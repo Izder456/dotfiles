@@ -1,0 +1,21 @@
+#!/bin/sh
+
+exec feh --bg-fill /usr/share/backgrounds/gruvbox.png
+#xrdb ~/.Xresources
+
+escape C-t
+set bgcolor 32302f
+set fgcolor d5c4a1
+set barstcky 1
+set barbordercolor 32302f
+set border 0
+set gap 8
+set bargravity ne
+set font Unifont
+bind space exec rofi -show drun
+bind f exec luakit
+bind q quit
+bind y tmpwm
+bind b exec sdorfehs -c "echo `battstat {p}`"
+exec ~/.local/bin/bar.sh &
+exec xterm &

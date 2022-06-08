@@ -1,0 +1,5 @@
+restart
+quit
+exec ls
+exec uxterm
+restart
