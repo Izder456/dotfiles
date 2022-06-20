@@ -1,6 +1,1 @@
-@theme "/usr/local/share/rofi/themes/gruvbox-dark.rasi"
-@theme "/usr/local/share/rofi/themes/Paper.rasi"
-@theme "/usr/local/share/rofi/themes/sidebar.rasi"
-@theme "/usr/local/share/rofi/themes/sidebar.rasi"
-@theme "/usr/local/share/rofi/themes/Arc-Dark.rasi"
-@theme "/usr/local/share/rofi/themes/gruvbox-dark.rasi"
+@theme "/usr/share/rofi/themes/gruvbox-dark-hard.rasi"

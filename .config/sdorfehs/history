@@ -3,3 +3,9 @@ quit
 exec ls
 exec uxterm
 restart
+quit
+restart
+quit
+restart
+quit
+restart

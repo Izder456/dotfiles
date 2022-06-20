@@ -1,4 +1,4 @@
-#!/bin/sh
+\#!/bin/sh
 
 exec feh --bg-fill /usr/share/backgrounds/gruvbox.png
 #xrdb ~/.Xresources
@@ -12,10 +12,17 @@ set border 0
 set gap 8
 set bargravity ne
 set font Unifont
+alias volume-up exec pulseaudio-ctl up
+alias volume-down exec pulseaudio-ctl down
+alias volume-mute exec pulseaudio-ctl mute
+alias volume-mute-mic exec pulseaudio-ctl mute-inmput
 bind space exec rofi -show drun
-bind f exec luakit
+definekey top XF86AudioRaiseVolume volume-up
+definekey top XF86AudioLowerVolume volume-down
+definekey top XF86AudioMute volume-mute
+definekey top XF86AudioMicMute volume-mute-mic
+bind f exec qutebrowser
 bind q quit
 bind y tmpwm
-bind b exec sdorfehs -c "echo `battstat {p}`"
 exec ~/.local/bin/bar.sh &
 exec xterm &
