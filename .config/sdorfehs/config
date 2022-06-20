@@ -1,4 +1,4 @@
-\#!/bin/sh
+#!/bin/sh
 
 exec feh --bg-fill /usr/share/backgrounds/gruvbox.png
 #xrdb ~/.Xresources
@@ -15,7 +15,7 @@ set font Unifont
 alias volume-up exec pulseaudio-ctl up
 alias volume-down exec pulseaudio-ctl down
 alias volume-mute exec pulseaudio-ctl mute
-alias volume-mute-mic exec pulseaudio-ctl mute-inmput
+alias volume-mute-mic exec pulseaudio-ctl mute-input
 bind space exec rofi -show drun
 definekey top XF86AudioRaiseVolume volume-up
 definekey top XF86AudioLowerVolume volume-down
