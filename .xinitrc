@@ -1,9 +1,17 @@
 #!/bin/sh
-ulimit -Sc 0
-/usr/X11R6/bin/xrdb /home/izder456/.Xdefaults
-picom -b
-feh --bg-fill /usr/share/backgrounds/gruvbox.png &
-#dbus-launch ratpoison
-dbus-launch sdorfehs 
-#dbus-launch mwm
-#dbus-launch emwm
+
+if test -z "$DBUS_SESSION_BUS_ADDRESS" ; then
+	# if not found, launch a new one
+	eval `dbus-launch --sh-syntax --exit-with-session`
+	echo "D-Bus per-session daemon address is: $DBUS_SESSION_BUS_ADDRESS"
+fi
+
+
+exec ulimit -Sc 0
+exec xrdb ~/.Xdefaults
+exec picom -b
+exec feh --bg-fill /usr/share/backgrounds/gruvbox.png &
+#exec dbus-launch ratpoison
+exec dbus-launch sdorfehs 
+#exec dbus-launch mwm
+#exec dbus-launch emwm
