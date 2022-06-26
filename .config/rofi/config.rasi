@@ -1,1 +1,1 @@
-@theme "/usr/share/rofi/themes/gruvbox-dark-hard.rasi"
+@theme "~/.config/rofi/themes/gruvbox-dark-hard.rasi"
