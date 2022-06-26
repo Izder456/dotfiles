@@ -1,0 +1,26 @@
+#!/bin/sh
+
+exec feh --bg-fill /usr/share/backgrounds/gruvbox.png
+#xrdb ~/.Xresources
+
+escape C-t
+set bgcolor 32302f
+set fgcolor d5c4a1
+set border 0
+set gap 8
+set bargravity ne
+set font Unifont
+alias volume-up exec pulseaudio-ctl up
+alias volume-down exec pulseaudio-ctl down
+alias volume-mute exec pulseaudio-ctl mute
+alias volume-mute-mic exec pulseaudio-ctl mute-input
+bind space exec rofi -show drun
+definekey top XF86AudioRaiseVolume volume-up
+definekey top XF86AudioLowerVolume volume-down
+definekey top XF86AudioMute volume-mute
+definekey top XF86AudioMicMute volume-mute-mic
+bind c exec urxvt
+bind f exec qutebrowser
+bind q quit
+bind y tmpwm
+exec urxvt &
