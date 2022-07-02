@@ -1,10 +1,12 @@
 ! $OpenBSD: dot.Xdefaults,v 1.3 2014/07/10 10:22:59 jasper Exp $
-xterm*loginShell:true
 ! xterm*background: #4a4a4a
 ! xterm*foreground: #ffffff
 xterm*scrollBar: false
+URxvt.scrollBar: false
 xterm*faceName: Unifont
+URxvt.faceName: Unifont
 xterm*selectToClipboard: true
+URxvt.selectToClibboard: true
 ! Base16 Gruvbox dark, soft
 ! Scheme: Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)
 
@@ -27,6 +29,7 @@ xterm*selectToClipboard: true
 
 
 xterm*allowSendEvents: true
+URxvt.allowSendEvents: true
 *.foreground:   base05
 #ifdef background_opacity
 *.background:   [background_opacity]base00
