@@ -6,11 +6,9 @@ if test -z "$DBUS_SESSION_BUS_ADDRESS" ; then
 	echo "D-Bus per-session daemon address is: $DBUS_SESSION_BUS_ADDRESS"
 fi
 
-exec ulimit -Sc 0
-exec xrdb ~/.Xdefaults
-exec picom -b
-exec feh --bg-fill /usr/share/backgrounds/gruvbox.png &
+xrdb ~/.Xdefaults
+feh --bg-fill /usr/share/backgrounds/gruvbox.png &
 #exec dbus-launch ratpoison
-exec dbus-launch sdorfehs 
+#exec dbus-launch sdorfehs 
 #exec dbus-launch mwm
 #exec dbus-launch emwm

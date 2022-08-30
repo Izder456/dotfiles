@@ -8,16 +8,7 @@ config_version: 2
 settings:
   colors.webpage.darkmode.enabled:
     global: true
-  colors.webpage.preferred_color_scheme:
-    global: dark
   content.autoplay:
     global: false
-  content.notifications.enabled:
-    https://alovoa.com: true
-    https://www.facebook.com: false
-  content.proxy:
-    global: http://localhost:8118/
-  content.register_protocol_handler:
-    https://mail.proton.me#mailto=%25s: true
   downloads.prevent_mixed_content:
     global: false

@@ -5,7 +5,7 @@
 Menu DefaultRootMenu
 {
 	"Root Menu"		f.title
-	"New Terminal"	f.exec "xterm &"
+	"New Terminal"	f.exec "urxvt &"
 	"Internet"	f.exec "qutebrowser &"
 	"Show Rofi"	f.exec "rofi -show drun &"
 	"Shuffle Up"	f.circle_up

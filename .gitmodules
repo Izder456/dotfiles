@@ -1,0 +1,3 @@
+[submodule "fizsh"]
+	path = fizsh
+	url = https://github.com/zsh-users/fizsh.git
