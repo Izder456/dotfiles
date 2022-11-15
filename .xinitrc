@@ -8,7 +8,4 @@ fi
 
 xrdb ~/.Xdefaults
 feh --bg-fill /usr/share/backgrounds/gruvbox.png &
-#exec dbus-launch ratpoison
-#exec dbus-launch sdorfehs 
-#exec dbus-launch mwm
-#exec dbus-launch emwm
+exec dbus-launch sdorfehs 
