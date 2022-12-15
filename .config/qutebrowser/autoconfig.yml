@@ -6,8 +6,6 @@
 
 config_version: 2
 settings:
-  colors.webpage.darkmode.enabled:
-    global: true
   content.autoplay:
     global: false
   downloads.prevent_mixed_content:

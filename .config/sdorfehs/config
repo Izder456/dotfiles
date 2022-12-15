@@ -5,17 +5,15 @@
 # izder456 2022 <izder456@disroot.org>
 ######################################
 
-exec feh --bg-fill /usr/share/backgrounds/gruvbox.png
-
 escape C-t
 set bgcolor 32302f
 set fgcolor d5c4a1
 set barsticky 1
 set barbordercolor 32302f
 set border 0
-set gap 8
+set gap 12
 set bargravity ne
-set font Unifont
+set font "3270 Nerd Font Mono"
 alias scrot exec scrot
 alias volume-up exec pulseaudio-ctl up
 alias volume-down exec pulseaudio-ctl down
@@ -27,8 +25,13 @@ definekey top XF86AudioRaiseVolume volume-up
 definekey top XF86AudioLowerVolume volume-down
 definekey top XF86AudioMute volume-mute
 definekey top XF86AudioMicMute volume-mute-mic
-bind L exec betterlockscreen --lock blur
-bind f exec firefox-bin
+bind L exec betterlockscreen --lock
+bind f exec qutebrowser
+bind F exec pcmanfm
+bind P exec xterm -e ncspot
+bind I exec xterm -e btm
+bind N exec xterm -e nmtui
 bind q quit
 exec ~/.local/bin/bar.sh &
 exec xterm &
+exec xautolock -time 15 -locker 'betterlockscreen --lock' &

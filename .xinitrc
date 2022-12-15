@@ -7,5 +7,4 @@ if test -z "$DBUS_SESSION_BUS_ADDRESS" ; then
 fi
 
 xrdb ~/.Xdefaults
-feh --bg-fill /usr/share/backgrounds/gruvbox.png &
 exec dbus-launch sdorfehs 
