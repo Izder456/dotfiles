@@ -1,0 +1,10 @@
+#!/bin/sh
+
+xset b off
+prefix="/usr/X11R6"
+exec_prefix="${prefix}"
+
+/usr/local/bin/feh --bg-fill /usr/local/share/backgrounds/5pm-threed.png
+
+(sleep 3 && xwd -out /tmp/xenodm.xwd -root) &
+

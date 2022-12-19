@@ -1,0 +1,120 @@
+xlogin*login.translations: #override \
+	<Key>F1: set-session-argument(failsafe) finish-field()\n\
+	<Key>Left: move-backward-character()\n\
+	<Key>Right: move-forward-character()\n\
+	<Key>Home: move-to-begining()\n\
+	<Key>End: move-to-end()\n\
+	Ctrl<Key>KP_Enter: set-session-argument(failsafe) finish-field()\n\
+	<Key>KP_Enter: set-session-argument() finish-field()\n\
+	Ctrl<Key>Return: set-session-argument(failsafe) finish-field()\n\
+	<Key>Return: set-session-argument() finish-field()
+
+xlogin*greeting: Welcome idiot.
+xlogin*namePrompt: Login:
+xlogin*fail: Login incorrect or forbidden, ya goof.
+#if WIDTH > 800
+xlogin*greetFace:       3270Condensed Nerd Font Mono-22:bold:italic:dpi=75
+xlogin*face:            3270Condensed Nerd Font Mono-16:bold:dpi=75
+xlogin*promptFace:      3270Condensed Nerd Font Mono-16:bold:dpi=75
+xlogin*failFace:        3270Condensed Nerd Font Mono-16:bold:italic:dpi=75
+#else
+xlogin*greetFace:       3270Condensed Nerd Font Mono-18:bold:italic:dpi=75
+xlogin*face:            3270Condensed Nerd Font Mono-12:bold:dpi=75
+xlogin*promptFace:      3270Condensed Nerd Font Mono-12:bold:dpi=75
+xlogin*failFace:        3270Condensed Nerd Font Mono-12:bold:italic:dpi=75
+#endif
+
+#if !(defined(bpp1) || defined(bpp4) || defined(bpp8) || defined(bpp15))
+# if PLANES < 4
+#  ifndef bpp1
+#   define bpp1
+#  endif
+# else
+#  if PLANES > 4
+#   if PLANES > 8
+#    ifndef bpp15
+#     define bpp15
+#    endif
+#   else
+#    ifndef bpp8
+#     define bpp8
+#    endif bpp8
+#   endif
+#  else
+#   ifndef bpp4
+#    define bpp4
+#   endif
+#  endif
+# endif
+#endif  /* If manual override */
+
+! border/shadow
+xlogin*borderWidth: 2
+xlogin*borderColor: #d5c4a1
+xlogin.Login.sepWidth: 2
+xlogin.Login.hiColor: #665c54
+xlogin.Login.greetColor: #fb4934
+xlogin.Login.failColor: #d5c4a1
+xlogin.Login.promptColor: #fabd2f
+xlogin.Login.foreground: #32302f
+xlogin.Login.background: #32302f
+xlogin.Login.cursorColor: #d5c4a1
+xlogin.Login.inpColor: #d5c4a1
+
+#ifdef bpp1
+xlogin*logoFileName: /etc/X11/xenodm/pixmaps/mcpuffer.xpm
+#endif
+#ifdef bpp4
+xlogin*logoFileName: /etc/X11/xenodm/pixmaps/mcpuffer.xpm
+#endif
+#ifdef bpp8
+xlogin*logoFileName: /etc/X11/xenodm/pixmaps/mcpuffer.xpm
+#endif
+#ifdef bpp15
+xlogin*logoFileName: /etc/X11/xenodm/pixmaps/mcpuffer.xpm
+#endif
+
+xlogin*useShape: true
+xlogin*logoPadding: 10
+
+xterm*scrollBar: false
+xterm*selectToClipboard: true
+URxvt.selectToClibboard: true
+xterm*allowSendEvents: true
+URxvt.allowSendEvents: true
+
+*.faceName: 3270Consdensed Nerd Font Mono
+*.faceSize: 12
+*.foreground: #d5c4a1
+*.Foreground: #d5c4a1
+*.background: #32302f
+*.Background: #32302f
+*.cursorColor: #d5c4a1
+
+*.color0: #32302f
+*.color1: #fb4934
+*.color2: #b8bb26
+*.color3: #fabd2f
+*.color4: #83a598
+*.color5: #d3869b
+*.color6: #8ec07c
+*.color7: #d5c4a1
+
+*.color8: #665c54
+*.color9: #fb4934
+*.color10: #b8bb26
+*.color11: #fabd2f
+*.color12: #83a598
+*.color13: #d3869b
+*.color14: #8ec07c
+*.color15: #fbf1c7
+
+*.color16: #fe8019
+*.color17: #d65d0e
+*.color18: #3c3836
+*.color19: #504945
+*.color20: #bdae93
+*.color21: #ebdbb2
+
+*.activeBackground: #32302f
+*.activeForeground: #d5c4a1

@@ -2,6 +2,6 @@
 
 while true
 do
-	echo $(date) "||" $(battstat) > ~/.config/sdorfehs/bar
+	echo $(date +"%a, %B %d %Y @%I:%M %p %Z") "||" $(battstat) > ~/.config/sdorfehs/bar
 	sleep 1
 done

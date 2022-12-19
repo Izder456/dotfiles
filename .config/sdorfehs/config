@@ -6,32 +6,43 @@
 ######################################
 
 escape C-t
-set bgcolor 32302f
-set fgcolor d5c4a1
+set ignoreresizehints 1
+set barinpadding 0
+set barpadding 14 6
+set onlyborder 1
+set bgcolor #32302f
+set fgcolor #d5c4a1
+set barcolor #32302f
+set barborder 2
+set barbordercolor #d5c4a1
+set border 2
+set fwcolor #d5c4a1
+set bwcolor #32302f
+set gap 10
+set padding 12 12 12 12
 set barsticky 1
-set barbordercolor 32302f
-set border 0
-set gap 12
 set bargravity ne
 set font "3270 Nerd Font Mono"
+unmanage OpenSSH Authentication Passphrase Request
+warp 1
 alias scrot exec scrot
-alias volume-up exec pulseaudio-ctl up
-alias volume-down exec pulseaudio-ctl down
-alias volume-mute exec pulseaudio-ctl mute
-alias volume-mute-mic exec pulseaudio-ctl mute-input
+alias volume-up exec sndioctl output.level=+0.1
+alias volume-down exec sndioctl output.level=-0.1
+alias volume-mute exec sndioctl output.mute=!
 bind space exec rofi -show drun
 definekey top Print scrot
 definekey top XF86AudioRaiseVolume volume-up
 definekey top XF86AudioLowerVolume volume-down
 definekey top XF86AudioMute volume-mute
 definekey top XF86AudioMicMute volume-mute-mic
-bind L exec betterlockscreen --lock
+definekey top C-M-Q quit
+bind Tab focuslast
+bind grave focus
 bind f exec qutebrowser
 bind F exec pcmanfm
-bind P exec xterm -e ncspot
-bind I exec xterm -e btm
-bind N exec xterm -e nmtui
-bind q quit
-exec ~/.local/bin/bar.sh &
+bind P exec xterm -hold -e ncspot
+bind I exec xterm -hold -e top
+bind i exec xterm -hold -e neofetch
+bind N exec xterm -e "doas nvim /etc/hostname.urtwn0"
 exec xterm &
-exec xautolock -time 15 -locker 'betterlockscreen --lock' &
+exec ~/.local/bin/bar.sh &

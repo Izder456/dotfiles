@@ -1,1 +1,0 @@
-/home/izder456/Projects/dotfiles/.xinitrc

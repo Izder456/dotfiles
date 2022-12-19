@@ -7,4 +7,5 @@ if test -z "$DBUS_SESSION_BUS_ADDRESS" ; then
 fi
 
 xrdb ~/.Xdefaults
+exec feh --bg-fill /usr/local/share/backgrounds/5pm-threed.png
 exec dbus-launch sdorfehs 
