@@ -8,41 +8,48 @@
 escape C-t
 set ignoreresizehints 1
 set barinpadding 0
-set barpadding 14 6
+set barpadding 16 14
 set onlyborder 1
 set bgcolor #32302f
 set fgcolor #d5c4a1
 set barcolor #32302f
-set barborder 2
+set barborder 4
 set barbordercolor #d5c4a1
-set border 2
+set border 4
 set fwcolor #d5c4a1
 set bwcolor #32302f
-set gap 10
-set padding 12 12 12 12
+set gap 14
+set padding 14 14 14 14
 set barsticky 1
 set bargravity ne
 set font "3270 Nerd Font Mono"
-unmanage OpenSSH Authentication Passphrase Request
 warp 1
+alias term exec terminator
 alias scrot exec scrot
 alias volume-up exec sndioctl output.level=+0.1
 alias volume-down exec sndioctl output.level=-0.1
 alias volume-mute exec sndioctl output.mute=!
-bind space exec rofi -show drun
+alias rec-start exec ~/.local/bin/fauxstream.sh
+alias rec-stop exec pkill ffmpeg
+bind space exec rofi -show combi
 definekey top Print scrot
 definekey top XF86AudioRaiseVolume volume-up
 definekey top XF86AudioLowerVolume volume-down
 definekey top XF86AudioMute volume-mute
 definekey top XF86AudioMicMute volume-mute-mic
 definekey top C-M-Q quit
+bind c term
 bind Tab focuslast
 bind grave focus
 bind f exec qutebrowser
+bind L term -x links "http://68k.news/"
+bind Z term -x ssh izder456@sdf.org
 bind F exec pcmanfm
-bind P exec xterm -hold -e ncspot
-bind I exec xterm -hold -e top
-bind i exec xterm -hold -e neofetch
-bind N exec xterm -e "doas nvim /etc/hostname.urtwn0"
-exec xterm &
+bind P term -x ncspot
+bind I term -x top
+bind i term -x neofetch
+bind N term -x "doas nvim /etc/hostname.urtwn0"
+bind M term -x "weechat"
+bind m term -e "neomutt"
+term &
 exec ~/.local/bin/bar.sh &

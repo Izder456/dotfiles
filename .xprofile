@@ -1,0 +1,5 @@
+#!/bin/sh
+
+ulimit -Sc 0
+PATH="/bin:/usr/bin:/sbin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/home/izder456/.local/bin:/home/izder456/.cargo/bin:/usr/games"
+export PATH
