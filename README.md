@@ -1,7 +1,5 @@
-# Prereq's
+# Iz's OpenBSD Dotfiles
 
-- https://github.com/imwally/battstat.git
+- Mainly for personal backups, but if ya wantem, use em.
 
-- https://github.com/jcs/sdorfehs.git
-
-- https://github.com/zsh-users/fizsh.git
+- I ain't gonna support any mishaps on your machine, as this is a pet project.

@@ -1,10 +1,15 @@
 #!/bin/sh
 
+! turn off that godforsaken terminal beep
 xset b off
+
+! boilerplate prefix stuff
 prefix="/usr/X11R6"
 exec_prefix="${prefix}"
 
+! set background
 /usr/local/bin/feh --bg-fill /usr/local/share/backgrounds/5pm-threed.png
 
+! Make screenshot 3 seconds after xenodm inits
 (sleep 3 && xwd -out /tmp/xenodm.xwd -root) &
 

@@ -1,11 +1,9 @@
 #!/bin/sh
-
-if test -z "$DBUS_SESSION_BUS_ADDRESS" ; then
-	# if not found, launch a new one
-	eval `dbus-launch --sh-syntax --exit-with-session`
-	echo "D-Bus per-session daemon address is: $DBUS_SESSION_BUS_ADDRESS"
-fi
-
-xrdb ~/.Xdefaults
-exec feh --bg-fill /usr/local/share/backgrounds/5pm-threed.png
-exec dbus-launch sdorfehs 
+[ -f /etc/xprofile ] && . /etc/xprofile
+[ -f ~/.xprofile ] && . ~/.xprofile
+[ -f ~/.Xdefaults ] && xrdb ~/.Xdefaults
+export LC_ALL=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+ulimit -Sc 0
+feh --bg-fill /usr/local/share/backgrounds/5pm-threed.png &
+sdorfehs 

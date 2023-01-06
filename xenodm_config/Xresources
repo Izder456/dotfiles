@@ -9,9 +9,12 @@ xlogin*login.translations: #override \
 	Ctrl<Key>Return: set-session-argument(failsafe) finish-field()\n\
 	<Key>Return: set-session-argument() finish-field()
 
+! Xlogin prompt text
 xlogin*greeting: Welcome idiot.
 xlogin*namePrompt: Login:
 xlogin*fail: Login incorrect or forbidden, ya goof.
+
+! Xlogin resizing
 #if WIDTH > 800
 xlogin*greetFace:       3270Condensed Nerd Font Mono-22:bold:italic:dpi=75
 xlogin*face:            3270Condensed Nerd Font Mono-16:bold:dpi=75
@@ -48,7 +51,7 @@ xlogin*failFace:        3270Condensed Nerd Font Mono-12:bold:italic:dpi=75
 # endif
 #endif  /* If manual override */
 
-! border/shadow
+! Xlogin theming
 xlogin*borderWidth: 2
 xlogin*borderColor: #d5c4a1
 xlogin.Login.sepWidth: 2
@@ -60,7 +63,10 @@ xlogin.Login.foreground: #32302f
 xlogin.Login.background: #32302f
 xlogin.Login.cursorColor: #d5c4a1
 xlogin.Login.inpColor: #d5c4a1
+xlogin*useShape: true
+xlogin*logoPadding: 10
 
+! Minecraft Pufferfish xpm
 #ifdef bpp1
 xlogin*logoFileName: /etc/X11/xenodm/pixmaps/mcpuffer.xpm
 #endif
@@ -74,15 +80,8 @@ xlogin*logoFileName: /etc/X11/xenodm/pixmaps/mcpuffer.xpm
 xlogin*logoFileName: /etc/X11/xenodm/pixmaps/mcpuffer.xpm
 #endif
 
-xlogin*useShape: true
-xlogin*logoPadding: 10
 
-xterm*scrollBar: false
-xterm*selectToClipboard: true
-URxvt.selectToClibboard: true
-xterm*allowSendEvents: true
-URxvt.allowSendEvents: true
-
+! Globals
 *.faceName: 3270Consdensed Nerd Font Mono
 *.faceSize: 12
 *.foreground: #d5c4a1
