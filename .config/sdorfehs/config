@@ -25,7 +25,7 @@ set bargravity ne
 set font "3270 Nerd Font Mono"
 warp 1
 alias term exec urxvt
-alias scrot exec import -window root ~/Pictures/screenshot-`date %F`.png
+alias scrot exec scrot -F ~/Pictures/screenshot-`date +%F`.png
 alias volume-up exec sndioctl output.level=+0.05
 alias volume-down exec sndioctl output.level=-0.05
 alias volume-mute exec sndioctl output.mute=!
@@ -37,18 +37,16 @@ definekey top XF86AudioRaiseVolume volume-up
 definekey top XF86AudioLowerVolume volume-down
 definekey top XF86AudioMute volume-mute
 definekey top XF86AudioMicMute volume-mute-mic
-definekey top C-M-Prior exec sdorfehs -c "select -" -c "gprev" -c "next"
-definekey top C-M-Next exec sdorfehs -c "select -" -c "gnext" -c "next"
 bind c term
 bind Tab focuslast
 bind aciitilde focus
-bind f exec luakit
-bind L term -e links "http://68k.news/"
-bind Z term -e ssh izder456@sdf.org
+bind f exec firefox-esr
+bind L term -title "links cli browser" -e links "http://68k.news/"
+bind Z term -title "SDF PUBNIX" -e ssh izder456@sdf.org
 bind F exec pcmanfm
-bind P term -e ncspot
-bind i term -e top
-bind I term -e neofetch
-bind N term -e -hold "doas nvim /opt/hostname.wifi0"
-bind M term -e "weechat"
+bind P term -title "ncspot cli spotify client" -e ncspot
+bind i term -title "top cli system resource monitor" -e top
+bind I term -title "neofetch cli sysfetch" -hold -e neofetch
+bind N term -title "wireless network configuration file" -e doas nvim /opt/hostname.wifi0
+bind M term -title "weechat cli messenger client" -e weechat
 exec ~/.local/bin/bar.sh &

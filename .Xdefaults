@@ -1,7 +1,6 @@
 ! URxvt stuffs
 URxvt.scrollBar: false
 URxvt.font: xft:3270 Nerd Font Mono:size=12
-URxvt.selectToClibboard: true
 URxvt.allowSendEvents: true
 URxvt.letterSpace: 1
 URxvt.imLocale: en_US.UTF-8
@@ -9,7 +8,7 @@ URxvt.termName: rxvt-unicode-256color
 URxvt.intensityStyles: false
 URxvt.loginShell: true
 URxvt.savelines: 16384
-URxvt.perl-ext-common: default,resize-font,clipboard,url-select
+URxvt.perl-ext-common: default,resize-font,clipboard
 
 ! clipboard plugin 
 URxvt.clipboard.autocopy: true
@@ -17,17 +16,13 @@ URxvt.keysym.M-c: perl:clipboard:copy
 URxvt.keysym.M-v: perl:clipboard:paste
 URxvt.keysym.M-C-v: perl:clipboard:paste_excaped
 
-! url-select plugin
-URxvt.keysym.M-u perl:url-select:select_next
-URxvt.url-select.underline: true
-URxvt.url-select.launcher: firefox-esr
-
 ! Font Rendering Stuffs
 Xft.rgba: rgb
 Xft.antialias: true
 Xft.autohint: true
 Xft.hintstyle: hintfull
 Xft.lcdfilter: lcdfilter
+
 
 ! Restuffs
 *.foreground: #d5c4a1
