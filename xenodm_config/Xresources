@@ -9,22 +9,19 @@ xlogin*login.translations: #override \
 	Ctrl<Key>Return: set-session-argument(failsafe) finish-field()\n\
 	<Key>Return: set-session-argument() finish-field()
 
-! Xlogin prompt text
-xlogin*greeting: Welcome idiot.
-xlogin*namePrompt: Login:
-xlogin*fail: Login incorrect or forbidden, ya goof.
-
-! Xlogin resizing
+xlogin*greeting: Pleeease, stop!
+xlogin*namePrompt: Fight:
+xlogin*fail: STOP THAT SONG!
 #if WIDTH > 800
-xlogin*greetFace:       3270Condensed Nerd Font Mono-22:bold:italic:dpi=75
-xlogin*face:            3270Condensed Nerd Font Mono-16:bold:dpi=75
-xlogin*promptFace:      3270Condensed Nerd Font Mono-16:bold:dpi=75
-xlogin*failFace:        3270Condensed Nerd Font Mono-16:bold:italic:dpi=75
+xlogin*greetFace:       EarthboundZero Nerd Font-22:bold:italic:dpi=75
+xlogin*face:            EarthboundZero Nerd Font-16:bold:dpi=75
+xlogin*promptFace:      EarthboundZero Nerd Font-16:bold:dpi=75
+xlogin*failFace:        EarthboundZero Nerd Font-16:bold:italic:dpi=75
 #else
-xlogin*greetFace:       3270Condensed Nerd Font Mono-18:bold:italic:dpi=75
-xlogin*face:            3270Condensed Nerd Font Mono-12:bold:dpi=75
-xlogin*promptFace:      3270Condensed Nerd Font Mono-12:bold:dpi=75
-xlogin*failFace:        3270Condensed Nerd Font Mono-12:bold:italic:dpi=75
+xlogin*greetFace:       EarthboundZero Nerd Font-18:bold:italic:dpi=75
+xlogin*face:            EarthboundZero Nerd Font-12:bold:dpi=75
+xlogin*promptFace:      EarthboundZero Nerd Font-12:bold:dpi=75
+xlogin*failFace:        EarthboundZero Nerd Font-12:bold:italic:dpi=75
 #endif
 
 #if !(defined(bpp1) || defined(bpp4) || defined(bpp8) || defined(bpp15))
@@ -51,7 +48,7 @@ xlogin*failFace:        3270Condensed Nerd Font Mono-12:bold:italic:dpi=75
 # endif
 #endif  /* If manual override */
 
-! Xlogin theming
+! border/shadow
 xlogin*borderWidth: 2
 xlogin*borderColor: #d5c4a1
 xlogin.Login.sepWidth: 2
@@ -63,26 +60,30 @@ xlogin.Login.foreground: #32302f
 xlogin.Login.background: #32302f
 xlogin.Login.cursorColor: #d5c4a1
 xlogin.Login.inpColor: #d5c4a1
+
+#ifdef bpp1
+xlogin*logoFileName: /etc/X11/xenodm/pixmaps/giegue.xpm
+#endif
+#ifdef bpp4
+xlogin*logoFileName: /etc/X11/xenodm/pixmaps/giegue.xpm
+#endif
+#ifdef bpp8
+xlogin*logoFileName: /etc/X11/xenodm/pixmaps/giegue.xpm
+#endif
+#ifdef bpp15
+xlogin*logoFileName: /etc/X11/xenodm/pixmaps/giegue.xpm
+#endif
+
 xlogin*useShape: true
 xlogin*logoPadding: 10
 
-! Minecraft Pufferfish xpm
-#ifdef bpp1
-xlogin*logoFileName: /etc/X11/xenodm/pixmaps/mcpuffer.xpm
-#endif
-#ifdef bpp4
-xlogin*logoFileName: /etc/X11/xenodm/pixmaps/mcpuffer.xpm
-#endif
-#ifdef bpp8
-xlogin*logoFileName: /etc/X11/xenodm/pixmaps/mcpuffer.xpm
-#endif
-#ifdef bpp15
-xlogin*logoFileName: /etc/X11/xenodm/pixmaps/mcpuffer.xpm
-#endif
+xterm*scrollBar: false
+xterm*selectToClipboard: true
+URxvt.selectToClibboard: true
+xterm*allowSendEvents: true
+URxvt.allowSendEvents: true
 
-
-! Globals
-*.faceName: 3270Consdensed Nerd Font Mono
+*.faceName: EarthboundZero Nerd Font
 *.faceSize: 12
 *.foreground: #d5c4a1
 *.Foreground: #d5c4a1

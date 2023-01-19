@@ -22,9 +22,9 @@ set gap 14
 set padding 14 14 14 14
 set barsticky 1
 set bargravity ne
-set font "3270 Nerd Font Mono"
+set font "EarthboundZero Nerd Font"
 warp 1
-alias term exec urxvt
+alias term exec xterm
 alias scrot exec scrot -F ~/Pictures/screenshot-`date +%F`.png
 alias volume-up exec sndioctl output.level=+0.05
 alias volume-down exec sndioctl output.level=-0.05
@@ -40,7 +40,7 @@ definekey top XF86AudioMicMute volume-mute-mic
 bind c term
 bind Tab focuslast
 bind aciitilde focus
-bind f exec firefox-esr
+bind f exec firefox
 bind L term -title "links cli browser" -e links "http://68k.news/"
 bind Z term -title "SDF PUBNIX" -e ssh izder456@sdf.org
 bind F exec pcmanfm

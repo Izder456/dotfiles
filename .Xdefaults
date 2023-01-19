@@ -1,20 +1,14 @@
-! URxvt stuffs
-URxvt.scrollBar: false
-URxvt.font: xft:3270 Nerd Font Mono:size=12
-URxvt.allowSendEvents: true
-URxvt.letterSpace: 1
-URxvt.imLocale: en_US.UTF-8
-URxvt.termName: rxvt-unicode-256color
-URxvt.intensityStyles: false
-URxvt.loginShell: true
-URxvt.savelines: 16384
-URxvt.perl-ext-common: default,resize-font,clipboard
-
-! clipboard plugin 
-URxvt.clipboard.autocopy: true
-URxvt.keysym.M-c: perl:clipboard:copy
-URxvt.keysym.M-v: perl:clipboard:paste
-URxvt.keysym.M-C-v: perl:clipboard:paste_excaped
+! xwindow stuffs
+xterm*scrollBar: false
+*faceName: EarthboundZero Nerd Font
+*faceSize: 8
+*renderFont: true
+*allowSendEvents: true
+*letterSpace: 1
+*imLocale: en_US.UTF-8
+*intensityStyles: true
+xterm*loginShell: true
+xterm*savelines: 16384
 
 ! Font Rendering Stuffs
 Xft.rgba: rgb
@@ -23,11 +17,12 @@ Xft.autohint: true
 Xft.hintstyle: hintfull
 Xft.lcdfilter: lcdfilter
 
-
 ! Restuffs
-*.foreground: #d5c4a1
-*.background: #32302f
-*.cursorColor: #d5c4a1
+*foreground: #d5c4a1
+*background: #32302f
+*cursorColor: #d5c4a1
+
+
 
 *.color0: #32302f
 *.color1: #fb4934
