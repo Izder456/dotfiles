@@ -9,19 +9,19 @@ xlogin*login.translations: #override \
 	Ctrl<Key>Return: set-session-argument(failsafe) finish-field()\n\
 	<Key>Return: set-session-argument() finish-field()
 
-xlogin*greeting: Pleeease, stop!
-xlogin*namePrompt: Fight:
-xlogin*fail: STOP THAT SONG!
+xlogin*greeting: Hello...My Name is Han-Tyumi
+xlogin*namePrompt: Footy-Footy:
+xlogin*fail: I'd like my desire back...
 #if WIDTH > 800
-xlogin*greetFace:       EarthboundZero Nerd Font-22:bold:italic:dpi=75
-xlogin*face:            EarthboundZero Nerd Font-16:bold:dpi=75
-xlogin*promptFace:      EarthboundZero Nerd Font-16:bold:dpi=75
-xlogin*failFace:        EarthboundZero Nerd Font-16:bold:italic:dpi=75
+xlogin*greetFace:       beachedttf Nerd Font Mono-22:italic:dpi=75
+xlogin*face:            desertedttf Nerd Font Mono-16:bold:dpi=75
+xlogin*promptFace:      desertedttf Nerd Font Mono-16:bold:dpi=75
+xlogin*failFace:        strandedttf Nerd Font Mono-16:bold:dpi=75
 #else
-xlogin*greetFace:       EarthboundZero Nerd Font-18:bold:italic:dpi=75
-xlogin*face:            EarthboundZero Nerd Font-12:bold:dpi=75
-xlogin*promptFace:      EarthboundZero Nerd Font-12:bold:dpi=75
-xlogin*failFace:        EarthboundZero Nerd Font-12:bold:italic:dpi=75
+xlogin*greetFace:       beachedttf Nerd Font Mono-18:italic:dpi=75
+xlogin*face:            desertedttf Nerd Font Mono-12:bold:dpi=75
+xlogin*promptFace:      desertedttf Nerd Font Mono-12:bold:dpi=75
+xlogin*failFace:        strandedttf Nerd Font Mono-12:italic:dpi=75
 #endif
 
 #if !(defined(bpp1) || defined(bpp4) || defined(bpp8) || defined(bpp15))
@@ -62,16 +62,16 @@ xlogin.Login.cursorColor: #d5c4a1
 xlogin.Login.inpColor: #d5c4a1
 
 #ifdef bpp1
-xlogin*logoFileName: /etc/X11/xenodm/pixmaps/giegue.xpm
+xlogin*logoFileName: /etc/X11/xenodm/pixmaps/hantyumi.xpm
 #endif
 #ifdef bpp4
-xlogin*logoFileName: /etc/X11/xenodm/pixmaps/giegue.xpm
+xlogin*logoFileName: /etc/X11/xenodm/pixmaps/hantyumi.xpm
 #endif
 #ifdef bpp8
-xlogin*logoFileName: /etc/X11/xenodm/pixmaps/giegue.xpm
+xlogin*logoFileName: /etc/X11/xenodm/pixmaps/hantyumi.xpm
 #endif
 #ifdef bpp15
-xlogin*logoFileName: /etc/X11/xenodm/pixmaps/giegue.xpm
+xlogin*logoFileName: /etc/X11/xenodm/pixmaps/hantyumi.xpm
 #endif
 
 xlogin*useShape: true
@@ -83,7 +83,7 @@ URxvt.selectToClibboard: true
 xterm*allowSendEvents: true
 URxvt.allowSendEvents: true
 
-*.faceName: EarthboundZero Nerd Font
+*.faceName: desertedttf Nerd Font Mono
 *.faceSize: 12
 *.foreground: #d5c4a1
 *.Foreground: #d5c4a1

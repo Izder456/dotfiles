@@ -3,8 +3,8 @@
 
 include "/home/izder456/.gtkrc-2.0.mine"
 gtk-theme-name="Gruvbox-Material-Dark"
-gtk-icon-theme-name="Gruvbox_Dark"
-gtk-font-name="Sans 10"
+gtk-icon-theme-name="gruvbox_dark"
+gtk-font-name="strandedttf Medium 12"
 gtk-cursor-theme-name="Adwaita"
 gtk-cursor-theme-size=0
 gtk-toolbar-style=GTK_TOOLBAR_BOTH_HORIZ
@@ -15,4 +15,5 @@ gtk-enable-event-sounds=1
 gtk-enable-input-feedback-sounds=1
 gtk-xft-antialias=1
 gtk-xft-hinting=1
-gtk-xft-hintstyle="hintmedium"
+gtk-xft-hintstyle="hintfull"
+gtk-xft-rgba="rgb"
