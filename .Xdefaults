@@ -1,7 +1,7 @@
 ! xwindow stuffs
 xterm*scrollBar: false
-*faceName: EarthboundZero Nerd Font
-*faceSize: 8
+*faceName: desertedttf Nerd Font Mono
+*faceSize: 12
 *renderFont: true
 *allowSendEvents: true
 *letterSpace: 1
