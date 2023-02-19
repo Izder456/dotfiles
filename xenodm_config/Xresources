@@ -13,15 +13,15 @@ xlogin*greeting: Hello...My Name is Han-Tyumi
 xlogin*namePrompt: Footy-Footy:
 xlogin*fail: I'd like my desire back...
 #if WIDTH > 800
-xlogin*greetFace:       beachedttf Nerd Font Mono-22:italic:dpi=75
-xlogin*face:            desertedttf Nerd Font Mono-16:bold:dpi=75
-xlogin*promptFace:      desertedttf Nerd Font Mono-16:bold:dpi=75
-xlogin*failFace:        strandedttf Nerd Font Mono-16:bold:dpi=75
+xlogin*greetFace:       GohuFont Nerd Font Mono-22:italic:dpi=75
+xlogin*face:            GohuFont Nerd Font Mono-16:bold:dpi=75
+xlogin*promptFace:      GohuFont Nerd Font Mono-16:bold:dpi=75
+xlogin*failFace:        GohuFont Nerd Font Mono-16:bold:dpi=75
 #else
-xlogin*greetFace:       beachedttf Nerd Font Mono-18:italic:dpi=75
-xlogin*face:            desertedttf Nerd Font Mono-12:bold:dpi=75
-xlogin*promptFace:      desertedttf Nerd Font Mono-12:bold:dpi=75
-xlogin*failFace:        strandedttf Nerd Font Mono-12:italic:dpi=75
+xlogin*greetFace:       GohuFont Nerd Font Mono-18:italic:dpi=75
+xlogin*face:            GohuFont Nerd Font Mono-12:bold:dpi=75
+xlogin*promptFace:      GohuFont Nerd Font Mono-12:bold:dpi=75
+xlogin*failFace:        GohuFont Nerd Font Mono-12:italic:dpi=75
 #endif
 
 #if !(defined(bpp1) || defined(bpp4) || defined(bpp8) || defined(bpp15))
@@ -83,7 +83,7 @@ URxvt.selectToClibboard: true
 xterm*allowSendEvents: true
 URxvt.allowSendEvents: true
 
-*.faceName: desertedttf Nerd Font Mono
+*.faceName: GohuFont Nerd Font Mono
 *.faceSize: 12
 *.foreground: #d5c4a1
 *.Foreground: #d5c4a1

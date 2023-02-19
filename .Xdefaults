@@ -1,6 +1,6 @@
 ! xwindow stuffs
 xterm*scrollBar: false
-*faceName: desertedttf Nerd Font Mono
+*faceName: GohuFont Nerd Font Mono
 *faceSize: 12
 *renderFont: true
 *allowSendEvents: true
@@ -10,12 +10,29 @@ xterm*scrollBar: false
 xterm*loginShell: true
 xterm*savelines: 16384
 
+URxvt.font: xft:GohuFont Nerd Font Mono:style=Regular:size=12
+URxvt.boldFont: xft:GohuFont Nerd Font Mono:style=Bold:size=12
+URxvt.italicFont: xft:GohuFont Nerd Font Mono:style=Italic:size=12
+URxvt.boldItalicFont: xft:GohuFont Nerd Font Mono:style=Italic:size=12
+URxvt.geometry: 400x400
+URxvt.internalBorder: 12
+URxvt.cursorBlink: true
+URxvt.cursorUnderLine: false
+URxvt.saveLine: 2048
+URxvt.scrollBar: false
+URxvt.scrollBar_right: false
+URxvt.urgentOnBell: true
+URxvt.depth: 24
+URxvt.iso14755_52: false
+URxvt.iso14755: false
+
 ! Font Rendering Stuffs
+Xft.dpi: 82
 Xft.rgba: rgb
 Xft.antialias: true
-Xft.autohint: true
+Xft.autohint: false
 Xft.hintstyle: hintfull
-Xft.lcdfilter: lcdfilter
+Xft.lcdfilter: lcddefault
 
 ! Restuffs
 *foreground: #d5c4a1
