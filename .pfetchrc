@@ -1,0 +1,21 @@
+#/bin/sh
+
+export PF_SOURCE="~/.pfetchrc"
+
+export PF_INFO="ascii title os host kernel uptime pkgs memory shell wm"
+
+export PF_COLOR=1
+
+export PF_SEP=":"
+
+export PF_ALIGN=""
+
+export USER="izder456"
+
+export HOSTNAME="OpenBaSeD.srcerizder.top"
+
+export EDITOR="neovim"
+
+export SHELL="zsh"
+
+export XDG_CURRENT_DESKTOP="sdorfehs"
