@@ -20,7 +20,7 @@ sub prompt_yn {
 };
 
 print "Welcome to iz's OpenBSD setup Perl script!\n";
-print "This assumes you have installed the doas.conf file in the root of this project.\n\n";
+print "This assumes you have installed the doas.conf file in the root of this project.\n";
 print "Checking if doas.conf is installed...\n";
 
 my $destination = "/etc/doas.conf"; # Destination file path
@@ -43,8 +43,8 @@ if (-e $destination) {
         print "Please copy the file $filename to $destination manually.\n";
     } else {
         print "Failed to download the file. Please check your internet connection.\n";
-    }
-}
+    };
+};
 
 # remove cruft installed by default in openbsd
 print "Removing OpenBSD default Cruft...\n";
@@ -106,7 +106,6 @@ if (-d '~/.fizsh') {
 print ("Compiling in rust programs...( this is gonna take a bit :3 )\n");
 my @rsdeps = ('wiki-tui', 'fd-find', 'sd', 'onefetch', 'tokei', 'zoxide', 'fd-find', 'du-dust' 'cargo-update-installed');
 system('cargo', 'install', \@rsdeps);
-)
 
 print ("Compiling in GNU shuf re-implementation...\n");
 system('git', 'clone', 'https://github.com/ibara/shuf.git', '~/.shuf');
