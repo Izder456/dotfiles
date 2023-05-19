@@ -104,7 +104,7 @@ if (-d '~/.fizsh') {
 };
 
 print ("Compiling in rust programs...( this is gonna take a bit :3 )\n");
-my @rsdeps = ('wiki-tui', 'fd-find', 'sd', 'onefetch', 'tokei', 'zoxide', 'fd-find', 'du-dust' 'cargo-update-installed');
+my @rsdeps = ('wiki-tui', 'fd-find', 'sd', 'onefetch', 'tokei', 'zoxide', 'broot', 'du-dust' 'cargo-update-installed');
 system('cargo', 'install', \@rsdeps);
 
 print ("Compiling in GNU shuf re-implementation...\n");
