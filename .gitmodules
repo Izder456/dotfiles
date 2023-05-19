@@ -1,6 +1,0 @@
-[submodule "fizsh"]
-	path = .fizsh
-	url = https://github.com/zsh-users/fizsh.git
-[submodule ".config/terminator"]
-	path = .config/terminator
-	url = https://github.com/egel/terminator

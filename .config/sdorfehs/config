@@ -2,7 +2,7 @@
 
 ######################################
 # sdorfehs rc setup file
-# izder456 2022 <izder456@disroot.org>
+# izder456 2023 <izder456@disroot.org>
 ######################################
 
 escape C-t
@@ -10,44 +10,46 @@ set ignoreresizehints 1
 set barinpadding 0
 set barpadding 16 14
 set onlyborder 1
-set bgcolor #32302f
-set fgcolor #d5c4a1
-set barcolor #32302f
+set bgcolor #282828
+set fgcolor #ebdbb2
+set barcolor #1d2021
 set barborder 4
-set barbordercolor #d5c4a1
+set barbordercolor #ebdbb2
 set border 4
-set fwcolor #d5c4a1
-set bwcolor #32302f
+set fwcolor #ebdbb2
+set bwcolor #282828
 set gap 14
 set padding 14 14 14 14
 set barsticky 1
-set bargravity ne
+set bargravity nw
 set font "GohuFont Nerd Font Mono"
 warp 1
-alias term exec urxvt
+alias term exec st
+alias tterm exec urxvt
+alias bgset exec feh --bg-fill $(shuf -n1 -e /usr/local/share/backgrounds/*)
 alias scrot exec scrot -F ~/Pictures/screenshot-`date +%F`.png
 alias volume-up exec sndioctl output.level=+0.05
 alias volume-down exec sndioctl output.level=-0.05
 alias volume-mute exec sndioctl output.mute=!
 alias volume-mute-mic exec sndioctl input.mute=!
-alias rec-start exec ~/.local/bin/fauxstream.sh
-alias rec-stop exec pkill ffmpeg
-bind space exec rofi -show combi
+bind space exec rofi -i -show drun -modi drun -show-icons
 definekey top Print scrot
 definekey top XF86AudioRaiseVolume volume-up
 definekey top XF86AudioLowerVolume volume-down
 definekey top XF86AudioMute volume-mute
 definekey top XF86AudioMicMute volume-mute-mic
-bind c term
+definekey top XF86MonBrightnessUp exec xbacklight -inc 10
+definekey top XF86MonBrightnessDown exec xbacklight -dec 10
 bind x exec xkill
 bind Tab focuslast
 bind aciitilde focus
-bind f exec firefox
-bind L term -title "links cli browser" -e links "http://68k.news/"
-bind Z term -title "SDF PUBNIX" -e ssh izder456@sdf.org
+bind c term
+bind f exec qutebrowser
 bind F exec pcmanfm
-bind P term -title "ncspot cli spotify client" -e ncspot
-bind i term -title "glances cli system resource monitor" -e glances
-bind I term -title "neofetch cli sysfetch" -hold -e neofetch
-bind N term -title "wireless network configuration file" -e doas nvim /opt/hostname.wifi0
+bind P term -T "ncspot cli spotify client" -e ncspot
+bind i term -T "htop cli system resource monitor" -e htop
+bind g term -T "glances cli system resource monitor" -e glances
+bind I tterm -title "neofetch cli sysfetch" -hold -e neofetch
+bind V vmove
+bgset
 exec ~/.local/bin/bar.sh &

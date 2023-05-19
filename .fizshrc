@@ -1,23 +1,18 @@
-export PATH=$PATH:$HOME/.cargo/bin:$HOME/.local/bin
+export COMMON_FLAGS="-O2 -pipe -march=native"
+export CFLAGS="${COMMON_FLAGS}"
+export CXXFLAGS="${COMMON_FLAGS}"
+export FCFLAGS="${COMMON_FLAGS}"
+export FFLAGS="${COMMON_FLAGS}"
+export RUSTFLAGS="-C target-cpu=native -C opt-level=3"
+
 alias sudo="doas"
-alias ls="exa --no-icons -h"
-alias la="exa --no-icons -ah"
-alias ll="exa --no-icons -lh"
-alias lh="exa --no-icons -lah"
+alias ls="exa --icons -h"
+alias la="exa --icons -ah"
+alias ll="exa --icons -lh"
+alias lh="exa --icons -lah"
 alias cat="bat -pp"
 alias grep="rg"
 alias e="nvim"
-alias paste="nc termbin.com 9999"
-alias pkgup="doas pkg_add -u"
-alias pkgsr="doas pkg_info -Q"
-alias pkgin="doas pkg_add"
-alias pkgck="doas pkg_check -F"
-alias pkgcn="doas pkg_delete -a"
-alias pkgdl="doas pkg_delete"
-alias sysup="doas sysupgrade -sn"
-alias sysmr="doas sysmerge -d"
-alias carup="cargo-update-installed"
-alias poweroff="doas halt -p"
 alias s="ncspot"
 alias f="neofetch --off"
 alias mf="pfetch"
@@ -26,6 +21,6 @@ alias w="wiki-tui"
 
 transfer(){ if [ $# -eq 0 ];then echo "No arguments specified.\nUsage:\n  transfer <file|directory>\n  ... | transfer <file_name>">&2;return 1;fi;if tty -s;then file="$1";file_name=$(basename "$file");if [ ! -e "$file" ];then echo "$file: No such file or directory">&2;return 1;fi;if [ -d "$file" ];then file_name="$file_name.zip" ,;(cd "$file"&&zip -r -q - .)|curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name"|tee /dev/null,;else cat "$file"|curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name"|tee /dev/null;fi;else file_name=$1;curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name"|tee /dev/null;fi;}
 
-. ~/.pfetchrc
+export PATH=$HOME/.cargo/bin:$HOME/.local/bin:$PATH
 
-pfetch
+afetch
