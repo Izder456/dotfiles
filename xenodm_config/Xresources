@@ -9,9 +9,10 @@ xlogin*login.translations: #override \
 	Ctrl<Key>Return: set-session-argument(failsafe) finish-field()\n\
 	<Key>Return: set-session-argument() finish-field()
 
-xlogin*greeting: Hello...My Name is Han-Tyumi
-xlogin*namePrompt: Footy-Footy:
-xlogin*fail: I'd like my desire back...
+xlogin*greeting: WELCOME
+xlogin*namePrompt: USER:
+xlogin*passwdPrompt: PASS:
+xlogin*fail: TOOBAD!
 #if WIDTH > 800
 xlogin*greetFace:       GohuFont Nerd Font Mono-22:italic:dpi=75
 xlogin*face:            GohuFont Nerd Font Mono-16:bold:dpi=75
@@ -23,30 +24,6 @@ xlogin*face:            GohuFont Nerd Font Mono-12:bold:dpi=75
 xlogin*promptFace:      GohuFont Nerd Font Mono-12:bold:dpi=75
 xlogin*failFace:        GohuFont Nerd Font Mono-12:italic:dpi=75
 #endif
-
-#if !(defined(bpp1) || defined(bpp4) || defined(bpp8) || defined(bpp15))
-# if PLANES < 4
-#  ifndef bpp1
-#   define bpp1
-#  endif
-# else
-#  if PLANES > 4
-#   if PLANES > 8
-#    ifndef bpp15
-#     define bpp15
-#    endif
-#   else
-#    ifndef bpp8
-#     define bpp8
-#    endif bpp8
-#   endif
-#  else
-#   ifndef bpp4
-#    define bpp4
-#   endif
-#  endif
-# endif
-#endif  /* If manual override */
 
 ! border/shadow
 xlogin*borderWidth: 2
@@ -62,16 +39,16 @@ xlogin.Login.cursorColor: #d5c4a1
 xlogin.Login.inpColor: #d5c4a1
 
 #ifdef bpp1
-xlogin*logoFileName: /etc/X11/xenodm/pixmaps/hantyumi.xpm
+xlogin*logoFileName: /etc/X11/xenodm/pixmaps/mcpuffer.xpm
 #endif
 #ifdef bpp4
-xlogin*logoFileName: /etc/X11/xenodm/pixmaps/hantyumi.xpm
+xlogin*logoFileName: /etc/X11/xenodm/pixmaps/mcpuffer.xpm
 #endif
 #ifdef bpp8
-xlogin*logoFileName: /etc/X11/xenodm/pixmaps/hantyumi.xpm
+xlogin*logoFileName: /etc/X11/xenodm/pixmaps/mcpuffer.xpm
 #endif
 #ifdef bpp15
-xlogin*logoFileName: /etc/X11/xenodm/pixmaps/hantyumi.xpm
+xlogin*logoFileName: /etc/X11/xenodm/pixmaps/mcpuffer.xpm
 #endif
 
 xlogin*useShape: true

@@ -1,10 +1,10 @@
 #!/bin/sh
 
-xset b off
+xset b on
 prefix="/usr/X11R6"
 exec_prefix="${prefix}"
 
-/usr/local/bin/feh --bg-fill /usr/local/share/backgrounds/oddments.png
+/usr/local/bin/feh --bg-fill /usr/local/share/backgrounds/moonside.png
 
-(sleep 3 && xwd -out /tmp/xenodm.xwd -root) &
+#(sleep 3 && xwd -out /tmp/xenodm.xwd -root) &
 
