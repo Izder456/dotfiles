@@ -64,7 +64,7 @@ chmod(0700, $ENV{'HOME'});
 
 print "Installing deps...\n";
 my @shdeps = ('zsh', 'bash', 'harfbuzz', 'neofetch', 'git', 'gmake', 'gawk', 'cmake', 'meson', 'upower', 'gcc', 'mercurial', 'feh', 'ffmpeg', 'yt-dlp', 'ImageMagick', 'gd', 'fftw3', 'fftw', 'automake', 'autoconf', 'neovim', 'dbus', 'htop', 'ncspot', 'rust', 'crystal', 'exa', 'pkg_mgr', 'scrot', 'py3-neovim', 'py3-pip', 'lynx', 'links', 'wget', 'curl', 'openssl','gmp', 'xz-utils', 'p7zip', 'bat', 'pkgconf', 'noto-emoji', 'ranger', 'ee', 'nano');
-my @xdeps = ('sdorfehs', 'gtk2-murrine-engine', 'mpv', 'qutebrowser', 'abiword', 'gnumeric', 'pcmanfm', 'weechat', 'dunst', 'picom', 'rofi', 'leafpad', 'xarchiver', 'xkill', 'xedit', 'xpdf' 'lxappearance', 'claws-mail');
+my @xdeps = ('sdorfehs', 'gtk2-murrine-engine', 'mpv', 'qutebrowser', 'abiword', 'gnumeric', 'pcmanfm', 'weechat', 'dunst', 'picom', 'rofi', 'leafpad', 'xarchiver', 'xkill', 'xedit', 'xpdf', 'lxappearance', 'claws-mail');
 system('doas', 'pkg_add', \@shdeps, \@xdeps);
 
 if (-d '~/.dotfiles') {
@@ -94,17 +94,17 @@ if (-d '~/.fizsh') {
     system('cp', '~/.dotfiles/.fizshrc', '~/.fizsh/.fizshrc');
     system('chsh', '-s', '/usr/local/bin/fizsh');
 } else {
-    system('git', 'clone', 'https://github.com/zsh-users/fizsh.git', '~/.fizsh')
+    system('git', 'clone', 'https://github.com/zsh-users/fizsh.git', '~/.fizsh');
     chdir '~/.fizsh';
     system('./configure');
     system('make');
     system('doas', 'make', 'install');
-    system('cp', '~/.dotfiles/.fizshrc', '~/.fizsh/.fizshrc')
+    system('cp', '~/.dotfiles/.fizshrc', '~/.fizsh/.fizshrc');
     system('chsh', '-s', '/usr/local/bin/fizsh');
 };
 
 print ("Compiling in rust programs...( this is gonna take a bit :3 )\n");
-my @rsdeps = ('wiki-tui', 'fd-find', 'sd', 'onefetch', 'tokei', 'zoxide', 'broot', 'du-dust' 'cargo-update-installed');
+my @rsdeps = ('fd-find', 'sd', 'onefetch', 'tokei', 'zoxide', 'broot', 'du-dust', 'cargo-update-installed');
 system('cargo', 'install', \@rsdeps);
 
 print ("Compiling in GNU shuf re-implementation...\n");
@@ -115,10 +115,11 @@ system('make');
 system('doas', 'make', 'install');
 
 print ("Compiling in afetch...\n");
-system('git', 'clone', 'https://github.com/13-CF/afetch.git', '~/.afetch')
+system('git', 'clone', 'https://github.com/13-CF/afetch.git', '~/.afetch');
 chdir '~/.afetch';
 system('make');
 system('doas', 'make', 'install');
 
-if (-d )
-mkdir '~/.ssh' unless -d '~/.ssh';
+if (-d ) {
+ mkdir '~/.ssh' unless -d '~/.ssh';
+}
