@@ -45,8 +45,6 @@ unlink qw(
 print "Setting 0700 Perms for user's HOME...\n";
 chmod(0700, $ENV{'HOME'});
 
-
-
 print "Installing deps...\n";
 our @shdeps = ('zsh', 'bash', 'harfbuzz', 'neofetch', 'git', 'gmake', 'gawk', 'cmake', 'meson', 'upower', 'gcc', 'mercurial', 'feh', 'ffmpeg', 'yt-dlp', 'ImageMagick', 'gd', 'fftw3', 'fftw', 'automake', 'autoconf', 'neovim', 'dbus', 'htop', 'ncspot', 'rust', 'crystal', 'exa', 'pkg_mgr', 'scrot', 'py3-neovim', 'py3-pip', 'lynx', 'links', 'wget', 'curl', 'openssl','gmp', 'xz-utils', 'p7zip', 'bat', 'pkgconf', 'noto-emoji', 'ranger', 'ee', 'nano');
 our @xdeps = ('sdorfehs', 'gtk2-murrine-engine', 'mpv', 'qutebrowser', 'abiword', 'gnumeric', 'pcmanfm', 'weechat', 'dunst', 'picom', 'rofi', 'leafpad', 'xarchiver', 'xkill', 'xedit', 'xpdf', 'lxappearance', 'claws-mail');
@@ -88,6 +86,17 @@ if (-d '~/.fizsh') {
     system('chsh', '-s', '/usr/local/bin/fizsh');
 };
 
+print ("Installing backgrounds...\n");
+system('doas', 'mkdir', '-p', '/usr/local/share/backgrounds');
+system('doas', 'cp', '-rvf', '~/.dotfiles/backgrounds/*', '/usr/local/share/backgrounds');
+
+print ("Setting up Xenodm...\n");
+system('doas', 'cp', '-rvf', '~/.dotfiles/xenodm_config/*', '/etc/X11/xenodm');
+
+print ("Installing Fonts...\n");
+system('doas', 'cp', '-rvf', '~/.dotfiles/.fonts/*', '/usr/X11R6/lib/X11/fonts/TTF');
+system('doas', 'fc-cache', '-fv');
+
 print ("Compiling in rust programs...( this is gonna take a bit :3 )\n");
 our @rsdeps = ('fd-find', 'sd', 'onefetch', 'tokei', 'zoxide', 'broot', 'du-dust', 'cargo-update-installed');
 system('cargo', 'install', @rsdeps);
@@ -96,6 +105,12 @@ print ("Compiling in GNU shuf re-implementation...\n");
 system('git', 'clone', 'https://github.com/ibara/shuf.git', '~/.shuf');
 chdir '~/.shuf';
 system('./configure');
+system('make');
+system('doas', 'make', 'install');
+
+print ("Compiling in suckless-term...\n");
+system('git', 'clone', 'https://github.com/izder456/st.git', '~/.st');
+chdir '~/.st';
 system('make');
 system('doas', 'make', 'install');
 
