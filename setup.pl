@@ -138,7 +138,7 @@ sub update_xdg_user_dirs {
 # Main script
 sub main {
     print_message("Welcome to iz's OpenBSD setup Perl script!");
-    print_message("This assumes you have installed the doas.conf file in the root of this project.");
+    print_message("This assumes you have installed the doas.conf file located in the root of this project.");
     print_message("Checking if doas.conf is installed...");
 
     my $destination = "/etc/doas.conf";
