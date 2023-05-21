@@ -57,7 +57,7 @@ sub update_or_clone_dotfiles {
 
 # Symlinks dotfiles from .dotfiles directory to home directory
 sub symlink_dotfiles {
-    system('ln', '-sf', glob("$ENV{HOME}/.dotfiles/.*"), '.');
+    system('ln', '-sf', glob("$ENV{HOME}/.dotfiles/.*"), "$ENV{HOME}/"};
 }
 
 # Configures and sets up the default shell
