@@ -94,7 +94,7 @@ sub install_fonts {
 
 # Compiles rust programs using Cargo
 sub compile_rust_programs {
-    my @rust_dependencies = ('fd-find', 'sd', 'onefetch', 'tokei', 'zoxide', 'broot', 'du-dust', 'cargo-update-installed');
+    my @rust_dependencies = ('sd', 'onefetch', 'tokei', 'zoxide', 'broot', 'du-dust', 'cargo-update-installed');
     system('cargo', 'install', @rust_dependencies);
 }
 
