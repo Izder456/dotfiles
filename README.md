@@ -4,6 +4,16 @@
 
 - I ain't gonna support any mishaps on your machine, as this is a pet project.
 
+## Sidenote:
+
+- There is a Setup Script for my OpenBSD dotfiles in this repo.
+
+- while not feature-complete (yet), it is *hopefully* not broken.
+
+- it is made for either i386 or amd64 OpenBSD 7.x or -current.
+
+- by design, it does not do any performance tweaking, the user is encouraged to refer to the FAQ, the manpages, or the unofficial openbsd handbook, for that.
+
 # Setup:
 
 
