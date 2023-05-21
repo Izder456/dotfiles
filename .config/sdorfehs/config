@@ -25,7 +25,6 @@ set bargravity nw
 set font "GohuFont Nerd Font Mono"
 warp 1
 alias term exec st
-alias tterm exec urxvt
 alias bgset exec feh --bg-fill $(shuf -n1 -e /usr/local/share/backgrounds/*)
 alias scrot exec scrot -F ~/Pictures/screenshot-`date +%F`.png
 alias volume-up exec sndioctl output.level=+0.05
@@ -49,7 +48,6 @@ bind F exec pcmanfm
 bind P term -T "ncspot cli spotify client" -e ncspot
 bind i term -T "htop cli system resource monitor" -e htop
 bind g term -T "glances cli system resource monitor" -e glances
-bind I tterm -title "neofetch cli sysfetch" -hold -e neofetch
 bind V vmove
 bgset
 exec ~/.local/bin/bar.sh &
