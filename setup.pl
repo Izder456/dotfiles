@@ -164,6 +164,9 @@ sub main {
     say("Setting 0700 permissions for user's HOME...");
     set_home_directory_perms();
 
+    say("Installing Git...");
+    install_dependencies('git');
+
     update_or_clone_dotfiles();
 
     opendir(my $dh, $ENV{'HOME'}) or die "Cannot open directory: $!";
@@ -171,7 +174,7 @@ sub main {
     symlink_dotfiles();
 
     say("Installing dependencies...");
-    my @shell_dependencies = ('zsh', 'bash', 'harfbuzz', 'neofetch', 'git', 'iftop', 'gmake', 'gawk', 'cmake', 'meson', 'upower', 'gcc', 'mercurial', 'feh', 'ffmpeg', 'yt-dlp', 'ImageMagick', 'gd', 'fftw3', 'fftw', 'automake', 'autoconf', 'neovim', 'dbus', 'htop', 'ncspot', 'composer','rust', 'crystal', 'exa', 'pkg_mgr', 'scrot', 'py3-neovim', 'py3-pip', 'lynx', 'links', 'wget', 'curl', 'openssl', 'gmp', 'p7zip', 'bat', 'pkgconf', 'noto-emoji', 'ranger', 'ee', 'nano');
+    my @shell_dependencies = ('zsh', 'bash', 'harfbuzz', 'neofetch', 'iftop', 'gmake', 'gawk', 'cmake', 'meson', 'upower', 'gcc', 'mercurial', 'feh', 'ffmpeg', 'yt-dlp', 'ImageMagick', 'gd', 'fftw3', 'fftw', 'automake', 'autoconf', 'neovim', 'dbus', 'htop', 'ncspot', 'composer','rust', 'crystal', 'exa', 'pkg_mgr', 'scrot', 'py3-neovim', 'py3-pip', 'lynx', 'links', 'wget', 'curl', 'openssl', 'gmp', 'p7zip', 'bat', 'pkgconf', 'noto-emoji', 'ranger', 'ee', 'nano');
     my @xdeps = ('sdorfehs', 'xdg-user-dirs', 'xdg-utils', 'gtk2-murrine-engine', 'mpv', 'qutebrowser', 'abiword', 'gnumeric', 'pcmanfm', 'weechat', 'dunst', 'picom', 'rofi', 'leafpad', 'xarchiver', 'xpdf', 'lxappearance', 'claws-mail');
     install_dependencies(@shell_dependencies, @xdeps);
 
