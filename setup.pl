@@ -60,7 +60,7 @@ if (-d './.dotfiles') {
 opendir(my $dh, $ENV{'HOME'}) or die "Cannot open directory: $!";
 
 print "Symlinking Dotfiles...\n";
-system('ln', '-svf', './.dotfiles/.*', '.');
+system('ln', '-sf', './.dotfiles/.*', '.');
 
 chdir $dh;
 print "Setting up default shell...\n";
