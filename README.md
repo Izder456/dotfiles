@@ -21,7 +21,7 @@ $ ./setup.pl
 ```
 ### Note
 
-- when the script is installing deps, always choose the last number when given a version choice from pkg_add.
+- when the script is installing deps, always choose the last number when given a version choice from `pkg_add`.
 
 # DISCLAIMER:
 
