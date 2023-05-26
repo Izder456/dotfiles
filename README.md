@@ -9,7 +9,7 @@
 
 ## Do as root:
 ```
-# usermod -aG wheel,operator,staff [your username]
+# usermod -G wheel,operator,staff [your username]
 # ftp -o /etc/doas.conf https://github.com/izder456/dotfiles/raw/main/doas.conf
 ```
 
