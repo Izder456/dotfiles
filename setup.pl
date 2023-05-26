@@ -123,6 +123,13 @@ sub compile_afetch {
     system('doas', 'make', 'install');
 }
 
+# Setup Battery Monitor
+sub setup_battstat {
+    system('git', 'clone', 'https://github.com/imwally/battstat.git', "$ENV{HOME}/.battstat");
+    chdir "$ENV{HOME}/.battstat";
+    system('doas', 'install', './battstat', '/usr/local/bin');
+}
+
 # Updates XDG user directories
 sub update_xdg_user_dirs {
     system('xdg-user-dirs-update');
@@ -195,6 +202,9 @@ sub main {
 
     print_message("Compiling afetch...");
     compile_afetch();
+
+    print_message("Setting up Battery Monitor...");
+    setup_battstat();
 
     closedir $dh;
 
