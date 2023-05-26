@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 
-use Modern::Perl;
+use 5.36;
 
 # Set PATH explicitly
 $ENV{'PATH'} = '/bin:/usr/bin:/sbin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin';
