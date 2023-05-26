@@ -19,6 +19,9 @@ $ ftp -o ./setup.pl https://github.com/izder456/dotfiles/raw/main/setup.pl
 $ chmod +x setup.pl
 $ ./setup.pl
 ```
+### Note
+
+- when the script is installing deps, always choose the last number when given a version choice from pkg_add.
 
 # DISCLAIMER:
 
