@@ -83,7 +83,7 @@ sub install_backgrounds {
 
 # Sets up Xenodm configuration
 sub setup_xenodm {
-    system('doas', 'ln', '-sf', glob("$ENV{HOME}/.dotfiles/xenodm_config/*"), '/etc/X11/xenodm/');
+    system('doas', 'cp', '-rvf', glob("$ENV{HOME}/.dotfiles/xenodm_config/*"), '/etc/X11/xenodm/');
 }
 
 # Installs fonts to /usr/X11R6/lib/X11/fonts/TTF
