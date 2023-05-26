@@ -47,7 +47,7 @@ chmod(0700, $ENV{'HOME'});
 
 print "Installing deps...\n";
 our @shdeps = ('zsh', 'bash', 'harfbuzz', 'neofetch', 'git', 'gmake', 'gawk', 'cmake', 'meson', 'upower', 'gcc', 'mercurial', 'feh', 'ffmpeg', 'yt-dlp', 'ImageMagick', 'gd', 'fftw3', 'fftw', 'automake', 'autoconf', 'neovim', 'dbus', 'htop', 'ncspot', 'rust', 'crystal', 'exa', 'pkg_mgr', 'scrot', 'py3-neovim', 'py3-pip', 'lynx', 'links', 'wget', 'curl', 'openssl','gmp', 'xz-utils', 'p7zip', 'bat', 'pkgconf', 'noto-emoji', 'ranger', 'ee', 'nano');
-our @xdeps = ('sdorfehs', 'gtk2-murrine-engine', 'mpv', 'qutebrowser', 'abiword', 'gnumeric', 'pcmanfm', 'weechat', 'dunst', 'picom', 'rofi', 'leafpad', 'xarchiver', 'xkill', 'xedit', 'xpdf', 'lxappearance', 'claws-mail');
+our @xdeps = ('sdorfehs', 'xdg-user-dirs', 'xdg-utils', gtk2-murrine-engine', 'mpv', 'qutebrowser', 'abiword', 'gnumeric', 'pcmanfm', 'weechat', 'dunst', 'picom', 'rofi', 'leafpad', 'xarchiver', 'xkill', 'xedit', 'xpdf', 'lxappearance', 'claws-mail');
 system('doas', 'pkg_add', @shdeps, @xdeps);
 
 if (-d './.dotfiles') {
@@ -58,11 +58,9 @@ if (-d './.dotfiles') {
 };
 
 opendir(my $dh, $ENV{'HOME'}) or die "Cannot open directory: $!";
-while (my $f = readdir $dh) {
-    next unless $f =~ /^\..*$/;
-    unlink "~/$f";
-    symlink(".dotfiles/$f", "~/$f");
-};
+
+print "Symlinking Dotfiles...\n";
+system('ln', '-svf', './.dotfiles/.*', '.');
 
 chdir $dh;
 print "Setting up default shell...\n";
@@ -71,7 +69,7 @@ if (-d '.fizsh') {
     system('./configure');
     system('make');
     system('doas', 'make', 'install');
-    system('cp', '.dotfiles/.fizshrc', './.fizsh/.fizshrc');
+    system('cp', './.dotfiles/.fizshrc', './.fizsh/.fizshrc');
     system('chsh', '-s', '/usr/local/bin/fizsh');
 } else {
     system('git', 'clone', 'https://github.com/zsh-users/fizsh.git', '.fizsh');
@@ -126,3 +124,5 @@ system('doas', 'make', 'install');
 
 chdir $dh;
 closedir $dh;
+
+system('xdg-user-dirs-update');
