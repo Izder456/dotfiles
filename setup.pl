@@ -64,6 +64,7 @@ while (my $f = readdir $dh) {
     symlink(".dotfiles/$f", "~/$f");
 };
 
+chdir $dh;
 print "Setting up default shell...\n";
 if (-d '.fizsh') {
     chdir './.fizsh';
@@ -82,21 +83,26 @@ if (-d '.fizsh') {
     system('chsh', '-s', '/usr/local/bin/fizsh');
 };
 
+chdir $dh;
 print ("Installing backgrounds...\n");
 system('doas', 'mkdir', '-p', '/usr/local/share/backgrounds');
 system('doas', 'cp', '-rvf', './.dotfiles/backgrounds/*', '/usr/local/share/backgrounds');
 
+chdir $dh;
 print ("Setting up Xenodm...\n");
 system('doas', 'cp', '-rvf', './.dotfiles/xenodm_config/*', '/etc/X11/xenodm');
 
+chdir $dh;
 print ("Installing Fonts...\n");
 system('doas', 'cp', '-rvf', './.dotfiles/.fonts/*', '/usr/X11R6/lib/X11/fonts/TTF');
 system('doas', 'fc-cache', '-fv');
 
+chdir $dh;
 print ("Compiling in rust programs...( this is gonna take a bit :3 )\n");
 our @rsdeps = ('fd-find', 'sd', 'onefetch', 'tokei', 'zoxide', 'broot', 'du-dust', 'cargo-update-installed');
 system('cargo', 'install', @rsdeps);
 
+chdir $dh;
 print ("Compiling in GNU shuf re-implementation...\n");
 system('git', 'clone', 'https://github.com/ibara/shuf.git', './.shuf');
 chdir './.shuf';
@@ -104,16 +110,19 @@ system('./configure');
 system('make');
 system('doas', 'make', 'install');
 
+chdir $dh;
 print ("Compiling in suckless-term...\n");
 system('git', 'clone', 'https://github.com/izder456/st.git', './.st');
 chdir './.st';
 system('make');
 system('doas', 'make', 'install');
 
+chdir $dh;
 print ("Compiling in afetch...\n");
 system('git', 'clone', 'https://github.com/13-CF/afetch.git', './.afetch');
 chdir './.afetch';
 system('make');
 system('doas', 'make', 'install');
 
+chdir $dh;
 closedir $dh;
