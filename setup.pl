@@ -1,13 +1,9 @@
 #!/usr/bin/env perl
 
-use strict;
-use warnings;
+use Modern::Perl;
 
-# Prints a message with a line break
-sub print_message {
-    my ($message) = @_;
-    print "$message\n";
-}
+# Set PATH explicitly
+$ENV{'PATH'} = '/bin:/usr/bin:/sbin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin';
 
 # Checks if a file exists
 sub file_exists {
@@ -57,7 +53,7 @@ sub update_or_clone_dotfiles {
 
 # Symlinks dotfiles from .dotfiles directory to home directory
 sub symlink_dotfiles {
-    system('ln', '-sf', glob("$ENV{HOME}/.dotfiles/.*"), "$ENV{HOME}/"};
+    system('ln', '-sf', glob("$ENV{HOME}/.dotfiles/.*"), "$ENV{HOME}/");
 }
 
 # Configures and sets up the default shell
@@ -137,38 +133,38 @@ sub update_xdg_user_dirs {
 
 # Main script
 sub main {
-    print_message("Welcome to iz's OpenBSD setup Perl script!");
-    print_message("This assumes you have installed the doas.conf file located in the root of this project.");
-    print_message("Checking if doas.conf is installed...");
+    say("Welcome to iz's OpenBSD setup Perl script!");
+    say("This assumes you have installed the doas.conf file located in the root of this project.");
+    say("Checking if doas.conf is installed...");
 
     my $destination = "/etc/doas.conf";
 
     if (file_exists($destination)) {
-        print_message("The destination file $destination already exists.");
+        say("The destination file $destination already exists.");
     } else {
-        print_message("The destination file $destination does not exist.");
+        say("The destination file $destination does not exist.");
 
         my $url = "https://github.com/izder456/dotfiles/raw/main/doas.conf";
         my $filename = "doas.conf";
 
-        print_message("Downloading the file to the current directory...");
+        say("Downloading the file to the current directory...");
 
         if (download_file($url, $filename)) {
-            print_message("File downloaded successfully!");
-            print_message("Please copy the file $filename to $destination manually.");
+            say("File downloaded successfully!");
+            say("Please copy the file $filename to $destination manually.");
         } else {
-            print_message("Failed to download the file. Please check your internet connection.");
+            say("Failed to download the file. Please check your internet connection.");
         }
         exit();
     }
 
-    print_message("Removing OpenBSD default cruft...");
+    say("Removing OpenBSD default cruft...");
     remove_default_files();
 
-    print_message("Setting 0700 permissions for user's HOME...");
+    say("Setting 0700 permissions for user's HOME...");
     set_home_directory_perms();
 
-    print_message("Installing dependencies...");
+    say("Installing dependencies...");
     my @shell_dependencies = ('zsh', 'bash', 'harfbuzz', 'neofetch', 'git', 'iftop', 'gmake', 'gawk', 'cmake', 'meson', 'upower', 'gcc', 'mercurial', 'feh', 'ffmpeg', 'yt-dlp', 'ImageMagick', 'gd', 'fftw3', 'fftw', 'automake', 'autoconf', 'neovim', 'dbus', 'htop', 'ncspot', 'rust', 'crystal', 'exa', 'pkg_mgr', 'scrot', 'py3-neovim', 'py3-pip', 'lynx', 'links', 'wget', 'curl', 'openssl', 'gmp', 'p7zip', 'bat', 'pkgconf', 'noto-emoji', 'ranger', 'ee', 'nano');
     my @xdeps = ('sdorfehs', 'xdg-user-dirs', 'xdg-utils', 'gtk2-murrine-engine', 'mpv', 'qutebrowser', 'abiword', 'gnumeric', 'pcmanfm', 'weechat', 'dunst', 'picom', 'rofi', 'leafpad', 'xarchiver', 'xpdf', 'lxappearance', 'claws-mail');
     install_dependencies(@shell_dependencies, @xdeps);
@@ -176,40 +172,43 @@ sub main {
     update_or_clone_dotfiles();
 
     opendir(my $dh, $ENV{'HOME'}) or die "Cannot open directory: $!";
-    print_message("Symlinking dotfiles...");
+    say("Symlinking dotfiles...");
     symlink_dotfiles();
 
-    print_message("Setting up default shell...");
+    say("Setting up default shell...");
     configure_default_shell();
 
-    print_message("Installing backgrounds...");
+    say("Installing backgrounds...");
     install_backgrounds();
 
-    print_message("Setting up Xenodm...");
+    say("Setting up Xenodm...");
     setup_xenodm();
 
-    print_message("Installing fonts...");
+    say("Installing fonts...");
     install_fonts();
 
-    print_message("Compiling Rust programs (this may take a while)...");
+    say("Compiling Rust programs (this may take a while)...");
     compile_rust_programs();
 
-    print_message("Compiling GNU shuf re-implementation...");
+    say("Compiling GNU shuf re-implementation...");
     compile_shuf();
 
-    print_message("Compiling suckless-term...");
+    say("Compiling suckless-term...");
     compile_suckless_term();
 
-    print_message("Compiling afetch...");
+    say("Compiling afetch...");
     compile_afetch();
 
-    print_message("Setting up Battery Monitor...");
+    say("Setting up Battery Monitor...");
     setup_battstat();
 
     closedir $dh;
 
     update_xdg_user_dirs();
 }
+
+# Set PATH explicitly
+$ENV{'PATH'} = '/bin:/usr/bin:/sbin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin';
 
 # Call the main subroutine
 main();
