@@ -50,49 +50,49 @@ our @shdeps = ('zsh', 'bash', 'harfbuzz', 'neofetch', 'git', 'gmake', 'gawk', 'c
 our @xdeps = ('sdorfehs', 'xdg-user-dirs', 'xdg-utils', 'gtk2-murrine-engine', 'mpv', 'qutebrowser', 'abiword', 'gnumeric', 'pcmanfm', 'weechat', 'dunst', 'picom', 'rofi', 'leafpad', 'xarchiver', 'xkill', 'xedit', 'xpdf', 'lxappearance', 'claws-mail');
 system('doas', 'pkg_add', @shdeps, @xdeps);
 
-if (-d './.dotfiles') {
-    chdir './.dotfiles';
+if (-d "~/.dotfiles") {
+    chdir "~/.dotfiles";
     system('git', 'pull', '--ff-only');
 } else {
-    system('git', 'clone', 'https://github.com/izder456/dotfiles', './.dotfiles');
+    system('git', 'clone', 'https://github.com/izder456/dotfiles', "~/.dotfiles");
 };
 
 opendir(my $dh, $ENV{'HOME'}) or die "Cannot open directory: $!";
 
 print "Symlinking Dotfiles...\n";
-system('ln', '-sf', './.dotfiles/.*', '.');
+system('ln', '-sf', "~/.dotfiles/.*", ".");
 
 chdir $dh;
 print "Setting up default shell...\n";
-if (-d '.fizsh') {
-    chdir './.fizsh';
-    system('./configure');
+if (-d ".fizsh") {
+    chdir "~/.fizsh";
+    system("./configure");
     system('make');
     system('doas', 'make', 'install');
-    system('cp', './.dotfiles/.fizshrc', './.fizsh/.fizshrc');
+    system('cp', "~/.dotfiles/.fizshrc", "~/.fizsh/.fizshrc");
     system('chsh', '-s', '/usr/local/bin/fizsh');
 } else {
-    system('git', 'clone', 'https://github.com/zsh-users/fizsh.git', '.fizsh');
-    chdir './.fizsh';
-    system('./configure');
+    system('git', 'clone', 'https://github.com/zsh-users/fizsh.git', "~/.fizsh");
+    chdir "~/.fizsh";
+    system("./configure");
     system('make');
     system('doas', 'make', 'install');
-    system('cp', './.dotfiles/.fizshrc', './.fizsh/.fizshrc');
+    system('cp', "~/.dotfiles/.fizshrc", "~/.fizsh/.fizshrc");
     system('chsh', '-s', '/usr/local/bin/fizsh');
 };
 
 chdir $dh;
 print ("Installing backgrounds...\n");
 system('doas', 'mkdir', '-p', '/usr/local/share/backgrounds');
-system('doas', 'cp', '-rvf', './.dotfiles/backgrounds/*', '/usr/local/share/backgrounds');
+system('doas', 'cp', '-rvf', "~/.dotfiles/backgrounds/*", '/usr/local/share/backgrounds');
 
 chdir $dh;
 print ("Setting up Xenodm...\n");
-system('doas', 'cp', '-rvf', './.dotfiles/xenodm_config/*', '/etc/X11/xenodm');
+system('doas', 'ln', '-sf', "~/.dotfiles/xenodm_config/*", '/etc/X11/xenodm/');
 
 chdir $dh;
 print ("Installing Fonts...\n");
-system('doas', 'cp', '-rvf', './.dotfiles/.fonts/*', '/usr/X11R6/lib/X11/fonts/TTF');
+system('doas', 'cp', '-rvf', "~/.dotfiles/.fonts/*", '/usr/X11R6/lib/X11/fonts/TTF/');
 system('doas', 'fc-cache', '-fv');
 
 chdir $dh;
@@ -102,23 +102,23 @@ system('cargo', 'install', @rsdeps);
 
 chdir $dh;
 print ("Compiling in GNU shuf re-implementation...\n");
-system('git', 'clone', 'https://github.com/ibara/shuf.git', './.shuf');
-chdir './.shuf';
+system('git', 'clone', 'https://github.com/ibara/shuf.git', "~/.shuf");
+chdir "~/.shuf";
 system('./configure');
 system('make');
 system('doas', 'make', 'install');
 
 chdir $dh;
 print ("Compiling in suckless-term...\n");
-system('git', 'clone', 'https://github.com/izder456/st.git', './.st');
-chdir './.st';
+system('git', 'clone', 'https://github.com/izder456/st.git', "~/.st");
+chdir "~/.st";
 system('make');
 system('doas', 'make', 'install');
 
 chdir $dh;
 print ("Compiling in afetch...\n");
-system('git', 'clone', 'https://github.com/13-CF/afetch.git', './.afetch');
-chdir './.afetch';
+system('git', 'clone', 'https://github.com/13-CF/afetch.git', "~/.afetch");
+chdir "~/.afetch";
 system('make');
 system('doas', 'make', 'install');
 
