@@ -6,4 +6,4 @@ exec dunst &
 #exec ~/.local/bin/locker &
 exec picom -b &
 ulimit -Sc 0
-exec sdorfehs
+exec stumpwm
