@@ -34,10 +34,10 @@ config.set("fileselect.multiple_files.command", ['st', '-e', 'ranger', '--choose
 
 # Always restore open sites when qutebrowser is reopened.
 # Type: Bool
-c.auto_save.session = True
+c.auto_save.session = False 
 
 # Automatically start playing `<video>` elements. Note: On Qt < 5.11,
-# this option needs a restart and does not support URL patterns.
+# this option needs a rest Falseart and does not support URL patterns.
 # Type: Bool
 c.content.autoplay = False
 
@@ -152,7 +152,7 @@ c.completion.shrink = True
 # Directory to save downloads to. If unset, a sensible OS-specific
 # default is used.
 # Type: Directory
-c.downloads.location.directory = '/tmp/'
+c.downloads.location.directory = '~/Downloads/'
 
 # Padding (in pixels) around text for tabs.
 # Type: Padding
