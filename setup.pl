@@ -51,6 +51,15 @@ sub update_or_clone_dotfiles {
     }
 }
 
+sub update_or_clone_stumpwm {
+    if (-d "$ENV{HOME}/.stumpwm.d") {
+        chdir "$ENV{HOMW}/.stumpwm.d";
+        system('git', 'pull', '--ff-only');
+    } else {
+        system('git', 'clone', 'https://github.com/izder456/StumpWM-Config', "$ENV{HOME}/.stumpwm.d");
+    }
+}
+
 # Symlinks dotfiles from .dotfiles directory to home directory
 sub symlink_dotfiles {
     system('ln', '-sf', glob("$ENV{HOME}/.dotfiles/.*"), "$ENV{HOME}/");
@@ -169,13 +178,15 @@ sub main {
 
     update_or_clone_dotfiles();
 
+    update_or_clone_stumpwm();
+
     opendir(my $dh, $ENV{'HOME'}) or die "Cannot open directory: $!";
     say("Symlinking dotfiles...");
     symlink_dotfiles();
 
     say("Installing dependencies...");
-    my @shell_dependencies = ('zsh', 'bash', 'ripgrep', 'harfbuzz', 'neofetch', 'iftop', 'gmake', 'gawk', 'cmake', 'meson', 'upower', 'gcc', 'mercurial', 'feh', 'ffmpeg', 'yt-dlp', 'ImageMagick', 'gd', 'fftw3', 'fftw', 'automake', 'autoconf', 'neovim', 'dbus', 'htop', 'ncspot', 'composer','rust', 'crystal', 'exa', 'pkg_mgr', 'scrot', 'py3-neovim', 'py3-pip', 'lynx', 'links', 'wget', 'curl', 'openssl', 'gmp', 'p7zip', 'bat', 'pkgconf', 'noto-emoji', 'ranger', 'ee', 'nano');
-    my @xdeps = ('sdorfehs', 'xdg-user-dirs', 'xdg-utils', 'gtk2-murrine-engine', 'mpv', 'qutebrowser', 'abiword', 'gnumeric', 'pcmanfm', 'weechat', 'dunst', 'picom', 'rofi', 'leafpad', 'xarchiver', 'xpdf', 'lxappearance', 'claws-mail');
+    my @shell_dependencies = ('zsh', 'bash', 'ripgrep', 'harfbuzz', 'neofetch', 'iftop', 'gmake', 'gawk', 'cmake', 'meson', 'upower', 'gcc', 'g++', 'mercurial', 'feh', 'ffmpeg', 'yt-dlp', 'ImageMagick', 'gd', 'fftw3', 'fftw', 'automake', 'autoconf', 'neovim', 'dbus', 'htop', 'ncspot', 'composer','rust', 'crystal', 'exa', 'pkg_mgr', 'scrot', 'py3-neovim', 'py3-pip', 'lynx', 'links', 'wget', 'curl', 'openssl', 'gmp', 'p7zip', 'bat', 'pkgconf', 'noto-emoji', 'ranger', 'ee', 'nano');
+    my @xdeps = ('stumpwm', 'sbcl', 'xdg-user-dirs', 'xdg-utils', 'gtk2-murrine-engine', 'mpv', 'qutebrowser', 'abiword', 'gnumeric', 'caja', 'caja-extensions', 'weechat', 'dunst', 'picom', 'rofi', 'leafpad', 'xarchiver', 'xpdf', 'lxappearance', 'claws-mail');
     install_dependencies(@shell_dependencies, @xdeps);
 
     say("Setting up default shell...");
