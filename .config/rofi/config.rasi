@@ -1,6 +1,6 @@
 configuration {
  modi: "window,drun,ssh,combi";
- font: "GohuFont Nerd Font Mono 12";
+ font: "GohuFont uni14 Nerd Font Mono 12";
  combi-modi: "window,drun,ssh";
  }
 @theme "~/.config/rofi/themes/gruvbox-dark-hard.rasi"
