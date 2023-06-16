@@ -53,7 +53,7 @@ sub update_or_clone_dotfiles {
 
 sub update_or_clone_stumpwm {
     if (-d "$ENV{HOME}/.stumpwm.d") {
-        chdir "$ENV{HOMW}/.stumpwm.d";
+        chdir "$ENV{HOME}/.stumpwm.d";
         system('git', 'pull', '--ff-only');
     } else {
         system('git', 'clone', 'https://github.com/izder456/StumpWM-Config', "$ENV{HOME}/.stumpwm.d");

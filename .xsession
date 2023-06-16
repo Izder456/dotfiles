@@ -6,4 +6,5 @@ exec dunst &
 #exec ~/.local/bin/locker &
 exec picom -b &
 ulimit -Sc 0
+exec feh --bg-fill $(shuf -n1 -e /usr/local/share/backgrounds/*.png) &
 exec stumpwm

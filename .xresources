@@ -1,6 +1,6 @@
 ! xwindow stuffs
 xterm*scrollBar: false
-xterm*faceName: GohuFont Nerd Font
+xterm*faceName: GohuFont uni14 Nerd Font Mono
 xterm*faceSize: 12
 xterm*renderFont: true
 xterm*internalBorder: 16

@@ -13,17 +13,11 @@ xlogin*greeting: WELCOME
 xlogin*namePrompt: USER:
 xlogin*passwdPrompt: PASS:
 xlogin*fail: TOOBAD!
-#if WIDTH > 800
-xlogin*greetFace:       GohuFont Nerd Font Mono-22:italic:dpi=75
-xlogin*face:            GohuFont Nerd Font Mono-16:bold:dpi=75
-xlogin*promptFace:      GohuFont Nerd Font Mono-16:bold:dpi=75
-xlogin*failFace:        GohuFont Nerd Font Mono-16:bold:dpi=75
-#else
-xlogin*greetFace:       GohuFont Nerd Font Mono-18:italic:dpi=75
-xlogin*face:            GohuFont Nerd Font Mono-12:bold:dpi=75
-xlogin*promptFace:      GohuFont Nerd Font Mono-12:bold:dpi=75
-xlogin*failFace:        GohuFont Nerd Font Mono-12:italic:dpi=75
-#endif
+
+xlogin*greetFace:       GohuFont uni14 Nerd Font Mono-22:bold:italic:dpi=86
+xlogin*face:            GohuFont uni14 Nerd Font Mono-14:bold:dpi=86
+xlogin*promptFace:      GohuFont uni11 Nerd Font Mono-14:bold:dpi=86
+xlogin*failFace:        GohuFont uni11 Nerd Font Mono-14:bold:italic:dpi=86
 
 ! border/shadow
 xlogin*borderWidth: 2
@@ -38,18 +32,7 @@ xlogin.Login.background: #32302f
 xlogin.Login.cursorColor: #d5c4a1
 xlogin.Login.inpColor: #d5c4a1
 
-#ifdef bpp1
 xlogin*logoFileName: /etc/X11/xenodm/pixmaps/mcpuffer.xpm
-#endif
-#ifdef bpp4
-xlogin*logoFileName: /etc/X11/xenodm/pixmaps/mcpuffer.xpm
-#endif
-#ifdef bpp8
-xlogin*logoFileName: /etc/X11/xenodm/pixmaps/mcpuffer.xpm
-#endif
-#ifdef bpp15
-xlogin*logoFileName: /etc/X11/xenodm/pixmaps/mcpuffer.xpm
-#endif
 
 xlogin*useShape: true
 xlogin*logoPadding: 10
@@ -60,7 +43,7 @@ URxvt.selectToClibboard: true
 xterm*allowSendEvents: true
 URxvt.allowSendEvents: true
 
-*.faceName: GohuFont Nerd Font Mono
+*.faceName: GohuFont uni14 Nerd Font Mono
 *.faceSize: 12
 *.foreground: #d5c4a1
 *.Foreground: #d5c4a1
