@@ -1,12 +1,21 @@
 #!/usr/bin/env sh
 
+###############################################
+### This is based on @tfemby's script
+### Thanks to @tfemby for the initial version
+### -iz
+###############################################
+
+
 function get_volume {
     # pactl get-sink-volume @DEFAULT_SINK@ | awk {'print $5'} | sed 's/.$//'
+    sleep 0.5
     sndioctl -n output.level | sed 's/\.//' | sed 's/.$//'
 }
 
 function is_mute {
     # pactl get-sink-mute @DEFAULT_SINK@ | awk {'print $2'}
+    sleep 0.5
     sndioctl -n output.mute
 }
 
@@ -48,17 +57,17 @@ function send_notification {
 case $1 in
     up)
         # pactl set-sink-volume @DEFAULT_SINK@ +1000
-        sndioctl -n output.level=+0.05
+        sndioctl output.level=+0.05
         send_notification "volume"
     ;;
     down)
         # pactl set-sink-volume @DEFAULT_SINK@ -1000
-        sndioctl -n output.level=-0.05
+        sndioctl output.level=-0.05
         send_notification "volume"
     ;;
     mute)
         # pactl set-sink-mute @DEFAULT_SINK@ toggle
-        sndioctl -n output.mute=!
+        sndioctl output.mute=!
         send_notification "mute"
     ;;
     volume)

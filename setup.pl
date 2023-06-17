@@ -91,6 +91,11 @@ sub setup_xenodm {
     system('doas', 'cp', '-rvf', glob("$ENV{HOME}/.dotfiles/xenodm_config/*"), '/etc/X11/xenodm/');
 }
 
+sub setup_apmd {
+    system('doas', 'mkdir', '/etc/apm');
+    system('doas', 'cp', '-rvf', glob("$ENV{HOME}/.dotfiles/apm_config/*"), '/etc/apm/');
+}
+
 # Installs fonts to /usr/X11R6/lib/X11/fonts/TTF
 sub install_fonts {
     system('doas', 'cp', '-rvf', glob("$ENV{HOME}/.dotfiles/.fonts/*"), '/usr/X11R6/lib/X11/fonts/TTF/');
@@ -218,11 +223,17 @@ sub main {
     say("Compiling suckless-term...");
     compile_suckless_term();
 
+    say("Compiling slock...");
+    compile_slock();
+
     say("Compiling afetch...");
     compile_afetch();
 
     say("Setting up Battery Monitor...");
     setup_battstat();
+
+    say("Setting up suspend...");
+    setup_apmd();
 
     closedir $dh;
 
