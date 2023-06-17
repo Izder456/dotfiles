@@ -2,9 +2,10 @@
 [ -f /etc/xprofile ] && . /etc/xprofile
 [ -f ~/.xprofile ] && sh ~/.xprofile
 [ -f ~/.xresources ] && xrdb ~/.xresources
-exec dunst &
-#exec ~/.local/bin/locker &
-exec picom -b &
+dunst &
+picom -b &
 ulimit -Sc 0
-exec feh --bg-fill $(shuf -n1 -e /usr/local/share/backgrounds/*.png) &
-exec stumpwm
+feh --bg-fill $(shuf -n1 -e /usr/local/share/backgrounds/*.png) &
+xidle -delay 5 -nw -program "/usr/local/bin/slock" -timeout 1800 &
+emacs --daemon &
+stumpwm

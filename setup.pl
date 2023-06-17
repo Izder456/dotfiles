@@ -112,6 +112,14 @@ sub compile_shuf {
     system('doas', 'make', 'install');
 }
 
+# Compiles in my Slock Setup
+sub compile_slock {
+    system('git', 'clone', 'https://github.com/Izder456/slock.git', "$ENV{HOME}/.slock");
+    chdir "$ENV{HOME}/.slock";
+    system('make');
+    system('doas', 'make', 'install');
+}
+
 # Compiles suckless-term (st)
 sub compile_suckless_term {
     system('git', 'clone', 'https://github.com/izder456/st.git', "$ENV{HOME}/.st");
