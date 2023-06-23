@@ -104,7 +104,7 @@ sub install_fonts {
 
 # Compiles rust programs using Cargo
 sub compile_rust_programs {
-    my @rust_dependencies = ('sd', 'onefetch', 'tokei', 'zoxide', 'broot', 'du-dust', 'cargo-update-installed');
+    my @rust_dependencies = ('sd', 'onefetch', 'tokei', 'zoxide', 'broot', 'du-dust', 'cargo-update-installed', 'cargo-quickinstall', 'cargo-upgrade', 'tre-command', 'hyperfine');
     system('cargo', 'install', @rust_dependencies);
 }
 
@@ -121,14 +121,6 @@ sub compile_shuf {
 sub compile_slock {
     system('git', 'clone', 'https://github.com/Izder456/slock.git', "$ENV{HOME}/.slock");
     chdir "$ENV{HOME}/.slock";
-    system('make');
-    system('doas', 'make', 'install');
-}
-
-# Compiles suckless-term (st)
-sub compile_suckless_term {
-    system('git', 'clone', 'https://github.com/izder456/st.git', "$ENV{HOME}/.st");
-    chdir "$ENV{HOME}/.st";
     system('make');
     system('doas', 'make', 'install');
 }
@@ -199,7 +191,7 @@ sub main {
 
     say("Installing dependencies...");
     my @shell_dependencies = ('zsh', 'bash', 'ripgrep', 'harfbuzz', 'neofetch', 'iftop', 'gmake', 'gawk', 'cmake', 'meson', 'upower', 'gcc', 'g++', 'mercurial', 'feh', 'ffmpeg', 'yt-dlp', 'ImageMagick', 'gd', 'fftw3', 'fftw', 'automake', 'autoconf', 'neovim', 'dbus', 'htop', 'ncspot', 'composer','rust', 'crystal', 'exa', 'pkg_mgr', 'scrot', 'py3-neovim', 'py3-pip', 'lynx', 'links', 'wget', 'curl', 'openssl', 'gmp', 'p7zip', 'bat', 'pkgconf', 'noto-emoji', 'ranger', 'ee', 'nano');
-    my @xdeps = ('stumpwm', 'sbcl', 'xdg-user-dirs', 'xdg-utils', 'gtk2-murrine-engine', 'mpv', 'qutebrowser', 'abiword', 'gnumeric', 'caja', 'caja-extensions', 'weechat', 'dunst', 'picom', 'rofi', 'leafpad', 'xarchiver', 'xpdf', 'lxappearance', 'claws-mail');
+    my @xdeps = ('stumpwm', 'sbcl', 'xdg-user-dirs', 'xdg-utils', 'gtk2-murrine-engine', 'mpv', 'alacritty', 'qutebrowser', 'abiword', 'gnumeric', 'caja', 'caja-extensions', 'weechat', 'dunst', 'picom', 'rofi', 'leafpad', 'xarchiver', 'xpdf', 'lxappearance', 'claws-mail');
     install_dependencies(@shell_dependencies, @xdeps);
 
     say("Setting up default shell...");
@@ -219,9 +211,6 @@ sub main {
 
     say("Compiling GNU shuf re-implementation...");
     compile_shuf();
-
-    say("Compiling suckless-term...");
-    compile_suckless_term();
 
     say("Compiling slock...");
     compile_slock();
