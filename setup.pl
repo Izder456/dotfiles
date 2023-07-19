@@ -191,7 +191,7 @@ sub main {
 
     say("Installing dependencies...");
     my @shell_dependencies = ('zsh', 'bash', 'ripgrep', 'harfbuzz', 'neofetch', 'iftop', 'gmake', 'gawk', 'cmake', 'meson', 'upower', 'gcc', 'g++', 'mercurial', 'feh', 'ffmpeg', 'yt-dlp', 'ImageMagick', 'gd', 'fftw3', 'fftw', 'automake', 'autoconf', 'neovim', 'dbus', 'htop', 'ncspot', 'composer','rust', 'crystal', 'exa', 'pkg_mgr', 'scrot', 'py3-neovim', 'py3-pip', 'lynx', 'links', 'wget', 'curl', 'openssl', 'gmp', 'p7zip', 'bat', 'pkgconf', 'noto-emoji', 'ranger', 'ee', 'nano');
-    my @xdeps = ('stumpwm', 'sbcl', 'xdg-user-dirs', 'xdg-utils', 'gtk2-murrine-engine', 'mpv', 'alacritty', 'qutebrowser', 'abiword', 'gnumeric', 'caja', 'caja-extensions', 'weechat', 'dunst', 'picom', 'rofi', 'leafpad', 'xarchiver', 'xpdf', 'lxappearance', 'claws-mail');
+    my @xdeps = ('stumpwm', 'sbcl', 'xdg-user-dirs', 'xdg-utils', 'gtk2-murrine-engine', 'mpv', 'alacritty', 'firefox-esr', 'abiword', 'gnumeric', 'caja', 'caja-extensions', 'weechat', 'dunst', 'picom', 'rofi', 'leafpad', 'xarchiver', 'xpdf', 'lxappearance', 'claws-mail');
     install_dependencies(@shell_dependencies, @xdeps);
 
     say("Setting up default shell...");

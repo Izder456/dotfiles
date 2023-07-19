@@ -367,7 +367,7 @@ bell:
 
   # Duration of the visual bell flash in milliseconds. A `duration` of `0` will
   # disable the visual bell animation.
-  #duration: 0
+  duration: 15
 
   # Visual bell animation color.
   color: '#fabd2f'
@@ -383,9 +383,9 @@ bell:
   #     program: notify-send
   #     args: ["Hello, World!"]
   #
-  command:
-    program: notify-send
-    args: ["HEY!"]
+  #command:
+  #  program: notify-send
+  #  args: ["HEY!"]
 #selection:
   # This string contains all characters that are used as separators for
   # "semantic words" in Alacritty.
