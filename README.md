@@ -22,7 +22,7 @@
         9. changing the default shell to [fizsh](https://github.com/zsh-users/fizsh.git),
         10. installing the [backgrounds](backgrounds) to `/usr/local/share/backgrounds`,
         11. installing the [configuration for xenodm](xenodm_config),
-        12. setting up apmd to properlay autohook the locker when laptop lid closes,
+        12. setting up apmd to properly autohook the locker when laptop lid closes,
         13. installing [the fonts](.fonts) to `/usr/X11R6/lib/X11/fonts/TTF`,
         14. compiling and installing some rust programs i use daily,
         15. compiling and installing some reimplementation of [gnu shuf](https://github.com/ibara/shuf.git),
