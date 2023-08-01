@@ -8,7 +8,7 @@
 
 - while there *is* a setup script in this project, it is not meant to be plug-n-play. its a bare-bones setup that is **highly non-portable** and *will* take a little hackery to work 100%. I don't really find this as an issue cos I am perfectly comfortable melding it for my needs. 
 
-- it is _**highly encouraged*_ that you read over the PERL script before following the [Setup](#setup-script) but for brevity's sake:
+- it is _**highly encouraged**_ that you read over the PERL script before following the [Setup](#setup-script) but for brevity's sake:
     - the setup script first forces perl v5.36 compliance
     - i define a few subroutines:
         1. checking for files, 
