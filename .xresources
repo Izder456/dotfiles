@@ -18,6 +18,9 @@ Xft.autohint: false
 Xft.hintstyle: hintfull
 Xft.lcdfilter: lcddefault
 
+XClock*Background: #32302f
+XClock*Foreground: #ebdbb2
+
 ! hard contrast: *background: #1d2021
 *background: #282828
 ! soft contrast: *background: #32302f
