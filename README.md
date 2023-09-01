@@ -10,7 +10,7 @@
 
 - it is _**highly encouraged**_ that you read over the PERL script before following the [Setup](#setup-script) but for brevity's sake:
     - the setup script first forces perl v5.36 compliance
-    - i define a few subroutines:
+    - I define a few subroutines:
         1. checking for files, 
         2. downloading files, 
         3. removing default stuff,
@@ -29,7 +29,8 @@
         16. compiling and installing [my suckless lock configuration/fork](https://github.com/Izder456/slock.git),
         17. compiling and installing the fetch program i use: [afetch](https://github.com/13-CF/afetch.git),
         18. setting up battstat for my modeline: [battstat](https://github.com/imwally/battstat.git),
-        19. and finally setting up `xdg-user-dirs`.
+        19. setting up my [DOOM Emacs Config](https://github/Izder456/Emacs-Config),
+        20. and finally setting up `xdg-user-dirs`.
     - then, my main subroutine is defined where the script uses the previously defined subroutines to install deps and put things all together. most of the function is from the subroutines.
 
 - by design, my script **does not do any performance tweaking**, the user is encouraged to refer to [the FAQ](https://openbsd.org/faq), [the manpages](https://man.openbsd.org), or the unofficial [openbsd handbook](https://www.openbsdhandbook.com), for that.

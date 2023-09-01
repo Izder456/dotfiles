@@ -4,20 +4,72 @@ export CXXFLAGS="${COMMON_FLAGS}"
 export FCFLAGS="${COMMON_FLAGS}"
 export FFLAGS="${COMMON_FLAGS}"
 export RUSTFLAGS="-C target-cpu=native -C opt-level=3"
+export LC_CTYPE="en_US.UTF-8"
+export VISUAL="emacsclient --create-frame --alternate-editor='emacs'"
+export EDITOR="emacsclient -nw --create-frame --altenate-editor='emacs -nw'"
 
+autoload _fzf_key_bindings _fzf_completion
+_fzf_key_bindings
+_fzf_completion
+
+##
+# Alias for muscle memory
+##
 alias sudo="doas"
-alias ls="exa --icons -h"
-alias la="exa --icons -ah"
-alias ll="exa --icons -lh"
-alias lh="exa --icons -lah"
-alias cat="bat -pp"
-alias grep="rg"
-alias e="nvim"
-alias s="ncspot"
+
+##
+# Alias for listing files
+##
+alias ls="exa --icons --git -h"
+alias la="exa --icons --git -ah"
+alias ll="exa --icons --git -lh"
+alias lh="exa --icons --git -lah"
+
+##
+# Alias for parsing
+##
+alias cat="bat --theme=gruvbox-dark -pp"
+alias bat="bat --theme=gruvbox-dark"
+alias grep="ggrep --color=auto"
+alias rgrep="rg"
+
+##
+# Alias for sysfetch
+##
 alias f="neofetch --off"
+alias F="neofetch -L"
 alias mf="pfetch"
-alias i="glances"
+alias uf="ufetch"
 
-export PATH=$HOME/.cargo/bin:$HOME/.local/bin:$PATH
+##
+# Alias for sysstats
+##
+alias i="top"
+alias H="htop"
 
+
+##
+# Alias for tarballz
+##
+alias btar="tar"
+alias tar="gtar"
+
+##
+# Alias for yt-dlp
+##
+alias audio-dlp="yt-dlp -x --audio-qality 0 --audio-format vorbis \
+		--embed-thumbnail --embed-chapters --embed-metadata \
+		--concurrent-fragments 5"
+alias video-dlp="yt-dlp --write-subs --sub-format srt --remux-video mkv \
+		--embed-thumbnail --embed-chapters --embed-subs --embed-metadata \
+		--concurrent-fragments 5"
+
+##
+# EXPORT PATH
+##
+export PATH=$HOME/.cargo/bin:$HOME/.local/bin:$HOME/.emacs.d/bin:$PATH
+
+##
+# the r/unixporn rite of passage
+##
 afetch
