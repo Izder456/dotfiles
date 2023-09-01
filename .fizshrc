@@ -1,13 +1,13 @@
-export COMMON_FLAGS="-O2 -pipe -march=native"
-export CFLAGS="${COMMON_FLAGS}"
-export CXXFLAGS="${COMMON_FLAGS}"
-export FCFLAGS="${COMMON_FLAGS}"
-export FFLAGS="${COMMON_FLAGS}"
-export RUSTFLAGS="-C target-cpu=native -C opt-level=3"
+##
+# ENV VARS
+##
 export LC_CTYPE="en_US.UTF-8"
 export VISUAL="emacsclient --create-frame --alternate-editor='emacs'"
 export EDITOR="emacsclient -nw --create-frame --altenate-editor='emacs -nw'"
 
+##
+# FZF Completions
+##
 autoload _fzf_key_bindings _fzf_completion
 _fzf_key_bindings
 _fzf_completion
@@ -57,7 +57,7 @@ alias tar="gtar"
 ##
 # Alias for yt-dlp
 ##
-alias audio-dlp="yt-dlp -x --audio-qality 0 --audio-format vorbis \
+alias audio-dlp="yt-dlp -x --audio-quality 0 --audio-format vorbis \
 		--embed-thumbnail --embed-chapters --embed-metadata \
 		--concurrent-fragments 5"
 alias video-dlp="yt-dlp --write-subs --sub-format srt --remux-video mkv \
