@@ -206,7 +206,7 @@ sub main {
     symlink_dotfiles();
 
     say("Installing dependencies...");
-    my @shell_dependencies = ('github-cli', 'fzf', 'gnupg', 'coreutils', 'ggrep', 'gtar','passwd-store', 'zsh', 'bash', 'ripgrep', 'harfbuzz', 'neofetch', 'iftop', 'gmake', 'gawk', 'cmake', 'meson', 'upower', 'gcc', 'g++', 'mercurial', 'feh', 'ffmpeg', 'yt-dlp', 'ImageMagick', 'gd', 'fftw3', 'fftw', 'autoconf', 'neovim', 'emacs', 'dbus', 'htop', 'ncspot', 'composer','rust', 'crystal', 'leiningen', 'clojure', 'chicken', 'exa', 'pkg_mgr', 'scrot', 'py3-neovim', 'py3-pip', 'lynx', 'links', 'wget', 'curl', 'openssl', 'gmp', 'p7zip', 'bat', 'pkgconf', 'noto-emoji', 'ranger', 'ee', 'nano');
+    my @shell_dependencies = ('github-cli', 'fzf', 'gnupg', 'coreutils', 'ggrep', 'gtar','passwd-store', 'zsh', 'bash', 'ripgrep', 'harfbuzz', 'neofetch', 'iftop', 'gmake', 'gawk', 'cmake', 'meson', 'upower', 'gcc', 'g++', 'mercurial', 'feh', 'ffmpeg', 'yt-dlp', 'ImageMagick', 'gd', 'fftw3', 'fftw', 'moc', 'autoconf', 'neovim', 'emacs', 'dbus', 'htop', 'ncspot', 'composer','rust', 'crystal', 'leiningen', 'clojure', 'chicken', 'exa', 'pkg_mgr', 'scrot', 'py3-neovim', 'py3-pip', 'lynx', 'links', 'wget', 'curl', 'openssl', 'gmp', 'p7zip', 'bat', 'pkgconf', 'noto-emoji', 'ranger', 'ee', 'nano');
     my @xdeps = ('stumpwm', 'sbcl', 'xdg-user-dirs', 'xdg-utils', 'gtk2-murrine-engine', 'mpv', 'alacritty', 'firefox-esr', 'abiword', 'gnumeric', 'caja', 'caja-extensions', 'weechat', 'dunst', 'picom', 'rofi', 'leafpad', 'xarchiver', 'xpdf', 'lxappearance', 'claws-mail');
     install_dependencies(@shell_dependencies, @xdeps);
 
