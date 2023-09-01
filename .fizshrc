@@ -6,7 +6,7 @@ export VISUAL="emacsclient --create-frame --alternate-editor='emacs'"
 export EDITOR="emacsclient -nw --create-frame --altenate-editor='emacs -nw'"
 
 ##
-# FZF Completions
+# Setup Completions
 ##
 autoload _fzf_key_bindings _fzf_completion
 _fzf_key_bindings
@@ -34,6 +34,12 @@ alias grep="ggrep --color=auto"
 alias rgrep="rg"
 
 ##
+# Alias for editing
+##
+alias edit=$EDITOR
+alias vedit=$VISUAL
+
+##
 # Alias for sysfetch
 ##
 alias f="neofetch --off"
@@ -58,16 +64,15 @@ alias tar="gtar"
 # Alias for yt-dlp
 ##
 alias audio-dlp="yt-dlp -x --audio-quality 0 --audio-format vorbis \
-		--embed-thumbnail --embed-chapters --embed-metadata \
 		--concurrent-fragments 5"
 alias video-dlp="yt-dlp --write-subs --sub-format srt --remux-video mkv \
-		--embed-thumbnail --embed-chapters --embed-subs --embed-metadata \
-		--concurrent-fragments 5"
+		--embed-subs --concurrent-fragments 5"
 
 ##
-# EXPORT PATH
+# EXPORT PATH & MAN
 ##
-export PATH=$HOME/.cargo/bin:$HOME/.local/bin:$HOME/.emacs.d/bin:$PATH
+export PATH=$HOME/.cargo/bin:$HOME/.local/bin:$HOME/.emacs.d/bin:$HOME/.local/share/pkg/bin:$PATH
+export MANPATH=$HOME/.local/share/pkg/man:$MANPATH
 
 ##
 # the r/unixporn rite of passage
