@@ -4,7 +4,7 @@ xset b on
 prefix="/usr/X11R6"
 exec_prefix="${prefix}"
 
-/usr/local/bin/feh --bg-fill /usr/local/share/backgrounds/oddments.png
+/usr/local/bin/feh --bg-fill $(/usr/local/bin/shuf -n1 -e /usr/local/share/backgrounds/*)
 
-#(sleep 3 && xwd -out /tmp/xenodm.xwd -root) &
+(sleep 3 && xwd -out /tmp/xenodm.xwd -root) &
 

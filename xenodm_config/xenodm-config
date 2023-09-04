@@ -1,0 +1,21 @@
+! $OpenBSD: xenodm-config.in,v 1.5 2018/11/03 18:04:45 matthieu Exp $
+!
+DisplayManager.authDir:	/etc/X11/xenodm
+DisplayManager.errorLogFile:	/var/log/xenodm.log
+DisplayManager.servers:		/etc/X11/xenodm/Xservers
+DisplayManager*resources:	/etc/X11/xenodm/Xresources
+! All displays should use authorization, but we cannot be sure
+! X terminals may not be configured that way, so they will require
+! individual resource settings.
+DisplayManager*authorize:	true
+!
+DisplayManager*startup:		/etc/X11/xenodm/Xstartup
+DisplayManager*session:		/etc/X11/xenodm/Xsession
+DisplayManager*reset:		/etc/X11/xenodm/Xreset
+DisplayManager*authComplain:	true
+! The following three resources set up display :0 as the console.
+DisplayManager._0.setup:	/etc/X11/xenodm/Xsetup_0
+DisplayManager._0.startup:	/etc/X11/xenodm/GiveConsole
+DisplayManager._0.reset:	/etc/X11/xenodm/TakeConsole
+
+DisplayManager.*.authName:	MIT-MAGIC-COOKIE-1

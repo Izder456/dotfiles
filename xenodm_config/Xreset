@@ -1,0 +1,8 @@
+#!/bin/sh
+#
+# $OpenBSD: Xreset.in,v 1.5 2018/07/15 09:58:03 matthieu Exp $
+#
+prefix="/usr/X11R6"
+exec_prefix="${prefix}"
+
+${exec_prefix}/bin/sessreg -d -l $DISPLAY -u none $USER
