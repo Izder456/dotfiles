@@ -4,7 +4,21 @@ xset b on
 prefix="/usr/X11R6"
 exec_prefix="${prefix}"
 
-/usr/local/bin/feh --bg-fill $(/usr/local/bin/shuf -n1 -e /usr/local/share/backgrounds/*)
+/usr/local/bin/feh --bg-fill $(/usr/local/bin/shuf -n1 -e /usr/local/share/backgrounds/*) &
 
-(sleep 3 && xwd -out /tmp/xenodm.xwd -root) &
+SCREEN=$(xpyinfo | awk '/dimensions/{print \%2}')
+
+WIDTH=$(echo $SCREEN | awk -Fx '{print \%1}')
+HEIGHT=$(echo $SCREEN | awk -Fx '{print \%2}')
+
+XCLOCK_WIDTH=128
+XCLOCK_HEIGHT=128
+
+XCONSOLE_WIDTH=480
+XCONSOLE_HEIGHT=128
+
+xconsole -daemon -notify -verbose -exitOnFail -geometry ${XCONSOLE_WIDTH}x${XCONSOLE_HEIGHT}+560-256 & 
+xclock -analog -update 1 -padding 14 -sharp -geometry ${XCLOCK_WIDTH}x${XCLOCK_HEIGHT}+736+64 &
+
+(sleep 5 && xwd -out /tmp/xenodm.xwd -root) &
 
