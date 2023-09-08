@@ -3,7 +3,7 @@
 ##
 export LC_CTYPE="en_US.UTF-8"
 export VISUAL="emacsclient --create-frame --alternate-editor='emacs'"
-export EDITOR="emacsclient -nw --create-frame --altenate-editor='emacs -nw'"
+export EDITOR="emacsclient -nw --create-frame --alternate-editor='emacs -nw'"
 
 ##
 # Setup Completions
@@ -11,6 +11,12 @@ export EDITOR="emacsclient -nw --create-frame --altenate-editor='emacs -nw'"
 autoload _fzf_key_bindings _fzf_completion
 _fzf_key_bindings
 _fzf_completion
+
+##
+# Java Stuff
+##
+export PATH=$PATH:/usr/local/jdk-17/bin
+export JAVA_HOME=/usr/local/jdk-17/
 
 ##
 # Alias for muscle memory
