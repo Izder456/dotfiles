@@ -1,0 +1,9 @@
+#!/bin/sh
+
+NAME=$(date '+%Y-%m-%d_%H:%M:%S') 
+
+ffmpeg -f sndio -thread_queue_size 4096 -i snd/mon \
+    -y -f x11grab -thread_queue_size 8000 -s 1600x900 -r 30 -i :0 \
+    -c:v libx264rgb -crf 0 -b:v 10000k -preset ultrafast \
+    -c:a flac -b:a 160k -ar 48000 -threads 4 -cpu-used 0 \
+    "$HOME/Videos/Recordings/$NAME.mkv"
