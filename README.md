@@ -52,7 +52,8 @@ $ ./setup.pl
 ```
 ### Note:
 
-- when the script is installing deps, always choose the last number when given a version choice from `pkg_add`.
+- when the script is installing deps, always choose the last number when given a version choice from `pkg_add`. (with the
+exception of emacs, in that case, chose the gtk2 variant.)
 
 # DISCLAIMER
 
