@@ -21,4 +21,3 @@ xconsole -daemon -notify -verbose -exitOnFail -geometry ${XCONSOLE_WIDTH}x${XCON
 xclock -analog -update 1 -padding 14 -sharp -geometry ${XCLOCK_WIDTH}x${XCLOCK_HEIGHT}+736+64 &
 
 (sleep 5 && xwd -out /tmp/xenodm.xwd -root) &
-

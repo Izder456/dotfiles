@@ -14,12 +14,12 @@ xlogin*namePrompt: (-USER =:)
 xlogin*passwdPrompt: (-PASS =:)
 xlogin*fail: (TOOBAD!)
 
-xlogin*greetFace:       beachedttf-16:medium:dpi=96
-xlogin*face:            desertedttf-16:medium:dpi=96
-xlogin*promptFace:      strandedttf-16:medium:dpi=96
-xlogin*failFace:        groundedttf-16:medium:dpi=96
+xlogin*greetFace:       Spleen-16:Regular:dpi=96
+xlogin*face:            Spleen:Regular:dpi=96
+xlogin*promptFace:      Spleen:Regular:dpi=96
+xlogin*failFace:        Spleen:Regular:dpi=96
 
-xconsole*face:      GohuFont uni11 Nerd Font Mono-11:Regular:dpi=96
+xconsole*face:      Spleen-14:Regular:dpi=96
 xconsole*scrollBar: false
 xconsole*borderWidth: 4
 xconsole*borderColor: #ebdbb2

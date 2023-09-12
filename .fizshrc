@@ -34,10 +34,10 @@ alias sudo="doas"
 ##
 # Alias for listing files
 ##
-alias ls="exa --icons --git -h"
-alias la="exa --icons --git -ah"
-alias ll="exa --icons --git -lh"
-alias lh="exa --icons --git -lah"
+alias ls="eza --icons --git -h"
+alias la="eza --icons --git -ah"
+alias ll="eza --icons --git -lh"
+alias lh="eza --icons --git -lah"
 
 ##
 # Alias for parsing

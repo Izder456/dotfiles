@@ -1,4 +1,3 @@
-# See dunst(5) for all configuration options
 
 [global]
     ### Display ###
@@ -122,7 +121,7 @@
 
     ### Text ###
 
-    font = GohuFont Nerd Font 12
+    font = Spleen 12
 
     # The spacing between lines.  If the height is smaller than the
     # font height, it will get raised to the font height.
@@ -228,9 +227,6 @@
     history_length = 20
 
     ### Misc/Advanced ###
-
-    # dmenu path.
-    dmenu = /usr/bin/dmenu -p dunst:
 
     # Browser for opening urls in context menu.
     browser = /usr/bin/xdg-open

@@ -1,6 +1,6 @@
 ! xwindow stuffs
 xterm*scrollBar: false
-xterm*faceName: GohuFont uni14 Nerd Font Mono
+xterm*faceName: Spleen
 xterm*faceSize: 12
 xterm*renderFont: true
 xterm*internalBorder: 16
@@ -20,6 +20,9 @@ Xft.lcdfilter: lcddefault
 
 XClock*Background: #32302f
 XClock*Foreground: #ebdbb2
+
+*faceName: Spleen
+*faceSize: 12
 
 ! hard contrast: *background: #1d2021
 *background: #282828

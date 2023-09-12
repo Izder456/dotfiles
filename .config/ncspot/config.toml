@@ -1,7 +1,0 @@
-[ncspot]
-notify = true
-repeat = true
-shuffle = "playlist"
-bitrate = 160
-use_nerdfont = true
-initial_screen = "search"
