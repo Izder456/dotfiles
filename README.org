@@ -1,0 +1,78 @@
+* Iz's OpenBSD Dotfiles
+
+- Mainly for personal backups, but if you want them, feel free to use them.
+
+- I won't provide support for any issues on your machine, as this is a pet project.
+
+** Shameless Unixporn for internet points.
+
+[[file:assets/XenoDM.png][XenoDM.png]]
+[[file:assets/StumpWM.png][StumpWM.png]]
+
+** Crucial Information
+
+- While /there *is*/ a setup script in this project, =it's not meant to be plug-and-play=. /It's a bare-bones setup/ that is fairly non-portable and will require some tinkering to work perfectly. I don't see this as a problem because I'm comfortable customizing it to my needs.
+
+- It's highly encouraged that you read the PERL script before following the [[#setup-script][Setup]] instructions. But for brevity:
+
+    1. The setup script enforces Perl v5.36 compliance.
+    2. Defines several subroutines:
+       - Checking for files.
+       - Downloading files.
+       - Removing default configurations.
+       - Setting strict home directory permissions.
+       - Boilerplate for pkg_tools.
+       - Cloning the project to ~$HOME/.dotfiles~.
+       - Cloning my StumpWM configuration to ~$HOME/.stumpwm.d~.
+       - Symlinking the dotfiles.
+       - Changing the default shell to [[https://github.com/zsh-users/fizsh.git][fizsh]].
+       - Installing backgrounds to ~/usr/local/share/backgrounds~.
+       - Installing Xenodm configuration.
+       - Setting up apmd for laptop lid closure.
+       - Installing fonts to ~/usr/X11R6/lib/X11/fonts/TTF~.
+       - Compiling and installing Rust programs.
+       - Compiling and installing a reimplementation of [[https://github.com/ibara/shuf.git][GNU shuf]].
+       - Compiling and installing [[https://github.com/Izder456/slock.git][my Suckless lock configuration/fork]].
+       - Compiling and installing [[https://github.com/13-CF/afetch.git][afetch]].
+       - Setting up battstat for the modeline.
+       - Setting up [[https://github/Izder456/Emacs-Config][DOOM Emacs Config]] in ~$HOME/.doom.d~.
+       - Setting up ~xdg-user-dirs~.
+
+    3. The main subroutine uses the previously defined subroutines to install dependencies and configure everything.
+
+- My script doesn't perform any performance tweaking. Users should refer to [[https://openbsd.org/faq][the FAQ]], [[https://man.openbsd.org][manpages]], or the unofficial [[https://www.openbsdhandbook.com][OpenBSD Handbook]] for that.
+
+- for laptops, I /highly recommend/ solene%'s power management daemon [[https://dataswamp.org/~solene/2022-03-21-openbsd-cool-frequency.html][obsdfreqd]]
+
+- *new for my workflow*: /my user is no longer in wheel, i use the doas group, update accordingly./
+
+** Setup Script
+   - Read the [[#crucial-information][Crucial Information]] and the disclaimer.
+
+*** Do as root:
+
+#+BEGIN_SRC shell
+# groupadd doas
+# usermod -G doas,operator,staff [your username]
+# ftp -o /etc/doas.conf https://github.com/izder456/dotfiles/raw/main/doas.conf
+#+END_SRC
+
+*** Do as user:
+
+#+BEGIN_SRC shell
+$ ftp -o ./setup.pl https://github.com/izder456/dotfiles/raw/main/setup.pl
+$ chmod +x setup.pl
+$ ./setup.pl
+#+END_SRC
+
+** Note:
+
+- When the script installs dependencies, always choose the latest version when given a version choice from ~pkg_add~, except for Emacs, where you should choose the gtk2 variant.
+
+* DISCLAIMER
+
+- I'm not responsible for any system breakage due to my code.
+
+- If you're unsure, refer to [[LICENSE.txt][THE LICENSE]] to see how seriously I take this.
+
+- Use with caution.

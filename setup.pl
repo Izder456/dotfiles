@@ -62,7 +62,7 @@ sub update_or_clone_stumpwm {
 
 # Symlinks dotfiles from .dotfiles directory to home directory
 sub symlink_dotfiles {
-    system('ln', '-sf', glob("$ENV{HOME}/.dotfiles/.*"), glob("$ENV{HOME}/"));
+    system('ln', '-sf', glob("$ENV{HOME}/.dotfiles/.*"), glob("$ENV{HOME}"));
 }
 
 # Configures and sets up the default shell
@@ -120,7 +120,7 @@ sub install_fonts {
 
 # Compiles rust programs using Cargo
 sub compile_rust_programs {
-    my @rust_dependencies = ('sd', 'eza', 'onefetch', 'tokei', 'zoxide', 'broot', 'du-dust', 'cargo-update-installed', 'cargo-quickinstall', 'tre-command', 'hyperfine');
+    my @rust_dependencies = ('sd', 'eza', 'tere', 'onefetch', 'tokei', 'zoxide', 'broot', 'du-dust', 'cargo-update-installed', 'cargo-quickinstall', 'tre-command', 'hyperfine');
     system('cargo', 'install', @rust_dependencies);
 }
 
@@ -207,7 +207,7 @@ sub main {
 
     say("Installing dependencies...");
     my @shell_dependencies = ('github-cli', 'fzf', 'unifont', 'spleen', 'gnupg', 'coreutils', 'ggrep', 'gtar', 'zsh', 'bash', 'ripgrep', 'harfbuzz', 'neofetch', 'iftop', 'hw-probe',
-    'gmake', 'gawk', 'cmake', 'meson', 'upower', 'gcc', 'g++', 'mercurial', 'feh', 'ffmpeg', 'yt-dlp', 'ImageMagick', 'gd', 'fftw3', 'fftw', 'moc', 'autoconf', 'neovim', 'emacs', 'dbus', 'htop', 'ncspot', 'rust', 'crystal', 'leiningen', 'clojure', 'chicken', 'scrot', 'py3-pip', 'lynx', 'links', 'wget', 'curl', 'openssl', 'gmp', 'p7zip', 'bat', 'pkgconf', 'noto-emoji', 'ee', 'nano');
+    'gmake', 'gawk', 'cmake', 'meson', 'jdk-17', 'upower', 'gcc', 'g++', 'mercurial', 'feh', 'ffmpeg', 'yt-dlp', 'ImageMagick', 'gd', 'fftw3', 'fftw', 'moc', 'autoconf', 'neovim', 'emacs', 'dbus', 'htop', 'ncspot', 'rust', 'crystal', 'leiningen', 'clojure', 'chicken', 'scrot', 'py3-pip', 'lynx', 'links', 'wget', 'curl', 'openssl', 'gmp', 'p7zip', 'bat', 'pkgconf', 'noto-emoji', 'ee', 'nano');
     my @xdeps = ('stumpwm', 'sbcl', 'xdg-user-dirs', 'xdg-utils', 'gtk2-murrine-engine', 'mpv', 'alacritty', 'firefox-esr', 'abiword', 'gnumeric', 'zathura', 'zathura-pdf-mupdf', 'xclip', 'screenkey', 'caja', 'caja-extensions', 'weechat', 'dunst', 'picom', 'rofi', 'leafpad', 'xarchiver', 'xpdf', 'lxappearance', 'claws-mail');
     install_dependencies(@shell_dependencies, @xdeps);
 

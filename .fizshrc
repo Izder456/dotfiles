@@ -21,6 +21,14 @@ _fzf_key_bindings
 _fzf_completion
 
 ##
+# Python Stuff
+##
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+##
 # Java Stuff
 ##
 export PATH=$PATH:/usr/local/jdk-17/bin
@@ -30,6 +38,7 @@ export JAVA_HOME=/usr/local/jdk-17/
 # Alias for muscle memory
 ##
 alias sudo="doas"
+alias su="echo 'did you mean to run doas -s?'"
 
 ##
 # Alias for listing files
@@ -87,6 +96,14 @@ alias video-dlp="yt-dlp --write-subs --sub-format srt --remux-video mkv \
 ##
 export PATH=$HOME/.cargo/bin:$HOME/.local/bin:$HOME/.emacs.d/bin:$HOME/.local/share/pkg/bin:$PATH
 export MANPATH=$HOME/.local/share/pkg/man:$MANPATH
+
+##
+# Tere config
+##
+tere() {
+    local result=$(command tere "$@")
+    [ -n "$result" ] && cd -- "$result"
+}
 
 ##
 # the r/unixporn rite of passage
