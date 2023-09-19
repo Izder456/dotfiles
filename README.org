@@ -6,8 +6,10 @@
 
 ** Shameless Unixporn for internet points.
 
-[[file:assets/XenoDM.png][XenoDM.png]]
-[[file:assets/StumpWM.png][StumpWM.png]]
+#+html: <p align="center"><img width=700 src="assets/XenoDM.png" /></p>
+
+#+html: <p align="center"><img width=700 src="assets/StumpWM.png" /></p>
+
 
 ** Crucial Information
 
