@@ -62,11 +62,21 @@ sub update_or_clone_stumpwm {
 
 # Symlinks dotfiles from .dotfiles directory to home directory
 sub symlink_dotfiles {
-    system('ln', '-sf', glob("$ENV{HOME}/.dotfiles/.*"), glob("$ENV{HOME}"));
+    system('ln', '-sf', glob("$ENV{HOME}/.dotfiles/.*"), "$ENV{HOME}/"));
 }
 
 # Configures and sets up the default shell
 sub configure_default_shell {
+    if (-d "$ENV{HOME}/.zsh-openbsd") {
+        system('git', 'pull');
+    } else {
+        system('git', 'clone', 'https://github.com/sizeofvoid/openbsd-shell-completions.git', "$ENV{HOME}/.zsh-openbsd");
+    }
+    if (-d "$ENV{HOME}/.zsh-comps") {
+        system('git', 'pull');
+    } else {
+        system('git', 'clone', 'https://github.com/zsh-users/zsh-completions.git', "$ENV{HOME}/.zsh-comps");
+    }
     if (-d "$ENV{HOME}/.fizsh") {
         chdir "$ENV{HOME}/.fizsh";
     } else {

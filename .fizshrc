@@ -16,9 +16,16 @@ export EDITOR="emacsclient -nw --create-frame --alternate-editor='emacs -nw'"
 ##
 # Setup Completions
 ##
+fpath=($HOME/.zsh-openbsd/completions $fpath)
+fpath=($HOME/.zsh-comps/src $fpath)
+autoload -U compinit; compinit
+_comp_options+=(globdots)
 autoload _fzf_key_bindings _fzf_completion
 _fzf_key_bindings
 _fzf_completion
+setopt MENU_COMPLETE
+setopt AUTO_LIST
+setopt COMPLETE_IN_WORD
 
 ##
 # Java Stuff
@@ -71,7 +78,7 @@ alias H="htop"
 ##
 # Zoxide Setup
 ##
-eval $(zoxide init zsh)
+eval "$(zoxide init zsh)"
 alias cd="z"
 alias zz="z -"
 

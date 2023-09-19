@@ -27,7 +27,9 @@
        - Cloning the project to ~$HOME/.dotfiles~.
        - Cloning my StumpWM configuration to ~$HOME/.stumpwm.d~.
        - Symlinking the dotfiles.
-       - Changing the default shell to [[https://github.com/zsh-users/fizsh.git][fizsh]].
+       - Changing the default shell to [[https://github.com/zsh-users/fizsh.git][fizsh]] using
+       [[https://github.com/zsh-users/zsh-completions.git][zsh-completions]] &
+       [[https://github.com/sizeofvoid/openbsd-zsh-completions][openbsd-completions]].
        - Installing backgrounds to ~/usr/local/share/backgrounds~.
        - Installing Xenodm configuration.
        - Setting up apmd for laptop lid closure.
