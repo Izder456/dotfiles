@@ -21,14 +21,6 @@ _fzf_key_bindings
 _fzf_completion
 
 ##
-# Python Stuff
-##
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
-##
 # Java Stuff
 ##
 export PATH=$PATH:/usr/local/jdk-17/bin
@@ -38,7 +30,7 @@ export JAVA_HOME=/usr/local/jdk-17/
 # Alias for muscle memory
 ##
 alias sudo="doas"
-alias su="echo 'did you mean to run doas -s?'"
+alias su="echo 'did you mean to run doas -s? (you aren't wheel)'"
 
 ##
 # Alias for listing files
@@ -76,6 +68,12 @@ alias uf="ufetch"
 alias i="top"
 alias H="htop"
 
+##
+# Zoxide Setup
+##
+eval $(zoxide init zsh)
+alias cd="z"
+alias zz="z -"
 
 ##
 # Alias for tarballz
