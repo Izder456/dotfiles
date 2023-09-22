@@ -38,7 +38,7 @@
        - Compiling and installing [[https://github.com/Izder456/slock.git][my Suckless lock configuration/fork]].
        - Compiling and installing [[https://github.com/13-CF/afetch.git][afetch]].
        - Setting up battstat for the modeline.
-       - Setting up [[https://github/Izder456/Emacs-Config][DOOM Emacs Config]] in ~$HOME/.doom.d~.
+       - Setting up [[https://github.comIzder456/Emacs-Config][My DOOM-Emacs Config]] in ~$HOME/.doom.d~.
        - Setting up ~xdg-user-dirs~.
 
     3. The main subroutine uses the previously defined subroutines to install dependencies and configure everything.
