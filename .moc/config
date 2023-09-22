@@ -7,7 +7,7 @@ ReadTags = yes
 #
 # Example:    MusicDir = "/home/joe/music"
 #
-MusicDir = /home/izder456/Music
+MusicDir = ~/Music
 
 # Start in the music directory by default?  If set to 'no', start
 # in the current directory by default.  A single directory on

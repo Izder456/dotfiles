@@ -10,6 +10,7 @@
 
 #+html: <p align="center"><img width=700 src="assets/StumpWM.png" /></p>
 
+#+html: <p align="center"><img width=700 src="assets/Emacs.png" /></p>
 
 ** Crucial Information
 
@@ -25,7 +26,7 @@
        - Setting strict home directory permissions.
        - Boilerplate for pkg_tools.
        - Cloning the project to ~$HOME/.dotfiles~.
-       - Cloning my StumpWM configuration to ~$HOME/.stumpwm.d~.
+       - Cloning [[https://github.com/Izder456/StumpWM-Config][My StumpWM Config]] to ~$HOME/.stumpwm.d~.
        - Symlinking the dotfiles.
        - Changing the default shell to [[https://github.com/zsh-users/fizsh.git][fizsh]] using [[https://github.com/zsh-users/zsh-completions.git][zsh-completions]] & [[https://github.com/sizeofvoid/openbsd-zsh-completions][openbsd-completions]].
        - Installing backgrounds to ~/usr/local/share/backgrounds~.
@@ -53,7 +54,7 @@
 
 *** Do as root:
 
-#+BEGIN_SRC shell
+#+BEGIN_SRC
 # groupadd doas
 # usermod -G doas,operator,staff [your username]
 # ftp -o /etc/doas.conf https://github.com/izder456/dotfiles/raw/main/doas.conf
@@ -61,7 +62,7 @@
 
 *** Do as user:
 
-#+BEGIN_SRC shell
+#+BEGIN_SRC
 $ ftp -o ./setup.pl https://github.com/izder456/dotfiles/raw/main/setup.pl
 $ chmod +x setup.pl
 $ ./setup.pl

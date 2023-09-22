@@ -10,8 +10,13 @@ export LC_TIME="en_US.UTF-8"
 export LC_MESSAGES="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
-export VISUAL="emacsclient --create-frame --alternate-editor='emacs'"
-export EDITOR="emacsclient -nw --create-frame --alternate-editor='emacs -nw'"
+export VISUAL="emacsclient --create-frame --alternate-editor='emacs -Q'"
+export EDITOR="emacsclient -nw --color=no --create-frame --alternate-editor='emacs -Q -nw --color=no'"
+
+##
+# export $PATH
+##
+export PATH=$HOME/.cargo/bin:$HOME/.local/bin:$HOME/.emacs.d/bin:$HOME/.local/share/pkg/bin:$PATH
 
 ##
 # Setup Completions
@@ -76,13 +81,6 @@ alias i="top"
 alias H="htop"
 
 ##
-# Zoxide Setup
-##
-eval "$(zoxide init zsh)"
-alias cd="z"
-alias zz="z -"
-
-##
 # Alias for tarballz
 ##
 alias btar="tar"
@@ -96,10 +94,6 @@ alias audio-dlp="yt-dlp -x --audio-quality 0 --audio-format vorbis \
 alias video-dlp="yt-dlp --write-subs --sub-format srt --remux-video mkv \
 		--embed-subs --concurrent-fragments 5"
 
-##
-# EXPORT PATH & MAN
-##
-export PATH=$HOME/.cargo/bin:$HOME/.local/bin:$HOME/.emacs.d/bin:$HOME/.local/share/pkg/bin:$PATH
 export MANPATH=$HOME/.local/share/pkg/man:$MANPATH
 
 ##

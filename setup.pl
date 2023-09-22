@@ -62,7 +62,7 @@ sub update_or_clone_stumpwm {
 
 # Symlinks dotfiles from .dotfiles directory to home directory
 sub symlink_dotfiles {
-    system('ln', '-sf', glob("$ENV{HOME}/.dotfiles/.*"), "$ENV{HOME}/"));
+    system('ln', '-sf', glob("$ENV{HOME}/.dotfiles/.*"), "$ENV{HOME}/");
 }
 
 # Configures and sets up the default shell
