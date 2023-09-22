@@ -19,10 +19,22 @@ xlogin*face:            Spleen:Regular:dpi=96
 xlogin*promptFace:      Spleen:Regular:dpi=96
 xlogin*failFace:        Spleen:Regular:dpi=96
 
-xconsole*face:      Spleen-14:Regular:dpi=96
+xconsole*font:      -misc-spleen-medium-r-normal--16-160-72-72-c-80-iso10646-1
 xconsole*scrollBar: false
 xconsole*borderWidth: 4
 xconsole*borderColor: #ebdbb2
+xconsole*iconic:    true
+xconsole*verbose:   true
+
+xmessage*background: #282828
+xmessage*foreground: #ebdbb2
+xmessage.borderWidth: 4
+xmessage*borderColor: #ebdbb2
+xmessage*message.scrollHorizontal: Never
+xmessage*message.scrollVertical: Never
+xmessage*timeout: 0
+xmessage*printValue: false
+xmessage*font:      -misc-spleen-medium-r-normal--16-160-72-72-c-80-iso10646-1
 
 xclock*borderWidth: 4
 xclock*borderColor: #ebdbb2

@@ -1,0 +1,24 @@
+#!/bin/sh
+# Assign ownership of the console to the invoking user
+# $OpenBSD: GiveConsole.in,v 1.2 2022/01/06 23:35:41 jsg Exp $
+#
+# By convention, both xconsole and xterm -C check that the
+# console is owned by the invoking user and is readable before attaching
+# the console output.  This way a random user can invoke xterm -C without
+# causing serious grief.
+#
+prefix="/usr/X11R6"
+exec_prefix="${prefix}"
+
+pkill xclock
+pkill xconsole
+pkill xmessage
+
+chown $USER /dev/console
+if [ -c /dev/dri/card0 ]; then
+    chown $USER /dev/dri/card0
+fi
+if [ -c /dev/dri/renderD128 ]; then
+    chown $USER /dev/dri/renderD128
+fi
+${exec_prefix}/bin/sessreg -a -l $DISPLAY -u none $USER
