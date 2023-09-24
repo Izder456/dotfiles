@@ -218,7 +218,7 @@ sub main {
     say("Installing dependencies...");
     my @shell_dependencies = ('github-cli', 'fzf', 'unifont', 'spleen', 'gnupg', 'coreutils', 'ggrep', 'gtar', 'zsh', 'bash', 'ripgrep', 'harfbuzz', 'neofetch', 'iftop', 'hw-probe',
     'gmake', 'gawk', 'cmake', 'meson', 'jdk-17', 'upower', 'gcc', 'g++', 'mercurial', 'feh', 'ffmpeg', 'yt-dlp', 'ImageMagick', 'gd', 'fftw3', 'fftw', 'moc', 'autoconf', 'neovim', 'emacs', 'dbus', 'htop', 'ncspot', 'rust', 'crystal', 'leiningen', 'clojure', 'chicken', 'scrot', 'py3-pip', 'lynx', 'links', 'wget', 'curl', 'openssl', 'gmp', 'p7zip', 'bat', 'pkgconf', 'noto-emoji', 'ee', 'nano');
-    my @xdeps = ('stumpwm', 'sbcl', 'xdg-user-dirs', 'xdg-utils', 'gtk2-murrine-engine', 'mpv', 'alacritty', 'firefox-esr', 'abiword', 'gnumeric', 'zathura', 'zathura-pdf-mupdf', 'xclip', 'screenkey', 'caja', 'caja-extensions', 'weechat', 'dunst', 'picom', 'rofi', 'leafpad', 'xarchiver', 'xpdf', 'lxappearance', 'claws-mail');
+    my @xdeps = ('stumpwm', 'sbcl', 'xdg-user-dirs', 'xdg-utils', 'gtk2-murrine-engine', 'mpv', 'alacritty', 'firefox-esr', 'ungoogled-chromium', 'abiword', 'gnumeric', 'zathura', 'zathura-pdf-mupdf', 'xclip', 'screenkey', 'caja', 'caja-extensions', 'weechat', 'dunst', 'picom', 'rofi', 'leafpad', 'xarchiver', 'xpdf', 'lxappearance', 'claws-mail');
     install_dependencies(@shell_dependencies, @xdeps);
 
     say("Setting up default shell...");
