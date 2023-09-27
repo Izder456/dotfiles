@@ -12,7 +12,7 @@ set atblanks
 set autoindent
 
 ## Automatically hard-wrap the current line when it becomes overlong.
-set breaklonglines
+#set breaklonglines
 
 ## Do case-sensitive searches by default.
 set casesensitive

@@ -42,7 +42,7 @@ export JAVA_HOME=/usr/local/jdk-17/
 # Alias for muscle memory
 ##
 alias sudo="doas"
-alias su="echo 'did you mean to run doas -s? (you aren't wheel)'"
+alias su="echo 'did you mean to run doas -s? '"
 
 ##
 # Alias for listing files
@@ -96,7 +96,10 @@ alias audio-dlp="yt-dlp -x --audio-quality 0 --audio-format vorbis \
 alias video-dlp="yt-dlp --write-subs --sub-format srt --remux-video mkv \
 		--embed-subs --concurrent-fragments 5"
 
-export MANPATH=$HOME/.local/share/pkg/man:$MANPATH
+##
+# Prompt
+##
+PROMPT="%B%F{yellow}%~%f%b%B % %b"
 
 ##
 # Tere config
@@ -105,6 +108,11 @@ tere() {
     local result=$(command tere "$@")
     [ -n "$result" ] && cd -- "$result"
 }
+
+##
+# Node.JS
+##
+export PATH=~/.npm-global/bin:$PATH
 
 ##
 # the r/unixporn rite of passage
