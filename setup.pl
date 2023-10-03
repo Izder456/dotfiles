@@ -27,7 +27,7 @@ sub remove_default_files {
         "$ENV{HOME}/.profile",
         "$ENV{HOME}/.Xdefaults",
         "$ENV{HOME}/.cvsrc"
-    );/
+    );
 }
 
 # Sets permissions for user's HOME directory
