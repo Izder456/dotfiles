@@ -9,7 +9,7 @@ exec_prefix="${prefix}"
 XWIDTH=$(xdpyinfo | awk '/dimensions/ {print $2}' | cut -d 'x' -f 1)
 XHEIGHT=$(xdpyinfo | awk '/dimensions/ {print $2}' | cut -d 'x' -f 2)
 
-/usr/local/bin/feh --bg-fill $(/usr/local/bin/shuf -n1 -e /usr/local/share/backgrounds/*) &
+/usr/local/bin/feh --bg-fill "$(/usr/local/bin/shuf -n1 -e /usr/local/share/backgrounds/*)" &
 
 XCLOCK_WIDTH=128
 XCLOCK_HEIGHT=128
