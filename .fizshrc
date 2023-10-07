@@ -22,12 +22,8 @@ export PATH=$HOME/.cargo/bin:$HOME/.local/bin:$HOME/.emacs.d/bin:$HOME/.local/sh
 # Setup Completions
 ##
 fpath=($HOME/.zsh-openbsd/completions $fpath)
-fpath=($HOME/.zsh-comps/src $fpath)
 autoload -U compinit; compinit
 _comp_options+=(globdots)
-autoload _fzf_key_bindings _fzf_completion
-_fzf_key_bindings
-_fzf_completion
 setopt MENU_COMPLETE
 setopt AUTO_LIST
 setopt COMPLETE_IN_WORD

@@ -1,0 +1,12 @@
+[submodule "dotfiles"]
+	path = dotfiles
+	url = https://github.com/justone/dotfiles.git
+[submodule "dfm"]
+	path = dfm
+	url = https://github.com/justone/dotfiles.git
+[submodule "StumpWM-Config"]
+	path = StumpWM-Config
+	url = https://github.com/Izder456/StumpWM-Config
+[submodule "Emacs-Config"]
+	path = Emacs-Config
+	url = https://github.com/Izder456/Emacs-Config
