@@ -18,7 +18,7 @@
 
 - +It's highly encouraged that you read the PERL script before following the [[#setup-script][Setup]] instructions. But for brevity:+ *scratch that*, you /will/ read it now:
 
-+ =Boilerplate-Perl=
+*** =Boilerplate-Perl=
 
 #+BEGIN_SRC perl :tangle setup.pl
 #!/usr/bin/env perl
@@ -43,7 +43,7 @@ sub download_file {
 }
 #+END_SRC
 
-+ =Remove-Cruft=
+*** =Remove-Cruft=
 
 #+BEGIN_SRC perl :tangle setup.pl
 # Removes default OpenBSD files
@@ -64,7 +64,7 @@ sub set_home_directory_perms {
 }
 #+END_SRC
 
-+ =Handle-Packages=
+*** =Handle-Packages=
 
 #+BEGIN_SRC perl :tangle setup.pl
 # Install port deps with pkg_add using `.pkglist`
@@ -82,7 +82,7 @@ sub install_ports {
 }
 #+END_SRC
 
-+ =Handle-Cargo-Packages=
+*** =Handle-Cargo-Packages=
 
 #+BEGIN_SRC perl :tangle setup.pl
 # Install rust programs with cargo using an array.
@@ -95,7 +95,7 @@ sub install_cargo_programs {
 }
 #+END_SRC
 
-+ =Dots-Manage=
+*** =Dots-Manage=
 
   dfm install script config
 
@@ -137,7 +137,7 @@ sub symlink_dots {
 }
 #+END_SRC
 
-+ =FiZSH-Setup=
+*** =FiZSH-Setup=
 
   This is a zsh frontend, that emulates the functionality of fish
 
@@ -168,7 +168,7 @@ sub configure_default_shell {
 }
 #+END_SRC
 
-+ =Emacs-Setup=
+*** =Emacs-Setup=
 
 #+BEGIN_SRC perl :tangle setup.pl
 # Configures and installs doom emacs
@@ -191,7 +191,7 @@ sub configure_doom_emacs {
 }
 #+END_SRC
 
-+ =StumpWM-Setup=
+*** =StumpWM-Setup=
 
 #+BEGIN_SRC perl :tangle setup.pl
 sub update_or_clone_stumpwm {
@@ -206,7 +206,7 @@ sub update_or_clone_stumpwm {
 }
 #+END_SRC
 
-+ =XenoDM/Background-Setup=
+*** =XenoDM/Background-Setup=
 
 #+BEGIN_SRC perl :tangle setup.pl
 # Installs backgrounds to /usr/local/share/backgrounds
@@ -227,7 +227,7 @@ sub setup_xenodm {
 }
 #+END_SRC
 
-+ =APMD_AutoHook-Lock=
+*** =APMD_AutoHook-Lock=
 
 #+BEGIN_SRC perl :tangle setup.pl
 sub setup_apmd {
@@ -239,7 +239,7 @@ sub setup_apmd {
 }
 #+END_SRC
 
-+ =Extra-Packages=
+*** =Extra-Packages=
 
 #+BEGIN_SRC perl :tangle setup.pl
 # Compiles shuf re-implementation
