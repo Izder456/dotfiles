@@ -1,5 +1,4 @@
 #!/usr/bin/env perl
-
 # Ensure Perl 5.36.0 compatibility
 use 5.36.0;
 
@@ -34,29 +33,6 @@ sub remove_default_files {
 # Sets permissions for user's HOME directory
 sub set_home_directory_perms {
   chmod(0700, $ENV{'HOME'});
-}
-
-# Install port deps with pkg_add using `.pkglist`
-sub install_ports {
-  say "We will install deps now!";
-  say "Press ENTER to continue:";
-  <STDIN>;
-  my $pkglist = ".pkglist";
-  open my $info, $pkglist or die "Could not open $file: $!";
-  while( my $line = <$info>)  {
-    say $line;
-    last if $. == 2;
-  }
-  close $info;
-}
-
-# Install rust programs with cargo using an array.
-sub install_cargo_programs {
-  say "We will install cargo deps now!";
-  say "Press Enter to continue";
-  <STDIN>;
-  my @cargolist = ('sd', 'eza', 'tere', 'onefetch', 'tokei', 'du-dust', 'cargo-update-installed', 'tre-command', 'hyperfine');
-  system('cargo', 'install', @rust_dependencies);
 }
 
 # Updates dotfiles repository or clones if not present

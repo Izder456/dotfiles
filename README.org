@@ -18,11 +18,318 @@
 
 - +It's highly encouraged that you read the PERL script before following the [[#setup-script][Setup]] instructions. But for brevity:+ *scratch that*, you /will/ read it now:
 
+*** =PKGLIST=
+
+#+BEGIN_SRC :tangle .pkglist
+ImageMagick--
+adb--
+alacritty--
+appmanager--
+aria2--
+armagetronad--
+audacity--
+autoconf--%2.71
+automake--%1.16
+avahi--
+bash--
+bat--
+bison--
+blockgame--
+boehm-gc--
+boost--
+borgbackup--%1.2
+caja--
+caja-extensions--
+chicken--
+clang-tools-extra--
+clisp--
+clojure--
+cmake--
+cmatrix--
+cmixer--
+composer--
+coreutils--
+cpuid--
+curl--
+dbus--
+deadbeef--
+desktop-file-utils--
+desmume--
+dhewm3--
+dolphin--
+dunst--
+editorconfig-core-c--
+ee--
+emacs--gtk2%emacs
+fceux--
+fd--
+fdupes--
+feh--
+ffmpeg--
+fftw--
+fftw3--
+fltk--
+fluidsynth--
+fmt--
+freefont-ttf--
+fsharp--
+fzf--
+g++--%8
+gawk--
+gcc--%8
+gcc-libs--%8
+gd--
+generaluser-gs-soundfont--
+gettext-runtime--
+gettext-tools--
+gforth--
+ggrep--
+gimp--%snapshot
+git--
+github-cli--
+glade--
+glfw--
+glib2--
+glslang--
+gmake--
+gmp--
+gnupg--
+go--
+go-tools--
+groff--
+gtk+4--
+gtk2-murrine-engine--
+gtk2mm--
+gzdoom--
+harfbuzz--
+htop--
+hw-probe--
+i2pd--
+iftop--
+iniparser--
+inkscape--
+intltool--
+isync--
+jack--
+jdk--%1.8
+jdk--%11
+jdk--%17
+jq--
+json-glib--
+lame--
+leafpad--
+leiningen--
+libarchive--
+libcanberra--
+libcanberra-gtk3--
+liberation-fonts--
+libevent--
+libglade2--
+libiconv--
+libinotify--
+liblo--
+libotr--
+libpurple--
+libqalculate--
+libqrencode--
+libsamplerate--
+libsndfile--
+libstatgrab--
+libtool--
+libusb-compat--
+libvorbis--
+libyaml--
+links--
+llvm--%13
+llvm--%16
+lmms--
+lsblk--
+lua--%5.4
+luajit--
+lwjgl--
+lwjgl3--
+lxappearance--
+lynx--
+m4--
+mercurial--
+meson--
+mgba--
+mgba-qt--
+minetest--
+moc--
+mono--
+most--
+motif--
+mplus-fonts--
+mpv--
+msmtp--
+mu--
+musescore--
+musikcube--
+mxml--
+nano--
+ncdu--
+neofetch--
+neovim--
+nestopia--
+node--
+noto-emoji--
+noto-nerd-fonts--
+nss--
+obsdfreqd--
+openal--
+openmw--
+openssl--%1.1
+openssl--%3.0
+openssl--%3.1
+p5-List-MoreUtils--
+p5-XML-Parser--
+p7zip--
+password-store--
+pcre--
+php--%8.1
+picom--
+pidgin--
+pidgin-libnotify--
+pidgin-otr--
+pidgin-window-merge--
+pkgconf--
+pkglocatedb--
+portaudio-svn--
+portslist--
+pv--
+py3-isort--
+py3-pandas--
+py3-pip--
+py3-pipx--
+py3-pytest-subtests--
+py3-test-isort--
+python--%3.11
+quirks--
+qutebrowser--
+ripgrep--
+rofi--
+ruby--%3.2
+rust--
+sbcl--
+screen--shm
+screenkey--
+scrot--
+sdl2--
+sdl2-gfx--
+sdl2-image--
+sdl2-net--
+sdl2-pango--
+sdl2-ttf--
+shared-mime-info--
+shellcheck--
+shfmt--
+sl--
+snes9x--
+speedtest-cli--
+spleen--
+ssh-copy-id--
+sshfs-fuse--
+stumpwm--
+subversion--
+supertux--
+supertuxkart--
+surf--
+texinfo--
+thunderbird--
+tidy--
+tor--
+tree--
+ungoogled-chromium--
+unifont--
+upower--
+urlview--slang
+vlc--
+vulkan-headers--
+vulkan-loader--
+vulkan-tools--
+vulkan-validation-layers--
+wget--
+wireguard-tools--
+xarchiver--
+xclip--
+xdg-user-dirs--
+xdg-utils--
+xz--
+yt-dlp--
+zsh--
+#+END_SRC
+
+*** =CARGOLIST=
+
+#+BEGIN_SRC :tangle .cargolist
+cargo-update-installed
+dust
+eza
+hyperfine
+onefetch
+oxipng
+sd
+tere
+tokei
+#+END_SRC
+
+*** =Rexfile=
+
+#+BEGIN_SRC perl :tangle Rexfile
+use Rex -feature => ['1.4'];
+
+# convert file contents to a string (thanks tim!)
+sub file_to_string {
+  open(DATA, "<@_[0]") or die "Can't open @_[0]";
+  @lines = <DATA>;
+  close(DATA);
+  my $data = join("", @lines);
+  $data =~ s/\n/ /g;
+  return $data;
+}
+
+# task to set up doas-capable user with two params (user & pass)
+task 'doas-user-setup', sub {
+  my $params = shift;
+  my $user = $params->{$user};
+  my $pass = $params->{$pass};
+  # Ensure :doas is present
+  group "doas", ensure => "present";
+  # Add $user with $pass
+  account "$user",
+  ensure => "present",
+  uid => 1000,
+  home => "/home/$user",
+  expire => 'never',
+  groups => [ 'izder456', 'operator', 'doas', 'staff' ],
+  password => "$pass",
+  create_home => TRUE;
+}
+
+# task to install ports from .pkglist
+task 'install-ports', sub {
+  my $params = shift;
+  my $pkgfile = $params->${pkgfile};
+  my $pkglist = file_to_string($pkgfile);
+  # Install
+  pkg [ $pkglist ], ensure => "present";
+}
+
+# task to install cargo-packages from .cargolist
+task 'install-cargo', sub {
+  my $params = shift;
+  my $cargofile = $params->${cargofile};
+  my $cargolist = file_to_string($cargofile);
+  # Install
+  system("cargo", "install", "$cargolist");
+}
+#+END_SRC
+
 *** =Boilerplate-Perl=
 
 #+BEGIN_SRC perl :tangle setup.pl
 #!/usr/bin/env perl
-
 # Ensure Perl 5.36.0 compatibility
 use 5.36.0;
 
@@ -61,37 +368,6 @@ sub remove_default_files {
 # Sets permissions for user's HOME directory
 sub set_home_directory_perms {
   chmod(0700, $ENV{'HOME'});
-}
-#+END_SRC
-
-*** =Handle-Packages=
-
-#+BEGIN_SRC perl :tangle setup.pl
-# Install port deps with pkg_add using `.pkglist`
-sub install_ports {
-  say "We will install deps now!";
-  say "Press ENTER to continue:";
-  <STDIN>;
-  my $pkglist = ".pkglist";
-  open my $info, $pkglist or die "Could not open $file: $!";
-  while( my $line = <$info>)  {
-    say $line;
-    last if $. == 2;
-  }
-  close $info;
-}
-#+END_SRC
-
-*** =Handle-Cargo-Packages=
-
-#+BEGIN_SRC perl :tangle setup.pl
-# Install rust programs with cargo using an array.
-sub install_cargo_programs {
-  say "We will install cargo deps now!";
-  say "Press Enter to continue";
-  <STDIN>;
-  my @cargolist = ('sd', 'eza', 'tere', 'onefetch', 'tokei', 'du-dust', 'cargo-update-installed', 'tre-command', 'hyperfine');
-  system('cargo', 'install', @rust_dependencies);
 }
 #+END_SRC
 
