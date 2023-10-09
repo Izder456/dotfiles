@@ -6,7 +6,7 @@ $ENV{'PATH'} = '/bin:/usr/bin:/sbin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr
 
 # convert file contents to a string (thanks tim!)
 sub file_to_string {
-  open(DATA, "<@_[0]") or die "Can't open @_[0]";
+  open(DATA, "<$_[0]") or die "Can't open $_[0]";
   my @lines = <DATA>;
   close(DATA);
   my $data = join("", @lines);
@@ -38,7 +38,7 @@ task 'remove_default_cruft', sub {
     "$ENV{HOME}/.cvsrc"
   );
   chmod(0700, $ENV{'HOME'});
-}
+};
 
 # Updates dotfiles repository or clones if not present
 task 'update_or_clone_dotfiles', sub {
@@ -48,13 +48,13 @@ task 'update_or_clone_dotfiles', sub {
   } else {
     system('git', 'clone', '--recurse-submodules', '--depth', '1', 'https://github.com/izder456/dotfiles', "$ENV{HOME}/.dotfiles");
   }
-}
+};
 
 # task to set up doas-capable user with two params (user & pass)
-task 'doas-user-setup', sub {
+task 'doas_user_setup', sub {
   my $params = shift;
-  my $user = $params->{$user};
-  my $pass = $params->{$pass};
+  my $user = $params->{user};
+  my $pass = $params->{pass};
   # Ensure :doas is present
   group "doas", ensure => "present";
   # Add $user with $pass
@@ -66,25 +66,25 @@ task 'doas-user-setup', sub {
   groups => [ 'izder456', 'operator', 'doas', 'staff' ],
   password => "$pass",
   create_home => TRUE;
-}
+};
 
 # task to install ports from .pkglist
-task 'install-ports', sub {
+task 'install_ports', sub {
   my $params = shift;
-  my $pkgfile = $params->${pkgfile};
+  my $pkgfile = $params->{pkgfile};
   my $pkglist = file_to_string($pkgfile);
   # Install
   pkg [ $pkglist ], ensure => "present";
-}
+};
 
 # task to install cargo-packages from .cargolist
-task 'install-cargo', sub {
+task 'install_cargo', sub {
   my $params = shift;
-  my $cargofile = $params->${cargofile};
+  my $cargofile = $params->{cargofile};
   my $cargolist = file_to_string($cargofile);
   # Install
   system("cargo", "install", "$cargolist");
-}
+};
 
 # Upgrade/Merge/Install dotfiles
 sub update_or_clone_dotfiles {
@@ -102,7 +102,7 @@ task 'symlink_dots', sub {
   <STDIN>;
   update_or_clone_dotfiles();
   system('dfm', 'umi');
-}
+};
 
 # Configures and sets up the default shell
 task 'configure_default_shell', sub {
@@ -127,7 +127,7 @@ task 'configure_default_shell', sub {
   system('doas', 'make', 'install');
   system('cp', "$ENV{HOME}/.dotfiles/.fizshrc", "$ENV{HOME}/.fizsh/.fizshrc");
   system('chsh', '-s', '/usr/local/bin/fizsh');
-}
+};
 
 # Configures and installs doom emacs
 task 'configure_doom_emacs', sub {
@@ -146,7 +146,7 @@ task 'configure_doom_emacs', sub {
   }
   system('ln', '-sf', '$ENV{HOME}/.dotfiles/Emacs-Config', "$ENV{HOME}/.doom.d");
   system("$ENV{HOME}/.emacs.d/bin/doom", 'sync');
-}
+};
 
 task 'update_or_clone_stumpwm', sub {
   say "We will set up StumpWM now!";
@@ -157,7 +157,7 @@ task 'update_or_clone_stumpwm', sub {
   } else {
     system('ln', '-sf', '$ENV{HOME}/.dotfiles/StumpWM-Config', '$ENV{HOME}/.stumpwm.d');
   }
-}
+};
 
 # Installs backgrounds to /usr/local/share/backgrounds
 task 'install_backgrounds', sub {
@@ -166,7 +166,7 @@ task 'install_backgrounds', sub {
   <STDIN>;
   system('doas', 'mkdir', '-p', '/usr/local/share/backgrounds');
   system('doas', 'cp', '-rvf', '$ENV{HOME}/.dotfiles/backgrounds/*', '/usr/local/share/backgrounds');
-}
+};
 
 # Sets up Xenodm configuration
 task 'setup_xenodm', sub {
@@ -174,7 +174,7 @@ task 'setup_xenodm', sub {
   say "Press ENTER to continue:";
   <STDIN>;
   system('doas', 'cp', '-rvf', '$ENV{HOME}/.dotfiles/config/*', '/etc/X11/xenodm/');
-}
+};
 
 task 'setup_apmd', sub {
   say "We will set up APM-Autohook now!";
@@ -182,7 +182,7 @@ task 'setup_apmd', sub {
   <STDIN>;
   system('doas', 'mkdir', '/etc/apm');
   system('doas', 'cp', '-rvf', '$ENV{HOME}/.dotfiles/APM-Config/*', '/etc/apm/');
-}
+};
 
 # Compiles shuf re-implementation
 task 'compile_shuf', sub {
@@ -194,7 +194,7 @@ task 'compile_shuf', sub {
   system('./configure');
   system('make');
   system('doas', 'make', 'install');
-}
+};
 
 # Compiles in my Slock Setup
 task 'compile_slock', sub {
@@ -205,7 +205,7 @@ task 'compile_slock', sub {
   chdir "$ENV{HOME}/.slock";
   system('make');
   system('doas', 'make', 'install');
-}
+};
 
 # Compiles afetch
 task 'compile_afetch', sub {
@@ -216,7 +216,7 @@ task 'compile_afetch', sub {
   chdir "$ENV{HOME}/.afetch";
   system('make');
   system('doas', 'make', 'install');
-}
+};
 
 # Setup Battery Monitor
 task 'setup_battstat', sub {
@@ -226,7 +226,7 @@ task 'setup_battstat', sub {
   system('git', 'clone', 'https://github.com/imwally/battstat.git', "$ENV{HOME}/.battstat");
   chdir "$ENV{HOME}/.battstat";
   system('doas', 'install', './battstat', '/usr/local/bin');
-}
+};
 
 # Updates XDG user directories
 task 'update_xdg_user_dirs', sub {
@@ -235,4 +235,4 @@ task 'update_xdg_user_dirs', sub {
   <STDIN>;
   system('xdg-user-dirs-update');
   system('mkdir', '$ENV{HOME}/Projects');
-}
+};
