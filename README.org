@@ -16,8 +16,7 @@
 
 - While /there *is*/ a setup script in this project, =it's not meant to be plug-and-play=. /It's a bare-bones setup/ that is fairly non-portable and will require some tinkering to work perfectly. I don't see this as a problem because I'm comfortable customizing it to my needs.
 
-- +It's highly encouraged that you read the PERL script before following the [[#setup-script][Setup]] instructions. But for brevity:+ *scratch that*, you /will/ read it now:
-
+** Setup
 *** InitScript
 
 #+BEGIN_SRC sh :tangle setup.ksh
@@ -30,7 +29,7 @@ doas pkg_add p5-Rex git
 
 *** PackageLists
 
-These are my packgelist files
+These are my packge list files
 
 **** PKGLIST
 
@@ -276,7 +275,7 @@ yt-dlp--
 zsh--
 #+END_SRC
 
-**** =CARGOLIST=
+**** CARGOLIST
 
 Cargo Package List
 
@@ -636,9 +635,7 @@ task 'update_xdg_user_dirs', sub {
 }
 #+END_SRC
 
------
 ** Setup Script
-
 *** Do as user:
 
 #+BEGIN_SRC
