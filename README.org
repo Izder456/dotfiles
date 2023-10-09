@@ -663,8 +663,8 @@ task 'update_xdg_user_dirs', sub {
 *** Do as user:
 
 #+BEGIN_SRC
-$ ftp -o ./setup.pl https://github.com/izder456/dotfiles/raw/main/setup.pl
-$ chmod +x setup.pl
+$ ftp -o ./setup.ksh https://github.com/izder456/dotfiles/raw/main/setup.ksh
+$ chmod +x setup.ksh
 $ ./setup.pl
 #+END_SRC
 
