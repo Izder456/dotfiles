@@ -18,7 +18,23 @@
 
 - +It's highly encouraged that you read the PERL script before following the [[#setup-script][Setup]] instructions. But for brevity:+ *scratch that*, you /will/ read it now:
 
-*** =PKGLIST=
+*** =InitScript=
+
+#+BEGIN_SRC sh :tangle setup.ksh
+#!/bin/ksh
+echo "We will install p5-rex from ports now!"
+echo "Press ENTER to continue:"
+read
+doas pkg_add p5-Rex git
+#+END_SRC
+
+*** =PackageLists=
+
+These are my packgelist files
+
+**** =PKGLIST=
+
+Ports List
 
 #+BEGIN_SRC :tangle .pkglist
 ImageMagick--
@@ -260,7 +276,9 @@ yt-dlp--
 zsh--
 #+END_SRC
 
-*** =CARGOLIST=
+**** =CARGOLIST=
+
+Cargo Package List
 
 #+BEGIN_SRC :tangle .cargolist
 cargo-update-installed
@@ -275,20 +293,86 @@ tokei
 #+END_SRC
 
 *** =Rexfile=
+**** =Perl-Boilerplate=
+
+Set up +"macros"+ "subroutines" in perl, That I'll use later.
 
 #+BEGIN_SRC perl :tangle Rexfile
+use 5.36.0;
 use Rex -feature => ['1.4'];
+
+# Set PATH explicitly
+$ENV{'PATH'} = '/bin:/usr/bin:/sbin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin';
 
 # convert file contents to a string (thanks tim!)
 sub file_to_string {
   open(DATA, "<@_[0]") or die "Can't open @_[0]";
-  @lines = <DATA>;
+  my @lines = <DATA>;
   close(DATA);
   my $data = join("", @lines);
   $data =~ s/\n/ /g;
   return $data;
 }
 
+# Checks if a file exists
+sub file_exists {
+  my ($filepath) = @_;
+  return -e $filepath;
+}
+
+# Downloads a file from a given URL
+sub download_file {
+  my ($url, $filename) = @_;
+  my $status = system("ftp -o $filename $url");
+  return $status == 0;
+}
+#+END_SRC
+
+**** =Remove-Cruft=
+
+I don't need some of these defaults
+
+#+BEGIN_SRC perl :tangle Rexfile
+# task to clean home dir
+task 'remove_default_cruft', sub {
+  unlink(
+    "$ENV{HOME}/.cshrc",
+    "$ENV{HOME}/.login",
+    "$ENV{HOME}/.mailrc",
+    "$ENV{HOME}/.profile",
+    "$ENV{HOME}/.Xdefaults",
+    "$ENV{HOME}/.cvsrc"
+  );
+  chmod(0700, $ENV{'HOME'});
+}
+#+END_SRC
+
+**** =Clone-Dots=
+
+Update, or clone my dotfiles
+
+#+BEGIN_SRC perl :tangle Rexfile
+# Updates dotfiles repository or clones if not present
+task 'update_or_clone_dotfiles', sub {
+  if (-d "$ENV{HOME}/.dotfiles") {
+    chdir "$ENV{HOME}/.dotfiles";
+    system('git', 'pull', '--recurse-submodules');
+  } else {
+    system('git', 'clone', '--recurse-submodules', '--depth', '1', 'https://github.com/izder456/dotfiles', "$ENV{HOME}/.dotfiles");
+  }
+}
+#+END_SRC
+
+**** =Setup-User=
+
+1. Take two params:
+  + user
+  + pass
+2. ensure ~:doas~ group exists
+3. make user, using params
+4. add user to ~:doas~ group
+
+#+BEGIN_SRC perl :tangle Rexfile
 # task to set up doas-capable user with two params (user & pass)
 task 'doas-user-setup', sub {
   my $params = shift;
@@ -306,7 +390,14 @@ task 'doas-user-setup', sub {
   password => "$pass",
   create_home => TRUE;
 }
+#+END_SRC
 
+**** =Package-installation=
+
++ Install ports from [[.pkglist][=.pkglist=]]
++ Install cargo packages from [[.cargolist][=.cargolist=]]
+
+#+BEGIN_SRC perl :tangle Rexfile
 # task to install ports from .pkglist
 task 'install-ports', sub {
   my $params = shift;
@@ -326,54 +417,9 @@ task 'install-cargo', sub {
 }
 #+END_SRC
 
-*** =Boilerplate-Perl=
+**** =Dots-Install=
 
-#+BEGIN_SRC perl :tangle setup.pl
-#!/usr/bin/env perl
-# Ensure Perl 5.36.0 compatibility
-use 5.36.0;
-
-# Set PATH explicitly
-$ENV{'PATH'} = '/bin:/usr/bin:/sbin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin';
-
-# Checks if a file exists
-sub file_exists {
-  my ($filepath) = @_;
-  return -e $filepath;
-}
-
-# Downloads a file from a given URL
-sub download_file {
-  my ($url, $filename) = @_;
-  my $status = system("ftp -o $filename $url");
-  return $status == 0;
-}
-#+END_SRC
-
-*** =Remove-Cruft=
-
-#+BEGIN_SRC perl :tangle setup.pl
-# Removes default OpenBSD files
-sub remove_default_files {
-  unlink(
-    "$ENV{HOME}/.cshrc",
-    "$ENV{HOME}/.login",
-    "$ENV{HOME}/.mailrc",
-    "$ENV{HOME}/.profile",
-    "$ENV{HOME}/.Xdefaults",
-    "$ENV{HOME}/.cvsrc"
-  );
-}
-
-# Sets permissions for user's HOME directory
-sub set_home_directory_perms {
-  chmod(0700, $ENV{'HOME'});
-}
-#+END_SRC
-
-*** =Dots-Manage=
-
-  dfm install script config
++ dfm install script config
 
 #+BEGIN_SRC :tangle .dfminstall
 .fonts recurse
@@ -392,8 +438,10 @@ APM-Config skip
 README.org skip
 #+END_SRC
 
-#+BEGIN_SRC perl :tangle setup.pl
-# Updates dotfiles repository or clones if not present
++ dots install
+
+#+BEGIN_SRC perl :tangle Rexfile
+# Upgrade/Merge/Install dotfiles
 sub update_or_clone_dotfiles {
   if (-d "$ENV{HOME}/.dotfiles") {
     chdir "$ENV{HOME}/.dotfiles";
@@ -403,8 +451,7 @@ sub update_or_clone_dotfiles {
   }
 }
 
-# Upgrade/Merge/Install dotfiles
-sub symlink_dots {
+task 'symlink_dots', sub {
   say "We will install dots now!";
   say "Press ENTER to continue:";
   <STDIN>;
@@ -413,13 +460,13 @@ sub symlink_dots {
 }
 #+END_SRC
 
-*** =FiZSH-Setup=
+**** =FiZSH-Setup=
 
-  This is a zsh frontend, that emulates the functionality of fish
+This is a zsh frontend, that emulates the functionality of fish
 
-#+BEGIN_SRC perl :tangle setup.pl
+#+BEGIN_SRC perl :tangle Rexfile
 # Configures and sets up the default shell
-sub configure_default_shell {
+task 'configure_default_shell', sub {
   say "We will install FiZSH now!";
   say "Press ENTER to continue:";
   <STDIN>;
@@ -444,11 +491,13 @@ sub configure_default_shell {
 }
 #+END_SRC
 
-*** =Emacs-Setup=
+**** =Emacs-Setup=
 
-#+BEGIN_SRC perl :tangle setup.pl
+I use Emacs, btw
+
+#+BEGIN_SRC perl :tangle Rexfile
 # Configures and installs doom emacs
-sub configure_doom_emacs {
+task 'configure_doom_emacs', sub {
   say "We will install Doom-Emacs now!";
   say "Press ENTER to continue:";
   <STDIN>;
@@ -467,10 +516,12 @@ sub configure_doom_emacs {
 }
 #+END_SRC
 
-*** =StumpWM-Setup=
+**** =StumpWM-Setup=
 
-#+BEGIN_SRC perl :tangle setup.pl
-sub update_or_clone_stumpwm {
+Yeah, this weird WM...
+
+#+BEGIN_SRC perl :tangle Rexfile
+task 'update_or_clone_stumpwm', sub {
   say "We will set up StumpWM now!";
   say "Press ENTER to continue:";
   <STDIN>;
@@ -482,11 +533,13 @@ sub update_or_clone_stumpwm {
 }
 #+END_SRC
 
-*** =XenoDM/Background-Setup=
+**** =XenoDM/Background-Setup=
 
-#+BEGIN_SRC perl :tangle setup.pl
+Because XDM wasn't cutting it...
+
+#+BEGIN_SRC perl :tangle Rexfile
 # Installs backgrounds to /usr/local/share/backgrounds
-sub install_backgrounds {
+task 'install_backgrounds', sub {
   say "We will install backgrounds now!";
   say "Press ENTER to continue:";
   <STDIN>;
@@ -495,7 +548,7 @@ sub install_backgrounds {
 }
 
 # Sets up Xenodm configuration
-sub setup_xenodm {
+task 'setup_xenodm', sub {
   say "We will set up XenoDM now!";
   say "Press ENTER to continue:";
   <STDIN>;
@@ -503,10 +556,12 @@ sub setup_xenodm {
 }
 #+END_SRC
 
-*** =APMD_AutoHook-Lock=
+**** =APMD_AutoHook-Lock=
 
-#+BEGIN_SRC perl :tangle setup.pl
-sub setup_apmd {
+Setup Laptop Slock shell-close autohook
+
+#+BEGIN_SRC perl :tangle Rexfile
+task 'setup_apmd', sub {
   say "We will set up APM-Autohook now!";
   say "Press ENTER to continue:";
   <STDIN>;
@@ -515,11 +570,13 @@ sub setup_apmd {
 }
 #+END_SRC
 
-*** =Extra-Packages=
+**** =Extra-Packages=
 
-#+BEGIN_SRC perl :tangle setup.pl
+Extra stuff thats not in ports, cargo or base
+
+#+BEGIN_SRC perl :tangle Rexfile
 # Compiles shuf re-implementation
-sub compile_shuf {
+task 'compile_shuf', sub {
   say "we will compile shuf now!";
   say "press enter to continue:";
   <STDIN>;
@@ -531,7 +588,7 @@ sub compile_shuf {
 }
 
 # Compiles in my Slock Setup
-sub compile_slock {
+task 'compile_slock', sub {
   say "we will compile suckless lock now!";
   say "press enter to continue:";
   <STDIN>;
@@ -542,7 +599,7 @@ sub compile_slock {
 }
 
 # Compiles afetch
-sub compile_afetch {
+task 'compile_afetch', sub {
   say "we will compile afetch now!";
   say "press enter to continue:";
   <STDIN>;
@@ -553,7 +610,7 @@ sub compile_afetch {
 }
 
 # Setup Battery Monitor
-sub setup_battstat {
+task 'setup_battstat', sub {
   say "we will set up battery monitor now!";
   say "press enter to continue:";
   <STDIN>;
@@ -561,9 +618,16 @@ sub setup_battstat {
   chdir "$ENV{HOME}/.battstat";
   system('doas', 'install', './battstat', '/usr/local/bin');
 }
+#+END_SRC
 
+**** =Xdg-UserDirs=
+
+
+Setup Homedir Paths
+
+#+BEGIN_SRC perl :tangle Rexfile
 # Updates XDG user directories
-sub update_xdg_user_dirs {
+task 'update_xdg_user_dirs', sub {
   say "we will set xdg-user-dirs now!";
   say "press enter to continue:";
   <STDIN>;
@@ -572,20 +636,8 @@ sub update_xdg_user_dirs {
 }
 #+END_SRC
 
-- My script doesn't perform any performance tweaking. Users should refer to [[https://openbsd.org/faq][the FAQ]], [[https://man.openbsd.org][manpages]], or the unofficial [[https://www.openbsdhandbook.com][OpenBSD Handbook]] for that.
-
-- for laptops, I /highly recommend/ solene%'s power management daemon [[https://dataswamp.org/~solene/2022-03-21-openbsd-cool-frequency.html][obsdfreqd]]
-
+-----
 ** Setup Script
-   - Read the [[#crucial-information][Crucial Information]] and the disclaimer.
-
-*** Do as root:
-
-#+BEGIN_SRC
-# groupadd doas
-# usermod -G doas,operator,staff [your username]
-# ftp -o /etc/doas.conf https://github.com/izder456/dotfiles/raw/main/doas.conf
-#+END_SRC
 
 *** Do as user:
 
@@ -596,6 +648,10 @@ $ ./setup.pl
 #+END_SRC
 
 ** Note:
+
+- My script doesn't perform any performance tweaking. Users should refer to [[https://openbsd.org/faq][the FAQ]], [[https://man.openbsd.org][manpages]], or the unofficial [[https://www.openbsdhandbook.com][OpenBSD Handbook]] for that.
+
+- for laptops, I /highly recommend/ solene%'s power management daemon [[https://dataswamp.org/~solene/2022-03-21-openbsd-cool-frequency.html][obsdfreqd]]
 
 - When the script installs dependencies, always choose the latest version when given a version choice from ~pkg_add~, except for Emacs, where you should choose the gtk2 variant.
 
