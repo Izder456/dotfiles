@@ -294,7 +294,7 @@ tokei
 *** Rexfile
 **** Perl-Boilerplate
 
-Set up +"macros"+ "subroutines" in perl, That I'll use later.
+Set up "subroutines" in perl, That I'll use later.
 
 #+BEGIN_SRC perl :tangle Rexfile
 use 5.36.0;
