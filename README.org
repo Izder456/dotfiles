@@ -18,7 +18,7 @@
 
 - +It's highly encouraged that you read the PERL script before following the [[#setup-script][Setup]] instructions. But for brevity:+ *scratch that*, you /will/ read it now:
 
-*** =InitScript=
+*** InitScript
 
 #+BEGIN_SRC sh :tangle setup.ksh
 #!/bin/ksh
@@ -28,11 +28,11 @@ read
 doas pkg_add p5-Rex git
 #+END_SRC
 
-*** =PackageLists=
+*** PackageLists
 
 These are my packgelist files
 
-**** =PKGLIST=
+**** PKGLIST
 
 Ports List
 
@@ -292,8 +292,8 @@ tere
 tokei
 #+END_SRC
 
-*** =Rexfile=
-**** =Perl-Boilerplate=
+*** Rexfile
+**** Perl-Boilerplate
 
 Set up +"macros"+ "subroutines" in perl, That I'll use later.
 
@@ -328,7 +328,7 @@ sub download_file {
 }
 #+END_SRC
 
-**** =Remove-Cruft=
+**** Remove-Cruft
 
 I don't need some of these defaults
 
@@ -347,7 +347,7 @@ task 'remove_default_cruft', sub {
 }
 #+END_SRC
 
-**** =Clone-Dots=
+**** Clone-Dots
 
 Update, or clone my dotfiles
 
@@ -363,7 +363,7 @@ task 'update_or_clone_dotfiles', sub {
 }
 #+END_SRC
 
-**** =Setup-User=
+**** Setup-User
 
 1. Take two params:
   + user
@@ -392,7 +392,7 @@ task 'doas-user-setup', sub {
 }
 #+END_SRC
 
-**** =Package-installation=
+**** Package-installation
 
 + Install ports from [[.pkglist][=.pkglist=]]
 + Install cargo packages from [[.cargolist][=.cargolist=]]
@@ -417,7 +417,7 @@ task 'install-cargo', sub {
 }
 #+END_SRC
 
-**** =Dots-Install=
+**** Dots-Install
 
 + dfm install script config
 
@@ -460,7 +460,7 @@ task 'symlink_dots', sub {
 }
 #+END_SRC
 
-**** =FiZSH-Setup=
+**** FiZSH-Setup
 
 This is a zsh frontend, that emulates the functionality of fish
 
@@ -491,7 +491,7 @@ task 'configure_default_shell', sub {
 }
 #+END_SRC
 
-**** =Emacs-Setup=
+**** Emacs-Setup
 
 I use Emacs, btw
 
@@ -516,7 +516,7 @@ task 'configure_doom_emacs', sub {
 }
 #+END_SRC
 
-**** =StumpWM-Setup=
+**** StumpWM-Setup
 
 Yeah, this weird WM...
 
@@ -533,7 +533,7 @@ task 'update_or_clone_stumpwm', sub {
 }
 #+END_SRC
 
-**** =XenoDM/Background-Setup=
+**** XenoDM/Background-Setup
 
 Because XDM wasn't cutting it...
 
@@ -556,7 +556,7 @@ task 'setup_xenodm', sub {
 }
 #+END_SRC
 
-**** =APMD_AutoHook-Lock=
+**** APMD_AutoHook-Lock
 
 Setup Laptop Slock shell-close autohook
 
@@ -570,7 +570,7 @@ task 'setup_apmd', sub {
 }
 #+END_SRC
 
-**** =Extra-Packages=
+**** Extra-Packages
 
 Extra stuff thats not in ports, cargo or base
 
@@ -620,7 +620,7 @@ task 'setup_battstat', sub {
 }
 #+END_SRC
 
-**** =Xdg-UserDirs=
+**** Xdg-UserDirs
 
 
 Setup Homedir Paths
