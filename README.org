@@ -19,6 +19,8 @@
 ** Setup
 *** InitScript
 
+Init KSH Script
+
 #+BEGIN_SRC sh :tangle setup.ksh
 #!/bin/ksh
 echo "We will install p5-rex & git from ports now!"
@@ -35,7 +37,7 @@ These are my packge list files
 
 Ports List
 
-#+BEGIN_SRC :tangle .pkglist
+#+BEGIN_SRC txt :tangle .pkglist
 ImageMagick--
 adb--
 alacritty--
@@ -279,7 +281,7 @@ zsh--
 
 Cargo Package List
 
-#+BEGIN_SRC :tangle .cargolist
+#+BEGIN_SRC txt :tangle .cargolist
 cargo-update-installed
 dust
 eza
@@ -420,7 +422,7 @@ task 'install_cargo', sub {
 
 + dfm install script config
 
-#+BEGIN_SRC :tangle .dfminstall
+#+BEGIN_SRC txt :tangle .dfminstall
 .fonts recurse
 .git recurse
 .icons recurse

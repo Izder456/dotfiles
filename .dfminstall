@@ -1,1 +1,14 @@
+.fonts recurse
+.git recurse
+.icons recurse
+.themes recurse
+.moc recurse
+.config recurse
+.local recurse
+assets skip
+backgrounds skip
+Emacs-Config skip
+StumpWM-Config skip
+XenoDM-Config skip
+APM-Config skip
 README.org skip

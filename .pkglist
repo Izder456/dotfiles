@@ -29,6 +29,7 @@ coreutils--
 cpuid--
 curl--
 dbus--
+deadbeef--
 desktop-file-utils--
 desmume--
 dhewm3--
@@ -210,6 +211,7 @@ stumpwm--
 subversion--
 supertux--
 supertuxkart--
+surf--
 texinfo--
 thunderbird--
 tidy--
