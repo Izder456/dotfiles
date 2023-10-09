@@ -665,7 +665,7 @@ task 'update_xdg_user_dirs', sub {
 #+BEGIN_SRC
 $ ftp -o ./setup.ksh https://github.com/izder456/dotfiles/raw/main/setup.ksh
 $ chmod +x setup.ksh
-$ ./setup.pl
+$ ./setup.ksh
 #+END_SRC
 
 ** Note:
