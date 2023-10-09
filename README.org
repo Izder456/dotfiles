@@ -27,6 +27,45 @@ echo "We will install p5-rex & git from ports now!"
 echo "Press ENTER to continue:"
 read
 doas pkg_add p5-Rex git
+echo "We will run the Rexfile now!"
+echo "Press ENTER to continue:"
+read
+echo "Removing Cruft..."
+rex remove_default_cruft
+echo "Cloning/Installing Dots..."
+rex symlink_dots
+echo "Setting up doas user..."
+echo "Enter user: \c"
+read USER
+echo "Enter password: \c"
+stty -echo
+read PASS
+stty echo
+rex doas_user_setup --user="${USER}" --pass="${PASS}"
+echo "Setting up Ports..."
+rex install_ports --pkgfile=".pkgfile"
+echo "Setting up Cargo..."
+rex install_cargo --cargofile=".cargofile"
+echo "Setting up FiZSH..."
+rex configure_default_shell
+echo "Setting up DOOM Emacs..."
+rex configure_doom_emacs
+echo "Setting up StumpWM..."
+rex update_or_clone_stumpwm
+echo "Installing Backgrounds..."
+rex install_backgrounds
+echo "Setting up XenoDM..."
+rex setup_xenodm
+echo "Setting up APMD..."
+rex setup_apmd
+echo "Setting up extras..."
+rex compile_shuf
+rex compile_slock
+rex compile_afetch
+rex setup_battstat
+echo "XDG-User-Dirs-Setup"
+rex update_xdg_user_dirs
+echo "DONE!"
 #+END_SRC
 
 *** PackageLists
@@ -348,19 +387,46 @@ task 'remove_default_cruft', sub {
 };
 #+END_SRC
 
-**** Clone-Dots
+**** Dots-Install
 
-Update, or clone my dotfiles
++ dfm install script config
+
+#+BEGIN_SRC txt :tangle .dfminstall
+.fonts recurse
+.git recurse
+.icons recurse
+.themes recurse
+.moc recurse
+.config recurse
+.local recurse
+assets skip
+backgrounds skip
+Emacs-Config skip
+StumpWM-Config skip
+XenoDM-Config skip
+APM-Config skip
+README.org skip
+#+END_SRC
+
++ dots install
 
 #+BEGIN_SRC perl :tangle Rexfile
-# Updates dotfiles repository or clones if not present
-task 'update_or_clone_dotfiles', sub {
+# Upgrade/Merge/Install dotfiles
+sub update_or_clone_dotfiles {
   if (-d "$ENV{HOME}/.dotfiles") {
     chdir "$ENV{HOME}/.dotfiles";
     system('git', 'pull', '--recurse-submodules');
   } else {
     system('git', 'clone', '--recurse-submodules', '--depth', '1', 'https://github.com/izder456/dotfiles', "$ENV{HOME}/.dotfiles");
   }
+}
+
+task 'symlink_dots', sub {
+  say "We will install dots now!";
+  say "Press ENTER to continue:";
+  <STDIN>;
+  update_or_clone_dotfiles();
+  system('dfm', 'umi');
 };
 #+END_SRC
 
@@ -415,49 +481,6 @@ task 'install_cargo', sub {
   my $cargolist = file_to_string($cargofile);
   # Install
   system("cargo", "install", "$cargolist");
-};
-#+END_SRC
-
-**** Dots-Install
-
-+ dfm install script config
-
-#+BEGIN_SRC txt :tangle .dfminstall
-.fonts recurse
-.git recurse
-.icons recurse
-.themes recurse
-.moc recurse
-.config recurse
-.local recurse
-assets skip
-backgrounds skip
-Emacs-Config skip
-StumpWM-Config skip
-XenoDM-Config skip
-APM-Config skip
-README.org skip
-#+END_SRC
-
-+ dots install
-
-#+BEGIN_SRC perl :tangle Rexfile
-# Upgrade/Merge/Install dotfiles
-sub update_or_clone_dotfiles {
-  if (-d "$ENV{HOME}/.dotfiles") {
-    chdir "$ENV{HOME}/.dotfiles";
-    system('git', 'pull', '--recurse-submodules');
-  } else {
-    system('git', 'clone', '--recurse-submodules', '--depth', '1', 'https://github.com/izder456/dotfiles', "$ENV{HOME}/.dotfiles");
-  }
-}
-
-task 'symlink_dots', sub {
-  say "We will install dots now!";
-  say "Press ENTER to continue:";
-  <STDIN>;
-  update_or_clone_dotfiles();
-  system('dfm', 'umi');
 };
 #+END_SRC
 
@@ -622,7 +645,6 @@ task 'setup_battstat', sub {
 #+END_SRC
 
 **** Xdg-UserDirs
-
 
 Setup Homedir Paths
 

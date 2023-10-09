@@ -3,3 +3,42 @@ echo "We will install p5-rex & git from ports now!"
 echo "Press ENTER to continue:"
 read
 doas pkg_add p5-Rex git
+echo "We will run the Rexfile now!"
+echo "Press ENTER to continue:"
+read
+echo "Removing Cruft..."
+rex remove_default_cruft
+echo "Cloning/Installing Dots..."
+rex symlink_dots
+echo "Setting up doas user..."
+echo "Enter user: \c"
+read USER
+echo "Enter password: \c"
+stty -echo
+read PASS
+stty echo
+rex doas_user_setup --user="${USER}" --pass="${PASS}"
+echo "Setting up Ports..."
+rex install_ports --pkgfile=".pkgfile"
+echo "Setting up Cargo..."
+rex install_cargo --cargofile=".cargofile"
+echo "Setting up FiZSH..."
+rex configure_default_shell
+echo "Setting up DOOM Emacs..."
+rex configure_doom_emacs
+echo "Setting up StumpWM..."
+rex update_or_clone_stumpwm
+echo "Installing Backgrounds..."
+rex install_backgrounds
+echo "Setting up XenoDM..."
+rex setup_xenodm
+echo "Setting up APMD..."
+rex setup_apmd
+echo "Setting up extras..."
+rex compile_shuf
+rex compile_slock
+rex compile_afetch
+rex setup_battstat
+echo "XDG-User-Dirs-Setup"
+rex update_xdg_user_dirs
+echo "DONE!"

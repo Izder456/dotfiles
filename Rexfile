@@ -40,14 +40,22 @@ task 'remove_default_cruft', sub {
   chmod(0700, $ENV{'HOME'});
 };
 
-# Updates dotfiles repository or clones if not present
-task 'update_or_clone_dotfiles', sub {
+# Upgrade/Merge/Install dotfiles
+sub update_or_clone_dotfiles {
   if (-d "$ENV{HOME}/.dotfiles") {
     chdir "$ENV{HOME}/.dotfiles";
     system('git', 'pull', '--recurse-submodules');
   } else {
     system('git', 'clone', '--recurse-submodules', '--depth', '1', 'https://github.com/izder456/dotfiles', "$ENV{HOME}/.dotfiles");
   }
+}
+
+task 'symlink_dots', sub {
+  say "We will install dots now!";
+  say "Press ENTER to continue:";
+  <STDIN>;
+  update_or_clone_dotfiles();
+  system('dfm', 'umi');
 };
 
 # task to set up doas-capable user with two params (user & pass)
@@ -84,24 +92,6 @@ task 'install_cargo', sub {
   my $cargolist = file_to_string($cargofile);
   # Install
   system("cargo", "install", "$cargolist");
-};
-
-# Upgrade/Merge/Install dotfiles
-sub update_or_clone_dotfiles {
-  if (-d "$ENV{HOME}/.dotfiles") {
-    chdir "$ENV{HOME}/.dotfiles";
-    system('git', 'pull', '--recurse-submodules');
-  } else {
-    system('git', 'clone', '--recurse-submodules', '--depth', '1', 'https://github.com/izder456/dotfiles', "$ENV{HOME}/.dotfiles");
-  }
-}
-
-task 'symlink_dots', sub {
-  say "We will install dots now!";
-  say "Press ENTER to continue:";
-  <STDIN>;
-  update_or_clone_dotfiles();
-  system('dfm', 'umi');
 };
 
 # Configures and sets up the default shell
