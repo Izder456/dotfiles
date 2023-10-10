@@ -33,7 +33,8 @@ read
 echo "Removing Cruft..."
 rex remove_default_cruft
 echo "Cloning/Installing Dots..."
-rex symlink_dots
+git clone --depth 1 --recurse-submodules https://github.com/Izder456/dotfiles ./.dotfiles
+./.dotfiles/bin/dfm umi
 echo "Setting up doas user..."
 echo "Enter user: \c"
 read USER
@@ -322,7 +323,7 @@ Cargo Package List
 
 #+BEGIN_SRC txt :tangle .cargolist
 cargo-update-installed
-dust
+du-dust
 eza
 hyperfine
 onefetch
@@ -406,28 +407,6 @@ StumpWM-Config skip
 XenoDM-Config skip
 APM-Config skip
 README.org skip
-#+END_SRC
-
-+ dots install
-
-#+BEGIN_SRC perl :tangle Rexfile
-# Upgrade/Merge/Install dotfiles
-sub update_or_clone_dotfiles {
-  if (-d "$ENV{HOME}/.dotfiles") {
-    chdir "$ENV{HOME}/.dotfiles";
-    system('git', 'pull', '--recurse-submodules');
-  } else {
-    system('git', 'clone', '--recurse-submodules', '--depth', '1', 'https://github.com/izder456/dotfiles', "$ENV{HOME}/.dotfiles");
-  }
-}
-
-task 'symlink_dots', sub {
-  say "We will install dots now!";
-  say "Press ENTER to continue:";
-  <STDIN>;
-  update_or_clone_dotfiles();
-  system('dfm', 'umi');
-};
 #+END_SRC
 
 **** Setup-User

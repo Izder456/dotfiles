@@ -40,24 +40,6 @@ task 'remove_default_cruft', sub {
   chmod(0700, $ENV{'HOME'});
 };
 
-# Upgrade/Merge/Install dotfiles
-sub update_or_clone_dotfiles {
-  if (-d "$ENV{HOME}/.dotfiles") {
-    chdir "$ENV{HOME}/.dotfiles";
-    system('git', 'pull', '--recurse-submodules');
-  } else {
-    system('git', 'clone', '--recurse-submodules', '--depth', '1', 'https://github.com/izder456/dotfiles', "$ENV{HOME}/.dotfiles");
-  }
-}
-
-task 'symlink_dots', sub {
-  say "We will install dots now!";
-  say "Press ENTER to continue:";
-  <STDIN>;
-  update_or_clone_dotfiles();
-  system('dfm', 'umi');
-};
-
 # task to set up doas-capable user with two params (user & pass)
 task 'doas_user_setup', sub {
   my $params = shift;

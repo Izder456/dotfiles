@@ -9,7 +9,8 @@ read
 echo "Removing Cruft..."
 rex remove_default_cruft
 echo "Cloning/Installing Dots..."
-rex symlink_dots
+git clone --depth 1 --recurse-submodules https://github.com/Izder456/dotfiles ./.dotfiles
+./.dotfiles/bin/dfm umi
 echo "Setting up doas user..."
 echo "Enter user: \c"
 read USER
