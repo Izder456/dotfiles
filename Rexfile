@@ -131,8 +131,8 @@ task 'setup_apmd', sub {
 
 # Compiles shuf re-implementation
 task 'compile_shuf', sub {
-  say "we will compile shuf now!";
-  say "press enter to continue:";
+  say "We will compile shuf now!";
+  say "Press ENTER to continue:";
   <STDIN>;
   system('git', 'clone', 'https://github.com/ibara/shuf.git', "$ENV{HOME}/.shuf");
   chdir "$ENV{HOME}/.shuf";
@@ -143,8 +143,8 @@ task 'compile_shuf', sub {
 
 # Compiles in my Slock Setup
 task 'compile_slock', sub {
-  say "we will compile suckless lock now!";
-  say "press enter to continue:";
+  say "We will compile suckless lock now!";
+  say "Press ENTER to continue:";
   <STDIN>;
   system('git', 'clone', 'https://github.com/Izder456/slock.git', "$ENV{HOME}/.slock");
   chdir "$ENV{HOME}/.slock";
@@ -154,8 +154,8 @@ task 'compile_slock', sub {
 
 # Compiles afetch
 task 'compile_afetch', sub {
-  say "we will compile afetch now!";
-  say "press enter to continue:";
+  say "We will compile afetch now!";
+  say "Press ENTER to continue:";
   <STDIN>;
   system('git', 'clone', 'https://github.com/13-CF/afetch.git', "$ENV{HOME}/.afetch");
   chdir "$ENV{HOME}/.afetch";
@@ -165,8 +165,8 @@ task 'compile_afetch', sub {
 
 # Setup Battery Monitor
 task 'setup_battstat', sub {
-  say "we will set up battery monitor now!";
-  say "press enter to continue:";
+  say "We will set up battery monitor now!";
+  say "Press ENTER to continue:";
   <STDIN>;
   system('git', 'clone', 'https://github.com/imwally/battstat.git', "$ENV{HOME}/.battstat");
   chdir "$ENV{HOME}/.battstat";
@@ -175,8 +175,8 @@ task 'setup_battstat', sub {
 
 # Updates XDG user directories
 task 'update_xdg_user_dirs', sub {
-  say "we will set xdg-user-dirs now!";
-  say "press enter to continue:";
+  say "We will set xdg-user-dirs now!";
+  say "Press ENTER to continue:";
   <STDIN>;
   system('xdg-user-dirs-update');
   system('mkdir', "$ENV{HOME}/Projects");
