@@ -3,6 +3,8 @@ echo "We will install p5-rex & git from ports now!"
 echo "Press ENTER to continue:"
 read
 doas pkg_add p5-Rex git
+echo "Setting up Ports..."
+rex install_ports --pkgfile=".pkgfile"
 echo "Cloning/Installing Dots..."
 git clone --depth 1 --recurse-submodules https://github.com/Izder456/dotfiles ./.dotfiles
 ./.dotfiles/bin/dfm install
@@ -12,8 +14,6 @@ echo "Press ENTER to continue:"
 read
 echo "Removing Cruft..."
 rex remove_default_cruft
-echo "Setting up Ports..."
-rex install_ports --pkgfile=".pkgfile"
 echo "Setting up Cargo..."
 rex install_cargo --cargofile=".cargofile"
 echo "Setting up FiZSH..."
