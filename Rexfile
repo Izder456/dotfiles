@@ -40,31 +40,13 @@ task 'remove_default_cruft', sub {
   chmod(0700, $ENV{'HOME'});
 };
 
-# task to set up doas-capable user with two params (user & pass)
-task 'doas_user_setup', sub {
-  my $params = shift;
-  my $user = $params->{user};
-  my $pass = $params->{pass};
-  # Ensure :doas is present
-  group "doas", ensure => "present";
-  # Add $user with $pass
-  account "$user",
-  ensure => "present",
-  uid => 1000,
-  home => "/home/$user",
-  expire => 'never',
-  groups => [ 'izder456', 'operator', 'doas', 'staff' ],
-  password => "$pass",
-  create_home => TRUE;
-};
-
 # task to install ports from .pkglist
 task 'install_ports', sub {
   my $params = shift;
   my $pkgfile = $params->{pkgfile};
   my $pkglist = file_to_string($pkgfile);
   # Install
-  pkg [ $pkglist ], ensure => "present";
+  system('doas', 'pkg_add', '-U', "$pkglist ");
 };
 
 # task to install cargo-packages from .cargolist
@@ -73,7 +55,7 @@ task 'install_cargo', sub {
   my $cargofile = $params->{cargofile};
   my $cargolist = file_to_string($cargofile);
   # Install
-  system("cargo", "install", "$cargolist");
+  system('cargo', 'install', "$cargolist ");
 };
 
 # Configures and sets up the default shell
@@ -116,7 +98,7 @@ task 'configure_doom_emacs', sub {
   if (-d "$ENV{HOME}/.doom.d") {
     system('rm', '-rvf', "$ENV{HOME}/.doom.d");
   }
-  system('ln', '-sf', '$ENV{HOME}/.dotfiles/Emacs-Config', "$ENV{HOME}/.doom.d");
+  system('ln', '-sf', "$ENV{HOME}/.dotfiles/Emacs-Config", "$ENV{HOME}/.doom.d");
   system("$ENV{HOME}/.emacs.d/bin/doom", 'sync');
 };
 
@@ -127,8 +109,10 @@ task 'update_or_clone_stumpwm', sub {
   if (-d "$ENV{HOME}/.stumpwm.d") {
     chdir "$ENV{HOME}/.stumpwm.d";
   } else {
-    system('ln', '-sf', '$ENV{HOME}/.dotfiles/StumpWM-Config', '$ENV{HOME}/.stumpwm.d');
-  }
+    system('ln', '-sf', "$ENV{HOME}/.dotfiles/StumpWM-Config", "$ENV{HOME}/.stumpwm.d");
+  };
+  say "Setting up fonts...";
+  system('doas', 'mkfontdir', '/usr/local/share/fonts/spleen');
 };
 
 # Installs backgrounds to /usr/local/share/backgrounds
@@ -137,7 +121,7 @@ task 'install_backgrounds', sub {
   say "Press ENTER to continue:";
   <STDIN>;
   system('doas', 'mkdir', '-p', '/usr/local/share/backgrounds');
-  system('doas', 'cp', '-rvf', '$ENV{HOME}/.dotfiles/backgrounds/*', '/usr/local/share/backgrounds');
+  system('doas', 'cp', '-rvf', glob("$ENV{HOME}/.dotfiles/backgrounds/*"), '/usr/local/share/backgrounds');
 };
 
 # Sets up Xenodm configuration
@@ -145,7 +129,7 @@ task 'setup_xenodm', sub {
   say "We will set up XenoDM now!";
   say "Press ENTER to continue:";
   <STDIN>;
-  system('doas', 'cp', '-rvf', '$ENV{HOME}/.dotfiles/config/*', '/etc/X11/xenodm/');
+  system('doas', 'cp', '-rvf', glob("$ENV{HOME}/.dotfiles/XendoDM-Config/*"), '/etc/X11/xenodm/');
 };
 
 task 'setup_apmd', sub {
@@ -153,7 +137,7 @@ task 'setup_apmd', sub {
   say "Press ENTER to continue:";
   <STDIN>;
   system('doas', 'mkdir', '/etc/apm');
-  system('doas', 'cp', '-rvf', '$ENV{HOME}/.dotfiles/APM-Config/*', '/etc/apm/');
+  system('doas', 'cp', '-rvf', glob("$ENV{HOME}/.dotfiles/APM-Config/*"), '/etc/apm/');
 };
 
 # Compiles shuf re-implementation

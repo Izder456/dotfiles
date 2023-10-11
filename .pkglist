@@ -1,5 +1,4 @@
 ImageMagick--
-adb--
 alacritty--
 appmanager--
 aria2--
@@ -54,9 +53,7 @@ fzf--
 g++--%8
 gawk--
 gcc--%8
-gcc-libs--%8
 gd--
-generaluser-gs-soundfont--
 gettext-runtime--
 gettext-tools--
 gforth--
@@ -118,7 +115,6 @@ libvorbis--
 libyaml--
 links--
 llvm--%13
-llvm--%16
 lmms--
 lsblk--
 lua--%5.4
@@ -183,7 +179,6 @@ py3-pytest-subtests--
 py3-test-isort--
 python--%3.11
 quirks--
-qutebrowser--
 ripgrep--
 rofi--
 ruby--%3.2
@@ -201,7 +196,6 @@ sdl2-ttf--
 shared-mime-info--
 shellcheck--
 shfmt--
-sl--
 snes9x--
 speedtest-cli--
 spleen--
@@ -211,7 +205,6 @@ stumpwm--
 subversion--
 supertux--
 supertuxkart--
-surf--
 texinfo--
 thunderbird--
 tidy--

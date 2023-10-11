@@ -27,22 +27,15 @@ echo "We will install p5-rex & git from ports now!"
 echo "Press ENTER to continue:"
 read
 doas pkg_add p5-Rex git
+echo "Cloning/Installing Dots..."
+git clone --depth 1 --recurse-submodules https://github.com/Izder456/dotfiles ./.dotfiles
+./.dotfiles/bin/dfm install
+doas cp ~/.dotfiles/doas.conf
 echo "We will run the Rexfile now!"
 echo "Press ENTER to continue:"
 read
 echo "Removing Cruft..."
 rex remove_default_cruft
-echo "Cloning/Installing Dots..."
-git clone --depth 1 --recurse-submodules https://github.com/Izder456/dotfiles ./.dotfiles
-./.dotfiles/bin/dfm umi
-echo "Setting up doas user..."
-echo "Enter user: \c"
-read USER
-echo "Enter password: \c"
-stty -echo
-read PASS
-stty echo
-rex doas_user_setup --user="${USER}" --pass="${PASS}"
 echo "Setting up Ports..."
 rex install_ports --pkgfile=".pkgfile"
 echo "Setting up Cargo..."
@@ -79,7 +72,6 @@ Ports List
 
 #+BEGIN_SRC txt :tangle .pkglist
 ImageMagick--
-adb--
 alacritty--
 appmanager--
 aria2--
@@ -134,9 +126,7 @@ fzf--
 g++--%8
 gawk--
 gcc--%8
-gcc-libs--%8
 gd--
-generaluser-gs-soundfont--
 gettext-runtime--
 gettext-tools--
 gforth--
@@ -198,7 +188,6 @@ libvorbis--
 libyaml--
 links--
 llvm--%13
-llvm--%16
 lmms--
 lsblk--
 lua--%5.4
@@ -263,7 +252,6 @@ py3-pytest-subtests--
 py3-test-isort--
 python--%3.11
 quirks--
-qutebrowser--
 ripgrep--
 rofi--
 ruby--%3.2
@@ -281,7 +269,6 @@ sdl2-ttf--
 shared-mime-info--
 shellcheck--
 shfmt--
-sl--
 snes9x--
 speedtest-cli--
 spleen--
@@ -291,7 +278,6 @@ stumpwm--
 subversion--
 supertux--
 supertuxkart--
-surf--
 texinfo--
 thunderbird--
 tidy--
@@ -400,6 +386,12 @@ task 'remove_default_cruft', sub {
 .moc recurse
 .config recurse
 .local recurse
+LICENSE.txt skip
+README.org skip
+doas.conf skip
+setup.ksh skip
+setup.pl.bak skip
+bin skip
 assets skip
 backgrounds skip
 Emacs-Config skip
@@ -407,35 +399,6 @@ StumpWM-Config skip
 XenoDM-Config skip
 APM-Config skip
 README.org skip
-#+END_SRC
-
-**** Setup-User
-
-1. Take two params:
-  + user
-  + pass
-2. ensure ~:doas~ group exists
-3. make user, using params
-4. add user to ~:doas~ group
-
-#+BEGIN_SRC perl :tangle Rexfile
-# task to set up doas-capable user with two params (user & pass)
-task 'doas_user_setup', sub {
-  my $params = shift;
-  my $user = $params->{user};
-  my $pass = $params->{pass};
-  # Ensure :doas is present
-  group "doas", ensure => "present";
-  # Add $user with $pass
-  account "$user",
-  ensure => "present",
-  uid => 1000,
-  home => "/home/$user",
-  expire => 'never',
-  groups => [ 'izder456', 'operator', 'doas', 'staff' ],
-  password => "$pass",
-  create_home => TRUE;
-};
 #+END_SRC
 
 **** Package-installation
@@ -450,7 +413,7 @@ task 'install_ports', sub {
   my $pkgfile = $params->{pkgfile};
   my $pkglist = file_to_string($pkgfile);
   # Install
-  pkg [ $pkglist ], ensure => "present";
+  system('doas', 'pkg_add', '-U', "$pkglist ");
 };
 
 # task to install cargo-packages from .cargolist
@@ -459,7 +422,7 @@ task 'install_cargo', sub {
   my $cargofile = $params->{cargofile};
   my $cargolist = file_to_string($cargofile);
   # Install
-  system("cargo", "install", "$cargolist");
+  system('cargo', 'install', "$cargolist ");
 };
 #+END_SRC
 
@@ -514,7 +477,7 @@ task 'configure_doom_emacs', sub {
   if (-d "$ENV{HOME}/.doom.d") {
     system('rm', '-rvf', "$ENV{HOME}/.doom.d");
   }
-  system('ln', '-sf', '$ENV{HOME}/.dotfiles/Emacs-Config', "$ENV{HOME}/.doom.d");
+  system('ln', '-sf', "$ENV{HOME}/.dotfiles/Emacs-Config", "$ENV{HOME}/.doom.d");
   system("$ENV{HOME}/.emacs.d/bin/doom", 'sync');
 };
 #+END_SRC
@@ -531,8 +494,10 @@ task 'update_or_clone_stumpwm', sub {
   if (-d "$ENV{HOME}/.stumpwm.d") {
     chdir "$ENV{HOME}/.stumpwm.d";
   } else {
-    system('ln', '-sf', '$ENV{HOME}/.dotfiles/StumpWM-Config', '$ENV{HOME}/.stumpwm.d');
-  }
+    system('ln', '-sf', "$ENV{HOME}/.dotfiles/StumpWM-Config", "$ENV{HOME}/.stumpwm.d");
+  };
+  say "Setting up fonts...";
+  system('doas', 'mkfontdir', '/usr/local/share/fonts/spleen');
 };
 #+END_SRC
 
@@ -547,7 +512,7 @@ task 'install_backgrounds', sub {
   say "Press ENTER to continue:";
   <STDIN>;
   system('doas', 'mkdir', '-p', '/usr/local/share/backgrounds');
-  system('doas', 'cp', '-rvf', '$ENV{HOME}/.dotfiles/backgrounds/*', '/usr/local/share/backgrounds');
+  system('doas', 'cp', '-rvf', glob("$ENV{HOME}/.dotfiles/backgrounds/*"), '/usr/local/share/backgrounds');
 };
 
 # Sets up Xenodm configuration
@@ -555,7 +520,7 @@ task 'setup_xenodm', sub {
   say "We will set up XenoDM now!";
   say "Press ENTER to continue:";
   <STDIN>;
-  system('doas', 'cp', '-rvf', '$ENV{HOME}/.dotfiles/config/*', '/etc/X11/xenodm/');
+  system('doas', 'cp', '-rvf', glob("$ENV{HOME}/.dotfiles/XendoDM-Config/*"), '/etc/X11/xenodm/');
 };
 #+END_SRC
 
@@ -569,7 +534,7 @@ task 'setup_apmd', sub {
   say "Press ENTER to continue:";
   <STDIN>;
   system('doas', 'mkdir', '/etc/apm');
-  system('doas', 'cp', '-rvf', '$ENV{HOME}/.dotfiles/APM-Config/*', '/etc/apm/');
+  system('doas', 'cp', '-rvf', glob("$ENV{HOME}/.dotfiles/APM-Config/*"), '/etc/apm/');
 };
 #+END_SRC
 

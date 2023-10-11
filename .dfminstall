@@ -5,6 +5,12 @@
 .moc recurse
 .config recurse
 .local recurse
+LICENSE.txt skip
+README.org skip
+doas.conf skip
+setup.ksh skip
+setup.pl.bak skip
+bin skip
 assets skip
 backgrounds skip
 Emacs-Config skip
