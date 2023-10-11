@@ -27,6 +27,8 @@ echo "We will install p5-rex & git from ports now!"
 echo "Press ENTER to continue:"
 read
 doas pkg_add p5-Rex git
+echo "Setting up Ports..."
+rex install_ports --pkgfile=".pkgfile"
 echo "Cloning/Installing Dots..."
 git clone --depth 1 --recurse-submodules https://github.com/Izder456/dotfiles ./.dotfiles
 ./.dotfiles/bin/dfm install
@@ -36,8 +38,6 @@ echo "Press ENTER to continue:"
 read
 echo "Removing Cruft..."
 rex remove_default_cruft
-echo "Setting up Ports..."
-rex install_ports --pkgfile=".pkgfile"
 echo "Setting up Cargo..."
 rex install_cargo --cargofile=".cargofile"
 echo "Setting up FiZSH..."
@@ -308,15 +308,7 @@ zsh--
 Cargo Package List
 
 #+BEGIN_SRC txt :tangle .cargolist
-cargo-update-installed
-du-dust
-eza
-hyperfine
-onefetch
-oxipng
-sd
-tere
-tokei
+cargo-update-installed du-dust eza hyperfine onefetch oxipng sd tere tokei
 #+END_SRC
 
 *** Rexfile
@@ -407,15 +399,6 @@ README.org skip
 + Install cargo packages from [[.cargolist][=.cargolist=]]
 
 #+BEGIN_SRC perl :tangle Rexfile
-# task to install ports from .pkglist
-task 'install_ports', sub {
-  my $params = shift;
-  my $pkgfile = $params->{pkgfile};
-  my $pkglist = file_to_string($pkgfile);
-  # Install
-  system('doas', 'pkg_add', '-U', "$pkglist ");
-};
-
 # task to install cargo-packages from .cargolist
 task 'install_cargo', sub {
   my $params = shift;
@@ -496,8 +479,6 @@ task 'update_or_clone_stumpwm', sub {
   } else {
     system('ln', '-sf', "$ENV{HOME}/.dotfiles/StumpWM-Config", "$ENV{HOME}/.stumpwm.d");
   };
-  say "Setting up fonts...";
-  system('doas', 'mkfontdir', '/usr/local/share/fonts/spleen');
 };
 #+END_SRC
 
@@ -520,7 +501,7 @@ task 'setup_xenodm', sub {
   say "We will set up XenoDM now!";
   say "Press ENTER to continue:";
   <STDIN>;
-  system('doas', 'cp', '-rvf', glob("$ENV{HOME}/.dotfiles/XendoDM-Config/*"), '/etc/X11/xenodm/');
+  system('doas', 'cp', '-rvf', glob("$ENV{HOME}/.dotfiles/XenoDM-Config/*"), '/etc/X11/xenodm/');
 };
 #+END_SRC
 
@@ -599,7 +580,7 @@ task 'update_xdg_user_dirs', sub {
   say "press enter to continue:";
   <STDIN>;
   system('xdg-user-dirs-update');
-  system('mkdir', '$ENV{HOME}/Projects');
+  system('mkdir', "$ENV{HOME}/Projects");
 };
 #+END_SRC
 
