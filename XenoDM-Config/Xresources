@@ -19,7 +19,7 @@ xlogin*face:            Spleen:Regular:dpi=96
 xlogin*promptFace:      Spleen:Regular:dpi=96
 xlogin*failFace:        Spleen:Regular:dpi=96
 
-xconsole*font:      -misc-spleen-medium-r-normal--16-160-72-72-c-80-iso10646-1
+xconsole*font:		-*-spleen-*-*-*-*-12-*-*-*-*-*-*-*
 xconsole*scrollBar: false
 xconsole*borderWidth: 4
 xconsole*borderColor: #ebdbb2
@@ -34,7 +34,7 @@ xmessage*message.scrollHorizontal: Never
 xmessage*message.scrollVertical: Never
 xmessage*timeout: 0
 xmessage*printValue: false
-xmessage*font:      -misc-spleen-medium-r-normal--16-160-72-72-c-80-iso10646-1
+xmessage*font:      -*-spleen-*-*-*-*-12-*-*-*-*-*-*-*
 
 xclock*borderWidth: 4
 xclock*borderColor: #ebdbb2
@@ -60,7 +60,7 @@ xlogin.Login.inpColor: #d5c4a1
 xlogin*logoFileName: /etc/X11/xenodm/pixmaps/srcerizder.xpm
 
 xlogin*useShape: true
-xlogin*logoPadding: 16
+xlogin*logoPadding: 14
 
 xterm*scrollBar: false
 xterm*selectToClipboard: true
@@ -68,8 +68,6 @@ URxvt.selectToClibboard: true
 xterm*allowSendEvents: true
 URxvt.allowSendEvents: true
 
-*.faceName: GohuFont uni14 Nerd Font Mono
-*.faceSize: 12
 *.foreground: #d5c4a1
 *.Foreground: #d5c4a1
 *.background: #32302f
