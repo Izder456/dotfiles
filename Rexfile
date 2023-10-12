@@ -24,15 +24,38 @@ task 'configure_default_shell', sub {
   <STDIN>;
   # Grab openbsd autocompletes
   if (-d "$ENV{HOME}/.zsh-openbsd") {
+    chdir("$ENV{HOME/.zsh-openbsd}")
     system('git', 'pull');
   } else {
     system('git', 'clone', 'https://github.com/sizeofvoid/openbsd-zsh-completions.git', "$ENV{HOME}/.zsh-openbsd");
   }
   # Grab fzf tabcompletes
-  if (-d "$ENV{HOME}/.zsh-openbsd") {
+  if (-d "$ENV{HOME}/.zsh-fzf") {
+    chdir("$ENV{HOME}/.zsh-fzf")l
     system('git', 'pull');
   } else {
     system('git', 'clone', 'https://github.com/Aloxaf/fzf-tab.git', "$ENV{HOME}/.zsh-fzf");
+  }
+  # Zsh-Autosuggestions
+  if (-d "$ENV{HOME}/.zsh-suggest") {
+    chdir("$ENV{HOME}/.zsh-suggest");
+    system('git', 'pull');
+  } else {
+    system('git', 'clone', 'https://github.com/zsh-users/zsh-autosuggestions.git', "$ENV{HOME}/.zsh-suggest");
+  }
+  # Zsh-256
+  if (-d "$ENV{HOME}/.zsh-256") {
+    chdir("$ENV{HOME}/.zsh-256");
+    system('git', 'pull');
+  } else {
+    system('git', 'clone', 'https://github.com/chrissicool/zsh-256color.git', "$ENV{HOME}/.zsh-256");
+  }
+  # Zsh-Syntax-Highlight
+  if (-d "$ENV{HOME}/.zsh-fsr") {
+    chdir("$ENV{HOME}/.zsh-fsr");
+    system('git', 'pull');
+  } else {
+    system('git', 'clone', 'https://github.com/zdharma-continuum/fast-syntax-highlighting.git', "$ENV{HOME}/.zsh-fsr");
   }
   # Grab fizsh src setup
   if (-d "$ENV{HOME}/.fizsh") {
