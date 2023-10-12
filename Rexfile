@@ -14,7 +14,7 @@ task 'remove_default_cruft', sub {
     "$ENV{HOME}/.Xdefaults",
     "$ENV{HOME}/.cvsrc"
   );
-  chmod(0700, $ENV{'HOME'});
+  system('doas', 'chmod', '0700', "$ENV{'HOME'}");
 };
 
 # Configures and sets up the default shell
