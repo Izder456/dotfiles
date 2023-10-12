@@ -4,29 +4,6 @@ use Rex -feature => ['1.4'];
 # Set PATH explicitly
 $ENV{'PATH'} = '/bin:/usr/bin:/sbin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin';
 
-# convert file contents to a string (thanks tim!)
-sub file_to_string {
-  open(DATA, "<$_[0]") or die "Can't open $_[0]";
-  my @lines = <DATA>;
-  close(DATA);
-  my $data = join("", @lines);
-  $data =~ s/\n/ /g;
-  return $data;
-}
-
-# Checks if a file exists
-sub file_exists {
-  my ($filepath) = @_;
-  return -e $filepath;
-}
-
-# Downloads a file from a given URL
-sub download_file {
-  my ($url, $filename) = @_;
-  my $status = system("ftp -o $filename $url");
-  return $status == 0;
-}
-
 # task to clean home dir
 task 'remove_default_cruft', sub {
   unlink(
@@ -38,15 +15,6 @@ task 'remove_default_cruft', sub {
     "$ENV{HOME}/.cvsrc"
   );
   chmod(0700, $ENV{'HOME'});
-};
-
-# task to install cargo-packages from .cargolist
-task 'install_cargo', sub {
-  my $params = shift;
-  my $cargofile = $params->{cargofile};
-  my $cargolist = file_to_string($cargofile);
-  # Install
-  system('cargo', 'install', "$cargolist ");
 };
 
 # Configures and sets up the default shell

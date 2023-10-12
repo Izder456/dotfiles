@@ -3,19 +3,23 @@ echo "We will install p5-rex & git from ports now!"
 echo "Press ENTER to continue:"
 read
 doas pkg_add p5-Rex git
-echo "Setting up Ports..."
-doas pkg_add -l ~/.pkglist
 echo "Cloning/Installing Dots..."
 git clone --depth 1 --recurse-submodules https://github.com/Izder456/dotfiles ./.dotfiles
 ./.dotfiles/bin/dfm install
-doas cp ~/.dotfiles/doas.conf
+doas cp ~/.dotfiles/doas.conf /etc/doas.conf
+echo "Setting up Ports..."
+echo "Press ENTER to continue:"
+read
+doas pkg_add -l ~/.pkglist
+echo "Setting up Cargo-Packages..."
+echo "Press ENTER to continue:"
+read
+doas cargo install $(cat ~/.cargolist)
 echo "We will run the Rexfile now!"
 echo "Press ENTER to continue:"
 read
 echo "Removing Cruft..."
 rex remove_default_cruft
-echo "Setting up Cargo..."
-rex install_cargo --cargofile=".cargolist"
 echo "Setting up FiZSH..."
 rex configure_default_shell
 echo "Setting up DOOM Emacs..."

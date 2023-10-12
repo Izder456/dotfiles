@@ -27,19 +27,23 @@ echo "We will install p5-rex & git from ports now!"
 echo "Press ENTER to continue:"
 read
 doas pkg_add p5-Rex git
-echo "Setting up Ports..."
-doas pkg_add -l ~/.pkglist
 echo "Cloning/Installing Dots..."
 git clone --depth 1 --recurse-submodules https://github.com/Izder456/dotfiles ./.dotfiles
 ./.dotfiles/bin/dfm install
-doas cp ~/.dotfiles/doas.conf
+doas cp ~/.dotfiles/doas.conf /etc/doas.conf
+echo "Setting up Ports..."
+echo "Press ENTER to continue:"
+read
+doas pkg_add -l ~/.pkglist
+echo "Setting up Cargo-Packages..."
+echo "Press ENTER to continue:"
+read
+doas cargo install $(cat ~/.cargolist)
 echo "We will run the Rexfile now!"
 echo "Press ENTER to continue:"
 read
 echo "Removing Cruft..."
 rex remove_default_cruft
-echo "Setting up Cargo..."
-rex install_cargo --cargofile=".cargolist"
 echo "Setting up FiZSH..."
 rex configure_default_shell
 echo "Setting up DOOM Emacs..."
@@ -322,29 +326,6 @@ use Rex -feature => ['1.4'];
 
 # Set PATH explicitly
 $ENV{'PATH'} = '/bin:/usr/bin:/sbin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin';
-
-# convert file contents to a string (thanks tim!)
-sub file_to_string {
-  open(DATA, "<$_[0]") or die "Can't open $_[0]";
-  my @lines = <DATA>;
-  close(DATA);
-  my $data = join("", @lines);
-  $data =~ s/\n/ /g;
-  return $data;
-}
-
-# Checks if a file exists
-sub file_exists {
-  my ($filepath) = @_;
-  return -e $filepath;
-}
-
-# Downloads a file from a given URL
-sub download_file {
-  my ($url, $filename) = @_;
-  my $status = system("ftp -o $filename $url");
-  return $status == 0;
-}
 #+END_SRC
 
 **** Remove-Cruft
@@ -391,22 +372,6 @@ StumpWM-Config skip
 XenoDM-Config skip
 APM-Config skip
 README.org skip
-#+END_SRC
-
-**** Package-installation
-
-+ Install ports from [[.pkglist][=.pkglist=]]
-+ Install cargo packages from [[.cargolist][=.cargolist=]]
-
-#+BEGIN_SRC perl :tangle Rexfile
-# task to install cargo-packages from .cargolist
-task 'install_cargo', sub {
-  my $params = shift;
-  my $cargofile = $params->{cargofile};
-  my $cargolist = file_to_string($cargofile);
-  # Install
-  system('cargo', 'install', "$cargolist ");
-};
 #+END_SRC
 
 **** FiZSH-Setup
@@ -585,6 +550,7 @@ task 'update_xdg_user_dirs', sub {
 #+END_SRC
 
 ** Setup Script
+
 *** Do as user:
 
 #+BEGIN_SRC

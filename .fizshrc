@@ -1,17 +1,12 @@
+#!/usr/bin/env zsh
+
 ##
 # ENV VARS
 ##
-LANG=
-export LC_COLLATE="en_US.UTF-8"
-export LC_CTYPE="en_US.UTF-8"
-export LC_MONETARY="en_US.UTF-8"
-export LC_NUMERIC="en_US.UTF-8"
-export LC_TIME="en_US.UTF-8"
-export LC_MESSAGES="en_US.UTF-8"
-export LC_ALL="en_US.UTF-8"
-export LC_CTYPE="en_US.UTF-8"
 export VISUAL="emacsclient --create-frame --alternate-editor='emacs -Q'"
 export EDITOR="nano"
+export PAGER="most"
+export PKG_PATH="http://cdn.OpenBSD.org/pub/OpenBSD/snapshots/packages/amd64"
 
 ##
 # export $PATH
@@ -22,8 +17,6 @@ export PATH=$HOME/.cargo/bin:$HOME/.local/bin:$HOME/.emacs.d/bin:$HOME/.local/sh
 # Setup Completions
 ##
 fpath=($HOME/.zsh-openbsd/completions $fpath)
-autoload -U compinit; compinit
-_comp_options+=(globdots)
 setopt MENU_COMPLETE
 setopt AUTO_LIST
 setopt COMPLETE_IN_WORD
@@ -35,6 +28,11 @@ export PATH=$PATH:/usr/local/jdk-17/bin
 export JAVA_HOME=/usr/local/jdk-17/
 
 ##
+# Ruby Stuff
+##
+export GEM_HOME="$HOME/.gems"
+
+##
 # Alias for muscle memory
 ##
 alias sudo="doas"
@@ -43,10 +41,10 @@ alias su="echo 'did you mean to run doas -s? '"
 ##
 # Alias for listing files
 ##
-alias ls="eza --icons --git -h"
-alias la="eza --icons --git -ah"
-alias ll="eza --icons --git -lh"
-alias lh="eza --icons --git -lah"
+alias ls="eza --icons -h"
+alias la="eza --icons -ah"
+alias ll="eza --icons -lh"
+alias lh="eza --icons -lah"
 
 ##
 # Alias for parsing
@@ -88,9 +86,9 @@ alias tar="gtar"
 # Alias for yt-dlp
 ##
 alias audio-dlp="yt-dlp -x --audio-quality 0 --audio-format vorbis \
-		--concurrent-fragments 5"
+	--concurrent-fragments 5"
 alias video-dlp="yt-dlp --write-subs --sub-format srt --remux-video mkv \
-		--embed-subs --concurrent-fragments 5"
+	--embed-subs --concurrent-fragments 5"
 
 ##
 # Prompt
@@ -103,6 +101,34 @@ PROMPT="%B%F{yellow}%~%f%b%B % %b"
 tere() {
     local result=$(command tere "$@")
     [ -n "$result" ] && cd -- "$result"
+}
+
+##
+# Transfer.sh
+##
+transfer() {
+    if [ $# -eq 0 ]; then
+        echo "No arguments specified.\nUsage:\n transfer <file|directory>\n ... | transfer <file_name>">&2;
+        return 1;
+    fi;
+    if tty -s; then
+        file="$1";
+        file_name=$(basename "$file");
+        if [ ! -e "$file" ]; then
+            echo "$file: No such file or directory">&2;
+            return 1;
+        fi;
+        if [ -d "$file" ]; then
+            file_name="$file_name.zip" ,;
+            (cd "$file" && zip -r -q - .) |
+                curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name" | tee /dev/null,;
+        else cat "$file" |
+                curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name" | tee /dev/null;
+        fi;
+    else file_name=$1;
+         curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name" |
+             tee /dev/null;
+    fi;
 }
 
 ##
