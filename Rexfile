@@ -30,7 +30,7 @@ task 'configure_default_shell', sub {
   }
   # Grab fzf tabcompletes
   if (-d "$ENV{HOME}/.zsh-openbsd") {
-    system('git,' 'pull');
+    system('git', 'pull');
   } else {
     system('git', 'clone', 'https://github.com/Aloxaf/fzf-tab.git', "$ENV{HOME}/.zsh-fzf");
   }
@@ -122,6 +122,30 @@ task 'compile_slock', sub {
   <STDIN>;
   system('git', 'clone', 'https://github.com/Izder456/slock.git', "$ENV{HOME}/.slock");
   chdir "$ENV{HOME}/.slock";
+  system('make');
+  system('doas', 'make', 'install');
+};
+
+
+# Compiles in my SURF Setup
+task 'compile_surf', sub {
+  say "We will compile suckless surf now!";
+  say "Press ENTER to continue:";
+  <STDIN>;
+  system('git', 'clone', 'https://github.com/Izder456/surf.git', "$ENV{HOME}/.surf-src");
+  chdir "$ENV{HOME}/.surf-src";
+  system('make');
+  system('doas', 'make', 'install');
+};
+
+
+# Compiles in my ST Setup
+task 'compile_st', sub {
+  say "We will compile suckless term now!";
+  say "Press ENTER to continue:";
+  <STDIN>;
+  system('git', 'clone', 'https://github.com/Izder456/st.git', "$ENV{HOME}/.st");
+  chdir "$ENV{HOME}/.st";
   system('make');
   system('doas', 'make', 'install');
 };

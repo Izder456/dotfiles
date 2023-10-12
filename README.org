@@ -45,7 +45,7 @@ doas pkg_add -l ~/.pkglist
 echo "Setting up Cargo-Packages..."
 echo "Press ENTER to continue:"
 read
-doas cargo install $(cat ~/.cargolist)
+cargo install $(cat ~/.cargolist)
 echo "We will run the Rexfile now!"
 echo "Press ENTER to continue:"
 read
@@ -66,6 +66,8 @@ rex setup_apmd
 echo "Setting up extras..."
 rex compile_shuf
 rex compile_slock
+rex compile_st
+rex compile_surf
 rex compile_afetch
 rex setup_battstat
 echo "XDG-User-Dirs-Setup"
@@ -397,7 +399,7 @@ task 'configure_default_shell', sub {
   }
   # Grab fzf tabcompletes
   if (-d "$ENV{HOME}/.zsh-openbsd") {
-    system('git,' 'pull');
+    system('git', 'pull');
   } else {
     system('git', 'clone', 'https://github.com/Aloxaf/fzf-tab.git', "$ENV{HOME}/.zsh-fzf");
   }
@@ -523,6 +525,30 @@ task 'compile_slock', sub {
   system('doas', 'make', 'install');
 };
 
+
+# Compiles in my SURF Setup
+task 'compile_surf', sub {
+  say "We will compile suckless surf now!";
+  say "Press ENTER to continue:";
+  <STDIN>;
+  system('git', 'clone', 'https://github.com/Izder456/surf.git', "$ENV{HOME}/.surf-src");
+  chdir "$ENV{HOME}/.surf-src";
+  system('make');
+  system('doas', 'make', 'install');
+};
+
+
+# Compiles in my ST Setup
+task 'compile_st', sub {
+  say "We will compile suckless term now!";
+  say "Press ENTER to continue:";
+  <STDIN>;
+  system('git', 'clone', 'https://github.com/Izder456/st.git', "$ENV{HOME}/.st");
+  chdir "$ENV{HOME}/.st";
+  system('make');
+  system('doas', 'make', 'install');
+};
+
 # Compiles afetch
 task 'compile_afetch', sub {
   say "We will compile afetch now!";
@@ -543,6 +569,7 @@ task 'setup_battstat', sub {
   chdir "$ENV{HOME}/.battstat";
   system('doas', 'install', './battstat', '/usr/local/bin');
 };
+
 #+END_SRC
 
 **** Xdg-UserDirs

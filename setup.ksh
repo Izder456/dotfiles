@@ -21,7 +21,7 @@ doas pkg_add -l ~/.pkglist
 echo "Setting up Cargo-Packages..."
 echo "Press ENTER to continue:"
 read
-doas cargo install $(cat ~/.cargolist)
+cargo install $(cat ~/.cargolist)
 echo "We will run the Rexfile now!"
 echo "Press ENTER to continue:"
 read
@@ -42,6 +42,8 @@ rex setup_apmd
 echo "Setting up extras..."
 rex compile_shuf
 rex compile_slock
+rex compile_st
+rex compile_surf
 rex compile_afetch
 rex setup_battstat
 echo "XDG-User-Dirs-Setup"
