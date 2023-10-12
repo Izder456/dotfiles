@@ -4,7 +4,14 @@ echo "Press ENTER to continue:"
 read
 doas pkg_add p5-Rex git
 echo "Cloning/Installing Dots..."
-git clone --depth 1 --recurse-submodules https://github.com/Izder456/dotfiles ./.dotfiles
+if [[ ! -d "${HOME}/.dotfiles" ]]; then
+    git clone --depth 1 --recurse-submodules https://github.com/Izder456/dotfiles $HOME/.dotfiles
+elif [[ -d "${HOME}/.dotfile" ]]; then
+    git pull --depth 1 --recurse-submodules
+else # something got fucked
+    echo "Dots brokey"
+    exit 1
+fi
 ./.dotfiles/bin/dfm install
 doas cp ~/.dotfiles/doas.conf /etc/doas.conf
 echo "Setting up Ports..."
