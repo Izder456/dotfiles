@@ -6,7 +6,7 @@ doas pkg_add p5-Rex git
 echo "Cloning/Installing Dots..."
 if [[ ! -d "${HOME}/.dotfiles" ]]; then
     git clone --depth 1 --recurse-submodules https://github.com/Izder456/dotfiles $HOME/.dotfiles
-elif [[ -d "${HOME}/.dotfile" ]]; then
+elif [[ -d "${HOME}/.dotfiles" ]]; then
     git pull --depth 1 --recurse-submodules
 else # something got fucked
     echo "Dots brokey"
