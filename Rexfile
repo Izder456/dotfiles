@@ -28,6 +28,12 @@ task 'configure_default_shell', sub {
   } else {
     system('git', 'clone', 'https://github.com/sizeofvoid/openbsd-zsh-completions.git', "$ENV{HOME}/.zsh-openbsd");
   }
+  # Grab fzf tabcompletes
+  if (-d "$ENV{HOME}/.zsh-openbsd") {
+    system('git,' 'pull');
+  } else {
+    system('git', 'clone', 'https://github.com/Aloxaf/fzf-tab.git', "$ENV{HOME}/.zsh-fzf");
+  }
   # Grab fizsh src setup
   if (-d "$ENV{HOME}/.fizsh") {
     chdir "$ENV{HOME}/.fizsh";
