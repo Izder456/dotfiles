@@ -12,7 +12,7 @@ else # something got fucked
     echo "Dots brokey"
     exit 1
 fi
-./.dotfiles/bin/dfm install
+${HOME}/.dotfiles/bin/dfm install
 doas cp ~/.dotfiles/doas.conf /etc/doas.conf
 echo "Setting up Ports..."
 echo "Press ENTER to continue:"

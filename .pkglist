@@ -1,6 +1,5 @@
 ImageMagick--
 alacritty--
-appmanager--
 aria2--
 armagetronad--
 audacity--
@@ -23,7 +22,6 @@ clojure--
 cmake--
 cmatrix--
 cmixer--
-composer--
 coreutils--
 cpuid--
 curl--

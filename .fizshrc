@@ -140,3 +140,5 @@ export PATH=~/.npm-global/bin:$PATH
 # the r/unixporn rite of passage
 ##
 afetch
+
+. $HOME/.shellrc.load
