@@ -443,7 +443,7 @@ task 'configure_doom_emacs', sub {
   if (-d "$USERHOME/.emacs.d") {
     chdir "$USERHOME/.emacs.d";
   } else {
-    system('git', 'clone', '--depth', '1', 'https://github.com/hlissner/doom-emacs.git', "$USERHOME/.emacs.d/");
+    system('git', 'clone', '--depth', '1', '$GITHUB/hlissner/doom-emacs.git', "$USERHOME/.emacs.d/");
     chdir "$USERHOME/.emacs.d";
   }
   system("$USERHOME/.emacs.d/bin/doom", 'install', '--config', '--env', '--fonts');
