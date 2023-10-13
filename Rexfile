@@ -28,7 +28,7 @@ task 'configure_default_shell', sub {
         "zsh-fzf"     => "$GITHUB/Aloxaf/fzf-tab.git",
         "zsh-suggest" => "$GITHUB/zsh-users/zsh-autosuggestions.git",
         "zsh-256"     => "$GITHUB/chissicool/zsh-256color.git",
-        "zsh-fsh" => "$GITHUB/zdharma-continuum/fast-syntax-highlighting.git"
+        "zsh-fsh"     => "$GITHUB/zdharma-continuum/fast-syntax-highlighting.git"
     );
     foreach $key ( keys %plugins ) {
         my $clonedir = "$USERHOME/.$key";

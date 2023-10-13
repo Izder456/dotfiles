@@ -1,30 +1,30 @@
 #!/bin/ksh
 echo "We will install p5-rex & git from ports now!"
 echo "Press ENTER to continue:"
-read
+read -r
 doas pkg_add p5-Rex git
 echo "Cloning/Installing Dots..."
 if [[ ! -d "${HOME}/.dotfiles" ]]; then
-    git clone --depth 1 --recurse-submodules https://github.com/Izder456/dotfiles $HOME/.dotfiles
+    git clone --depth 1 --recurse-submodules "https://github.com/Izder456/dotfiles.git" "${HOME}/.dotfiles"
 elif [[ -d "${HOME}/.dotfiles" ]]; then
     git pull --depth 1 --recurse-submodules
 else # something got fucked
     echo "Dots brokey"
     exit 1
 fi
-${HOME}/.dotfiles/bin/dfm install
+"${HOME}/.dotfiles/bin/dfm" install
 doas cp ~/.dotfiles/doas.conf /etc/doas.conf
 echo "Setting up Ports..."
 echo "Press ENTER to continue:"
-read
+read -r
 doas pkg_add -l ~/.pkglist
 echo "Setting up Cargo-Packages..."
 echo "Press ENTER to continue:"
-read
-cargo install $(cat ~/.cargolist)
+read -r
+xargs cargo install < ~/.cargolist
 echo "We will run the Rexfile now!"
 echo "Press ENTER to continue:"
-read
+read -r
 echo "Removing Cruft..."
 rex remove_default_cruft
 echo "Setting up FiZSH..."

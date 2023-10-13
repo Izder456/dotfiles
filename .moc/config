@@ -73,7 +73,7 @@ NonUTFXterm = yes
 
 # Use ASCII rather than graphic characters for drawing lines.  This
 # helps on some terminals.
-ASCIILines = yes
+ASCIILines = no
 
 # How fast to seek (in number of seconds per keystroke).  The first
 # option is for normal seek and the second for silent seek.
@@ -125,3 +125,4 @@ SilentSeekTime = 5
 #Layout3 = ""
 
 Layout1 = directory(0,0,FILL,FILL)
+Layout2 = playlist(0,0,100%,10):directory(0,10,100%,fill)
