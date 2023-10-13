@@ -4,17 +4,21 @@ use Rex -feature => ['1.4'];
 # Set PATH explicitly
 $ENV{'PATH'} = '/bin:/usr/bin:/sbin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin';
 
+# No Magic
+USERHOME = "$ENV{HOME}";
+GITHUB = "https://github.com";
+
 # task to clean home dir
 task 'remove_default_cruft', sub {
   unlink(
-    "$ENV{HOME}/.cshrc",
-    "$ENV{HOME}/.login",
-    "$ENV{HOME}/.mailrc",
-    "$ENV{HOME}/.profile",
-    "$ENV{HOME}/.Xdefaults",
-    "$ENV{HOME}/.cvsrc"
+    "$USERHOME/.cshrc",
+    "$USERHOME/.login",
+    "$USERHOME/.mailrc",
+    "$USERHOME/.profile",
+    "$USERHOME/.Xdefaults",
+    "$USERHOME/.cvsrc"
   );
-  system('doas', 'chmod', '0700', "$ENV{'HOME'}");
+  system('doas', 'chmod', '0700', "$USERHOME");
 };
 
 # Configures and sets up the default shell
@@ -22,52 +26,34 @@ task 'configure_default_shell', sub {
   say "We will install FiZSH now!";
   say "Press ENTER to continue:";
   <STDIN>;
-  # Grab openbsd autocompletes
-  if (-d "$ENV{HOME}/.zsh-openbsd") {
-    chdir("$ENV{HOME}/.zsh-openbsd");
-    system('git', 'pull');
-  } else {
-    system('git', 'clone', 'https://github.com/sizeofvoid/openbsd-zsh-completions.git', "$ENV{HOME}/.zsh-openbsd");
-  }
-  # Grab fzf tabcompletes
-  if (-d "$ENV{HOME}/.zsh-fzf") {
-    chdir("$ENV{HOME}/.zsh-fzf");
-    system('git', 'pull');
-  } else {
-    system('git', 'clone', 'https://github.com/Aloxaf/fzf-tab.git', "$ENV{HOME}/.zsh-fzf");
-  }
-  # Zsh-Autosuggestions
-  if (-d "$ENV{HOME}/.zsh-suggest") {
-    chdir("$ENV{HOME}/.zsh-suggest");
-    system('git', 'pull');
-  } else {
-    system('git', 'clone', 'https://github.com/zsh-users/zsh-autosuggestions.git', "$ENV{HOME}/.zsh-suggest");
-  }
-  # Zsh-256
-  if (-d "$ENV{HOME}/.zsh-256") {
-    chdir("$ENV{HOME}/.zsh-256");
-    system('git', 'pull');
-  } else {
-    system('git', 'clone', 'https://github.com/chrissicool/zsh-256color.git', "$ENV{HOME}/.zsh-256");
-  }
-  # Zsh-Syntax-Highlight
-  if (-d "$ENV{HOME}/.zsh-fsr") {
-    chdir("$ENV{HOME}/.zsh-fsr");
-    system('git', 'pull');
-  } else {
-    system('git', 'clone', 'https://github.com/zdharma-continuum/fast-syntax-highlighting.git', "$ENV{HOME}/.zsh-fsr");
+  my %plugin = (
+                    "zsh-openbsd" => "$GITHUB/sizeofvoid/openbsd-zsh-completions.git",
+                    "zsh-fzf" => "$GITHUB/Aloxaf/fzf-tab.git",
+                    "zsh-suggest" => "$GITHUB/zsh-users/zsh-autosuggestions.git",
+                    "zsh-256" => "$GITHUB/chissicool/zsh-256color.git",
+                    "zsh-fsh" => "$GITHUB/zdharma-continuum/fast-syntax-highlighting.git"
+                );
+  foreach $key (keys %plugins) {
+    my clonedir = "$USERHOME/.$key";
+    my cloneuri = $plugins{$key};
+    if (-d $clonedir) {
+      chdir("$clonedir");
+      system('git', 'pull');
+    } else {
+      system('git', 'clone', "$cloneuri", "$clonedir");
+    }
   }
   # Grab fizsh src setup
-  if (-d "$ENV{HOME}/.fizsh") {
-    chdir "$ENV{HOME}/.fizsh";
+  if (-d "$USERHOME/.fizsh") {
+    chdir "$USERHOME/.fizsh";
   } else {
-    system('git', 'clone', 'https://github.com/zsh-users/fizsh.git', "$ENV{HOME}/.fizsh");
-    chdir "$ENV{HOME}/.fizsh";
+    system('git', 'clone', "$GITHUB/zsh-users/fizsh.git', "$USERHOME/.fizsh");
+    chdir "$USERHOME/.fizsh";
   }
   system('./configure');
   system('make');
   system('doas', 'make', 'install');
-  system('cp', "$ENV{HOME}/.dotfiles/.fizshrc", "$ENV{HOME}/.fizsh/.fizshrc");
+  system('cp', "$USERHOME/.dotfiles/.fizshrc", "$USERHOME/.fizsh/.fizshrc");
   system('chsh', '-s', '/usr/local/bin/fizsh');
 };
 
@@ -76,28 +62,28 @@ task 'configure_doom_emacs', sub {
   say "We will install Doom-Emacs now!";
   say "Press ENTER to continue:";
   <STDIN>;
-  if (-d "$ENV{HOME}/.emacs.d") {
-    chdir "$ENV{HOME}/.emacs.d";
+  if (-d "$USERHOME/.emacs.d") {
+    chdir "$USERHOME/.emacs.d";
   } else {
-    system('git', 'clone', '--depth', '1', 'https://github.com/hlissner/doom-emacs.git', "$ENV{HOME}/.emacs.d/");
-    chdir "$ENV{HOME}/.emacs.d";
+    system('git', 'clone', '--depth', '1', 'https://github.com/hlissner/doom-emacs.git', "$USERHOME/.emacs.d/");
+    chdir "$USERHOME/.emacs.d";
   }
-  system("$ENV{HOME}/.emacs.d/bin/doom", 'install', '--config', '--env', '--fonts');
-  if (-d "$ENV{HOME}/.doom.d") {
-    system('rm', '-rvf', "$ENV{HOME}/.doom.d");
+  system("$USERHOME/.emacs.d/bin/doom", 'install', '--config', '--env', '--fonts');
+  if (-d "$USERHOME/.doom.d") {
+    system('rm', '-rvf', "$USERHOME/.doom.d");
   }
-  system('ln', '-sf', "$ENV{HOME}/.dotfiles/Emacs-Config", "$ENV{HOME}/.doom.d");
-  system("$ENV{HOME}/.emacs.d/bin/doom", 'sync');
+  system('ln', '-sf', "$USERHOME/.dotfiles/Emacs-Config", "$USERHOME/.doom.d");
+  system("$USERHOME/.emacs.d/bin/doom", 'sync');
 };
 
 task 'update_or_clone_stumpwm', sub {
   say "We will set up StumpWM now!";
   say "Press ENTER to continue:";
   <STDIN>;
-  if (-d "$ENV{HOME}/.stumpwm.d") {
-    chdir "$ENV{HOME}/.stumpwm.d";
+  if (-d "$USERHOME/.stumpwm.d") {
+    chdir "$USERHOME/.stumpwm.d";
   } else {
-    system('ln', '-sf', "$ENV{HOME}/.dotfiles/StumpWM-Config", "$ENV{HOME}/.stumpwm.d");
+    system('ln', '-sf', "$USERHOME/.dotfiles/StumpWM-Config", "$USERHOME/.stumpwm.d");
   };
 };
 
@@ -107,7 +93,7 @@ task 'install_backgrounds', sub {
   say "Press ENTER to continue:";
   <STDIN>;
   system('doas', 'mkdir', '-p', '/usr/local/share/backgrounds');
-  system('doas', 'cp', '-rvf', glob("$ENV{HOME}/.dotfiles/backgrounds/*"), '/usr/local/share/backgrounds');
+  system('doas', 'cp', '-rvf', glob("$USERHOME/.dotfiles/backgrounds/*"), '/usr/local/share/backgrounds');
 };
 
 # Sets up Xenodm configuration
@@ -115,7 +101,7 @@ task 'setup_xenodm', sub {
   say "We will set up XenoDM now!";
   say "Press ENTER to continue:";
   <STDIN>;
-  system('doas', 'cp', '-rvf', glob("$ENV{HOME}/.dotfiles/XenoDM-Config/*"), '/etc/X11/xenodm/');
+  system('doas', 'cp', '-rvf', glob("$USERHOME/.dotfiles/XenoDM-Config/*"), '/etc/X11/xenodm/');
 };
 
 task 'setup_apmd', sub {
@@ -123,7 +109,7 @@ task 'setup_apmd', sub {
   say "Press ENTER to continue:";
   <STDIN>;
   system('doas', 'mkdir', '/etc/apm');
-  system('doas', 'cp', '-rvf', glob("$ENV{HOME}/.dotfiles/APM-Config/*"), '/etc/apm/');
+  system('doas', 'cp', '-rvf', glob("$USERHOME/.dotfiles/APM-Config/*"), '/etc/apm/');
 };
 
 # Compiles shuf re-implementation
@@ -131,8 +117,8 @@ task 'compile_shuf', sub {
   say "We will compile shuf now!";
   say "Press ENTER to continue:";
   <STDIN>;
-  system('git', 'clone', 'https://github.com/ibara/shuf.git', "$ENV{HOME}/.shuf");
-  chdir "$ENV{HOME}/.shuf";
+  system('git', 'clone', '$GITHUB/ibara/shuf.git', "$USERHOME/.shuf");
+  chdir "$USERHOME/.shuf";
   system('./configure');
   system('make');
   system('doas', 'make', 'install');
@@ -143,8 +129,8 @@ task 'compile_slock', sub {
   say "We will compile suckless lock now!";
   say "Press ENTER to continue:";
   <STDIN>;
-  system('git', 'clone', 'https://github.com/Izder456/slock.git', "$ENV{HOME}/.slock");
-  chdir "$ENV{HOME}/.slock";
+  system('git', 'clone', '$GITHUB/Izder456/slock.git', "$USERHOME/.slock");
+  chdir "$USERHOME/.slock";
   system('make');
   system('doas', 'make', 'install');
 };
@@ -155,8 +141,8 @@ task 'compile_surf', sub {
   say "We will compile suckless surf now!";
   say "Press ENTER to continue:";
   <STDIN>;
-  system('git', 'clone', 'https://github.com/Izder456/surf.git', "$ENV{HOME}/.surf-src");
-  chdir "$ENV{HOME}/.surf-src";
+  system('git', 'clone', '$GITHUB/Izder456/surf.git', "$USERHOME/.surf-src");
+  chdir "$USERHOME/.surf-src";
   system('make');
   system('doas', 'make', 'install');
 };
@@ -167,8 +153,8 @@ task 'compile_st', sub {
   say "We will compile suckless term now!";
   say "Press ENTER to continue:";
   <STDIN>;
-  system('git', 'clone', 'https://github.com/Izder456/st.git', "$ENV{HOME}/.st");
-  chdir "$ENV{HOME}/.st";
+  system('git', 'clone', '$GITHUB/Izder456/st.git', "$USERHOME/.st");
+  chdir "$USERHOME/.st";
   system('make');
   system('doas', 'make', 'install');
 };
@@ -178,8 +164,8 @@ task 'compile_afetch', sub {
   say "We will compile afetch now!";
   say "Press ENTER to continue:";
   <STDIN>;
-  system('git', 'clone', 'https://github.com/13-CF/afetch.git', "$ENV{HOME}/.afetch");
-  chdir "$ENV{HOME}/.afetch";
+  system('git', 'clone', '$GITHUB/13-CF/afetch.git', "$USERHOME/.afetch");
+  chdir "$USERHOME/.afetch";
   system('make');
   system('doas', 'make', 'install');
 };
@@ -189,8 +175,8 @@ task 'setup_battstat', sub {
   say "We will set up battery monitor now!";
   say "Press ENTER to continue:";
   <STDIN>;
-  system('git', 'clone', 'https://github.com/imwally/battstat.git', "$ENV{HOME}/.battstat");
-  chdir "$ENV{HOME}/.battstat";
+  system('git', 'clone', '$GITHUB/imwally/battstat.git', "$USERHOME/.battstat");
+  chdir "$USERHOME/.battstat";
   system('doas', 'install', './battstat', '/usr/local/bin');
 };
 
@@ -200,5 +186,5 @@ task 'update_xdg_user_dirs', sub {
   say "Press ENTER to continue:";
   <STDIN>;
   system('xdg-user-dirs-update');
-  system('mkdir', "$ENV{HOME}/Projects");
+  system('mkdir', "$USERHOME/Projects");
 };

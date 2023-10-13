@@ -21,16 +21,22 @@ setopt MENU_COMPLETE
 setopt AUTO_LIST
 setopt COMPLETE_IN_WORD
 
-##
-# Suggestions
-##
-source ~/.zsh-suggest/zsh-autosuggestions.plugin.zsh
 
 ##
 # Java Stuff
 ##
 export PATH=$PATH:/usr/local/jdk-17/bin
 export JAVA_HOME=/usr/local/jdk-17/
+
+##
+# Syntax Highlight
+##
+source ~/.zsh-fsh/fast-syntax-highlighting.plugin.zsh
+
+##
+# Suggestions
+##
+source ~/.zsh-suggest/zsh-autosuggestions.plugin.zsh
 
 ##
 # FZF-Zsh
@@ -46,11 +52,6 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 # 256-Color
 ##
 source ~/.zsh-256/zsh-256color.plugin.zsh
-
-##
-# Syntax Highlight
-##
-source ~/.zsh-fsh/fast-syntax-highlighting.plugin.zsh
 
 ##
 # Ruby Stuff
