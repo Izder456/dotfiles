@@ -189,19 +189,6 @@ task 'compile_afetch', sub {
     system( 'doas', 'make', 'install' );
 };
 
-# Setup Battery Monitor
-task 'setup_battstat', sub {
-    say "We will set up battery monitor now!";
-    say "Press ENTER to continue:";
-    <STDIN>;
-    system(
-        'git',                          'clone',
-        '$GITHUB/imwally/battstat.git', "$USERHOME/.battstat"
-    );
-    chdir "$USERHOME/.battstat";
-    system( 'doas', 'install', './battstat', '/usr/local/bin' );
-};
-
 # Updates XDG user directories
 task 'update_xdg_user_dirs', sub {
     say "We will set xdg-user-dirs now!";

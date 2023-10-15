@@ -45,7 +45,6 @@ rex compile_slock
 rex compile_st
 rex compile_surf
 rex compile_afetch
-rex setup_battstat
 echo "XDG-User-Dirs-Setup"
 rex update_xdg_user_dirs
 echo "DONE!"

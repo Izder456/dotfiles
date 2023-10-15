@@ -69,7 +69,6 @@ rex compile_slock
 rex compile_st
 rex compile_surf
 rex compile_afetch
-rex setup_battstat
 echo "XDG-User-Dirs-Setup"
 rex update_xdg_user_dirs
 echo "DONE!"
@@ -85,9 +84,10 @@ Ports List
 
 #+BEGIN_SRC txt :tangle .pkglist
 ImageMagick--
-alacritty--
+appmanager--
 aria2--
 armagetronad--
+asciinema--
 audacity--
 autoconf--%2.71
 automake--%1.16
@@ -96,9 +96,9 @@ bash--
 bat--
 bison--
 blockgame--
-boehm-gc--
 boost--
 borgbackup--%1.2
+cairo--
 caja--
 caja-extensions--
 chicken--
@@ -109,18 +109,16 @@ cmake--
 cmatrix--
 cmixer--
 coreutils--
-cpuid--
 curl--
 dbus--
-deadbeef--
 desktop-file-utils--
 desmume--
 dhewm3--
 dolphin--
+dos2unix--
 dunst--
 editorconfig-core-c--
-ee--
-emacs--gtk2%emacs
+emacs--gtk3%emacs
 fceux--
 fd--
 fdupes--
@@ -134,9 +132,11 @@ fmt--
 freefont-ttf--
 fsharp--
 fzf--
-g++--%8
+gas--
 gawk--
-gcc--%8
+gcc--%11
+gcc-libs--%8
+gcr4--
 gd--
 gettext-runtime--
 gettext-tools--
@@ -165,9 +165,7 @@ hw-probe--
 i2pd--
 iftop--
 iniparser--
-inkscape--
 intltool--
-isync--
 jack--
 jdk--%1.8
 jdk--%11
@@ -186,10 +184,9 @@ libglade2--
 libiconv--
 libinotify--
 liblo--
+libmpc--
 libotr--
 libpurple--
-libqalculate--
-libqrencode--
 libsamplerate--
 libsndfile--
 libstatgrab--
@@ -207,6 +204,8 @@ lwjgl--
 lwjgl3--
 lxappearance--
 lynx--
+m17n-db--
+m17n-lib--
 m4--
 mercurial--
 meson--
@@ -216,13 +215,11 @@ minetest--
 moc--
 mono--
 most--
-motif--
 mplus-fonts--
 mpv--
 msmtp--
 mu--
 musescore--
-musikcube--
 mxml--
 nano--
 ncdu--
@@ -240,9 +237,9 @@ openssl--%1.1
 openssl--%3.0
 openssl--%3.1
 p5-List-MoreUtils--
+p5-Rex--
 p5-XML-Parser--
 p7zip--
-password-store--
 pcre--
 php--%8.1
 picom--
@@ -253,7 +250,6 @@ pidgin-window-merge--
 pkgconf--
 pkglocatedb--
 portaudio-svn--
-portslist--
 pv--
 py3-isort--
 py3-pandas--
@@ -263,12 +259,12 @@ py3-pytest-subtests--
 py3-test-isort--
 python--%3.11
 quirks--
+qutebrowser--
 ripgrep--
 rofi--
 ruby--%3.2
 rust--
 sbcl--
-screen--shm
 screenkey--
 scrot--
 sdl2--
@@ -289,12 +285,14 @@ stumpwm--
 subversion--
 supertux--
 supertuxkart--
+tabbed--
 texinfo--
 thunderbird--
 tidy--
 tor--
 tree--
 ungoogled-chromium--
+unicode-emoji--
 unifont--
 upower--
 urlview--slang
@@ -305,10 +303,12 @@ vulkan-tools--
 vulkan-validation-layers--
 wget--
 wireguard-tools--
+wmctrl--
 xarchiver--
 xclip--
 xdg-user-dirs--
 xdg-utils--
+xdotool--
 xz--
 yt-dlp--
 zsh--
@@ -319,7 +319,7 @@ zsh--
 Cargo Package List
 
 #+BEGIN_SRC txt :tangle .cargolist
-cargo-update-installed du-dust eza hyperfine onefetch oxipng sd tere tokei
+cargo-update-installed du-dust eza hyperfine onefetch sd tere tokei
 #+END_SRC
 
 *** Rexfile
@@ -588,19 +588,6 @@ task 'compile_afetch', sub {
     chdir "$USERHOME/.afetch";
     system('make');
     system( 'doas', 'make', 'install' );
-};
-
-# Setup Battery Monitor
-task 'setup_battstat', sub {
-    say "We will set up battery monitor now!";
-    say "Press ENTER to continue:";
-    <STDIN>;
-    system(
-        'git',                          'clone',
-        '$GITHUB/imwally/battstat.git', "$USERHOME/.battstat"
-    );
-    chdir "$USERHOME/.battstat";
-    system( 'doas', 'install', './battstat', '/usr/local/bin' );
 };
 #+END_SRC
 
