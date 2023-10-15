@@ -84,7 +84,6 @@ Ports List
 
 #+BEGIN_SRC txt :tangle .pkglist
 ImageMagick--
-appmanager--
 aria2--
 armagetronad--
 asciinema--
@@ -145,7 +144,6 @@ ggrep--
 gimp--%snapshot
 git--
 github-cli--
-glade--
 glfw--
 glib2--
 glslang--
@@ -301,6 +299,7 @@ vulkan-headers--
 vulkan-loader--
 vulkan-tools--
 vulkan-validation-layers--
+webkitgtk40--
 wget--
 wireguard-tools--
 wmctrl--
