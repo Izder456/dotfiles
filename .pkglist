@@ -1,4 +1,4 @@
-ImageMagick--
+#ImageMagick--
 aria2--
 armagetronad--
 asciinema--
@@ -48,7 +48,7 @@ fsharp--
 fzf--
 gas--
 gawk--
-gcc--%11
+gcc--%8
 gcc-libs--%8
 gcr4--
 gd--

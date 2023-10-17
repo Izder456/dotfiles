@@ -6,8 +6,8 @@ $ENV{'PATH'} =
 '/bin:/usr/bin:/sbin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin';
 
 # No Magic
-USERHOME = "$ENV{HOME}";
-GITHUB   = "https://github.com";
+our $USERHOME = "$ENV{HOME}";
+out $GITHUB   = "https://github.com";
 
 # task to clean home dir
 task 'remove_default_cruft', sub {
@@ -23,16 +23,17 @@ task 'configure_default_shell', sub {
     say "We will install FiZSH now!";
     say "Press ENTER to continue:";
     <STDIN>;
-    my %plugin = (
+    my %plugins = (
         "zsh-openbsd" => "$GITHUB/sizeofvoid/openbsd-zsh-completions.git",
         "zsh-fzf"     => "$GITHUB/Aloxaf/fzf-tab.git",
         "zsh-suggest" => "$GITHUB/zsh-users/zsh-autosuggestions.git",
-        "zsh-256"     => "$GITHUB/chissicool/zsh-256color.git",
+        "zsh-256"     => "$GITHUB/chrissicool/zsh-256color.git",
         "zsh-fsh"     => "$GITHUB/zdharma-continuum/fast-syntax-highlighting.git"
     );
-    foreach $key ( keys %plugins ) {
-        my $clonedir = "$USERHOME/.$key";
-        my $cloneuri = $plugins{$key};
+    keys %plugins;
+    while(my($k, $v) = each %plugins) {
+        my $clonedir = "$USERHOME/.$k";
+        my $cloneuri = "$v";
         if ( -d $clonedir ) {
             chdir("$clonedir");
             system( 'git', 'pull' );
@@ -70,7 +71,7 @@ task 'configure_doom_emacs', sub {
     }
     else {
         system( 'git', 'clone', '--depth', '1',
-            '$GITHUB/hlissner/doom-emacs.git',
+            "$GITHUB/hlissner/doom-emacs.git",
             "$USERHOME/.emacs.d/" );
         chdir "$USERHOME/.emacs.d";
     }
@@ -137,7 +138,7 @@ task 'compile_shuf', sub {
     say "We will compile shuf now!";
     say "Press ENTER to continue:";
     <STDIN>;
-    system( 'git', 'clone', '$GITHUB/ibara/shuf.git', "$USERHOME/.shuf" );
+    system( 'git', 'clone', "$GITHUB/ibara/shuf.git", "$USERHOME/.shuf" );
     chdir "$USERHOME/.shuf";
     system('./configure');
     system('make');
@@ -149,7 +150,7 @@ task 'compile_slock', sub {
     say "We will compile suckless lock now!";
     say "Press ENTER to continue:";
     <STDIN>;
-    system( 'git', 'clone', '$GITHUB/Izder456/slock.git', "$USERHOME/.slock" );
+    system( 'git', 'clone', "$GITHUB/Izder456/slock.git", "$USERHOME/.slock" );
     chdir "$USERHOME/.slock";
     system('make');
     system( 'doas', 'make', 'install' );
@@ -160,7 +161,7 @@ task 'compile_surf', sub {
     say "We will compile suckless surf now!";
     say "Press ENTER to continue:";
     <STDIN>;
-    system( 'git', 'clone', '$GITHUB/Izder456/surf.git',
+    system( 'git', 'clone', "$GITHUB/Izder456/surf.git",
         "$USERHOME/.surf-src" );
     chdir "$USERHOME/.surf-src";
     system('make');
@@ -172,7 +173,7 @@ task 'compile_st', sub {
     say "We will compile suckless term now!";
     say "Press ENTER to continue:";
     <STDIN>;
-    system( 'git', 'clone', '$GITHUB/Izder456/st.git', "$USERHOME/.st" );
+    system( 'git', 'clone', "$GITHUB/Izder456/st.git", "$USERHOME/.st" );
     chdir "$USERHOME/.st";
     system('make');
     system( 'doas', 'make', 'install' );
@@ -183,7 +184,7 @@ task 'compile_afetch', sub {
     say "We will compile afetch now!";
     say "Press ENTER to continue:";
     <STDIN>;
-    system( 'git', 'clone', '$GITHUB/13-CF/afetch.git', "$USERHOME/.afetch" );
+    system( 'git', 'clone', "$GITHUB/13-CF/afetch.git", "$USERHOME/.afetch" );
     chdir "$USERHOME/.afetch";
     system('make');
     system( 'doas', 'make', 'install' );
