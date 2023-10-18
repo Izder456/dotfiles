@@ -83,7 +83,7 @@ These are my packge list files
 Ports List
 
 #+BEGIN_SRC txt :tangle .pkglist
-#ImageMagick--
+ImageMagick--
 aria2--
 armagetronad--
 asciinema--
@@ -134,7 +134,6 @@ fzf--
 gas--
 gawk--
 gcc--%8
-gcc-libs--%8
 gcr4--
 gd--
 gettext-runtime--
@@ -336,7 +335,7 @@ $ENV{'PATH'} =
 
 # No Magic
 our $USERHOME = "$ENV{HOME}";
-out $GITHUB   = "https://github.com";
+our $GITHUB   = "https://github.com";
 #+END_SRC
 
 **** Remove-Cruft

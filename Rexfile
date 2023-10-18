@@ -7,7 +7,7 @@ $ENV{'PATH'} =
 
 # No Magic
 our $USERHOME = "$ENV{HOME}";
-out $GITHUB   = "https://github.com";
+our $GITHUB   = "https://github.com";
 
 # task to clean home dir
 task 'remove_default_cruft', sub {

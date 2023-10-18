@@ -1,4 +1,4 @@
-#ImageMagick--
+ImageMagick--
 aria2--
 armagetronad--
 asciinema--
@@ -49,7 +49,6 @@ fzf--
 gas--
 gawk--
 gcc--%8
-gcc-libs--%8
 gcr4--
 gd--
 gettext-runtime--
