@@ -1,4 +1,8 @@
-* Iz's OpenBSD Dotfiles
+#+TITLE: Iz's OpenBSD Dotfiles
+#+DESCRIPTION: Mainly for personal backups, but if you want 'em, use 'em.
+#+KEYWORDS: org-mode, emacs, doom-emacs, XenoDM, OpenBSD, stumpwm, elisp, lisp, perl, Rex, dotfiles, izder
+#+LANGUAGE: en
+#+PROPERTY: header-args: :tangle ~/.dotfiles :mkdirp t
 
 - Mainly for personal backups, but if you want them, feel free to use them.
 
