@@ -11,7 +11,6 @@ bat--
 bison--
 blockgame--
 boost--
-borgbackup--%1.2
 cairo--
 caja--
 caja-extensions--
@@ -28,7 +27,6 @@ curl--
 dbus--
 desktop-file-utils--
 desmume--
-dhewm3--
 dolphin--
 dos2unix--
 dunst--
@@ -60,7 +58,6 @@ gettext-runtime--
 gettext-tools--
 gforth--
 ggrep--
-gimp--%snapshot
 git--
 github-cli--
 glfw--
@@ -73,7 +70,6 @@ groff--
 gtk+4--
 gtk2-murrine-engine--
 gtk2mm--
-gzdoom--
 harfbuzz--
 htop--
 hw-probe--
@@ -151,6 +147,7 @@ obsdfreqd--
 openal--
 openjk--
 openmw--
+openrct2--
 openssl--%1.1
 openssl--%3.0
 openssl--%3.1
@@ -169,7 +166,6 @@ pidgin-window-merge--
 pkgconf--
 pkglocatedb--
 portaudio-svn--
-prboom--
 pv--
 py3-isort--
 py3-nose--
@@ -222,7 +218,6 @@ unicode-emoji--
 unifont--
 upower--
 urlview--slang
-vlc--
 vulkan-headers--
 vulkan-loader--
 vulkan-tools--
