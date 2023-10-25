@@ -29,8 +29,8 @@ echo "Removing Cruft..."
 rex remove_default_cruft
 echo "Setting up FiZSH..."
 rex configure_default_shell
-echo "Setting up DOOM Emacs..."
-rex configure_doom_emacs
+echo "Setting up Emacs..."
+rex configure_emacs
 echo "Setting up StumpWM..."
 rex update_or_clone_stumpwm
 echo "Installing Backgrounds..."
