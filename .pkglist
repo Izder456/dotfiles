@@ -5,7 +5,6 @@ asciinema--
 audacity--
 autoconf--%2.71
 automake--%1.16
-avahi--
 bash--
 bat--
 bison--
@@ -30,9 +29,7 @@ desmume--
 dolphin--
 dos2unix--
 dunst--
-easyrpg--
 editorconfig-core-c--
-ee--
 emacs--gtk3%emacs
 fceux--
 fd--
@@ -131,7 +128,6 @@ most--
 mplus-fonts--
 mpv--
 msmtp--
-mu--
 musescore--
 mxml--
 nano--
@@ -198,7 +194,6 @@ shellcheck--
 shfmt--
 smartmontools--
 snes9x--
-solarus--
 speedtest-cli--
 spleen--
 ssh-copy-id--
@@ -225,7 +220,6 @@ vulkan-validation-layers--
 webkitgtk40--
 wget--
 wireguard-tools--
-wmctrl--
 xarchiver--
 xclip--
 xdg-user-dirs--

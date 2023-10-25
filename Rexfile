@@ -61,30 +61,18 @@ task 'configure_default_shell', sub {
     system( 'chsh', '-s',                         '/usr/local/bin/fizsh' );
 };
 
-# Configures and installs doom emacs
-task 'configure_doom_emacs', sub {
-    say "We will install Doom-Emacs now!";
+# Configures and installs emacs
+task 'configure_emacs', sub {
+    say "We will build Emacs now!";
     say "Press ENTER to continue:";
     <STDIN>;
     if ( -d "$USERHOME/.emacs.d" ) {
         chdir "$USERHOME/.emacs.d";
+    } else {
+        system( 'ln',                               '-sf',
+                "$USERHOME/.dotfiles/Emacs-Config", "$USERHOME/.emacs.d"
+            );
     }
-    else {
-        system( 'git', 'clone', '--depth', '1',
-            "$GITHUB/hlissner/doom-emacs.git",
-            "$USERHOME/.emacs.d/" );
-        chdir "$USERHOME/.emacs.d";
-    }
-    system( "$USERHOME/.emacs.d/bin/doom",
-        'install', '--config', '--env', '--fonts' );
-    if ( -d "$USERHOME/.doom.d" ) {
-        system( 'rm', '-rvf', "$USERHOME/.doom.d" );
-    }
-    system(
-        'ln',                               '-sf',
-        "$USERHOME/.dotfiles/Emacs-Config", "$USERHOME/.doom.d"
-    );
-    system( "$USERHOME/.emacs.d/bin/doom", 'sync' );
 };
 
 task 'update_or_clone_stumpwm', sub {

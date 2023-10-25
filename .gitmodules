@@ -7,9 +7,9 @@
 [submodule "StumpWM-Config"]
 	path = StumpWM-Config
 	url = https://github.com/Izder456/StumpWM-Config
-[submodule "Emacs-Config"]
-	path = Emacs-Config
-	url = https://github.com/Izder456/Emacs-Config
 [submodule "XenoDM-Config"]
 	path = XenoDM-Config
 	url = https://github.com/Izder456/XenoDM-Config
+[submodule "Emacs-Config"]
+	path = Emacs-Config
+	url = https://github.com/Izder456/Minimal-Emacs.git
