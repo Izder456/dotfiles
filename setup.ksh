@@ -7,7 +7,7 @@ echo "Cloning/Installing Dots..."
 if [[ ! -d "${HOME}/.dotfiles" ]]; then
     git clone --depth 1 --recurse-submodules "https://github.com/Izder456/dotfiles.git" "${HOME}/.dotfiles"
 elif [[ -d "${HOME}/.dotfiles" ]]; then
-    git pull --depth 1 --recurse-submodules
+    echo "Already here"
 else # something got fucked
     echo "Dots brokey"
     exit 1
@@ -17,7 +17,8 @@ doas cp ~/.dotfiles/doas.conf /etc/doas.conf
 echo "Setting up Ports..."
 echo "Press ENTER to continue:"
 read -r
-doas pkg_add -l ~/.pkglist
+# Verbose
+doas pkg_add -Uvvvvm -l ~/.pkglist
 echo "Setting up Cargo-Packages..."
 echo "Press ENTER to continue:"
 read -r
