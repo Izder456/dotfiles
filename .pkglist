@@ -27,7 +27,6 @@ editorconfig-core-c--
 emacs--gtk3%emacs
 eza--
 fd--
-fdupes--
 feh--
 ffmpeg--
 fftw--
@@ -87,7 +86,6 @@ libiconv--
 libinotify--
 liblo--
 libmpc--
-libotr--
 libsamplerate--
 libsndfile--
 libstatgrab--
@@ -95,13 +93,12 @@ libtool--
 libusb-compat--
 libvorbis--
 libyaml--
-links--
 llvm--%13
+lmms--
 lsblk--
 lua--%5.4
 luajit--
 lxappearance--
-lynx--
 m17n-db--
 m17n-lib--
 m4--
@@ -112,6 +109,7 @@ mono--
 most--
 mpv--
 msmtp--
+musescore--
 mxml--
 nano--
 ncdu--
@@ -132,7 +130,6 @@ pandoc--
 pcre--
 php--%8.1
 picom--
-pidgin-libnotify--
 pkgconf--
 pkglocatedb--
 portaudio-svn--
@@ -170,18 +167,15 @@ spleen--
 ssh-copy-id--
 sshfs-fuse--
 stumpwm--
-subversion--
 tabbed--
 texinfo--
 tidy--
-tor--
 transmission-gtk--
 tree--
 ungoogled-chromium--
 unicode-emoji--
 unifont--
 upower--
-urlview--slang
 vulkan-headers--
 vulkan-loader--
 vulkan-tools--
