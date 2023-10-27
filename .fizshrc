@@ -3,10 +3,9 @@
 ##
 # ENV VARS
 ##
-export VISUAL="emacsclient --create-frame --alternate-editor='emacs -Q'"
-export EDITOR="nano"
+export VISUAL="emacs"
+export EDITOR="emacs -nw" 
 export PAGER="most"
-export PKG_PATH="http://cdn.OpenBSD.org/pub/OpenBSD/snapshots/packages/amd64"
 
 ##
 # export $PATH
@@ -101,12 +100,6 @@ alias uf="ufetch"
 ##
 alias i="top"
 alias H="htop"
-
-##
-# Alias for tarballz
-##
-alias btar="tar"
-alias tar="gtar"
 
 ##
 # Alias for yt-dlp
