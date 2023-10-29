@@ -35,7 +35,6 @@ enchant--
 eza--
 fceux--
 fd--
-fdupes--
 feh--
 ffmpeg--
 fftw--
@@ -85,7 +84,6 @@ jdk--%17
 jq--
 json-glib--
 lame--
-leafpad--
 leiningen--
 libarchive--
 libcanberra--
@@ -104,7 +102,6 @@ libtool--
 libusb-compat--
 libvorbis--
 libyaml--
-links--
 llvm--%13
 lmms--
 lsblk--
@@ -113,7 +110,6 @@ luajit--
 lwjgl--
 lwjgl3--
 lxappearance--
-lynx--
 m17n-db--
 m17n-lib--
 m4--
@@ -152,7 +148,6 @@ p7zip--
 pandoc--
 pcmanfm--
 pcre--
-php--%8.1
 picom--
 pidgin-libnotify--
 pkgconf--
@@ -175,7 +170,6 @@ ruby--%3.2
 ruby-shims--
 rust--
 sbcl--
-screenkey--
 scrot--
 sdl2--
 sdl2-gfx--
