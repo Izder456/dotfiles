@@ -102,12 +102,13 @@ alias i="top"
 alias H="htop"
 
 ##
-# Alias for yt-dlp
+# Alias for media
 ##
 alias audio-dlp="yt-dlp -x --audio-quality 0 --audio-format vorbis \
 	--concurrent-fragments 5"
 alias video-dlp="yt-dlp --write-subs --sub-format srt --remux-video mkv \
 	--embed-subs --concurrent-fragments 5"
+alias tidal-dlp="tidal-dl -o /home/izder456/Music -q Master -r P1080 -l "
 
 ##
 # Prompt
