@@ -165,7 +165,6 @@ python--%3.11
 quirks--
 ripgrep--
 rofi--
-rsync--
 ruby--%3.2
 ruby-shims--
 rust--

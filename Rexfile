@@ -185,4 +185,5 @@ task 'update_xdg_user_dirs', sub {
     <STDIN>;
     system('xdg-user-dirs-update');
     system( 'mkdir', "$USERHOME/Projects" );
+    system( 'doas', 'gdk-pixbuf-query-loaders', '--update-cache' );
 };

@@ -18,7 +18,7 @@ echo "Setting up Ports..."
 echo "Press ENTER to continue:"
 read -r
 # Verbose
-doas pkg_add -Uvvvvm -l ~/.pkglist
+doas pkg_add -vvvvm -l ~/.pkglist
 echo "Setting up Cargo-Packages..."
 echo "Press ENTER to continue:"
 read -r
