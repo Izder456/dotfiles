@@ -9,7 +9,7 @@ export LC_CTYPE="en_US.UTF-8"
 export MOZ_ACCELERATED=1
 export MOZ_WEBRENDER=1
 dunst &
-picom --backend glx --vsync -f -b &
+picom -f -b &
 ulimit -d 17000000
 ulimit -Sc 0
 xset +fp /usr/local/share/fonts/spleen
