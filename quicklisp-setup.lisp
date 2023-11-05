@@ -4,4 +4,5 @@
                 "cl-ppcre"
                 "alexandria"
                 "cl-fad"
-                "anaphora"))
+                "anaphora"
+                "drakma"))
