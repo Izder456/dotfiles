@@ -76,7 +76,6 @@ alias lh="eza --icons -lah"
 ##
 alias cat="bat --theme=gruvbox-dark -pp"
 alias bat="bat --theme=gruvbox-dark"
-alias grep="ggrep --color=auto"
 alias rgrep="rg"
 
 ##
