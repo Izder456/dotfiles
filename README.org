@@ -53,6 +53,7 @@ function ensure_hard
 {
   echo "$REVON We will install p5-rex & git from ports now! $REVOFF"
   doas pkg_add -vm p5-Rex git
+  ftp -o $HOME/Rexfile https://github.com/Izder456/dotfiles/raw/main/Rexfile
 }
 
 function ports_deps
