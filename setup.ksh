@@ -64,7 +64,6 @@ function setup_backgrounds
 function setup_emacs
 {
   ensure_hard
-  ports_deps
   echo "$REVON Setting up Emacs... $REVOFF"
   rex configure_emacs
 }
