@@ -148,8 +148,6 @@ p7zip--
 pandoc--
 pcmanfm--
 pcre--
-picom--
-pidgin-libnotify--
 pkgconf--
 pkglocatedb--
 portaudio-svn--
@@ -197,6 +195,7 @@ tree--
 ungoogled-chromium--
 unicode-emoji--
 unifont--
+uthash--
 upower--
 vulkan-headers--
 vulkan-loader--

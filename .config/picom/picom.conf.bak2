@@ -1,0 +1,76 @@
+##
+# Opacity
+##
+opacity-rule = [
+  "85:class_g = 'emacs'",
+  "85:class_g = 'st'",
+  "85:class_g = 'xterm'",
+];
+
+##
+# Blur
+##
+blur-method = "dual_kawase";
+blur-size = 5;
+blur-deviation = 5.0;
+blur-strength = 2;
+blur-background-fixed = true;
+
+##
+# Animations
+##
+animations = true;
+animation-for-open-window = "zoom";
+animation-for-transient-window = "zoom";
+animation-for-unmap-window = "zoom";
+animation-for-workspace-switch-in = "zoom";
+animation-for-workspace-switch-out = "zoom";
+## Defaults
+#animation-stiffness = 500;
+#animation-dampening = 25;
+#animation-clamping  = true;
+#animation-delta = 10;
+#animation-force-steps = false;
+#animation-window-mass = 1.0;
+
+##
+# Fading
+##
+#fading = true;
+#fade-in-step = 0.25;
+#fade-out-step = 0.25;
+#fade-exclude = [ ];
+
+##
+# Shadow
+##
+shadow = true;
+shadow-radius = 4;
+shadow-opacity = 0.45;
+shadow-offset-x = -4;
+shadow-offset-y = -4;
+shadow-color = "#7C6F64";
+
+##
+# Misc
+##
+mark-wwin-focused = false;
+mark-ovredir-focused = false;
+detect-rounded-corners = false;
+detect-client-opacity = false;
+refresh-rate = 0;
+vsync = true;
+dbe = false;
+unredir-if-possible = true;
+detect-transient = true;
+detect-client-leader = true;
+invert-color-include = [ ];
+
+##
+# Backend
+##
+backend = "glx";
+glx-no-stencil = true;
+glx-copy-from-front = false;
+use-damage = true;
+glx-no-rebind-pixmap = true;

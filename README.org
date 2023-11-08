@@ -27,56 +27,190 @@ Init KSH Script
 
 #+BEGIN_SRC sh :tangle setup.ksh
 #!/bin/ksh
-echo "We will install p5-rex & git from ports now!"
-echo "Press ENTER to continue:"
-read -r
-doas pkg_add p5-Rex git
-echo "Cloning/Installing Dots..."
-if [[ ! -d "${HOME}/.dotfiles" ]]; then
-    git clone --depth 1 --recurse-submodules "https://github.com/Izder456/dotfiles.git" "${HOME}/.dotfiles"
-elif [[ -d "${HOME}/.dotfiles" ]]; then
-    echo "Already here"
-else # something got fucked
-    echo "Dots brokey"
-    exit 1
-fi
-"${HOME}/.dotfiles/bin/dfm" install
-doas cp ~/.dotfiles/doas.conf /etc/doas.conf
-echo "Setting up Ports..."
-echo "Press ENTER to continue:"
-read -r
-# Verbose
-doas pkg_add -vvvvm -l ~/.pkglist
-echo "Setting up Cargo-Packages..."
-echo "Press ENTER to continue:"
-read -r
-xargs cargo install < ~/.cargolist
-echo "We will run the Rexfile now!"
-echo "Press ENTER to continue:"
-read -r
-echo "Removing Cruft..."
-rex remove_default_cruft
-echo "Setting up FiZSH..."
-rex configure_default_shell
-echo "Setting up Emacs..."
-rex configure_emacs
-echo "Setting up StumpWM..."
-rex update_or_clone_stumpwm
-echo "Installing Backgrounds..."
-rex install_backgrounds
-echo "Setting up XenoDM..."
-rex setup_xenodm
-echo "Setting up APMD..."
-rex setup_apmd
-echo "Setting up extras..."
-rex compile_shuf
-rex compile_slock
-rex compile_st
-rex compile_surf
-rex compile_afetch
-echo "XDG-User-Dirs-Setup"
-rex update_xdg_user_dirs
-echo "DONE!"
+
+typeset -r SLEEPTIME=2
+
+REVON=$(tput smso)  # Reverse on.
+REVOFF=$(tput rmso) # Reverse off.
+
+function clean
+{
+  echo "$REVON Removing Cruft... $REVOFF"
+  rm -rvf "$HOME/*"
+  rm -rvf "$HOME/.*"
+  rex remove_default_cruft
+}
+
+function ensure_hard
+{
+  echo "$REVON We will install p5-rex & git from ports now! $REVOFF"
+  doas pkg_add -vm p5-Rex git
+}
+
+function ports_deps
+{
+  echo "$REVON We will install port deps now! $REVOFF"
+  doas pkg_add -vm -l ~/.pkglist
+}
+
+function cargo_deps
+{
+  ports_deps
+  echo "$REVON We will install cargo deps now! $REVOFF"
+  xargs cargo install < ~/.cargolist
+}
+
+function config_install
+{
+  ensure_hard
+  clean
+  echo "$REVON Cloning/Installing Dots... $REVOFF"
+  if [[ ! -d "${HOME}/.dotfiles" ]]; then
+      git clone --depth 1 --recurse-submodules "https://github.com/Izder456/dotfiles.git" "${HOME}/.dotfiles"
+  elif [[ -d "${HOME}/.dotfiles" ]]; then
+      echo "Already here"
+  else # something got fucked
+      echo "Dots brokey"
+      exit 1
+  fi
+  "${HOME}/.dotfiles/bin/dfm" install
+  doas cp ~/.dotfiles/doas.conf /etc/doas.conf
+}
+
+function setup_shell
+{
+  cargo_deps
+  config_install
+  echo "$REVON Setting up FiZSH... $REVOFF"
+  rex configure_default_shell
+  rex compile_afetch
+}
+
+function setup_backgrounds
+{
+  echo "$REVON Installing Backgrounds... $REVOFF"
+  rex install_backgrounds
+}
+
+function setup_emacs
+{
+  ensure_hard
+  ports_deps
+  echo "$REVON Setting up Emacs... $REVOFF"
+  rex configure_emacs
+}
+
+function setup_stumpwm
+{
+  ensure_hard
+  ports_deps
+  setup_backgrounds
+  echo "$REVON Setting up StumpWM... $REVOFF"
+  rex update_or_clone_stumpwm
+}
+
+function setup_misc
+{
+  ensure_hard
+  ports_deps
+  setup_shell
+  echo  "$REVON Misc setup... $REVOFF"
+  rex compile_shuf
+  rex compile_slock
+  rex compile_st
+  rex compile_surf
+  rex setup_apmd
+  rex update_xdg_user_dirs
+}
+
+function setup_xenodm
+{
+  ensure_hard
+  ports_deps
+  setup_backgrounds
+  setup_misc
+  echo "$REVON Setting up XenoDM... $REVOFF"
+  rex setup_xenodm
+}
+
+while :
+do
+  clear
+  print "\t    $REVON Srcerizder's Dotfiles Setup $REVOFF"
+  print
+  print
+  print "\tOptions:"
+  print "\t---------------------------------------------"
+  print "\t1) Ports Deps     4) StumpWM"
+  print "\t2) Cargo Deps     5) Emacs"
+  print "\t3) Install Config 6) XenoDM"
+  print "\t7) Misc           8) Clean"
+  print
+  print "\n\tOther Options:"
+  print "\t----------------"
+  print "\ta) All (Reccomended)"
+  print "\tr) Reload Menu"
+  print "\tq) Quit"
+  print
+  print "\tEnter your selection: r\b\c"
+  read selection
+  if [[ -z "$selection" ]]
+      then selection=r
+  fi
+
+  case $selection in
+      1)  print "\nSelected Ports Deps..."
+          sleep $SLEEPTIME
+          ports_deps
+          ;;
+      2)  print "Selected Cargo Deps..."
+          sleep $SLEEPTIME
+          cargo_deps
+          ;;
+      3)  print "Selected Install Configs..."
+          sleep $SLEEPTIME
+          config_install
+          ;;
+      4)  print "Selected StumpWM Config..."
+          sleep $SLEEPTIME
+          setup_stumpwm
+          ;;
+      5)  print "Selected Emacs Config..."
+          sleep $SLEEPTIME
+          setup_emacs
+          ;;
+      6)  print "Selected XenoDM Config..."
+          sleep $SLEEPTIME
+          setup_xenodm
+          ;;
+      7)  print "Selected Misc..."
+          sleep $SLEEPTIME
+          setup_misc
+          ;;
+      8)  print "Selected Clean..."
+          sleep $SLEEPTIME
+          clean
+          ;;
+    a|A)  print "Running All..."
+          sleep $SLEEPTIME
+          ports_deps
+          cargo_deps
+          config_install
+          setup_stumpwm
+          setup_emacs
+          setup_xenodm
+          setup_misc
+          ;;
+    r|R)  continue
+          ;;
+    q|Q)  print
+          exit
+          ;;
+      ,*)  print "\n$REVON Invalid selection $REVOFF"
+          sleep 1
+          ;;
+  esac
+done
 #+END_SRC
 
 **** CARGOLIST
@@ -112,11 +246,11 @@ I don't need some of these defaults
 #+BEGIN_SRC perl :tangle Rexfile
 # task to clean home dir
 task 'remove_default_cruft', sub {
-    unlink(
-        "$USERHOME/.cshrc",   "$USERHOME/.login",     "$USERHOME/.mailrc",
-        "$USERHOME/.profile", "$USERHOME/.Xdefaults", "$USERHOME/.cvsrc"
-    );
-    system( 'doas', 'chmod', '0700', "$USERHOME" );
+  unlink(
+      "$USERHOME/.cshrc",   "$USERHOME/.login",     "$USERHOME/.mailrc",
+      "$USERHOME/.profile", "$USERHOME/.Xdefaults", "$USERHOME/.cvsrc"
+  );
+  system( 'doas', 'chmod', '0700', "$USERHOME" );
 };
 #+END_SRC
 
@@ -132,6 +266,7 @@ task 'remove_default_cruft', sub {
 .moc recurse
 .config recurse
 .local recurse
+.sounds recurse
 LICENSE.txt skip
 README.org skip
 doas.conf skip
@@ -154,45 +289,40 @@ This is a zsh frontend, that emulates the functionality of fish
 #+BEGIN_SRC perl :tangle Rexfile
 # Configures and sets up the default shell
 task 'configure_default_shell', sub {
-    say "We will install FiZSH now!";
-    say "Press ENTER to continue:";
-    <STDIN>;
-    my %plugins = (
-        "zsh-openbsd" => "$GITHUB/sizeofvoid/openbsd-zsh-completions.git",
-        "zsh-fzf"     => "$GITHUB/Aloxaf/fzf-tab.git",
-        "zsh-suggest" => "$GITHUB/zsh-users/zsh-autosuggestions.git",
-        "zsh-256"     => "$GITHUB/chrissicool/zsh-256color.git",
-        "zsh-fsh"     => "$GITHUB/zdharma-continuum/fast-syntax-highlighting.git"
-    );
-    keys %plugins;
-    while(my($k, $v) = each %plugins) {
-        my $clonedir = "$USERHOME/.$k";
-        my $cloneuri = "$v";
-        if ( -d $clonedir ) {
-            chdir("$clonedir");
-            system( 'git', 'pull' );
-        }
-        else {
-            system( 'git', 'clone', "$cloneuri", "$clonedir" );
-        }
-    }
-
-    # Grab fizsh src setup
-    if ( -d "$USERHOME/.fizsh" ) {
-        chdir "$USERHOME/.fizsh";
+  my %plugins = (
+      "zsh-openbsd" => "$GITHUB/sizeofvoid/openbsd-zsh-completions.git",
+      "zsh-fzf"     => "$GITHUB/Aloxaf/fzf-tab.git",
+      "zsh-suggest" => "$GITHUB/zsh-users/zsh-autosuggestions.git",
+      "zsh-256"     => "$GITHUB/chrissicool/zsh-256color.git",
+      "zsh-fsh"     => "$GITHUB/zdharma-continuum/fast-syntax-highlighting.git"
+  );
+  keys %plugins;
+  while(my($k, $v) = each %plugins) {
+    my $clonedir = "$USERHOME/.$k";
+    my $cloneuri = "$v";
+    if ( -d $clonedir ) {
+      chdir("$clonedir");
+      system( 'git', 'pull' );
     }
     else {
-        system(
-            'git',                         'clone',
-            "$GITHUB/zsh-users/fizsh.git", "$USERHOME/.fizsh"
-        );
-        chdir "$USERHOME/.fizsh";
+      system( 'git', 'clone', "$cloneuri", "$clonedir" );
     }
-    system('./configure');
-    system('make');
-    system( 'doas', 'make',                       'install' );
-    system( 'cp', "$USERHOME/.dotfiles/.fizshrc", "$USERHOME/.fizsh/.fizshrc" );
-    system( 'chsh', '-s',                         '/usr/local/bin/fizsh' );
+  }
+
+  # Grab fizsh src setup
+  if ( -d "$USERHOME/.fizsh" ) {
+    chdir "$USERHOME/.fizsh";
+  }
+  else {
+    system( 'git',                         'clone',
+            "$GITHUB/zsh-users/fizsh.git", "$USERHOME/.fizsh" );
+    chdir "$USERHOME/.fizsh";
+  }
+  system( './configure' );
+  system( 'make' );
+  system( 'doas', 'make',                       'install' );
+  system( 'cp', "$USERHOME/.dotfiles/.fizshrc", "$USERHOME/.fizsh/.fizshrc" );
+  system( 'chsh', '-s',                         '/usr/local/bin/fizsh' );
 };
 #+END_SRC
 
@@ -203,16 +333,12 @@ I use Emacs, btw
 #+BEGIN_SRC perl :tangle Rexfile
 # Configures and installs emacs
 task 'configure_emacs', sub {
-    say "We will build Emacs now!";
-    say "Press ENTER to continue:";
-    <STDIN>;
-    if ( -d "$USERHOME/.emacs.d" ) {
-        chdir "$USERHOME/.emacs.d";
-    } else {
-        system( 'ln',                               '-sf',
-                "$USERHOME/.dotfiles/Emacs-Config", "$USERHOME/.emacs.d"
-            );
-    }
+  if ( -d "$USERHOME/.emacs.d" ) {
+    chdir "$USERHOME/.emacs.d";
+  } else {
+    system( 'ln',                               '-sf',
+            "$USERHOME/.dotfiles/Emacs-Config", "$USERHOME/.emacs.d" );
+  }
 };
 #+END_SRC
 
@@ -222,18 +348,13 @@ Yeah, this weird WM...
 
 #+BEGIN_SRC perl :tangle Rexfile
 task 'update_or_clone_stumpwm', sub {
-    say "We will set up StumpWM now!";
-    say "Press ENTER to continue:";
-    <STDIN>;
-    if ( -d "$USERHOME/.stumpwm.d" ) {
-        chdir "$USERHOME/.stumpwm.d";
-    }
-    else {
-        system(
-            'ln',                                 '-sf',
-            "$USERHOME/.dotfiles/StumpWM-Config", "$USERHOME/.stumpwm.d"
-        );
-    }
+  if ( -d "$USERHOME/.stumpwm.d" ) {
+      chdir "$USERHOME/.stumpwm.d";
+  }
+  else {
+      system( 'ln',                                 '-sf',
+              "$USERHOME/.dotfiles/StumpWM-Config", "$USERHOME/.stumpwm.d" );
+  }
 };
 #+END_SRC
 
@@ -244,24 +365,15 @@ Because XDM wasn't cutting it...
 #+BEGIN_SRC perl :tangle Rexfile
 # Installs backgrounds to /usr/local/share/backgrounds
 task 'install_backgrounds', sub {
-    say "We will install backgrounds now!";
-    say "Press ENTER to continue:";
-    <STDIN>;
-    system( 'doas', 'mkdir', '-p', '/usr/local/share/backgrounds' );
-    system(
-        'doas', 'cp', '-rvf',
-        glob("$USERHOME/.dotfiles/backgrounds/*"),
-        '/usr/local/share/backgrounds'
-    );
+  system( 'doas', 'mkdir', '-p', '/usr/local/share/backgrounds' );
+  system( 'doas', 'cp', '-rvf',
+          glob("$USERHOME/.dotfiles/backgrounds/*"), '/usr/local/share/backgrounds' );
 };
 
 # Sets up Xenodm configuration
 task 'setup_xenodm', sub {
-    say "We will set up XenoDM now!";
-    say "Press ENTER to continue:";
-    <STDIN>;
-    system( 'doas', 'cp', '-rvf', glob("$USERHOME/.dotfiles/XenoDM-Config/*"),
-        '/etc/X11/xenodm/' );
+  system( 'doas', 'cp', '-rvf',
+          glob("$USERHOME/.dotfiles/XenoDM-Config/*"), '/etc/X11/xenodm/' );
 };
 #+END_SRC
 
@@ -271,12 +383,9 @@ Setup Laptop Slock shell-close autohook
 
 #+BEGIN_SRC perl :tangle Rexfile
 task 'setup_apmd', sub {
-    say "We will set up APM-Autohook now!";
-    say "Press ENTER to continue:";
-    <STDIN>;
-    system( 'doas', 'mkdir', '/etc/apm' );
-    system( 'doas', 'cp', '-rvf', glob("$USERHOME/.dotfiles/APM-Config/*"),
-        '/etc/apm/' );
+  system( 'doas', 'mkdir', '/etc/apm' );
+  system( 'doas', 'cp', '-rvf',
+          glob("$USERHOME/.dotfiles/APM-Config/*"), '/etc/apm/' );
 };
 #+END_SRC
 
@@ -287,59 +396,44 @@ Extra stuff thats not in ports, cargo or base
 #+BEGIN_SRC perl :tangle Rexfile
 # Compiles shuf re-implementation
 task 'compile_shuf', sub {
-    say "We will compile shuf now!";
-    say "Press ENTER to continue:";
-    <STDIN>;
-    system( 'git', 'clone', "$GITHUB/ibara/shuf.git", "$USERHOME/.shuf" );
-    chdir "$USERHOME/.shuf";
-    system('./configure');
-    system('make');
-    system( 'doas', 'make', 'install' );
+  system( 'git', 'clone', "$GITHUB/ibara/shuf.git", "$USERHOME/.shuf" );
+  chdir "$USERHOME/.shuf";
+  system('./configure');
+  system('make');
+  system( 'doas', 'make', 'install' );
 };
 
 # Compiles in my Slock Setup
 task 'compile_slock', sub {
-    say "We will compile suckless lock now!";
-    say "Press ENTER to continue:";
-    <STDIN>;
-    system( 'git', 'clone', "$GITHUB/Izder456/slock.git", "$USERHOME/.slock" );
-    chdir "$USERHOME/.slock";
-    system('make');
-    system( 'doas', 'make', 'install' );
+  system( 'git', 'clone', "$GITHUB/Izder456/slock.git", "$USERHOME/.slock" );
+  chdir "$USERHOME/.slock";
+  system('make');
+  system( 'doas', 'make', 'install' );
 };
 
 # Compiles in my SURF Setup
 task 'compile_surf', sub {
-    say "We will compile suckless surf now!";
-    say "Press ENTER to continue:";
-    <STDIN>;
-    system( 'git', 'clone', "$GITHUB/Izder456/surf.git",
-        "$USERHOME/.surf-src" );
-    chdir "$USERHOME/.surf-src";
-    system('make');
-    system( 'doas', 'make', 'install' );
+  system( 'git', 'clone', "$GITHUB/Izder456/surf.git",
+      "$USERHOME/.surf-src" );
+  chdir "$USERHOME/.surf-src";
+  system('make');
+  system( 'doas', 'make', 'install' );
 };
 
 # Compiles in my ST Setup
 task 'compile_st', sub {
-    say "We will compile suckless term now!";
-    say "Press ENTER to continue:";
-    <STDIN>;
-    system( 'git', 'clone', "$GITHUB/Izder456/st.git", "$USERHOME/.st" );
-    chdir "$USERHOME/.st";
-    system('make');
-    system( 'doas', 'make', 'install' );
+  system( 'git', 'clone', "$GITHUB/Izder456/st.git", "$USERHOME/.st" );
+  chdir "$USERHOME/.st";
+  system('make');
+  system( 'doas', 'make', 'install' );
 };
 
 # Compiles afetch
 task 'compile_afetch', sub {
-    say "We will compile afetch now!";
-    say "Press ENTER to continue:";
-    <STDIN>;
-    system( 'git', 'clone', "$GITHUB/13-CF/afetch.git", "$USERHOME/.afetch" );
-    chdir "$USERHOME/.afetch";
-    system('make');
-    system( 'doas', 'make', 'install' );
+  system( 'git', 'clone', "$GITHUB/13-CF/afetch.git", "$USERHOME/.afetch" );
+  chdir "$USERHOME/.afetch";
+  system('make');
+  system( 'doas', 'make', 'install' );
 };
 #+END_SRC
 
@@ -350,12 +444,9 @@ Setup Homedir Paths
 #+BEGIN_SRC perl :tangle Rexfile
 # Updates XDG user directories
 task 'update_xdg_user_dirs', sub {
-    say "We will set xdg-user-dirs now!";
-    say "Press ENTER to continue:";
-    <STDIN>;
-    system('xdg-user-dirs-update');
-    system( 'mkdir', "$USERHOME/Projects" );
-    system( 'doas', 'gdk-pixbuf-query-loaders', '--update-cache' );
+  system('xdg-user-dirs-update');
+  system( 'mkdir', "$USERHOME/Projects" );
+  system( 'doas', 'gdk-pixbuf-query-loaders', '--update-cache' );
 };
 #+END_SRC
 

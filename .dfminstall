@@ -5,6 +5,7 @@
 .moc recurse
 .config recurse
 .local recurse
+.sounds recurse
 LICENSE.txt skip
 README.org skip
 doas.conf skip

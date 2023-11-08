@@ -21,6 +21,9 @@ Xft.lcdfilter: lcddefault
 XClock*Background: #32302f
 XClock*Foreground: #ebdbb2
 
+Xcursor.size: 16
+Xcursor.theme: Capitaine Cursors (Gruvbox) - White
+
 *faceName: Spleen
 *faceSize: 12
 
