@@ -20,12 +20,12 @@ function ensure_hard
 function ports_deps
 {
   echo "$REVON We will install port deps now! $REVOFF"
-  doas pkg_add -vm -l ~/.pkglist
+  doas pkg_add -vvvvm -l ~/.pkglist
 }
 
 function cargo_deps
 {
-  ports_deps
+  doas pkg_add rust
   echo "$REVON We will install cargo deps now! $REVOFF"
   xargs cargo install < ~/.cargolist
 }
@@ -33,7 +33,6 @@ function cargo_deps
 function config_install
 {
   ensure_hard
-  clean
   echo "$REVON Cloning/Installing Dots... $REVOFF"
   if [[ ! -d "${HOME}/.dotfiles" ]]; then
       git clone --depth 1 --recurse-submodules "https://github.com/Izder456/dotfiles.git" "${HOME}/.dotfiles"
@@ -49,8 +48,7 @@ function config_install
 
 function setup_shell
 {
-  cargo_deps
-  config_install
+  ensure_hard
   echo "$REVON Setting up FiZSH... $REVOFF"
   rex configure_default_shell
   rex compile_afetch
@@ -73,8 +71,6 @@ function setup_emacs
 function setup_stumpwm
 {
   ensure_hard
-  ports_deps
-  setup_backgrounds
   echo "$REVON Setting up StumpWM... $REVOFF"
   rex update_or_clone_stumpwm
 }
@@ -82,7 +78,6 @@ function setup_stumpwm
 function setup_misc
 {
   ensure_hard
-  ports_deps
   setup_shell
   echo  "$REVON Misc setup... $REVOFF"
   rex compile_shuf
@@ -96,9 +91,6 @@ function setup_misc
 function setup_xenodm
 {
   ensure_hard
-  ports_deps
-  setup_backgrounds
-  setup_misc
   echo "$REVON Setting up XenoDM... $REVOFF"
   rex setup_xenodm
 }
