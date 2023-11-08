@@ -142,26 +142,29 @@ function setup_xenodm
 /W3 L0V3 C4ST!NG SP3LLS/
 
 #+BEGIN_SRC sh :tangle setup.ksh
+HEADER_TEXT=`cat <<-EOF
+\n$REVON Srcerizder Dotfiles Setup $REVOFF
+\nOptions:
+\n--------------------------
+\n  1) Ports \t 4) StumpWM
+\n  2) Cargo \t 5) Emacs
+\n  3) Config\t 6) XenoDM
+\n  7) Misc\t 8) Clean
+\n
+\nOther Options:
+\n----------------
+\n  a) All (Reccomended)
+\n  r) Reload Menu
+\n  q) Quit
+\n
+\nEnter your selection: r\b\c
+EOF
+`
+
 while :
 do
   clear
-  print "\t    $REVON Srcerizder's Dotfiles Setup $REVOFF"
-  print
-  print
-  print "\tOptions:"
-  print "\t---------------------------------------------"
-  print "\t1) Ports Deps     4) StumpWM"
-  print "\t2) Cargo Deps     5) Emacs"
-  print "\t3) Install Config 6) XenoDM"
-  print "\t7) Misc           8) Clean"
-  print
-  print "\n\tOther Options:"
-  print "\t----------------"
-  print "\ta) All (Reccomended)"
-  print "\tr) Reload Menu"
-  print "\tq) Quit"
-  print
-  print "\tEnter your selection: r\b\c"
+  print $HEADER_TEXT
   read selection
   if [[ -z "$selection" ]]
     then selection=r
