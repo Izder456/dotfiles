@@ -32,11 +32,12 @@ task 'configure_default_shell', sub {
     my $clonedir = "$USERHOME/.$k";
     my $cloneuri = "$v";
     if ( -d $clonedir ) {
-      chdir("$clonedir");
+      chdir "$clonedir";
       system( 'git', 'pull' );
     }
     else {
-      system( 'git', 'clone', "$cloneuri", "$clonedir" );
+      system( 'git',       'clone',
+              "$cloneuri", "$clonedir" );
     }
   }
 
@@ -79,13 +80,15 @@ task 'update_or_clone_stumpwm', sub {
 # Installs backgrounds to /usr/local/share/backgrounds
 task 'install_backgrounds', sub {
   system( 'doas', 'mkdir', '-p', '/usr/local/share/backgrounds' );
-  system( 'doas', 'cp', '-rvf',
+  system( 'doas',
+          'cp',                                      '-rvf',
           glob("$USERHOME/.dotfiles/backgrounds/*"), '/usr/local/share/backgrounds' );
 };
 
 # Sets up Xenodm configuration
 task 'setup_xenodm', sub {
-  system( 'doas', 'cp', '-rvf',
+  system( 'doas',
+          'cp',                                        '-rvf',
           glob("$USERHOME/.dotfiles/XenoDM-Config/*"), '/etc/X11/xenodm/' );
 };
 
@@ -97,49 +100,53 @@ task 'setup_apmd', sub {
 
 # Compiles shuf re-implementation
 task 'compile_shuf', sub {
-  system( 'git', 'clone', "$GITHUB/ibara/shuf.git", "$USERHOME/.shuf" );
+  system( 'git',                    'clone',
+          "$GITHUB/ibara/shuf.git", "$USERHOME/.shuf" );
   chdir "$USERHOME/.shuf";
-  system('./configure');
-  system('make');
+  system( './configure' );
+  system( 'make' );
   system( 'doas', 'make', 'install' );
 };
 
 # Compiles in my Slock Setup
 task 'compile_slock', sub {
-  system( 'git', 'clone', "$GITHUB/Izder456/slock.git", "$USERHOME/.slock" );
+  system( 'git',                        'clone',
+          "$GITHUB/Izder456/slock.git", "$USERHOME/.slock" );
   chdir "$USERHOME/.slock";
-  system('make');
+  system( 'make' );
   system( 'doas', 'make', 'install' );
 };
 
 # Compiles in my SURF Setup
 task 'compile_surf', sub {
-  system( 'git', 'clone', "$GITHUB/Izder456/surf.git",
-      "$USERHOME/.surf-src" );
+  system( 'git',                       'clone',
+          "$GITHUB/Izder456/surf.git", "$USERHOME/.surf-src" );
   chdir "$USERHOME/.surf-src";
-  system('make');
+  system( 'make' );
   system( 'doas', 'make', 'install' );
 };
 
 # Compiles in my ST Setup
 task 'compile_st', sub {
-  system( 'git', 'clone', "$GITHUB/Izder456/st.git", "$USERHOME/.st" );
+  system( 'git',                     'clone',
+          "$GITHUB/Izder456/st.git", "$USERHOME/.st" );
   chdir "$USERHOME/.st";
-  system('make');
+  system( 'make' );
   system( 'doas', 'make', 'install' );
 };
 
 # Compiles afetch
 task 'compile_afetch', sub {
-  system( 'git', 'clone', "$GITHUB/13-CF/afetch.git", "$USERHOME/.afetch" );
+  system( 'git',                      'clone',
+          "$GITHUB/13-CF/afetch.git", "$USERHOME/.afetch" );
   chdir "$USERHOME/.afetch";
-  system('make');
+  system( 'make' );
   system( 'doas', 'make', 'install' );
 };
 
 # Updates XDG user directories
 task 'update_xdg_user_dirs', sub {
-  system('xdg-user-dirs-update');
+  system( 'xdg-user-dirs-update' );
   system( 'mkdir', "$USERHOME/Projects" );
   system( 'doas', 'gdk-pixbuf-query-loaders', '--update-cache' );
 };

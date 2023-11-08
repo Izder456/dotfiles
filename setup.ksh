@@ -35,12 +35,12 @@ function config_install
   ensure_hard
   echo "$REVON Cloning/Installing Dots... $REVOFF"
   if [[ ! -d "${HOME}/.dotfiles" ]]; then
-      git clone --depth 1 --recurse-submodules "https://github.com/Izder456/dotfiles.git" "${HOME}/.dotfiles"
+    git clone --depth 1 --recurse-submodules "https://github.com/Izder456/dotfiles.git" "${HOME}/.dotfiles"
   elif [[ -d "${HOME}/.dotfiles" ]]; then
-      echo "Already here"
+    echo "Already here"
   else # something got fucked
-      echo "Dots brokey"
-      exit 1
+    echo "Dots brokey"
+    exit 1
   fi
   "${HOME}/.dotfiles/bin/dfm" install
   doas cp ~/.dotfiles/doas.conf /etc/doas.conf
@@ -117,7 +117,7 @@ do
   print "\tEnter your selection: r\b\c"
   read selection
   if [[ -z "$selection" ]]
-      then selection=r
+    then selection=r
   fi
 
   case $selection in
@@ -155,6 +155,7 @@ do
           ;;
     a|A)  print "Running All..."
           sleep $SLEEPTIME
+          clean
           ports_deps
           cargo_deps
           config_install
