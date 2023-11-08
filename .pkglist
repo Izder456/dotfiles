@@ -2,7 +2,6 @@ ImageMagick--
 aria2--
 asciinema--
 audacity--
-autoconf--%2.71
 automake--%1.16
 axel--
 bash--
@@ -192,7 +191,6 @@ tidy--
 tor--
 transmission-gtk--
 tree--
-ungoogled-chromium--
 unicode-emoji--
 unifont--
 uthash--
