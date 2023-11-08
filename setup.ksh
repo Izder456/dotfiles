@@ -56,6 +56,7 @@ function setup_shell
 
 function setup_backgrounds
 {
+  ensure_hard
   echo "$REVON Installing Backgrounds... $REVOFF"
   rex install_backgrounds
 }
