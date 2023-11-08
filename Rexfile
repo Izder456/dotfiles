@@ -94,7 +94,8 @@ task 'setup_xenodm', sub {
 
 task 'setup_apmd', sub {
   system( 'doas', 'mkdir', '/etc/apm' );
-  system( 'doas', 'cp', '-rvf',
+  system( 'doas',
+          'cp',                                     '-rvf',
           glob("$USERHOME/.dotfiles/APM-Config/*"), '/etc/apm/' );
 };
 
