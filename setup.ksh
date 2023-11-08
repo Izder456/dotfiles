@@ -8,7 +8,6 @@ REVOFF=$(tput rmso) # Reverse off.
 function clean
 {
   echo "$REVON Removing Cruft... $REVOFF"
-  rm -rvf "$HOME/.*"
   rex remove_default_cruft
 }
 
