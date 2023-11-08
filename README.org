@@ -137,7 +137,8 @@ function setup_xenodm
 **** Wizard Menu
 
 *(SH)adow wizard M0n3y G4ng*
-//W3 L0V3 C4ST!NG SP3LLS/
+
+/W3 L0V3 C4ST!NG SP3LLS/
 
 #+BEGIN_SRC sh :tangle setup.ksh
 while :
@@ -238,7 +239,7 @@ you probably want this if you want to write with stumpwm and modules...
                 "drakma"))
 #+END_SRC
 
-USE:
+/USE:/
 
 #+BEGIN_SRC sh
 $ ftp -o /tmp/quicklisp.lisp https://beta.quicklisp.org/quicklisp.org
@@ -364,6 +365,7 @@ stumpwm
 **** Sysctl.conf
 
 Open Kernel Limits n Allat
+
 *Very hardware specific*
 
 #+BEGIN_SRC conf :tangle sysctl.conf
@@ -410,6 +412,35 @@ net.inet.tcp.rfc1323=1
 net.inet.tcp.sack=1
 net.inet.udp.recvspace=262144
 net.inet.udp.sendspace=262144
+#+END_SRC
+
+**** Dfm-Install
+
+dfm install script config
+
+#+BEGIN_SRC txt :tangle .dfminstall
+.fonts recurse
+.git recurse
+.icons recurse
+.themes recurse
+.moc recurse
+.config recurse
+.local recurse
+LICENSE.txt skip
+COPYING skip
+README.org skip
+quicklisp-setup.lisp skip
+doas.conf skip
+sysctl.conf skip
+setup.ksh skip
+setup.pl.bak skip
+bin skip
+assets skip
+backgrounds skip
+Emacs-Config skip
+StumpWM-Config skip
+XenoDM-Config skip
+APM-Config skip
 #+END_SRC
 
 **** Doas.conf
@@ -481,34 +512,6 @@ task 'remove_default_cruft', sub {
 };
 #+END_SRC
 
-**** Dots-Install
-
-+ dfm install script config
-
-#+BEGIN_SRC txt :tangle .dfminstall
-.fonts recurse
-.git recurse
-.icons recurse
-.themes recurse
-.moc recurse
-.config recurse
-.local recurse
-LICENSE.txt skip
-COPYING skip
-README.org skip
-quicklisp-setup.lisp skip
-doas.conf skip
-sysctl.conf skip
-setup.ksh skip
-setup.pl.bak skip
-bin skip
-assets skip
-backgrounds skip
-Emacs-Config skip
-StumpWM-Config skip
-XenoDM-Config skip
-APM-Config skip
-#+END_SRC
 
 **** FiZSH-Setup
 
