@@ -6,8 +6,11 @@
 .config recurse
 .local recurse
 LICENSE.txt skip
+COPYING skip
 README.org skip
+quicklisp-setup.lisp skip
 doas.conf skip
+sysctl.conf skip
 setup.ksh skip
 setup.pl.bak skip
 bin skip
@@ -17,4 +20,3 @@ Emacs-Config skip
 StumpWM-Config skip
 XenoDM-Config skip
 APM-Config skip
-README.org skip

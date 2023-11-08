@@ -23,7 +23,11 @@
 ** Setup
 *** InitScript
 
-Init KSH Script
+Setup KSH Script
+
+**** Boilerplate
+
+set vars global
 
 #+BEGIN_SRC sh :tangle setup.ksh
 #!/bin/ksh
@@ -32,7 +36,13 @@ typeset -r SLEEPTIME=2
 
 REVON=$(tput smso)  # Reverse on.
 REVOFF=$(tput rmso) # Reverse off.
+#+END_SRC
 
+**** Subroutines
+
+split up control flow
+
+#+BEGIN_SRC sh :tangle setup.ksh
 function clean
 {
   echo "$REVON Removing Cruft... $REVOFF"
@@ -122,7 +132,14 @@ function setup_xenodm
   echo "$REVON Setting up XenoDM... $REVOFF"
   rex setup_xenodm
 }
+#+END_SRC
 
+**** Wizard Menu
+
+*(SH)adow wizard M0n3y G4ng*
+//W3 L0V3 C4ST!NG SP3LLS/
+
+#+BEGIN_SRC sh :tangle setup.ksh
 while :
 do
   clear
@@ -204,6 +221,225 @@ do
 done
 #+END_SRC
 
+*** Misc Stuffs
+
+**** Quicklisp Install
+
+you probably want this if you want to write with stumpwm and modules...
+
+#+BEGIN_SRC lisp :tangle quicklisp-setup.lisp
+(quicklisp-quickstart:install :path "~/.quicklisp")
+(ql:add-to-init-file)
+(ql:quickload '("clx"
+                "cl-ppcre"
+                "alexandria"
+                "cl-fad"
+                "anaphora"
+                "drakma"))
+#+END_SRC
+
+USE:
+
+#+BEGIN_SRC sh
+$ ftp -o /tmp/quicklisp.lisp https://beta.quicklisp.org/quicklisp.org
+$ ftp -o /tmp/quicklisp-setup.lisp https://github.com/Izder456/raw/main/quicklisp-setup.lisp
+$ sbcl --load /tmp/quicklisp.lisp --load /tmp/quicklisp-setup.lisp
+#+END_SRC
+
+**** .Xsession/.Xresources/.Xprofile
+
+#+BEGIN_SRC sh :tangle .xprofile
+#!/bin/sh
+export LC_ALL=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+export QT_QPA_PLATFORMTHEME=gtk2
+export SDL_VIDEO_X11_DGAMOUSE=0
+#+END_SRC
+
+#+BEGIN_SRC
+!!
+! XWindow Stuffs
+!!
+*imLocale: en_US.UTF-8
+
+!!
+! XTerm Stuffs
+!!
+*intensityStyles: true
+*allowSendEvents: true
+xterm*scrollBar: false
+xterm*faceName: Spleen
+xterm*faceSize: 12
+xterm*renderFont: true
+xterm*internalBorder: 16
+xterm*letterSpace: 1
+xterm*loginShell: true
+xterm*savelines: 16384
+
+!!
+! Font Rendering Stuffs
+!!
+Xft.dpi: 96
+Xft.rgba: rgb
+Xft.antialias: true
+Xft.autohint: false
+Xft.hintstyle: hintfull
+Xft.lcdfilter: lcddefault
+*faceName: Spleen
+*faceSize: 12
+
+!!
+! XClock Stuffs
+!!
+XClock*Background: #32302f
+XClock*Foreground: #ebdbb2
+
+!!
+! Pointer Stuffs
+!!
+Xcursor.size: 16
+Xcursor.theme: Capitaine Cursors (Gruvbox) - White
+
+!!
+! Background Colors
+!!
+! Normal
+*background: #282828
+*foreground: #ebdbb2
+! Hard-Dark
+*.activeBackground: #1d2021
+*.activeForeground: #32302f
+
+!!
+! Gruvbox Colors
+!!
+! Black + DarkGrey
+*color0:  #282828
+*color8:  #928374
+! DarkRed + Red
+*color1:  #cc241d
+*color9:  #fb4934
+! DarkGreen + Green
+*color2:  #98971a
+*color10: #b8bb26
+! DarkYellow + Yellow
+*color3:  #d79921
+*color11: #fabd2f
+! DarkBlue + Blue
+*color4:  #458588
+*color12: #83a598
+! DarkMagenta + Magenta
+*color5:  #b16286
+*color13: #d3869b
+! DarkCyan + Cyan
+*color6:  #689d6a
+*color14: #8ec07c
+! LightGrey + White
+*color7:  #a89984
+*color15: #ebdbb2
+#+END_SRC
+
+#+BEGIN_SRC sh :tangle .xsession
+#!/bin/sh
+[ -f /etc/xprofile ] && . /etc/xprofile
+[ -f ~/.xprofile ] && . ~/.xprofile
+[ -f ~/.xresources ] && xrdb ~/.xresources
+if [ -x /usr/local/bin/dbus-launch -a -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
+        eval `dbus-launch --sh-syntax --exit-with-x11`
+fi
+export LC_CTYPE="en_US.UTF-8"
+export MOZ_ACCELERATED=1
+export MOZ_WEBRENDER=1
+xset b off
+dunst &
+picom -f -b &
+ulimit -d 17000000
+ulimit -Sc 0
+xset +fp /usr/local/share/fonts/spleen
+feh --bg-fill $(shuf -n1 -e /usr/local/share/backgrounds/*.png) &
+xidle -delay 5 -nw -program "/usr/local/bin/slock" -timeout 1800 &
+stumpwm
+#+END_SRC
+
+**** Sysctl.conf
+
+Open Kernel Limits n Allat
+*Very hardware specific*
+
+#+BEGIN_SRC conf :tangle sysctl.conf
+# Allow KMem
+kern.allowkmem=1
+
+# IP-Forward
+net.inet.ip.forwarding=1
+net.inet6.ip6.forwarding=1
+
+# Shared Mem
+kern.shminfo.shmall=3135729
+kern.shminfo.shmmax=999999999
+kern.shminfo.shmmni=1024
+kern.shminfo.shmseg=1024
+
+# Semaphores
+kern.seminfo.semmns=4096
+kern.seminfo.semmni=1024
+
+# Kernel Limit
+kern.bufcachepercent=90
+kern.maxproc=32768
+kern.maxfiles=65535
+kern.maxvnodes=262144
+kern.somaxconn=2048
+
+# Multithreading
+hw.smt=1
+
+# Tearing
+machdep.allowaperture=1
+
+# Video/Audio
+kern.audio.record=1
+kern.video.record=1
+
+# Internet Speed
+net.inet.icmp.errppslimit=1000
+net.inet.tcp.ackonpush=1
+net.inet.tcp.ecn=1
+net.inet.tcp.mssdflt=1452
+net.inet.tcp.rfc1323=1
+net.inet.tcp.sack=1
+net.inet.udp.recvspace=262144
+net.inet.udp.sendspace=262144
+#+END_SRC
+
+**** Doas.conf
+
+This is totally overkill
+
+#+BEGIN_SRC conf :tangle doas.conf
+permit persist :doas
+permit nopass :operator cmd ln
+permit nopass :operator cmd cp
+permit nopass :operator cmd mv
+permit nopass :operator cmd make
+permit nopass :operator cmd mkdir
+permit nopass :operator cmd reboot
+permit nopass :operator cmd halt
+permit nopass :operator cmd install
+permit nopass :operator cmd mkfontdir
+permit nopass :operator cmd pkg_add
+permit nopass :operator cmd pkg_info
+permit nopass :operator cmd pkg_delete
+permit nopass :operator cmd pkg_mklocatedb
+permit nopass :operator cmd fc-cache
+permit nopass :operator cmd hw-probe
+permit nopass :operator cmd sysmerge
+permit nopass :operator cmd sysupgrade
+permit nopass :operator cmd syspatch
+permit nopass :operator cmd mount
+permit nopass :operator cmd umount
+#+END_SRC
+
 **** CARGOLIST
 
 Cargo Package List
@@ -258,8 +494,11 @@ task 'remove_default_cruft', sub {
 .config recurse
 .local recurse
 LICENSE.txt skip
+COPYING skip
 README.org skip
+quicklisp-setup.lisp skip
 doas.conf skip
+sysctl.conf skip
 setup.ksh skip
 setup.pl.bak skip
 bin skip
@@ -269,7 +508,6 @@ Emacs-Config skip
 StumpWM-Config skip
 XenoDM-Config skip
 APM-Config skip
-README.org skip
 #+END_SRC
 
 **** FiZSH-Setup
@@ -453,9 +691,8 @@ task 'update_xdg_user_dirs', sub {
 *** Do as user:
 
 #+BEGIN_SRC
-$ ftp -o ./setup.ksh $GITHUB/izder456/dotfiles/raw/main/setup.ksh
-$ chmod +x setup.ksh
-$ ksh setup.ksh
+$ ftp -o /tmp/setup.ksh $GITHUB/izder456/dotfiles/raw/main/setup.ksh
+$ ksh /tmp/setup.ksh
 #+END_SRC
 
 ** Note:
