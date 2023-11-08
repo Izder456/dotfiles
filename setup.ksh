@@ -157,9 +157,9 @@ do
     a|A)  print "Running All..."
           sleep $SLEEPTIME
           clean
+          config_install
           ports_deps
           cargo_deps
-          config_install
           setup_stumpwm
           setup_emacs
           setup_xenodm
