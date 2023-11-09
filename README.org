@@ -124,6 +124,7 @@ function setup_misc
   rex compile_st
   rex compile_surf
   rex setup_apmd
+  rex install_backgrounds
   rex update_xdg_user_dirs
 }
 
