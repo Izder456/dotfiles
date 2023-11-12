@@ -66,16 +66,18 @@ alias su="echo 'did you mean to run doas -s? '"
 ##
 # Alias for listing files
 ##
-alias ls="eza --icons -h"
-alias la="eza --icons -ah"
-alias ll="eza --icons -lh"
-alias lh="eza --icons -lah"
+alias ls="eza --icons=auto -h"
+alias la="eza --icons=auto -ah"
+alias ll="eza --icons=auto -lh"
+alias lh="eza --icons=auto -lah"
+alias tree="eza --icons=auto -Th"
 
 ##
 # Alias for parsing
 ##
 alias cat="bat --theme=gruvbox-dark -pp"
 alias bat="bat --theme=gruvbox-dark"
+unalias grep
 alias rgrep="rg"
 
 ##
