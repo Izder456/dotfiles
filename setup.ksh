@@ -18,6 +18,15 @@ function ensure_hard
   ftp -o $HOME/Rexfile https://github.com/Izder456/dotfiles/raw/main/Rexfile
 }
 
+function ensure_lisp
+{
+  echo "$REVON Quicklisp Setup $REVOFF"
+  doas pkg_add -vm sbcl rlwrap
+  ftp -o /tmp/quicklisp.lisp https://beta.quicklisp.org/quicklisp.lisp
+  ftp -o /tmp/quicklisp-setup.lisp https://github.com/izder456/dotfiles/raw/main/quicklisp-setup.lisp
+  sbcl --load /tmp/quicklisp.lisp --script /tmp/quicklisp-setup.lisp
+}
+
 function ports_deps
 {
   echo "$REVON We will install port deps now! $REVOFF"
@@ -72,8 +81,8 @@ function setup_emacs
 function setup_stumpwm
 {
   ensure_hard
+  ensure_lisp
   echo "$REVON Setting up StumpWM... $REVOFF"
-  rex sbcl_quicklisp
   rex update_or_clone_stumpwm
 }
 

@@ -56,6 +56,15 @@ function ensure_hard
   ftp -o $HOME/Rexfile https://github.com/Izder456/dotfiles/raw/main/Rexfile
 }
 
+function ensure_lisp
+{
+  echo "$REVON Quicklisp Setup $REVOFF"
+  doas pkg_add -vm sbcl rlwrap
+  ftp -o /tmp/quicklisp.lisp https://beta.quicklisp.org/quicklisp.lisp
+  ftp -o /tmp/quicklisp-setup.lisp https://github.com/izder456/dotfiles/raw/main/quicklisp-setup.lisp
+  sbcl --load /tmp/quicklisp.lisp --script /tmp/quicklisp-setup.lisp
+}
+
 function ports_deps
 {
   echo "$REVON We will install port deps now! $REVOFF"
@@ -110,8 +119,8 @@ function setup_emacs
 function setup_stumpwm
 {
   ensure_hard
+  ensure_lisp
   echo "$REVON Setting up StumpWM... $REVOFF"
-  rex sbcl_quicklisp
   rex update_or_clone_stumpwm
 }
 
@@ -636,17 +645,6 @@ Extra stuff thats not in ports, cargo or base
 
 #+BEGIN_SRC perl :tangle Rexfile
 # Compiles shuf re-implementation
-task 'sbcl_quicklisp', sub {
-   system( 'ftp',
-	   "-o /tmp/quicklisp.lisp", "https://beta.quicklisp.org/quicklisp.lisp");
-   system( 'ftp',
-           "-o /tmp/quicklisp-setup.lisp", "https://github.com/Izder456/dotfiles/raw/main/quicklisp-setup.lisp");
-   system( 'doas', 'pkg_add', 'sbcl rlwrap');
-   system( 'sbcl',
-           '--load', '/tmp/quicklisp.lisp',
-           '--script', '/tmp/quicklisp-setup.lisp');
-};
-
 task 'compile_shuf', sub {
   system( 'git',                    'clone',
           "$GITHUB/ibara/shuf.git", "$USERHOME/.shuf" );
