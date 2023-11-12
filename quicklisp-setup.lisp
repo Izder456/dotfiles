@@ -5,5 +5,4 @@
                 "alexandria"
                 "cl-fad"
                 "anaphora"
-                "drakma"
-                "slynk"))
+                "drakma"))

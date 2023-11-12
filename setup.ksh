@@ -73,6 +73,7 @@ function setup_stumpwm
 {
   ensure_hard
   echo "$REVON Setting up StumpWM... $REVOFF"
+  rex sbcl_quicklisp
   rex update_or_clone_stumpwm
 }
 
