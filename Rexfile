@@ -102,9 +102,9 @@ task 'setup_apmd', sub {
 # Compiles shuf re-implementation
 task 'sbcl_quicklisp', sub {
    system( 'ftp',
-	   '-o /tmp/quicklisp.lisp', 'https://beta.quicklisp.org/quicklisp.lisp');
+	   "-o /tmp/quicklisp.lisp", "https://beta.quicklisp.org/quicklisp.lisp");
    system( 'ftp',
-           '-o /tmp/quicklisp-setup.lisp', 'https://github.com/Izder456/dotfiles/raw/main/quicklisp-setup.lisp');
+           "-o /tmp/quicklisp-setup.lisp", "https://github.com/Izder456/dotfiles/raw/main/quicklisp-setup.lisp");
    system( 'doas', 'pkg_add', 'sbcl rlwrap');
    system( 'sbcl',
            '--load', '/tmp/quicklisp.lisp',
