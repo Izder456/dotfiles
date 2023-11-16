@@ -4,11 +4,14 @@
 #+LANGUAGE: en
 #+PROPERTY: header-args: :tangle ~/.dotfiles :mkdirp t
 
-- Mainly for personal backups, but if you want them, feel free to use them.
+* DISCLAIMER
 
-- I won't provide support for any issues on your machine, as this is a pet project.
+- I'm not responsible for any system breakage due to my code.
 
-** Shameless Unixporn for internet points.
+- If you're unsure, refer to [[LICENSE.txt][THE LICENSE]] to see how seriously I take this.
+
+- Use with caution.
+* Shameless Unixporn for internet points.
 
 #+html: <p align="center"><img width=700 src="assets/XenoDM.png" /></p>
 
@@ -16,12 +19,50 @@
 
 #+html: <p align="center"><img width=700 src="assets/Emacs.png" /></p>
 
-** Crucial Information
+* Crucial Information
 
 - While /there *is*/ a setup script in this project, =it's not meant to be plug-and-play=. /It's a bare-bones setup/ that is fairly non-portable and will require some tinkering to work perfectly. I don't see this as a problem because I'm comfortable customizing it to my needs.
 
-** Setup
-*** InitScript
+* Note:
+
+- My script doesn't perform any performance tweaking. Users should refer to [[https://openbsd.org/faq][the FAQ]], [[https://man.openbsd.org][manpages]], or the unofficial [[https://www.openbsdhandbook.com][OpenBSD Handbook]] for that.
+
+- for laptops, I /highly recommend/ solene%'s power management daemon [[https://dataswamp.org/~solene/2022-03-21-openbsd-cool-frequency.html][obsdfreqd]]
+
+- When the script installs dependencies, always choose the latest version when given a version choice from ~pkg_add~, except for Emacs, where you should choose the gtk2 variant.
+
+* Table of Contents :TOC_4:
+- [[#disclaimer][DISCLAIMER]]
+- [[#shameless-unixporn-for-internet-points][Shameless Unixporn for internet points.]]
+- [[#crucial-information][Crucial Information]]
+- [[#note][Note:]]
+- [[#setup][Setup]]
+  - [[#initscript][InitScript]]
+      - [[#boilerplate][Boilerplate]]
+      - [[#subroutines][Subroutines]]
+      - [[#wizard-menu][Wizard Menu]]
+  - [[#misc-stuffs][Misc Stuffs]]
+      - [[#quicklisp-install][Quicklisp Install]]
+      - [[#xsessionxresourcesxprofile][.Xsession/.Xresources/.Xprofile]]
+      - [[#sysctlconf][Sysctl.conf]]
+      - [[#dfm-install][Dfm-Install]]
+      - [[#doasconf][Doas.conf]]
+      - [[#cargolist][CARGOLIST]]
+  - [[#rexfile][Rexfile]]
+      - [[#perl-boilerplate][Perl-Boilerplate]]
+      - [[#remove-cruft][Remove-Cruft]]
+      - [[#fizsh-setup][FiZSH-Setup]]
+      - [[#emacs-setup][Emacs-Setup]]
+      - [[#stumpwm-setup][StumpWM-Setup]]
+      - [[#xenodmbackground-setup][XenoDM/Background-Setup]]
+      - [[#apmd_autohook-lock][APMD_AutoHook-Lock]]
+      - [[#extra-packages][Extra-Packages]]
+      - [[#xdg-userdirs][Xdg-UserDirs]]
+- [[#setup-script][Setup Script]]
+    - [[#do-as-user][Do as user:]]
+
+* Setup
+** InitScript
 
 Setup KSH Script
 
@@ -237,8 +278,7 @@ do
 done
 #+END_SRC
 
-*** Misc Stuffs
-
+** Misc Stuffs
 **** Quicklisp Install
 
 you probably want this if you want to write with stumpwm and modules...
@@ -491,10 +531,10 @@ permit nopass :operator cmd umount
 Cargo Package List
 
 #+BEGIN_SRC txt :tangle .cargolist
-cargo-update-installed du-dust hyperfine onefetch sd tere tokei
+cargo-upgrade-command du-dust hyperfine onefetch sd tere tokei
 #+END_SRC
 
-*** Rexfile
+** Rexfile
 **** Perl-Boilerplate
 
 Set up "subroutines" in perl, That I'll use later.
@@ -526,7 +566,6 @@ task 'remove_default_cruft', sub {
   system( 'doas', 'chmod', '0700', "$USERHOME" );
 };
 #+END_SRC
-
 
 **** FiZSH-Setup
 
@@ -704,8 +743,7 @@ task 'update_xdg_user_dirs', sub {
 };
 #+END_SRC
 
-** Setup Script
-
+* Setup Script
 *** Do as user:
 
 #+BEGIN_SRC
@@ -713,18 +751,3 @@ $ ftp -o /tmp/setup.ksh $GITHUB/izder456/dotfiles/raw/main/setup.ksh
 $ ksh /tmp/setup.ksh
 #+END_SRC
 
-** Note:
-
-- My script doesn't perform any performance tweaking. Users should refer to [[https://openbsd.org/faq][the FAQ]], [[https://man.openbsd.org][manpages]], or the unofficial [[https://www.openbsdhandbook.com][OpenBSD Handbook]] for that.
-
-- for laptops, I /highly recommend/ solene%'s power management daemon [[https://dataswamp.org/~solene/2022-03-21-openbsd-cool-frequency.html][obsdfreqd]]
-
-- When the script installs dependencies, always choose the latest version when given a version choice from ~pkg_add~, except for Emacs, where you should choose the gtk2 variant.
-
-* DISCLAIMER
-
-- I'm not responsible for any system breakage due to my code.
-
-- If you're unsure, refer to [[LICENSE.txt][THE LICENSE]] to see how seriously I take this.
-
-- Use with caution.
