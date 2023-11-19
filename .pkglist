@@ -34,6 +34,7 @@ desmume--
 dolphin--
 dos2unix--
 dunst--
+dvd+rw-tools--
 dwz--
 easytag--
 editorconfig-core-c--
@@ -87,6 +88,7 @@ gtk2-murrine-engine--
 gtk2mm--
 gzdoom--
 harfbuzz--
+harfbuzz-icu--
 hicolor-icon-theme--
 htop--
 hunspell--
@@ -261,6 +263,7 @@ tiff--
 tmate--
 tor--
 transmission-gtk--
+trash-d--
 tree--
 tree-sitter--
 ttyplot--

@@ -73,6 +73,11 @@ alias lh="eza --icons=auto -lah"
 alias tree="eza --icons=auto -Th"
 
 ##
+# Rm-Trash
+##
+alias rm="trash"
+
+##
 # Alias for parsing
 ##
 alias cat="bat --theme=gruvbox-dark -pp"
