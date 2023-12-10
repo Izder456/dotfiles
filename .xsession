@@ -14,6 +14,6 @@ picom -f -b &
 ulimit -d 17000000
 ulimit -Sc 0
 xset +fp /usr/local/share/fonts/spleen
-feh --bg-fill $(shuf -n1 -e /usr/local/share/backgrounds/*.png) &
+feh --bg-fill $(shuf -n1 -e /usr/local/share/backgrounds/*) &
 xidle -delay 5 -nw -program "/usr/local/bin/slock" -timeout 1800 &
 stumpwm
