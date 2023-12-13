@@ -56,6 +56,7 @@ source ~/.zsh-256/zsh-256color.plugin.zsh
 # Ruby Stuff
 ##
 export GEM_HOME="$HOME/.gems"
+export PATH=$PATH:$HOME/.gems/bin
 
 ##
 # Alias for muscle memory
