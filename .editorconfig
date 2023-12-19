@@ -14,7 +14,7 @@ indent_size = 2
 [*.{pl}]
 indent_size = 2
 
-[*.{rs,c,cpp,h,hpp}]
+[*.{rsw}]
 indent_size = 4
 
 [*.{ml,opam}]
