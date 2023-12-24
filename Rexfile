@@ -145,6 +145,17 @@ task 'compile_afetch', sub {
   system( 'doas', 'make', 'install' );
 };
 
+task 'compile_nxbelld', sub {
+    system( 'git', 'clone',
+	    "$GITHUB/dusxmt/nxbelld.git", "$USERHOME/.nxbelld" );
+    chdir "$USERHOME/.nxbelld";
+    system( 'env', 'AUTOCONF_VERSION=2.69', 'AUTOMAKE_VERSION=1.16',
+	    'autoreconf -i');
+    system( './configure', '--prefix', "$USERHOME/.local");
+    system( 'gmake' );
+    system( 'gmake', 'install' );
+};
+
 # Updates XDG user directories
 task 'update_xdg_user_dirs', sub {
   system( 'xdg-user-dirs-update' );

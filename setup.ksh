@@ -95,6 +95,7 @@ function setup_misc
   rex compile_slock
   rex compile_st
   rex compile_surf
+  rex compile_nxbelld
   rex setup_apmd
   rex install_backgrounds
   rex update_xdg_user_dirs
