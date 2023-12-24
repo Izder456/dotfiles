@@ -4,6 +4,7 @@ arx-libertatis--
 automake--%1.16
 bash--
 bat--
+beets--
 boost--
 cairo--
 chicken--
@@ -17,8 +18,10 @@ dbus--
 deadbeef--
 desktop-file-utils--
 dhewm3--
+dunst--
 editorconfig-core-c--
 emacs--gtk3%emacs
+enchant--
 extra-cmake-modules--
 eza--
 feh--
@@ -29,9 +32,12 @@ fltk--
 fluidsynth--
 freefont-ttf--
 fsharp--
+g++--%11
+gcc--%11
 gd--
 gettext-runtime--
 giflib--
+gimp--%snapshot
 git--
 github-cli--
 glib2--
@@ -42,6 +48,7 @@ gnome-icon-theme--
 gnome-icon-theme-symbolic--
 gnupg--
 gnutls--
+go--
 godot--
 godot4--
 godot4-editor--
@@ -125,6 +132,9 @@ pkglocatedb--
 png--
 portaudio-svn--
 pv--
+py3-ConfigArgParse--
+py3-Pillow--
+py3-numpy--
 py3-pip--
 py3-pipx--
 py3-platformdirs--
@@ -161,7 +171,9 @@ sshfs-fuse--
 stumpwm--
 supertux--
 supertuxkart--
+thunderbird--
 tiff--
+transmission--
 transmission-gtk--
 trash-d--
 tree--
