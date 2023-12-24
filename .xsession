@@ -13,6 +13,7 @@ dunst &
 picom -f -b &
 ulimit -d 17000000
 ulimit -Sc 0
+pkill nxbelld; nxbelld -v100 -d200 -f ~/.local/sfx/Pop.wav -b
 xset +fp /usr/local/share/fonts/spleen
 feh --bg-fill $(shuf -n1 -e /usr/local/share/backgrounds/*.png) &
 xidle -delay 5 -nw -program "/usr/local/bin/slock" -timeout 1800 &
