@@ -1,0 +1,119 @@
+cli_add_playlist_name Default
+deadbeef_version 1.9.4
+filechooser.lastdir file:///home/izder456/Music/Playlist
+filechooser.playlist.lastdir file:///home/izder456/Music/Mild%20High%20Club/Skiptracing
+gtkui.autoresize_columns 1
+gtkui.color.bar_background 64507 61937 51143
+gtkui.color.bar_foreground 64250 48572 12079
+gtkui.color.listview_cursor 64507 61937 51143
+gtkui.color.listview_even_row 10280 10280 10280
+gtkui.color.listview_odd_row 7453 8224 8481
+gtkui.color.listview_selection 15420 14392 13878
+gtkui.columns.playlist [{"title":"♫","id":"1","format":"%playstatus%","sort_format":"","size":"16","align":"0","color_override":"0","color":"#ff000000"},{"title":"Artist / Album","id":"-1","format":"$if(%artist%,%artist%,Unknown Artist)[ - %album%]","sort_format":"","size":"195","align":"0","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"345","align":"0","color_override":"0","color":"#ff000000"},{"title":"Duration","id":"-1","format":"%length%","sort_format":"","size":"181","align":"0","color_override":"0","color":"#ff000000"}]
+gtkui.columns.search [{"title":"Artist / Album","id":"-1","format":"$if(%artist%,%artist%,Unknown Artist)[ - %album%]","sort_format":"","size":"16","align":"0","color_override":"0","color":"#ff000000"},{"title":"Track No","id":"-1","format":"%tracknumber%","sort_format":"","size":"16","align":"1","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"16","align":"0","color_override":"0","color":"#ff000000"},{"title":"Duration","id":"-1","format":"%length%","sort_format":"","size":"16","align":"0","color_override":"0","color":"#ff000000"}]
+gtkui.font.listview_column_text Liberation Serif Bold 12
+gtkui.font.listview_group_text Serif 12
+gtkui.font.listview_text FreeSerif 11
+gtkui.font.tabstrip_text FreeSerif 11
+gtkui.hide_remove_from_disk 0
+gtkui.hide_tray_icon 1
+gtkui.layout.1.9.0 {"type":"vbox","legacy_params":" expand=\"0 1\" fill=\"1 1\" homogeneous=0","children":[{"type":"hbox","legacy_params":" expand=\"0 1 0\" fill=\"1 1 1\" homogeneous=0","children":[{"type":"playtb"},{"type":"seekbar"},{"type":"volumebar","settings":{"scale":"db"}}]},{"type":"tabbed_playlist","legacy_params":" hideheaders=0 width=625"}]}
+gtkui.override_bar_colors 1
+gtkui.override_listview_colors 1
+gtkui.override_tabstrip_colors 1
+gtkui.playlist.group_by_tf 
+gtkui.search.group_by_tf 
+gtkui.skip_deleted_songs 1
+gtkui.start_hidden 0
+gtkui.statusbar.visible 1
+gtkui.statusbar_seltime 1
+gtkui.tabscroll 0
+gtkui.tabstrip_embolden_playing 1
+gtkui.titlebar_playing_tf DeaDBeeF - %artist% - %title%
+gtkui.titlebar_stopped_tf DeaDBeeF
+gtkui.vis.use_custom_background_color 0
+gtkui.vis.use_custom_base_color 0
+gui_plugin GTK3
+hotkey.key01 "Ctrl f" 0 0 find
+hotkey.key02 "Ctrl o" 0 0 open_files
+hotkey.key03 "Ctrl q" 0 0 quit
+hotkey.key04 "Ctrl n" 0 0 new_playlist
+hotkey.key05 "Ctrl a" 0 0 select_all
+hotkey.key06 "Escape" 0 0 deselect_all
+hotkey.key07 "Ctrl m" 0 0 toggle_stop_after_current
+hotkey.key08 "Ctrl j" 0 0 jump_to_current_track
+hotkey.key09 "F1" 0 0 help
+hotkey.key10 "Delete" 1 0 remove_from_playlist
+hotkey.key11 "Ctrl w" 0 0 remove_current_playlist
+hotkey.key13 "Alt Return" 1 0 track_properties
+hotkey.key14 "Return" 0 0 play
+hotkey.key15 "Ctrl p" 0 0 toggle_pause
+hotkey.key16 "Alt 1" 0 0 playlist1
+hotkey.key17 "Alt 2" 0 0 playlist2
+hotkey.key18 "Alt 3" 0 0 playlist3
+hotkey.key19 "Alt 4" 0 0 playlist4
+hotkey.key20 "Alt 5" 0 0 playlist5
+hotkey.key21 "Alt 6" 0 0 playlist6
+hotkey.key22 "Alt 7" 0 0 playlist7
+hotkey.key23 "Alt 8" 0 0 playlist8
+hotkey.key24 "Alt 9" 0 0 playlist9
+hotkey.key25 "Alt 0" 0 0 playlist10
+hotkey.key26 z 0 0 prev
+hotkey.key27 x 0 0 play
+hotkey.key28 c 0 0 toggle_pause
+hotkey.key29 v 0 0 stop
+hotkey.key30 b 0 0 next
+hotkey.key31 n 0 0 playback_random
+hotkey.key32 "Ctrl k" 0 0 toggle_stop_after_album
+hotkeys_created 1
+junk.enable_cp936_detection 1
+junk.enable_shift_jis_detection 1
+lastfm.disable_np 0
+lastfm.enable 1
+lastfm.login izder456
+lastfm.mbid 1
+lastfm.password Byeb0t!!
+lastfm.prefer_album_artist 1
+lastfm.scrobbler_url https://post.audioscrobbler.com
+lastfm.submit_tiny_tracks 1
+logwindow.geometry.h 824
+logwindow.geometry.w 1564
+logwindow.geometry.x 18
+logwindow.geometry.y 58
+mainwin.geometry.h 751
+mainwin.geometry.w 625
+mainwin.geometry.x 121
+mainwin.geometry.y 53
+network.proxy.port 8080
+notify.albumart 1
+notify.albumart_size 64
+notify.enable 1
+notify.fix_kde_5_23_5 0
+notify.format_content_tf %artist% - %album%
+notify.format_title_tf Now Playing: %title%
+output_plugin pulseaudio
+playback.loop 0
+playback.order 2
+playback.volume.normalized 0.0124164
+playlist.current 0
+playlist.cursor.0 67
+playlist.cursor.1 0
+playlist.scroll.0 -92
+playlist.scroll.1 0
+playlist.scroll.cursorfollowplayback 1
+playlist.tab.00000 Psych
+prefwin.geometry.h 483
+prefwin.geometry.w 738
+prefwin.geometry.x 431
+prefwin.geometry.y 228
+resume.paused 0
+resume.playlist 0
+resume.position 16.904165
+resume.track 92
+searchwin.geometry.h 824
+searchwin.geometry.w 1564
+searchwin.geometry.x 18
+searchwin.geometry.y 58
+streamer.samplerate 44100
+streamer.samplerate_mult_44 44100
+streamer.samplerate_mult_48 48000
