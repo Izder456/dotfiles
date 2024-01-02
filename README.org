@@ -280,7 +280,7 @@ do
 	r|R)  continue;;
 	q|Q)  print
 	      exit;;
-	,*)  print "\n$REVON Invalid selection $REVOFF"
+	*)  print "\n$REVON Invalid selection $REVOFF"
 	    sleep 1;;
     esac
 done
