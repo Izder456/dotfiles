@@ -109,7 +109,6 @@ function setup_misc
 
 function setup_xenodm
 {
-    ensure_hard
     log "$REVON Setting up XenoDM... $REVOFF"
     rex setup_xenodm
 }
