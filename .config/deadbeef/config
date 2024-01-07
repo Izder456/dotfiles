@@ -1,6 +1,6 @@
 cli_add_playlist_name Default
 deadbeef_version 1.9.4
-filechooser.lastdir file:///home/izder456/Music/King%20Gizzard%20&%20the%20Lizard%20Wizard
+filechooser.lastdir file:///home/izder456/Documents/lmms/projects/Album
 filechooser.playlist.lastdir file:///home/izder456/Music
 gtkui.autoresize_columns 1
 gtkui.color.bar_background 60395 56283 45746
@@ -30,7 +30,7 @@ gtkui.font.tabstrip_text FreeSerif 11
 gtkui.hide_remove_from_disk 0
 gtkui.hide_tray_icon 1
 gtkui.last_playlist_save_name /home/izder456/Music/Vibes.dbpl
-gtkui.layout.1.9.0 {"type":"vbox","legacy_params":" expand=\"0 1\" fill=\"1 1\" homogeneous=0","children":[{"type":"hbox","legacy_params":" expand=\"0 1 0\" fill=\"1 1 1\" homogeneous=0","children":[{"type":"playtb"},{"type":"seekbar"},{"type":"volumebar","settings":{"scale":"db"}}]},{"type":"hsplitter","legacy_params":" locked=0 ratio=0.478261 pos=0 size2=0","children":[{"type":"vsplitter","legacy_params":" locked=0 ratio=0.317007 pos=0 size2=0","children":[{"type":"hsplitter","legacy_params":" locked=0 ratio=0.306150 pos=0 size2=0","children":[{"type":"coverart","settings":{"mode":"selected"}},{"type":"scope","settings":{"renderMode":"multichannel","scaleMode":"auto","fragmentDuration":"300"}}]},{"type":"vsplitter","legacy_params":" locked=0 ratio=0.086869 pos=0 size2=0","children":[{"type":"pltbrowser"},{"type":"spectrum","settings":{"renderMode":"bands","distanceBetweenBars":"3","barGranularity":"2"}}]}]},{"type":"tabbed_playlist","legacy_params":" hideheaders=0 width=810"}]}]}
+gtkui.layout.1.9.0 {"type":"vbox","legacy_params":" expand=\"0 1\" fill=\"1 1\" homogeneous=0","children":[{"type":"hbox","legacy_params":" expand=\"0 1 0\" fill=\"1 1 1\" homogeneous=0","children":[{"type":"playtb"},{"type":"seekbar"},{"type":"volumebar","settings":{"scale":"db"}}]},{"type":"hsplitter","legacy_params":" locked=0 ratio=0.478261 pos=0 size2=0","children":[{"type":"vsplitter","legacy_params":" locked=0 ratio=0.317007 pos=0 size2=0","children":[{"type":"hsplitter","legacy_params":" locked=0 ratio=0.306150 pos=0 size2=0","children":[{"type":"coverart","settings":{"mode":"selected"}},{"type":"scope","settings":{"renderMode":"multichannel","scaleMode":"auto","fragmentDuration":"300"}}]},{"type":"vsplitter","legacy_params":" locked=0 ratio=0.086869 pos=0 size2=0","children":[{"type":"pltbrowser"},{"type":"spectrum","settings":{"renderMode":"bands","distanceBetweenBars":"3","barGranularity":"2"}}]}]},{"type":"tabbed_playlist","legacy_params":" hideheaders=0 width=809"}]}]}
 gtkui.override_bar_colors 1
 gtkui.override_listview_colors 1
 gtkui.override_tabstrip_colors 1
@@ -109,22 +109,22 @@ notify.format_title_tf Now Playing: %title%
 output_plugin pulseaudio
 playback.loop 0
 playback.order 0
-playback.volume.normalized 0.0147395
+playback.volume.normalized 1.0000000
 playlist.current 0
-playlist.cursor.0 26
+playlist.cursor.0 2
 playlist.cursor.1 0
-playlist.scroll.0 -26
+playlist.scroll.0 -2
 playlist.scroll.1 0
 playlist.scroll.cursorfollowplayback 1
-playlist.tab.00000 Default
+playlist.tab.00000 Album
 prefwin.geometry.h 483
 prefwin.geometry.w 738
 prefwin.geometry.x 431
 prefwin.geometry.y 228
 resume.paused 0
 resume.playlist 0
-resume.position 0.0464399
-resume.track 12
+resume.position 94.180549
+resume.track 2
 searchwin.geometry.h 824
 searchwin.geometry.w 1564
 searchwin.geometry.x 18

@@ -32,8 +32,6 @@ fltk--
 fluidsynth--
 freefont-ttf--
 fzf--
-g++--%11
-gcc--%11
 gd--
 gettext-runtime--
 gettext-tools--
@@ -121,9 +119,6 @@ pkglocatedb--
 png--
 portaudio-svn--
 pv--
-py3-ConfigArgParse--
-py3-Pillow--
-py3-numpy--
 py3-pip--
 py3-pipx--
 py3-platformdirs--
