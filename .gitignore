@@ -1,6 +1,7 @@
 .local/bin/*
 *.lock
-*.dpbl
+*.dbpl
+*deadbeef/playlists*y
 running
 socket
 !.local/bin/ffrecord

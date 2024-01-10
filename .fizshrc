@@ -4,13 +4,13 @@
 # ENV VARS
 ##
 export VISUAL="emacs"
-export EDITOR="emacs -nw" 
+export EDITOR="emacs -nw"
 export PAGER="most"
 
 ##
 # export $PATH
 ##
-export PATH=$HOME/.cargo/bin:$HOME/.local/bin:$HOME/.emacs.d/bin:$HOME/.local/share/pkg/bin:$PATH
+export PATH=$PATH:$HOME/.cargo/bin:$HOME/.local/bin
 
 ##
 # Setup Completions
@@ -20,6 +20,9 @@ setopt MENU_COMPLETE
 setopt AUTO_LIST
 setopt COMPLETE_IN_WORD
 
+autoload -U bashcompinit
+bashcompinit
+eval "$(register-python-argcomplete pipx)"
 
 ##
 # Java Stuff
