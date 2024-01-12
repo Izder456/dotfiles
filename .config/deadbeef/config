@@ -111,9 +111,9 @@ playback.loop 0
 playback.order 0
 playback.volume.normalized 1.0000000
 playlist.current 0
-playlist.cursor.0 3
+playlist.cursor.0 515
 playlist.cursor.1 0
-playlist.scroll.0 -3
+playlist.scroll.0 -515
 playlist.scroll.1 0
 playlist.scroll.cursorfollowplayback 1
 playlist.tab.00000 mcbaise
@@ -123,8 +123,8 @@ prefwin.geometry.x 431
 prefwin.geometry.y 228
 resume.paused 0
 resume.playlist 0
-resume.position 0.0464399
-resume.track 7
+resume.position 63.483627
+resume.track 515
 searchwin.geometry.h 824
 searchwin.geometry.w 1564
 searchwin.geometry.x 18
