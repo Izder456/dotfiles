@@ -60,7 +60,6 @@
       - [[#extra-packages][Extra-Packages]]
       - [[#xdg-userdirs][Xdg-UserDirs]]
 - [[#setup-script][Setup Script]]
-    - [[#do-as-user][Do as user:]]
 
 * Setup
 ** InitScript
@@ -759,9 +758,62 @@ task 'update_xdg_user_dirs', sub {
 #+END_SRC
 
 * Setup Script
-*** Do as user:
 
-#+BEGIN_SRC
-$ ftp -o /tmp/setup.ksh $GITHUB/izder456/dotfiles/raw/main/setup.ksh
-$ ksh /tmp/setup.ksh
-#+END_SRC
+1. Install OpenBSD on a machine with these specs
+
+  #+BEGIN_SRC
+  >=42GB Install Disk
+  >=22GB in /usr/local (can get by with a single root partition)
+  4gb or more RAM
+  4 cores or more
+  OpenGL >=3.1 Capable GFX Card
+  #+END_SRC
+
+2. Switch to -CURRENT
+
+  #+BEGIN_SRC
+  # sysupgrade -sn
+  #+END_SRC
+
+3. Add =:doas= group
+
+  #+BEGIN_SRC
+  # groupadd doas
+  # usermod -G wheel,operator,doas [your username]
+  #+END_SRC
+
+4. Add user to staff login class
+
+  #+BEGIN_SRC
+  # usermod -L staff [your username]
+  #+END_SRC
+
+5. grab my doas and sysctl configs
+
+   #+BEGIN_SRC
+   # ftp -o /etc/doas.conf https://github.com/izder456/dotfiles/raw/main/doas.conf
+   # ftp -o /etc/sysctl.conf https://github.com/izder456/dotfiles/raw/main/sysctl.conf
+   #+END_SRC
+
+6. reboot, let sysupgrade finish, and merge changes:
+
+   #+BEGIN_SRC
+   # reboot
+   #+END_SRC
+
+   #+BEGIN_SRC
+   # sysmerge -d
+   #+END_SRC
+
+7. Download and run script as your regular user
+
+  #+BEGIN_SRC
+  $ ftp -o /tmp/setup.ksh $GITHUB/izder456/dotfiles/raw/main/setup.ksh
+  $ ksh /tmp/setup.ksh
+  #+END_SRC
+
+8. Reboot again
+
+  #+BEGIN_SRC
+  # reboot
+  #+END_SRC
