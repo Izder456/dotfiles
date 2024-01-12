@@ -808,7 +808,7 @@ task 'update_xdg_user_dirs', sub {
 7. Download and run script as your regular user
 
   #+BEGIN_SRC
-  $ ftp -o /tmp/setup.ksh $GITHUB/izder456/dotfiles/raw/main/setup.ksh
+  $ ftp -o /tmp/setup.ksh https://github.com/izder456/dotfiles/raw/main/setup.ksh
   $ ksh /tmp/setup.ksh
   #+END_SRC
 
