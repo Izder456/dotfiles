@@ -812,6 +812,12 @@ task 'update_xdg_user_dirs', sub {
   $ ksh /tmp/setup.ksh
   #+END_SRC
 
+8. enable dbus (my StumpWM config needs it)
+
+   #+BEGIN_SRC
+   # rcctl enable messagebus
+   #+END_SRC
+
 8. Reboot again
 
   #+BEGIN_SRC
