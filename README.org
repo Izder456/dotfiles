@@ -818,7 +818,7 @@ task 'update_xdg_user_dirs', sub {
    # rcctl enable messagebus
    #+END_SRC
 
-8. Reboot again
+9. Reboot again
 
   #+BEGIN_SRC
   # reboot
