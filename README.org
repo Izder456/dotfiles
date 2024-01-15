@@ -323,7 +323,8 @@ you probably want this if you want to write with stumpwm and modules...
                 "alexandria"
                 "cl-fad"
                 "anaphora"
-                "drakma"))
+                "drakma"
+		"slynk"))
 #+END_SRC
 
 /USE:/
