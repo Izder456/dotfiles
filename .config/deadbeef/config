@@ -1,4 +1,5 @@
 cli_add_playlist_name Default
+close_send_to_tray 0
 deadbeef_version 1.9.4
 filechooser.lastdir file:///home/izder456/Music/MASTER%20BOOT%20RECORD/INTERNET%20PROTOCOL
 filechooser.playlist.lastdir file:///home/izder456/Music
@@ -21,16 +22,16 @@ gtkui.color.tabstrip_mid 12850 12336 12079
 gtkui.color.tabstrip_playing_text 64764 61937 51143
 gtkui.color.tabstrip_selected_text 64764 61937 51143
 gtkui.color.tabstrip_text 64764 61937 51143
-gtkui.columns.playlist [{"title":"♫","id":"1","format":"%playstatus%","sort_format":"","size":"33","align":"0","color_override":"0","color":"#ff000000"},{"title":"Artist","id":"-1","format":"$if(%artist%,%artist%,Unknown Artist)","sort_format":"","size":"251","align":"0","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"546","align":"0","color_override":"0","color":"#ff000000"}]
+gtkui.columns.playlist [{"title":"♫","id":"1","format":"%playstatus%","sort_format":"","size":"33","align":"0","color_override":"0","color":"#ff000000"},{"title":"Artist","id":"-1","format":"$if(%artist%,%artist%,Unknown Artist)","sort_format":"","size":"119","align":"0","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"544","align":"0","color_override":"0","color":"#ff000000"}]
 gtkui.columns.search [{"title":"Artist / Album","id":"-1","format":"$if(%artist%,%artist%,Unknown Artist)[ - %album%]","sort_format":"","size":"16","align":"0","color_override":"0","color":"#ff000000"},{"title":"Track No","id":"-1","format":"%tracknumber%","sort_format":"","size":"16","align":"1","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"16","align":"0","color_override":"0","color":"#ff000000"},{"title":"Duration","id":"-1","format":"%length%","sort_format":"","size":"16","align":"0","color_override":"0","color":"#ff000000"}]
 gtkui.font.listview_column_text Spleen 8x16 Medium 12
 gtkui.font.listview_group_text Spleen 8x16 Medium 12
 gtkui.font.listview_text FreeSerif 11
 gtkui.font.tabstrip_text FreeSerif 11
-gtkui.hide_remove_from_disk 0
+gtkui.hide_remove_from_disk 1
 gtkui.hide_tray_icon 1
 gtkui.last_playlist_save_name /home/izder456/Music/Vibes.dbpl
-gtkui.layout.1.9.0 {"type":"vbox","legacy_params":" expand=\"0 1\" fill=\"1 1\" homogeneous=0","children":[{"type":"hbox","legacy_params":" expand=\"0 1 0\" fill=\"1 1 1\" homogeneous=0","children":[{"type":"playtb"},{"type":"seekbar"},{"type":"volumebar","settings":{"scale":"db"}}]},{"type":"hsplitter","legacy_params":" locked=0 ratio=0.478261 pos=0 size2=0","children":[{"type":"vsplitter","legacy_params":" locked=0 ratio=0.317007 pos=0 size2=0","children":[{"type":"hsplitter","legacy_params":" locked=0 ratio=0.286145 pos=0 size2=0","children":[{"type":"coverart","settings":{"mode":"selected"}},{"type":"scope","settings":{"renderMode":"multichannel","scaleMode":"auto","fragmentDuration":"300"}}]},{"type":"vsplitter","legacy_params":" locked=0 ratio=0.086869 pos=0 size2=0","children":[{"type":"pltbrowser"},{"type":"spectrum","settings":{"renderMode":"bands","distanceBetweenBars":"3","barGranularity":"2"}}]}]},{"type":"tabbed_playlist","legacy_params":" hideheaders=0 width=809"}]}]}
+gtkui.layout.1.9.0 {"type":"vbox","legacy_params":" expand=\"0 1\" fill=\"1 1\" homogeneous=0","children":[{"type":"hsplitter","legacy_params":" locked=0 ratio=0.074169 pos=0 size2=0","children":[{"type":"playtb"},{"type":"hsplitter","legacy_params":" locked=0 ratio=0.953408 pos=0 size2=0","children":[{"type":"seekbar"},{"type":"volumebar","settings":{"scale":"db"}}]}]},{"type":"hsplitter","legacy_params":" locked=0 ratio=0.478261 pos=0 size2=0","children":[{"type":"vsplitter","legacy_params":" locked=0 ratio=0.317007 pos=0 size2=0","children":[{"type":"hsplitter","legacy_params":" locked=0 ratio=0.286145 pos=0 size2=0","children":[{"type":"coverart","settings":{"mode":"selected"}},{"type":"scope","settings":{"renderMode":"multichannel","scaleMode":"auto","fragmentDuration":"300"}}]},{"type":"vsplitter","legacy_params":" locked=0 ratio=0.086869 pos=0 size2=0","children":[{"type":"pltbrowser"},{"type":"spectrum","settings":{"renderMode":"bands","distanceBetweenBars":"3","barGranularity":"2"}}]}]},{"type":"tabbed_playlist","legacy_params":" hideheaders=0 width=809"}]}]}
 gtkui.override_bar_colors 1
 gtkui.override_listview_colors 1
 gtkui.override_tabstrip_colors 1
@@ -42,10 +43,10 @@ gtkui.statusbar.visible 1
 gtkui.statusbar_seltime 1
 gtkui.tabscroll 0
 gtkui.tabstrip_embolden_playing 1
-gtkui.titlebar_playing_tf DeaDBeeF - %artist% - %title%
-gtkui.titlebar_stopped_tf DeaDBeeF
+gtkui.titlebar_playing_tf %title%
+gtkui.titlebar_stopped_tf DeadBeeF
 gtkui.vis.custom_background_color 7453 8224 8481
-gtkui.vis.custom_base_color 64250 48572 12079
+gtkui.vis.custom_base_color 26728 40349 27242
 gtkui.vis.use_custom_background_color 1
 gtkui.vis.use_custom_base_color 1
 gui_plugin GTK3
@@ -81,6 +82,7 @@ hotkey.key30 b 0 0 next
 hotkey.key31 n 0 0 playback_random
 hotkey.key32 "Ctrl k" 0 0 toggle_stop_after_album
 hotkeys_created 1
+junk.enable_cp1251_detection 1
 junk.enable_cp936_detection 1
 junk.enable_shift_jis_detection 1
 lastfm.disable_np 0
@@ -114,6 +116,7 @@ playlist.current 0
 playlist.cursor.0 17
 playlist.cursor.1 -1
 playlist.cursor.2 0
+playlist.groups.spacing 2
 playlist.scroll.0 -17
 playlist.scroll.1 0
 playlist.scroll.2 0
@@ -126,9 +129,9 @@ prefwin.geometry.w 738
 prefwin.geometry.x 431
 prefwin.geometry.y 228
 resume.paused 0
-resume.playlist 0
-resume.position 75.418739
-resume.track 17
+resume.playlist -1
+resume.position -1.000000
+resume.track -1
 searchwin.geometry.h 824
 searchwin.geometry.w 1564
 searchwin.geometry.x 18
