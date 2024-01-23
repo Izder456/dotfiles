@@ -40,7 +40,7 @@
   - [[#initscript][InitScript]]
       - [[#boilerplate][Boilerplate]]
       - [[#subroutines][Subroutines]]
-      - [[#make-sure-shit-is-here][Make sure shit is here]]
+      - [[#will-it-run][Will it run?]]
       - [[#wizard-menu][Wizard Menu]]
   - [[#misc-stuffs][Misc Stuffs]]
       - [[#quicklisp-install][Quicklisp Install]]
@@ -48,7 +48,7 @@
       - [[#sysctlconf][Sysctl.conf]]
       - [[#dfm-install][Dfm-Install]]
       - [[#doasconf][Doas.conf]]
-      - [[#cargolist][CARGOLIST]]
+      - [[#cargo-list][Cargo-list]]
   - [[#rexfile][Rexfile]]
       - [[#perl-boilerplate][Perl-Boilerplate]]
       - [[#remove-cruft][Remove-Cruft]]
@@ -64,11 +64,11 @@
 * Setup
 ** InitScript
 
-Setup KSH Script
+This setup script is written in Korn Shell from OpenBSD base and contains various functions for setting up the environment for these dotfiles.
 
 **** Boilerplate
 
-set vars global
+The basic structure of the KSH script, as well as some GLOBALS.
 
 #+BEGIN_SRC sh :tangle setup.ksh
 #!/bin/ksh
@@ -95,7 +95,7 @@ trap 'log "Error occurred at line $LINENO"; exit 1' ERR
 
 **** Subroutines
 
-split up control flow
+The various functions use within the script.
 
 #+BEGIN_SRC sh :tangle setup.ksh
 function clean
@@ -193,7 +193,9 @@ function setup_xenodm
 }
 #+END_SRC
 
-**** Make sure shit is here
+**** Will it run?
+
+You need some things to make this thing work. This checks that.
 
 #+BEGIN_SRC sh :tangle setup.ksh
 function is_internet_up
@@ -227,9 +229,7 @@ do_ensure
 
 **** Wizard Menu
 
-*(SH)adow wizard M0n3y G4ng*
-
-/W3 L0V3 C4ST!NG SP3LLS/
+The interactive menu for the setup process.
 
 #+BEGIN_SRC sh :tangle setup.ksh
 HEADER_TEXT=`cat <<-EOF
@@ -311,9 +311,12 @@ main
 #+END_SRC
 
 ** Misc Stuffs
+
+This section contains various scripts and configurations for setting up various aspects of your environment, including Quicklisp installation, .Xsession/.Xresources/.Xprofile settings, sysctl.conf settings, dfm installation, doas.conf settings, cargo-list, etc.
+
 **** Quicklisp Install
 
-you probably want this if you want to write with stumpwm and modules...
+You probably want this if you want to write with StumpWM and modules...
 
 #+BEGIN_SRC lisp :tangle quicklisp-setup.lisp
 (quicklisp-quickstart:install :path "~/.quicklisp")
@@ -336,6 +339,8 @@ $ sbcl --load /tmp/quicklisp.lisp --script /tmp/quicklisp-setup.lisp
 #+END_SRC
 
 **** .Xsession/.Xresources/.Xprofile
+
+The settings for X session, resources, and profile.
 
 #+BEGIN_SRC sh :tangle .xprofile
 #!/bin/sh
@@ -453,7 +458,7 @@ stumpwm
 
 **** Sysctl.conf
 
-Open Kernel Limits n Allat
+The kernel parameters settings.
 
 *Very hardware specific*
 
@@ -503,44 +508,28 @@ APM-Config skip
 
 **** Doas.conf
 
-This is totally overkill
++this is totally overkill+
+fine now
 
 #+BEGIN_SRC conf :tangle doas.conf
 permit persist :doas
-permit nopass :operator cmd ln
-permit nopass :operator cmd cp
-permit nopass :operator cmd mv
-permit nopass :operator cmd make
-permit nopass :operator cmd mkdir
-permit nopass :operator cmd reboot
-permit nopass :operator cmd halt
-permit nopass :operator cmd install
-permit nopass :operator cmd mkfontdir
-permit nopass :operator cmd pkg_add
-permit nopass :operator cmd pkg_info
-permit nopass :operator cmd pkg_delete
-permit nopass :operator cmd pkg_mklocatedb
-permit nopass :operator cmd fc-cache
-permit nopass :operator cmd hw-probe
-permit nopass :operator cmd sysmerge
-permit nopass :operator cmd sysupgrade
-permit nopass :operator cmd syspatch
-permit nopass :operator cmd mount
-permit nopass :operator cmd umount
 #+END_SRC
 
-**** CARGOLIST
+**** Cargo-list
 
-Cargo Package List
+The list of packages to be installed via Cargo.
 
 #+BEGIN_SRC txt :tangle .cargolist
 cargo-upgrade-command du-dust hyperfine onefetch sd tere tokei
 #+END_SRC
 
 ** Rexfile
+
+This file contains various tasks for setting up your environment using Rex, a Perl library for automation.
+
 **** Perl-Boilerplate
 
-Set up "subroutines" in perl, That I'll use later.
+The initial setup for Perl.
 
 #+BEGIN_SRC perl :tangle Rexfile
 use 5.36.0;
@@ -759,6 +748,8 @@ task 'update_xdg_user_dirs', sub {
 #+END_SRC
 
 * Setup Script
+
+instructions on how to set up your OpenBSD system using these dotfiles. It includes instructions for installing OpenBSD, switching to the -CURRENT release, adding the doas group, adding the user to the staff login class, downloading and running the setup script, etc
 
 1. Install OpenBSD on a machine with these specs
 
