@@ -1,36 +1,59 @@
-! xwindow stuffs
+!!
+! XWindow Stuffs
+!!
+*imLocale: en_US.UTF-8
+
+!!
+! XTerm Stuffs
+!!
+*intensityStyles: true
+*allowSendEvents: true
 xterm*scrollBar: false
 xterm*faceName: Spleen
 xterm*faceSize: 12
 xterm*renderFont: true
 xterm*internalBorder: 16
 xterm*letterSpace: 1
-*allowSendEvents: true
-*imLocale: en_US.UTF-8
-*intensityStyles: true
 xterm*loginShell: true
 xterm*savelines: 16384
+
+!!
 ! Font Rendering Stuffs
+!!
 Xft.dpi: 96
 Xft.rgba: rgb
 Xft.antialias: true
 Xft.autohint: false
 Xft.hintstyle: hintfull
 Xft.lcdfilter: lcddefault
-
-XClock*Background: #32302f
-XClock*Foreground: #ebdbb2
-
-Xcursor.size: 16
-Xcursor.theme: Capitaine Cursors (Gruvbox) - White
-
 *faceName: Spleen
 *faceSize: 12
 
-! hard contrast: *background: #1d2021
+!!
+! XClock Stuffs
+!!
+XClock*Background: #32302f
+XClock*Foreground: #ebdbb2
+
+!!
+! Pointer Stuffs
+!!
+Xcursor.size: 16
+Xcursor.theme: Capitaine Cursors (Gruvbox) - White
+
+!!
+! Background Colors
+!!
+! Normal
 *background: #282828
-! soft contrast: *background: #32302f
 *foreground: #ebdbb2
+! Hard-Dark
+*.activeBackground: #1d2021
+*.activeForeground: #32302f
+
+!!
+! Gruvbox Colors
+!!
 ! Black + DarkGrey
 *color0:  #282828
 *color8:  #928374
@@ -55,6 +78,3 @@ Xcursor.theme: Capitaine Cursors (Gruvbox) - White
 ! LightGrey + White
 *color7:  #a89984
 *color15: #ebdbb2
-
-*.activeBackground: #1d2021
-*.activeForeground: #32302f
