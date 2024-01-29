@@ -305,7 +305,43 @@ This section contains various scripts and configurations for setting up various 
 **** Editorconfig
 
 #+BEGIN_SRC toml :tangle .editorconfig
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
 [*]
+end_of_line = lf
+insert_final_newline = true
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Matches lisps
+[*.{lisp,lsp,elisp,el,clj,cljs,scm,hy}]
+indent_style = space
+indent_size = 2
+
+# Matches Build
+[{Rexfile,Makefile}]
+indent_style = space
+indent_size = 4
+
+# Matches Shell languages
+[*.{ksh,sh,bash,zsh,csh}]
+indent_style = space
+indent_size = 4
+
+# Matches Perl
+[*.{pl,pm,t,PL}]
+indent_style = space
+indent_size = 4
+
+# Matches Bracketed languages
+[*.{c,cpp,h,cp,C,H,m,M,rs,go,js,java}]
+indent_style = space
+indent_size = 2
+
+# Matches Ruby-Like
+[*.{rb,cr,exs,ex}]
 indent_style = space
 indent_size = 2
 #+END_SRC
@@ -354,13 +390,13 @@ export SDL_VIDEO_X11_DGAMOUSE=0
 !!
 ! XWindow Stuffs
 !!
-*imLocale: en_US.UTF-8
+,*imLocale: en_US.UTF-8
 
 !!
 ! XTerm Stuffs
 !!
-*intensityStyles: true
-*allowSendEvents: true
+,*intensityStyles: true
+,*allowSendEvents: true
 xterm*scrollBar: false
 xterm*faceName: Spleen
 xterm*faceSize: 12
@@ -379,8 +415,8 @@ Xft.antialias: true
 Xft.autohint: false
 Xft.hintstyle: hintfull
 Xft.lcdfilter: lcddefault
-*faceName: Spleen
-*faceSize: 12
+,*faceName: Spleen
+,*faceSize: 12
 
 !!
 ! XClock Stuffs
@@ -398,39 +434,39 @@ Xcursor.theme: Capitaine Cursors (Gruvbox) - White
 ! Background Colors
 !!
 ! Normal
-*background: #282828
-*foreground: #ebdbb2
+,*background: #282828
+,*foreground: #ebdbb2
 ! Hard-Dark
-*.activeBackground: #1d2021
-*.activeForeground: #32302f
+,*.activeBackground: #1d2021
+,*.activeForeground: #32302f
 
 !!
 ! Gruvbox Colors
 !!
 ! Black + DarkGrey
-*color0:  #282828
-*color8:  #928374
+,*color0:  #282828
+,*color8:  #928374
 ! DarkRed + Red
-*color1:  #cc241d
-*color9:  #fb4934
+,*color1:  #cc241d
+,*color9:  #fb4934
 ! DarkGreen + Green
-*color2:  #98971a
-*color10: #b8bb26
+,*color2:  #98971a
+,*color10: #b8bb26
 ! DarkYellow + Yellow
-*color3:  #d79921
-*color11: #fabd2f
+,*color3:  #d79921
+,*color11: #fabd2f
 ! DarkBlue + Blue
-*color4:  #458588
-*color12: #83a598
+,*color4:  #458588
+,*color12: #83a598
 ! DarkMagenta + Magenta
-*color5:  #b16286
-*color13: #d3869b
+,*color5:  #b16286
+,*color13: #d3869b
 ! DarkCyan + Cyan
-*color6:  #689d6a
-*color14: #8ec07c
+,*color6:  #689d6a
+,*color14: #8ec07c
 ! LightGrey + White
-*color7:  #a89984
-*color15: #ebdbb2
+,*color7:  #a89984
+,*color15: #ebdbb2
 #+END_SRC
 
 ***** .xsession
@@ -474,7 +510,7 @@ kern.maxfiles=32768
 hw.smt=1
 
 # Video/Audio enable/disable
-  # change these to =1 if you want microphone or webcam access
+# change these to =1 if you want microphone or webcam access
 kern.audio.record=0
 kern.video.record=0
 #+END_SRC
@@ -514,7 +550,7 @@ APM-Config skip
 fine now
 
 #+BEGIN_SRC conf :tangle doas.conf
-  permit persist :doas
+permit persist :doas
 #+END_SRC
 
 **** Cargo-list

@@ -1,3 +1,39 @@
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
 [*]
+end_of_line = lf
+insert_final_newline = true
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Matches lisps
+[*.{lisp,lsp,elisp,el,clj,cljs,scm,hy}]
+indent_style = space
+indent_size = 2
+
+# Matches Build
+[{Rexfile,Makefile}]
+indent_style = space
+indent_size = 4
+
+# Matches Shell languages
+[*.{ksh,sh,bash,zsh,csh}]
+indent_style = space
+indent_size = 4
+
+# Matches Perl
+[*.{pl,pm,t,PL}]
+indent_style = space
+indent_size = 4
+
+# Matches Bracketed languages
+[*.{c,cpp,h,cp,C,H,m,M,rs,go,js,java}]
+indent_style = space
+indent_size = 2
+
+# Matches Ruby-Like
+[*.{rb,cr,exs,ex}]
 indent_style = space
 indent_size = 2

@@ -2,7 +2,7 @@ add_folders_follow_symlinks 1
 cli_add_playlist_name Default
 close_send_to_tray 0
 deadbeef_version 1.9.4
-filechooser.lastdir file:///home/izder456/Music/King%20Gizzard%20&%20The%20Lizard%20Wizard
+filechooser.lastdir file:///home/izder456/Music/izder456
 filechooser.playlist.lastdir file:///home/izder456/Music
 gtkui.autoresize_columns 1
 gtkui.color.bar_background 60395 56283 45746
@@ -23,7 +23,7 @@ gtkui.color.tabstrip_mid 12850 12336 12079
 gtkui.color.tabstrip_playing_text 64764 61937 51143
 gtkui.color.tabstrip_selected_text 64764 61937 51143
 gtkui.color.tabstrip_text 64764 61937 51143
-gtkui.columns.playlist [{"title":"♫","id":"1","format":"%playstatus%","sort_format":"","size":"33","align":"0","color_override":"0","color":"#ff000000"},{"title":"Artist","id":"-1","format":"$if(%artist%,%artist%,Unknown Artist)","sort_format":"","size":"232","align":"0","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"594","align":"0","color_override":"0","color":"#ff000000"}]
+gtkui.columns.playlist [{"title":"♫","id":"1","format":"%playstatus%","sort_format":"","size":"58","align":"0","color_override":"0","color":"#ff000000"},{"title":"Artist","id":"-1","format":"$if(%artist%,%artist%,Unknown Artist)","sort_format":"","size":"270","align":"0","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"983","align":"0","color_override":"0","color":"#ff000000"}]
 gtkui.columns.search [{"title":"Artist / Album","id":"-1","format":"$if(%artist%,%artist%,Unknown Artist)[ - %album%]","sort_format":"","size":"16","align":"0","color_override":"0","color":"#ff000000"},{"title":"Track No","id":"-1","format":"%tracknumber%","sort_format":"","size":"16","align":"1","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"16","align":"0","color_override":"0","color":"#ff000000"},{"title":"Duration","id":"-1","format":"%length%","sort_format":"","size":"16","align":"0","color_override":"0","color":"#ff000000"}]
 gtkui.font.listview_column_text Spleen 8x16 Medium 12
 gtkui.font.listview_group_text Spleen 8x16 Medium 12
@@ -32,7 +32,7 @@ gtkui.font.tabstrip_text FreeSerif 11
 gtkui.hide_remove_from_disk 1
 gtkui.hide_tray_icon 1
 gtkui.last_playlist_save_name /home/izder456/Music/Vibes.dbpl
-gtkui.layout.1.9.0 {"type":"vbox","legacy_params":" expand=\"0 1\" fill=\"1 1\" homogeneous=0","children":[{"type":"hsplitter","legacy_params":" locked=0 ratio=0.074169 pos=0 size2=0","children":[{"type":"playtb"},{"type":"hsplitter","legacy_params":" locked=0 ratio=0.953408 pos=0 size2=0","children":[{"type":"seekbar"},{"type":"volumebar","settings":{"scale":"db"}}]}]},{"type":"hsplitter","legacy_params":" locked=0 ratio=0.478261 pos=0 size2=0","children":[{"type":"vsplitter","legacy_params":" locked=0 ratio=0.317007 pos=0 size2=0","children":[{"type":"hsplitter","legacy_params":" locked=0 ratio=0.311081 pos=0 size2=0","children":[{"type":"coverart","settings":{"mode":"selected"}},{"type":"scope","settings":{"renderMode":"multichannel","scaleMode":"auto","fragmentDuration":"300"}}]},{"type":"vsplitter","legacy_params":" locked=0 ratio=0.343434 pos=0 size2=0","children":[{"type":"pltbrowser"},{"type":"spectrum","settings":{"renderMode":"bands","distanceBetweenBars":"3","barGranularity":"2"}}]}]},{"type":"tabbed_playlist","legacy_params":" hideheaders=0 width=809"}]}]}
+gtkui.layout.1.9.0 {"type":"vbox","legacy_params":" expand=\"0 1\" fill=\"1 1\" homogeneous=0","children":[{"type":"hsplitter","legacy_params":" locked=0 ratio=0.074169 pos=0 size2=0","children":[{"type":"playtb"},{"type":"hsplitter","legacy_params":" locked=0 ratio=0.953408 pos=0 size2=0","children":[{"type":"seekbar"},{"type":"volumebar","settings":{"scale":"db"}}]}]},{"type":"hsplitter","legacy_params":" locked=0 ratio=0.230179 pos=0 size2=0","children":[{"type":"vsplitter","legacy_params":" locked=0 ratio=0.247619 pos=0 size2=0","children":[{"type":"scope","settings":{"renderMode":"multichannel","scaleMode":"auto","fragmentDuration":"300"}},{"type":"vsplitter","legacy_params":" locked=0 ratio=0.343434 pos=0 size2=0","children":[{"type":"coverart","settings":{"mode":"selected"}},{"type":"spectrum","settings":{"renderMode":"bands","distanceBetweenBars":"3","barGranularity":"2"}}]}]},{"type":"tabbed_playlist","legacy_params":" hideheaders=0 width=1198"}]}]}
 gtkui.override_bar_colors 1
 gtkui.override_listview_colors 1
 gtkui.override_tabstrip_colors 1
@@ -40,7 +40,7 @@ gtkui.playlist.group_by_tf
 gtkui.search.group_by_tf 
 gtkui.skip_deleted_songs 1
 gtkui.start_hidden 0
-gtkui.statusbar.visible 1
+gtkui.statusbar.visible 0
 gtkui.statusbar_seltime 1
 gtkui.tabscroll 0
 gtkui.tabstrip_embolden_playing 1
@@ -114,15 +114,15 @@ playback.loop 0
 playback.order 1
 playback.volume.normalized 0.0424667
 playlist.current 0
-playlist.cursor.0 35
+playlist.cursor.0 -1
 playlist.cursor.1 -1
 playlist.cursor.2 11
 playlist.groups.spacing 2
-playlist.scroll.0 -35
+playlist.scroll.0 0
 playlist.scroll.1 0
 playlist.scroll.2 -11
 playlist.scroll.cursorfollowplayback 1
-playlist.tab.00000 Mother 3i
+playlist.tab.00000 佐藤理
 prefwin.geometry.h 483
 prefwin.geometry.w 738
 prefwin.geometry.x 431
@@ -130,7 +130,7 @@ prefwin.geometry.y 228
 resume.paused 0
 resume.playlist 0
 resume.position 0.0464399
-resume.track 46
+resume.track 49
 searchwin.geometry.h 824
 searchwin.geometry.w 1564
 searchwin.geometry.x 18
