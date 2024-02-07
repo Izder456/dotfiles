@@ -55,6 +55,8 @@ function config_install {
         log "Dots brokey"
         exit 1
     fi
+    rex configure_gtk
+    rex configure_icons
     "${HOME}/.dotfiles/bin/dfm" install
     doas cp ~/.dotfiles/doas.conf /etc/doas.conf
 }

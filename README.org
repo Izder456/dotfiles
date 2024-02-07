@@ -49,7 +49,6 @@
       - [[#will-it-run][Will it run?]]
       - [[#wizard-menu][Wizard Menu]]
   - [[#misc-stuffs][Misc Stuffs]]
-      - [[#editorconfig][Editorconfig]]
       - [[#quicklisp-install][Quicklisp Install]]
       - [[#xsessionxresourcesxprofile][.Xsession/.Xresources/.Xprofile]]
       - [[#sysctlconf][Sysctl.conf]]
@@ -60,6 +59,7 @@
       - [[#perl-boilerplate][Perl-Boilerplate]]
       - [[#remove-cruft][Remove-Cruft]]
       - [[#fizsh-setup][FiZSH-Setup]]
+      - [[#icons-and-gtk-stuffs][Icons and GTK stuffs]]
       - [[#emacs-setup][Emacs-Setup]]
       - [[#stumpwm-setup][StumpWM-Setup]]
       - [[#xenodmbackground-setup][XenoDM/Background-Setup]]
@@ -141,6 +141,8 @@ function config_install {
         log "Dots brokey"
         exit 1
     fi
+    rex configure_gtk
+    rex configure_icons
     "${HOME}/.dotfiles/bin/dfm" install
     doas cp ~/.dotfiles/doas.conf /etc/doas.conf
 }
@@ -301,50 +303,6 @@ main
 ** Misc Stuffs
 
 This section contains various scripts and configurations for setting up various aspects of your environment, including Quicklisp installation, .Xsession/.Xresources/.Xprofile settings, sysctl.conf settings, dfm installation, doas.conf settings, cargo-list, etc.
-
-**** Editorconfig
-
-#+BEGIN_SRC toml :tangle .editorconfig
-# top-most EditorConfig file
-root = true
-
-# Unix-style newlines with a newline ending every file
-[*]
-end_of_line = lf
-insert_final_newline = true
-insert_final_newline = true
-trim_trailing_whitespace = true
-
-# Matches lisps
-[*.{lisp,lsp,elisp,el,clj,cljs,scm,hy}]
-indent_style = space
-indent_size = 2
-
-# Matches Build
-[{Rexfile,Makefile}]
-indent_style = space
-indent_size = 4
-
-# Matches Shell languages
-[*.{ksh,sh,bash,zsh,csh}]
-indent_style = space
-indent_size = 4
-
-# Matches Perl
-[*.{pl,pm,t,PL}]
-indent_style = space
-indent_size = 4
-
-# Matches Bracketed languages
-[*.{c,cpp,h,cp,C,H,m,M,rs,go,js,java}]
-indent_style = space
-indent_size = 2
-
-# Matches Ruby-Like
-[*.{rb,cr,exs,ex}]
-indent_style = space
-indent_size = 2
-#+END_SRC
 
 **** Quicklisp Install
 
@@ -637,6 +595,45 @@ task 'configure_default_shell', sub {
   system( 'doas', 'make', 'install' );
   system( 'cp', "$USERHOME/.dotfiles/.fizshrc", "$USERHOME/.fizsh/.fizshrc" );
   system( 'chsh', '-s', '/usr/local/bin/fizsh' );
+};
+#+END_SRC
+
+**** Icons and GTK stuffs
+
+#+BEGIN_SRC perl :tangle Rexfile
+task 'configure_gtk', sub {
+  my %gtk = (
+    "gruvbox-dark-gtk" => "$GITHUB/jmattheis/gruvbox-dark-gtk.git",
+  );
+  keys %gtk;
+  while (my($k, $v) = each %gtk) {
+    my $clonedir = "$USERHOME/.dotfiles/.themes/$k";
+    my $cloneuri = "$v";
+    if ( -d "$clonedir" ) {
+      chdir "$clonedir";
+      system( 'git', 'pull' );
+    } else {
+      system( 'git', 'clone', "$cloneuri", "$clonedir" );
+    }
+  }
+};
+
+task 'configure_icons', sub {
+  my %icons = (
+    "gruvbox-dark-icons" => "$GITHUB/Fausto-Korpsvart/Gruvbox-GTK-Theme.git",
+  );
+  keys %icons;
+  while (my($k, $v) = each %icons) {
+    my $clonedir = "/tmp/$k";
+    my $cloneuri = "$v";
+    if ( -d "$clonedir" ) {
+      chdir "$clonedir";
+      system( 'git', 'pull' );
+    } else {
+      system( 'git', 'clone', "$cloneuri", "$clonedir" );
+    }
+    system( 'cp', '-Rv', glob("$clonedir/icons/*"), "$USERHOME/.dotfiles/.icons/" );
+  }
 };
 #+END_SRC
 

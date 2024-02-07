@@ -2,6 +2,9 @@
 *.lock
 *.dbpl
 *deadbeef/playlists*y
+.themes
+.icons/Gruvbox*
+.icons/gruvbox*
 running
 socket
 !.local/bin/ffrecord

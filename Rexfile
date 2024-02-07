@@ -53,6 +53,41 @@ task 'configure_default_shell', sub {
   system( 'chsh', '-s', '/usr/local/bin/fizsh' );
 };
 
+task 'configure_gtk', sub {
+  my %gtk = (
+    "gruvbox-dark-gtk" => "$GITHUB/jmattheis/gruvbox-dark-gtk.git",
+  );
+  keys %gtk;
+  while (my($k, $v) = each %gtk) {
+    my $clonedir = "$USERHOME/.dotfiles/.themes/$k";
+    my $cloneuri = "$v";
+    if ( -d "$clonedir" ) {
+      chdir "$clonedir";
+      system( 'git', 'pull' );
+    } else {
+      system( 'git', 'clone', "$cloneuri", "$clonedir" );
+    }
+  }
+};
+
+task 'configure_icons', sub {
+  my %icons = (
+    "gruvbox-dark-icons" => "$GITHUB/Fausto-Korpsvart/Gruvbox-GTK-Theme.git",
+  );
+  keys %icons;
+  while (my($k, $v) = each %icons) {
+    my $clonedir = "/tmp/$k";
+    my $cloneuri = "$v";
+    if ( -d "$clonedir" ) {
+      chdir "$clonedir";
+      system( 'git', 'pull' );
+    } else {
+      system( 'git', 'clone', "$cloneuri", "$clonedir" );
+    }
+    system( 'cp', '-Rv', glob("$clonedir/icons/*"), "$USERHOME/.dotfiles/.icons/" );
+  }
+};
+
 # Configures and installs emacs
 task 'configure_emacs', sub {
   if ( -d "$USERHOME/.emacs.d" ) {
