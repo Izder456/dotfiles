@@ -630,7 +630,7 @@ task 'configure_gtk', sub {
 task 'configure_icons', sub {
   my %icons = (
     "gruvbox-round-icons" => "$GITHUB/Fausto-Korpsvart/Gruvbox-GTK-Theme.git",
-    "gruvbox-square-icons" => "$GITHUB/jmattheis/gruvbox-dark-icon-gtk.git",
+    "gruvbox-square-icons" => "$GITHUB/jmattheis/gruvbox-dark-icons-gtk.git",
     "gruvbox-plus-icons" => "$GITHUB/SylEleuth/gruvbox-plus-icon-pack.git",
   );
   keys %icons;
