@@ -16,7 +16,7 @@ artwork.save_to_music_folders_relative_path cover.jpg
 cli_add_playlist_name Default
 close_send_to_tray 0
 deadbeef_version 1.9.4
-filechooser.lastdir file:///home/izder456/Music/Gogol%20Bordello/Gypsy%20Punks_%20Underdog%20World%20Strike
+filechooser.lastdir file:///home/izder456/Music/Justice/Justice
 filechooser.playlist.lastdir file:///home/izder456/Music
 gtkui.action_separators 0
 gtkui.autoresize_columns 1
@@ -38,7 +38,7 @@ gtkui.color.tabstrip_mid 12850 12336 12079
 gtkui.color.tabstrip_playing_text 64764 61937 51143
 gtkui.color.tabstrip_selected_text 64764 61937 51143
 gtkui.color.tabstrip_text 64764 61937 51143
-gtkui.columns.playlist [{"title":"♫","id":"1","format":"%playstatus%","sort_format":"","size":"26","align":"0","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"118","align":"0","color_override":"0","color":"#ff000000"}]
+gtkui.columns.playlist [{"title":"♫","id":"1","format":"%playstatus%","sort_format":"","size":"26","align":"0","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"302","align":"0","color_override":"0","color":"#ff000000"}]
 gtkui.columns.search [{"title":"Artist / Album","id":"-1","format":"$if(%artist%,%artist%,Unknown Artist)[ - %album%]","sort_format":"","size":"16","align":"0","color_override":"0","color":"#ff000000"},{"title":"Track No","id":"-1","format":"%tracknumber%","sort_format":"","size":"16","align":"1","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"16","align":"0","color_override":"0","color":"#ff000000"},{"title":"Duration","id":"-1","format":"%length%","sort_format":"","size":"16","align":"0","color_override":"0","color":"#ff000000"}]
 gtkui.custom_tray_icon deadbeef_tray_icon
 gtkui.delete_files_ask 1
@@ -118,8 +118,8 @@ logwindow.geometry.h 824
 logwindow.geometry.w 1564
 logwindow.geometry.x 18
 logwindow.geometry.y 58
-mainwin.geometry.h 816
-mainwin.geometry.w 766
+mainwin.geometry.h 824
+mainwin.geometry.w 1564
 mainwin.geometry.x 18
 mainwin.geometry.y 58
 network.proxy.port 8080
@@ -132,26 +132,26 @@ notify.format_title_tf Now Playing: %title%
 output_plugin pulseaudio
 playback.loop 0
 playback.order 1
-playback.volume.normalized 1.0000000
+playback.volume.normalized 0.0855366
 playlist.current 0
-playlist.cursor.0 10
-playlist.cursor.1 -1
+playlist.cursor.0 0
+playlist.cursor.1 0
 playlist.cursor.2 11
 playlist.groups.spacing 4
-playlist.scroll.0 -10
+playlist.scroll.0 0
 playlist.scroll.1 0
 playlist.scroll.2 -11
 playlist.scroll.cursorfollowplayback 1
-playlist.tab.00000 The String Cheese Incident
+playlist.tab.00000 Infest The Rats' Nest
 prefwin.geometry.h 483
 prefwin.geometry.w 738
 prefwin.geometry.x 431
 prefwin.geometry.y 228
 replaygain.processing_flags 0
 resume.paused 0
-resume.playlist 0
-resume.position 0.0464399
-resume.track 25
+resume.playlist -1
+resume.position -1.000000
+resume.track -1
 searchwin.geometry.h 824
 searchwin.geometry.w 1564
 searchwin.geometry.x 18

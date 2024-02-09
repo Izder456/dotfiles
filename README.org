@@ -603,11 +603,13 @@ task 'configure_default_shell', sub {
 #+BEGIN_SRC perl :tangle Rexfile
 task 'configure_gtk', sub {
   my %gtk = (
-    "gruvbox-dark-gtk" => "$GITHUB/jmattheis/gruvbox-dark-gtk.git",
+    "gruvbox-square-gtk" => "$GITHUB/jmattheis/gruvbox-dark-gtk.git",
+    "gruvbox-round-gtk" => "$GITHUB/Fausto-Korpsvart/Gruvbox-GTK-Theme.git",
+    "gruvbox-plus-gtk" => "$GITHUB/SylEleuth/gruvbox-plus-gtk.git",
   );
   keys %gtk;
   while (my($k, $v) = each %gtk) {
-    my $clonedir = "$USERHOME/.dotfiles/.themes/$k";
+    my $clonedir = "/tmp/$k";
     my $cloneuri = "$v";
     if ( -d "$clonedir" ) {
       chdir "$clonedir";
@@ -615,12 +617,21 @@ task 'configure_gtk', sub {
     } else {
       system( 'git', 'clone', "$cloneuri", "$clonedir" );
     }
+    if ( -d "$clonedir/themes" ) {
+      system( 'cp', '-Rv', glob("$clonedir/themes/*"), "$USERHOME/.dotfiles/.themes/" );
+    } elsif ( -d "$clonedir/Gruvbox-Plus-Dark" ) {
+      system( 'cp', '-Rv', "$clonedir/Gruvbox-Plus-Dark", "$USERHOME/.dotfiles/.themes/" );
+    } else {
+      system( 'cp', '-Rv', "$clonedir", "$USERHOME/.dotfiles/.themes/" );
+    }
   }
 };
 
 task 'configure_icons', sub {
   my %icons = (
-    "gruvbox-dark-icons" => "$GITHUB/Fausto-Korpsvart/Gruvbox-GTK-Theme.git",
+    "gruvbox-round-icons" => "$GITHUB/Fausto-Korpsvart/Gruvbox-GTK-Theme.git",
+    "gruvbox-square-icons" => "$GITHUB/jmattheis/gruvbox-dark-icon-gtk.git",
+    "gruvbox-plus-icons" => "$GITHUB/SylEleuth/gruvbox-plus-icon-pack.git",
   );
   keys %icons;
   while (my($k, $v) = each %icons) {
@@ -632,7 +643,13 @@ task 'configure_icons', sub {
     } else {
       system( 'git', 'clone', "$cloneuri", "$clonedir" );
     }
-    system( 'cp', '-Rv', glob("$clonedir/icons/*"), "$USERHOME/.dotfiles/.icons/" );
+    if ( -d "$clonedir/icons" ) {
+      system( 'cp', '-Rv', glob("$clonedir/icons/*"), "$USERHOME/.dotfiles/.icons/" );
+    } elsif ( -d "$clonedir/Gruvbox-Plus-Dark" ) {
+      system( 'cp', '-Rv', "$clonedir/Gruvbox-Plus-Dark", "$USERHOME/.dotfiles/.icons/" );
+    } else {
+      system( 'cp', '-Rv', "$clonedir", "$USERHOME/.dotfiles/.icons/" );
+    }
   }
 };
 #+END_SRC
