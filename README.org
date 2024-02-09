@@ -7,6 +7,7 @@
 #+BEGIN_HTML
 <div align="left">
 <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/izder456/dotfiles?style=plastic">
+<img alt="Lines of code" src="https://tokei.rs/b1/github/izder456/dotfiles?category=code&style=plastic">
 </div>
 #+END_HTML
 
