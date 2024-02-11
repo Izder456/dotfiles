@@ -36,7 +36,7 @@
 
 - for laptops, I /highly recommend/ solene%'s power management daemon [[https://dataswamp.org/~solene/2022-03-21-openbsd-cool-frequency.html][obsdfreqd]]
 
-- When the script installs dependencies, always choose the latest version when given a version choice from ~pkg_add~, except for Emacs, where you should choose the gtk2 variant.
+- When the script installs dependencies, always choose the latest version when given a version choice from ~pkg_add~.
 
 * Table of Contents :TOC_4:
 - [[#disclaimer][DISCLAIMER]]
