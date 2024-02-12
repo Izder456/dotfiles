@@ -862,8 +862,10 @@ instructions on how to set up your OpenBSD system using these dotfiles. It inclu
 1. Install OpenBSD on a machine with these specs
 
    #+BEGIN_SRC
-  >=42GB Install Disk
-  >=22GB in /usr/local (can get by with a single root partition)
+  >=42GB Install Disklabel Size
+  >=12GB in / (you need this cos /tmp resides here by default, and my icons and gtk themes will clone here during setup)
+  >=22GB in /usr (you can get by with 1 single root partiton too, but its probably more ideal to break things up for ramdisk purposes)
+  >=22GB in /usr/local (same here, but even more important)
   4gb or more RAM
   4 cores or more
   OpenGL >=3.1 Capable GFX Card
