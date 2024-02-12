@@ -72,11 +72,11 @@
 * Setup
 ** InitScript
 
-This setup script is written in Korn Shell from OpenBSD base and contains various functions for setting up the environment for these dotfiles.
+This setup script is written in Korn Shell from OpenBSD base.
 
 **** Boilerplate
 
-The basic structure of the KSH script, as well as some GLOBALS.
+the basic setup of the KSH script, as well as some GLOBALS.
 
 #+BEGIN_SRC sh :tangle setup.ksh
 #!/bin/ksh
@@ -102,7 +102,7 @@ trap 'log "Error occurred at line $LINENO"; exit 1' ERR
 
 **** Subroutines
 
-The various functions use within the script.
+some basic functions i will be using
 
 #+BEGIN_SRC sh :tangle setup.ksh
 function clean {
@@ -191,7 +191,7 @@ function setup_xenodm {
 
 **** Will it run?
 
-You need some things to make this thing work. This checks that.
+You need some things to make this crap work. This checks those things. So it will work.
 
 #+BEGIN_SRC sh :tangle setup.ksh
 function is_internet_up {
@@ -303,7 +303,7 @@ main
 
 ** Misc Stuffs
 
-This section contains various scripts and configurations for setting up various aspects of your environment, including Quicklisp installation, .Xsession/.Xresources/.Xprofile settings, sysctl.conf settings, dfm installation, doas.conf settings, cargo-list, etc.
+random scripts and configs that are maybe relevant possibly.
 
 **** Quicklisp Install
 
@@ -596,7 +596,7 @@ cargo-upgrade-command du-dust hyperfine onefetch sd tere tokei
 
 ** Rexfile
 
-This file contains various tasks for setting up your environment using Rex, a Perl library for automation.
+this is an automation thingy i use. its definitely overkill, but i like perl.
 
 **** Perl-Boilerplate
 
@@ -857,7 +857,7 @@ task 'update_xdg_user_dirs', sub {
 
 * Setup Script
 
-instructions on how to set up your OpenBSD system using these dotfiles. It includes instructions for installing OpenBSD, switching to the -CURRENT release, adding the doas group, adding the user to the staff login class, downloading and running the setup script, etc
+please read the [[#disclaimer][DISCLAIMER]], i am not your mom. 
 
 1. Install OpenBSD on a machine with these specs
 
