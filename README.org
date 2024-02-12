@@ -326,7 +326,7 @@ You probably want this if you want to write with StumpWM and modules...
 /USE:/
 
 #+BEGIN_SRC sh
-$ ftp -o /tmp/quicklisp.lisp https://beta.quicklisp.org/quicklisp.org
+$ ftp -o /tmp/quicklisp.lisp https://beta.quicklisp.org/quicklisp.lisp
 $ ftp -o /tmp/quicklisp-setup.lisp https://github.com/Izder456/raw/main/quicklisp-setup.lisp
 $ sbcl --load /tmp/quicklisp.lisp --script /tmp/quicklisp-setup.lisp
 #+END_SRC
@@ -862,12 +862,12 @@ please read the [[#disclaimer][DISCLAIMER]], i am not your mom.
 1. Install OpenBSD on a machine with these specs
 
    #+BEGIN_SRC
-  >=42GB Install Disklabel Size
-  >=12GB in / (you need this cos /tmp resides here by default, and my icons and gtk themes will clone here during setup)
-  >=22GB in /usr (you can get by with 1 single root partiton too, but its probably more ideal to break things up for ramdisk purposes)
-  >=22GB in /usr/local (same here, but even more important)
+  >=42GB Install Disklabel Size (minimum reccomended)
+  >=4GB in / (you need this cos /tmp resides here by default, and my icons and gtk themes will clone here during setup)
+  >=4GB in /usr (you can get by with 1 single root partiton too, but its probably more ideal to break things up for ramdisk purposes)
+  >=24GB in /usr/local (same here as /usr, but even more important)
   4gb or more RAM
-  4 cores or more
+  4 logical cores or more
   OpenGL >=3.1 Capable GFX Card
    #+END_SRC
 
