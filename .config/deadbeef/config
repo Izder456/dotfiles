@@ -16,7 +16,7 @@ artwork.save_to_music_folders_relative_path cover.jpg
 cli_add_playlist_name Default
 close_send_to_tray 0
 deadbeef_version 1.9.4
-filechooser.lastdir file:///home/izder456/Music/TWRP/Together%20Through%20Time%20%5B2919%5D
+filechooser.lastdir file:///home/izder456/Music
 filechooser.playlist.lastdir file:///home/izder456/Music
 gtkui.action_separators 0
 gtkui.autoresize_columns 1
@@ -38,7 +38,7 @@ gtkui.color.tabstrip_mid 12850 12336 12079
 gtkui.color.tabstrip_playing_text 64764 61937 51143
 gtkui.color.tabstrip_selected_text 64764 61937 51143
 gtkui.color.tabstrip_text 64764 61937 51143
-gtkui.columns.playlist [{"title":"♫","id":"1","format":"%playstatus%","sort_format":"","size":"26","align":"0","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"302","align":"0","color_override":"0","color":"#ff000000"}]
+gtkui.columns.playlist [{"title":"♫","id":"1","format":"%playstatus%","sort_format":"","size":"44","align":"0","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"386","align":"0","color_override":"0","color":"#ff000000"}]
 gtkui.columns.search [{"title":"Artist / Album","id":"-1","format":"$if(%artist%,%artist%,Unknown Artist)[ - %album%]","sort_format":"","size":"16","align":"0","color_override":"0","color":"#ff000000"},{"title":"Track No","id":"-1","format":"%tracknumber%","sort_format":"","size":"16","align":"1","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"16","align":"0","color_override":"0","color":"#ff000000"},{"title":"Duration","id":"-1","format":"%length%","sort_format":"","size":"16","align":"0","color_override":"0","color":"#ff000000"}]
 gtkui.custom_tray_icon deadbeef_tray_icon
 gtkui.delete_files_ask 1
@@ -49,8 +49,8 @@ gtkui.font.listview_text FreeSerif 11
 gtkui.font.tabstrip_text FreeSerif 11
 gtkui.hide_remove_from_disk 1
 gtkui.hide_tray_icon 1
-gtkui.last_playlist_save_name /home/izder456/Music/Groove.dbpl
-gtkui.layout.1.9.0 {"type":"vbox","legacy_params":" expand=\"0 1\" fill=\"1 1\" homogeneous=0","children":[{"type":"hsplitter","legacy_params":" locked=0 ratio=0.074169 pos=0 size2=0","children":[{"type":"playtb"},{"type":"hsplitter","legacy_params":" locked=0 ratio=0.953408 pos=0 size2=0","children":[{"type":"seekbar"},{"type":"volumebar","settings":{"scale":"db"}}]}]},{"type":"hsplitter","legacy_params":" locked=0 ratio=0.236573 pos=0 size2=0","children":[{"type":"vsplitter","legacy_params":" locked=0 ratio=0.500000 pos=0 size2=0","children":[{"type":"coverart","settings":{"mode":"playing"}},{"type":"spectrum","settings":{"renderMode":"bands","distanceBetweenBars":"3","barGranularity":"2"}}]},{"type":"tabbed_playlist","legacy_params":" hideheaders=0 width=1432"}]}]}
+gtkui.last_playlist_save_name /home/izder456/Music/Grooves.dbpl
+gtkui.layout.1.9.0 {"type":"vbox","legacy_params":" expand=\"0 1\" fill=\"1 1\" homogeneous=0","children":[{"type":"hsplitter","legacy_params":" locked=0 ratio=0.074169 pos=0 size2=0","children":[{"type":"playtb"},{"type":"hsplitter","legacy_params":" locked=0 ratio=0.953408 pos=0 size2=0","children":[{"type":"seekbar"},{"type":"volumebar","settings":{"scale":"db"}}]}]},{"type":"hsplitter","legacy_params":" locked=0 ratio=0.248938 pos=0 size2=0","children":[{"type":"vsplitter","legacy_params":" locked=0 ratio=0.500000 pos=0 size2=0","children":[{"type":"coverart","settings":{"mode":"playing"}},{"type":"spectrum","settings":{"renderMode":"bands","distanceBetweenBars":"3","barGranularity":"2"}}]},{"type":"tabbed_playlist","legacy_params":" hideheaders=0 width=1409"}]}]}
 gtkui.override_bar_colors 1
 gtkui.override_listview_colors 1
 gtkui.override_tabstrip_colors 1
@@ -114,8 +114,8 @@ lastfm.password Byeb0t!!
 lastfm.prefer_album_artist 1
 lastfm.scrobbler_url https://post.audioscrobbler.com
 lastfm.submit_tiny_tracks 1
-logwindow.geometry.h 824
-logwindow.geometry.w 1564
+logwindow.geometry.h 1004
+logwindow.geometry.w 1884
 logwindow.geometry.x 18
 logwindow.geometry.y 58
 mainwin.geometry.h 1004
@@ -132,17 +132,17 @@ notify.format_title_tf Now Playing: %title%
 output_plugin pulseaudio
 playback.loop 0
 playback.order 1
-playback.volume.normalized 0.5221446
+playback.volume.normalized 0.2414418
 playlist.current 0
-playlist.cursor.0 5
+playlist.cursor.0 4
 playlist.cursor.1 0
 playlist.cursor.2 11
 playlist.groups.spacing 4
-playlist.scroll.0 0
+playlist.scroll.0 -4
 playlist.scroll.1 0
 playlist.scroll.2 -11
 playlist.scroll.cursorfollowplayback 1
-playlist.tab.00000 Spyro Gyra
+playlist.tab.00000 Mother 3i
 prefwin.geometry.h 547
 prefwin.geometry.w 762
 prefwin.geometry.x 579
@@ -151,7 +151,7 @@ replaygain.processing_flags 0
 resume.paused 0
 resume.playlist 0
 resume.position 0.0928798
-resume.track 40
+resume.track 83
 searchwin.geometry.h 824
 searchwin.geometry.w 1564
 searchwin.geometry.x 18

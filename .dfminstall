@@ -5,6 +5,7 @@
 .moc recurse
 .config recurse
 .local recurse
+.claws-mail recurse
 LICENSE.txt skip
 COPYING skip
 README.org skip

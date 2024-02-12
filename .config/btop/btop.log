@@ -29,3 +29,6 @@ Use --utf-force argument to force start if you're sure your terminal can handle 
 
 2024/02/10 (11:46:03) | ===> btop++ v.1.3.0
 2024/02/10 (11:46:03) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
+
+2024/02/11 (09:00:46) | ===> btop++ v.1.3.0
+2024/02/11 (09:00:46) | WARNING: failed to get battery
