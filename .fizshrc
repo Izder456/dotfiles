@@ -3,9 +3,9 @@
 ##
 # ENV VARS
 ##
-export VISUAL="emacs"
-export EDITOR="emacs -nw"
-export PAGER="most"
+export VISUAL="nvim"
+export EDITOR="vi"
+export PAGER="less -R"
 
 ##
 # export $PATH
@@ -84,7 +84,7 @@ alias rm="trash"
 ##
 # Alias for parsing
 ##
-alias cat="bat --theme=gruvbox-dark -pp"
+alias cat="bat --theme=gruvbox-dark --paging=never"
 alias bat="bat --theme=gruvbox-dark"
 unalias grep
 alias rgrep="rg"

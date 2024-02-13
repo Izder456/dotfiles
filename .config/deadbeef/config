@@ -1,4 +1,5 @@
 add_folders_follow_symlinks 1
+ape.write_apev2 1
 artwork.cache.expiration_time 0.000000
 artwork.cache.simplified 0
 artwork.cache_reset_time 0
@@ -16,8 +17,8 @@ artwork.save_to_music_folders_relative_path cover.jpg
 cli_add_playlist_name Default
 close_send_to_tray 0
 deadbeef_version 1.9.4
-filechooser.lastdir file:///home/izder456/Music/Deltron%203030,%20Del%20Tha%20Funkee%20Homosapien,%20Kid%20Koala,%20Dan%20The%20Automator/Deltron%203030%20%5B1832%5D
-filechooser.playlist.lastdir file:///home/izder456/Music
+filechooser.lastdir file:///home/izder456/Music/SebastiAn/Total%20%5B2793%5D
+filechooser.playlist.lastdir file:///home/izder456/Downloads
 gtkui.action_separators 0
 gtkui.autoresize_columns 1
 gtkui.color.bar_background 60395 56283 45746
@@ -38,7 +39,7 @@ gtkui.color.tabstrip_mid 12850 12336 12079
 gtkui.color.tabstrip_playing_text 64764 61937 51143
 gtkui.color.tabstrip_selected_text 64764 61937 51143
 gtkui.color.tabstrip_text 64764 61937 51143
-gtkui.columns.playlist [{"title":"♫","id":"1","format":"%playstatus%","sort_format":"","size":"44","align":"0","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"388","align":"0","color_override":"0","color":"#ff000000"}]
+gtkui.columns.playlist [{"title":"♫","id":"1","format":"%playstatus%","sort_format":"","size":"45","align":"0","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"703","align":"0","color_override":"0","color":"#ff000000"}]
 gtkui.columns.search [{"title":"Artist / Album","id":"-1","format":"$if(%artist%,%artist%,Unknown Artist)[ - %album%]","sort_format":"","size":"16","align":"0","color_override":"0","color":"#ff000000"},{"title":"Track No","id":"-1","format":"%tracknumber%","sort_format":"","size":"16","align":"1","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"16","align":"0","color_override":"0","color":"#ff000000"},{"title":"Duration","id":"-1","format":"%length%","sort_format":"","size":"16","align":"0","color_override":"0","color":"#ff000000"}]
 gtkui.custom_tray_icon deadbeef_tray_icon
 gtkui.delete_files_ask 1
@@ -48,9 +49,9 @@ gtkui.font.listview_group_text Spleen 8x16 Medium 12
 gtkui.font.listview_text FreeSerif 11
 gtkui.font.tabstrip_text FreeSerif 11
 gtkui.hide_remove_from_disk 1
-gtkui.hide_tray_icon 1
-gtkui.last_playlist_save_name /home/izder456/Music/Grooves.dbpl
-gtkui.layout.1.9.0 {"type":"vbox","legacy_params":" expand=\"0 1\" fill=\"1 1\" homogeneous=0","children":[{"type":"hsplitter","legacy_params":" locked=0 ratio=0.074169 pos=0 size2=0","children":[{"type":"playtb"},{"type":"hsplitter","legacy_params":" locked=0 ratio=0.953408 pos=0 size2=0","children":[{"type":"seekbar"},{"type":"volumebar","settings":{"scale":"db"}}]}]},{"type":"hsplitter","legacy_params":" locked=0 ratio=0.248938 pos=0 size2=0","children":[{"type":"vsplitter","legacy_params":" locked=0 ratio=0.500000 pos=0 size2=0","children":[{"type":"coverart","settings":{"mode":"playing"}},{"type":"spectrum","settings":{"renderMode":"bands","distanceBetweenBars":"3","barGranularity":"2"}}]},{"type":"tabbed_playlist","legacy_params":" hideheaders=0 width=1409"}]}]}
+gtkui.hide_tray_icon 0
+gtkui.last_playlist_save_name /home/izder456/Downloads/Grooves.dbpl
+gtkui.layout.1.9.0 {"type":"vbox","legacy_params":" expand=\"0 1\" fill=\"1 1\" homogeneous=0","children":[{"type":"hsplitter","legacy_params":" locked=0 ratio=0.074169 pos=0 size2=0","children":[{"type":"playtb"},{"type":"hsplitter","legacy_params":" locked=0 ratio=0.953408 pos=0 size2=0","children":[{"type":"seekbar"},{"type":"volumebar","settings":{"scale":"db"}}]}]},{"type":"hsplitter","legacy_params":" locked=0 ratio=0.239384 pos=0 size2=0","children":[{"type":"vsplitter","legacy_params":" locked=0 ratio=0.500000 pos=0 size2=0","children":[{"type":"coverart","settings":{"mode":"playing"}},{"type":"spectrum","settings":{"renderMode":"bands","distanceBetweenBars":"3","barGranularity":"2"}}]},{"type":"tabbed_playlist","legacy_params":" hideheaders=0 width=1427"}]}]}
 gtkui.override_bar_colors 1
 gtkui.override_listview_colors 1
 gtkui.override_tabstrip_colors 1
@@ -122,6 +123,10 @@ mainwin.geometry.h 1004
 mainwin.geometry.w 1884
 mainwin.geometry.x 18
 mainwin.geometry.y 58
+mp3.id3v1_encoding iso8859-1
+mp3.id3v2_version 3
+mp3.write_id3v1 1
+mp3.write_id3v2 1
 network.proxy.port 8080
 notify.albumart 1
 notify.albumart_size 72
@@ -132,17 +137,17 @@ notify.format_title_tf Now Playing: %title%
 output_plugin pulseaudio
 playback.loop 0
 playback.order 1
-playback.volume.normalized 0.2414418
+playback.volume.normalized 0.3678878
 playlist.current 0
-playlist.cursor.0 17
+playlist.cursor.0 39
 playlist.cursor.1 0
 playlist.cursor.2 11
 playlist.groups.spacing 4
-playlist.scroll.0 -17
+playlist.scroll.0 448
 playlist.scroll.1 0
 playlist.scroll.2 -11
 playlist.scroll.cursorfollowplayback 1
-playlist.tab.00000 Mother 3i
+playlist.tab.00000 Grooves
 prefwin.geometry.h 547
 prefwin.geometry.w 762
 prefwin.geometry.x 579
@@ -151,7 +156,7 @@ replaygain.processing_flags 0
 resume.paused 0
 resume.playlist 0
 resume.position 0.0928798
-resume.track 85
+resume.track 133
 searchwin.geometry.h 824
 searchwin.geometry.w 1564
 searchwin.geometry.x 18
@@ -162,3 +167,8 @@ streamer.samplerate 44100
 streamer.samplerate_mult_44 44100
 streamer.samplerate_mult_48 48000
 streamer.use_dependent_samplerate 1
+trkproperties.geometry.h 1004
+trkproperties.geometry.w 1884
+trkproperties.geometry.x 18
+trkproperties.geometry.y 58
+wv.write_apev2 1
