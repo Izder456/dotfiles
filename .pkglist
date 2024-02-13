@@ -1,16 +1,11 @@
 DevIL--
 ImageMagick--
-aclock--
-addresses--
 adwaita-icon-theme--
-affiche--
 astyle--
-autoconf--%2.69
 autoconf--%2.71
 automake--%1.16
 bash--
 bat--
-batmon--
 beets--
 billyfrontier--
 blockgame--
@@ -19,8 +14,6 @@ btop--
 bugdom--
 bugdom2--
 cairo--
-camera--
-cdplayer--
 chibi-scheme--
 chicken--
 clang-tools-extra--
@@ -31,9 +24,7 @@ cmatrix--
 cmixer--
 cromagrally--
 curl--
-cynthiune--
 cyrus-sasl--
-databasin--
 dbus--
 dbus-glib--
 deadbeef--
@@ -86,8 +77,6 @@ gmp--
 gnome-icon-theme--
 gnome-icon-theme-symbolic--
 gnupg--
-gnustep-camerakit--
-gnustep-corebase--
 gnutls--
 gnuwatch--
 go--
@@ -144,12 +133,9 @@ libtool--
 libvorbis--
 libwebp--
 libxml--
-libyajl--
 libyaml--
 lmms--
 lsblk--
-lua--%5.4
-luajit--
 lxappearance--
 m17n-db--
 m17n-lib--
@@ -160,7 +146,6 @@ mgba-qt--
 microscheme--
 minetest--
 minizip--
-most--
 motif--
 mpv--
 nano--
@@ -205,8 +190,6 @@ python--%3.11
 qtbase--
 quirks--
 rakudo--
-recoil-rts--
-rep-gtk--
 ripgrep--
 rlwrap--
 rofi--
@@ -225,7 +208,6 @@ sdl2-mixer--
 sdl2-net--
 sdl2-pango--
 sdl2-ttf--
-sdorfehs--
 shared-mime-info--
 shellcheck--
 shfmt--
