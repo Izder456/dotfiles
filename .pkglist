@@ -13,6 +13,7 @@ btop--
 bugdom--
 bugdom2--
 cairo--
+candycrisis--
 chibi-scheme--
 chicken--
 clang-tools-extra--
@@ -75,6 +76,7 @@ gmake--
 gmp--
 gnome-icon-theme--
 gnome-icon-theme-symbolic--
+gnugetopt--
 gnupg--
 gnutls--
 gnuwatch--
@@ -195,6 +197,7 @@ rofi--
 rsync--iconv
 ruby--%3.2
 rust--
+rust-analyzer--
 rust-clippy--
 rust-rustfmt--
 sbcl--
