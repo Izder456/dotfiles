@@ -17,7 +17,7 @@ artwork.save_to_music_folders_relative_path cover.jpg
 cli_add_playlist_name Default
 close_send_to_tray 0
 deadbeef_version 1.9.4
-filechooser.lastdir file:///home/izder456/Music/SebastiAn/Total%20%5B2793%5D
+filechooser.lastdir file:///home/izder456
 filechooser.playlist.lastdir file:///home/izder456/Downloads
 gtkui.action_separators 0
 gtkui.autoresize_columns 1
@@ -39,7 +39,7 @@ gtkui.color.tabstrip_mid 12850 12336 12079
 gtkui.color.tabstrip_playing_text 64764 61937 51143
 gtkui.color.tabstrip_selected_text 64764 61937 51143
 gtkui.color.tabstrip_text 64764 61937 51143
-gtkui.columns.playlist [{"title":"♫","id":"1","format":"%playstatus%","sort_format":"","size":"45","align":"0","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"703","align":"0","color_override":"0","color":"#ff000000"}]
+gtkui.columns.playlist [{"title":"♫","id":"1","format":"%playstatus%","sort_format":"","size":"45","align":"0","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"716","align":"0","color_override":"0","color":"#ff000000"}]
 gtkui.columns.search [{"title":"Artist / Album","id":"-1","format":"$if(%artist%,%artist%,Unknown Artist)[ - %album%]","sort_format":"","size":"16","align":"0","color_override":"0","color":"#ff000000"},{"title":"Track No","id":"-1","format":"%tracknumber%","sort_format":"","size":"16","align":"1","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"16","align":"0","color_override":"0","color":"#ff000000"},{"title":"Duration","id":"-1","format":"%length%","sort_format":"","size":"16","align":"0","color_override":"0","color":"#ff000000"}]
 gtkui.custom_tray_icon deadbeef_tray_icon
 gtkui.delete_files_ask 1
@@ -136,18 +136,18 @@ notify.format_content_tf %artist% - %album%
 notify.format_title_tf Now Playing: %title%
 output_plugin pulseaudio
 playback.loop 0
-playback.order 1
-playback.volume.normalized 0.3678878
+playback.order 2
+playback.volume.normalized 0.1778279
 playlist.current 0
-playlist.cursor.0 39
+playlist.cursor.0 5939
 playlist.cursor.1 0
 playlist.cursor.2 11
 playlist.groups.spacing 4
-playlist.scroll.0 448
+playlist.scroll.0 136384
 playlist.scroll.1 0
 playlist.scroll.2 -11
 playlist.scroll.cursorfollowplayback 1
-playlist.tab.00000 Grooves
+playlist.tab.00000 Music
 prefwin.geometry.h 547
 prefwin.geometry.w 762
 prefwin.geometry.x 579
@@ -155,8 +155,8 @@ prefwin.geometry.y 286
 replaygain.processing_flags 0
 resume.paused 0
 resume.playlist 0
-resume.position 0.0928798
-resume.track 133
+resume.position 108.94848
+resume.track 5939
 searchwin.geometry.h 824
 searchwin.geometry.w 1564
 searchwin.geometry.x 18
