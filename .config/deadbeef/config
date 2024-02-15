@@ -39,7 +39,7 @@ gtkui.color.tabstrip_mid 12850 12336 12079
 gtkui.color.tabstrip_playing_text 64764 61937 51143
 gtkui.color.tabstrip_selected_text 64764 61937 51143
 gtkui.color.tabstrip_text 64764 61937 51143
-gtkui.columns.playlist [{"title":"♫","id":"1","format":"%playstatus%","sort_format":"","size":"25","align":"0","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"1099","align":"0","color_override":"0","color":"#ff000000"}]
+gtkui.columns.playlist [{"title":"♫","id":"1","format":"%playstatus%","sort_format":"","size":"16","align":"0","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"640","align":"0","color_override":"0","color":"#ff000000"}]
 gtkui.columns.search [{"title":"Artist / Album","id":"-1","format":"$if(%artist%,%artist%,Unknown Artist)[ - %album%]","sort_format":"","size":"16","align":"0","color_override":"0","color":"#ff000000"},{"title":"Track No","id":"-1","format":"%tracknumber%","sort_format":"","size":"16","align":"1","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"16","align":"0","color_override":"0","color":"#ff000000"},{"title":"Duration","id":"-1","format":"%length%","sort_format":"","size":"16","align":"0","color_override":"0","color":"#ff000000"}]
 gtkui.custom_tray_icon deadbeef_tray_icon
 gtkui.delete_files_ask 1
@@ -51,7 +51,7 @@ gtkui.font.tabstrip_text FreeSerif 11
 gtkui.hide_remove_from_disk 1
 gtkui.hide_tray_icon 0
 gtkui.last_playlist_save_name /home/izder456/Downloads/Grooves.dbpl
-gtkui.layout.1.9.0 {"type":"vbox","legacy_params":" expand=\"0 1\" fill=\"1 1\" homogeneous=0","children":[{"type":"hsplitter","legacy_params":" locked=0 ratio=0.074169 pos=0 size2=0","children":[{"type":"playtb"},{"type":"hsplitter","legacy_params":" locked=0 ratio=0.953408 pos=0 size2=0","children":[{"type":"seekbar"},{"type":"volumebar","settings":{"scale":"db"}}]}]},{"type":"hsplitter","legacy_params":" locked=0 ratio=0.234015 pos=0 size2=0","children":[{"type":"vsplitter","legacy_params":" locked=0 ratio=0.500000 pos=0 size2=0","children":[{"type":"coverart","settings":{"mode":"playing"}},{"type":"spectrum","settings":{"renderMode":"bands","distanceBetweenBars":"3","barGranularity":"2"}}]},{"type":"tabbed_playlist","legacy_params":" hideheaders=0 width=1192"}]}]}
+gtkui.layout.1.9.0 {"type":"vbox","legacy_params":" expand=\"0 1\" fill=\"1 1\" homogeneous=0","children":[{"type":"hsplitter","legacy_params":" locked=0 ratio=0.074169 pos=0 size2=0","children":[{"type":"playtb"},{"type":"hsplitter","legacy_params":" locked=0 ratio=0.953408 pos=0 size2=0","children":[{"type":"seekbar"},{"type":"volumebar","settings":{"scale":"db"}}]}]},{"type":"hsplitter","legacy_params":" locked=0 ratio=0.505155 pos=0 size2=0","children":[{"type":"vsplitter","legacy_params":" locked=0 ratio=0.500000 pos=0 size2=0","children":[{"type":"coverart","settings":{"mode":"playing"}},{"type":"spectrum","settings":{"renderMode":"bands","distanceBetweenBars":"3","barGranularity":"2"}}]},{"type":"tabbed_playlist","legacy_params":" hideheaders=0 width=773"}]}]}
 gtkui.override_bar_colors 1
 gtkui.override_listview_colors 1
 gtkui.override_tabstrip_colors 1
@@ -115,14 +115,14 @@ lastfm.password Byeb0t!!
 lastfm.prefer_album_artist 1
 lastfm.scrobbler_url https://post.audioscrobbler.com
 lastfm.submit_tiny_tracks 1
-logwindow.geometry.h 832
-logwindow.geometry.w 1572
-logwindow.geometry.x 14
-logwindow.geometry.y 54
-mainwin.geometry.h 832
-mainwin.geometry.w 1572
-mainwin.geometry.x 14
-mainwin.geometry.y 54
+logwindow.geometry.h 842
+logwindow.geometry.w 1576
+logwindow.geometry.x 12
+logwindow.geometry.y 46
+mainwin.geometry.h 842
+mainwin.geometry.w 1576
+mainwin.geometry.x 12
+mainwin.geometry.y 46
 mp3.id3v1_encoding iso8859-1
 mp3.id3v2_version 3
 mp3.write_id3v1 1
@@ -137,13 +137,13 @@ notify.format_title_tf Now Playing: %title%
 output_plugin pulseaudio
 playback.loop 0
 playback.order 2
-playback.volume.normalized 0.4216965
+playback.volume.normalized 0.5929569
 playlist.current 0
-playlist.cursor.0 3028
+playlist.cursor.0 4127
 playlist.cursor.1 0
 playlist.cursor.2 11
 playlist.groups.spacing 4
-playlist.scroll.0 69405
+playlist.scroll.0 94720
 playlist.scroll.1 0
 playlist.scroll.2 -11
 playlist.scroll.cursorfollowplayback 1
@@ -155,8 +155,8 @@ prefwin.geometry.y 286
 replaygain.processing_flags 0
 resume.paused 0
 resume.playlist 0
-resume.position 0.0928798
-resume.track 2550
+resume.position 43.839435
+resume.track 4127
 searchwin.geometry.h 824
 searchwin.geometry.w 1564
 searchwin.geometry.x 18
