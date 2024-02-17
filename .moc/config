@@ -1,0 +1,128 @@
+# Show file titles (title, author, album) instead of file names?
+ReadTags = yes
+
+# In which directory do you store your music files?  If you specify it
+# you will be able to jump straight to this directory with the '-m'
+# parameter or the 'm' command.  This can also point to a playlist.
+#
+# Example:    MusicDir = "/home/joe/music"
+#
+MusicDir = ~/Music
+
+# Start in the music directory by default?  If set to 'no', start
+# in the current directory by default.  A single directory on
+# the command line takes precedence.
+StartInMusicDir = yes
+
+# How to sort?  FileName is the option's only value for now.
+Sort = FileName
+
+# Show errors in the streams (for example, broken frames in MP3 files)?
+ShowStreamErrors = yes
+
+# Set playback toggles.
+Repeat = no
+Shuffle = yes
+AutoNext = yes
+
+# Show files with dot at the beginning?
+ShowHiddenFiles = no
+
+# Hide file name extensions?
+HideFileExtension = yes
+
+# Show file format in menu?
+ShowFormat = yes
+
+# Show file time in menu?  Possible values: 'yes', 'no' and 'IfAvailable'
+# (meaning show the time only when it is already known, which often works
+# faster).
+ShowTime = IfAvailable
+
+# Show time played as a percentage in the time progress bar.
+ShowTimePercent = yes
+
+# Theme file to use.  This can be absolute path or relative to
+# /usr/share/moc/themes/ (depends on installation prefix) or
+# ~/.moc/themes/ .
+#
+# Example:    Theme = laras_theme
+#
+Theme = gruvbox_theme
+
+# MOC directory (where pid file, socket and state files are stored).
+# You can use ~ at the beginning.
+MOCDir = ~/.moc
+
+# Use librcc to fix ID3 version 1/1.1 tags encoding.
+UseRCC = yes
+
+# Use librcc to filenames and directory names encoding.
+UseRCCForFilesystem = yes
+
+# When this option is set the player assumes that if the encoding of
+# ID3v2 is set to ISO-8859-1 then the ID3v1TagsEncoding is actually
+# that and applies appropriate conversion.
+EnforceTagsEncoding = no
+
+# Enable the conversion of filenames from the local encoding to UTF-8.
+FileNamesIconv = no
+
+# Enable the conversion of the xterm title from UTF-8 to the local encoding.
+NonUTFXterm = yes
+
+# Use ASCII rather than graphic characters for drawing lines.  This
+# helps on some terminals.
+ASCIILines = no
+
+# How fast to seek (in number of seconds per keystroke).  The first
+# option is for normal seek and the second for silent seek.
+SeekTime = 1
+SilentSeekTime = 5
+
+# Main window layouts can be configured.  You can change the position and
+# size of the menus (directory and playlist).  You have three layouts and
+# can switch between then using the 'l' key (standard mapping).  By default,
+# only two layouts are configured.
+#
+# The format is as follows:
+#
+#     - Each layout is described as a list of menu entries.
+#     - Each menu entry is of the form:
+#
+#           menu(position_x, position_y, width, height)
+#
+#       where 'menu' is either 'directory' or 'playlist'.
+#     - The parameters define position and size of the menu.  They can
+#       be absolute numbers (like 10) or a percentage of the screen size
+#       (like 45%).
+#     - 'width' and 'height' can have also value of 'FILL' which means
+#        fill the screen from the menu's position to the border.
+#     - Menus may overlap.
+#
+# You must describe at least one menu (default is to fill the whole window).
+# There must be at least one layout (Layout1) defined; others can be empty.
+#
+# Example:    Layout1 = playlist(50%,50%,50%,50%)
+#             Layout2 = ""
+#             Layout3 = ""
+#
+#             Just one layout, the directory will occupy the whole
+#             screen, the playlist will have 1/4 of the screen size
+#             and be positioned at lower right corner.  (Note that
+#             because the playlist will be hidden by the directory
+#             you will have to use the TAB key to make the playlist
+#             visible.)
+#
+# Example:    Layout1 = playlist(0,0,100%,10):directory(0,10,100%,FILL)
+#
+#             The screen is split into two parts: playlist at the top
+#             and the directory menu at the bottom.  Playlist will
+#             occupy 10 lines and the directory menu the rest.
+#
+#Layout1 = directory(0,0,50%,100%):playlist(50%,0,FILL,100%)
+#Layout2 = directory(0,0,100%,100%):playlist(0,0,100%,100%)
+#Layout3 = ""
+
+Layout1 = directory(0,0,FILL,FILL)
+Layout2 = playlist(0,0,100%,10):directory(0,10,100%,fill)

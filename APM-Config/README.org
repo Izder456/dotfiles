@@ -1,0 +1,3 @@
+* APMD Config Suspend
+
+- Please read my [[../README.org][README.org]] for the larger project, since my [[../setup.pl][setup.pl]] /should/ handle this automagickally

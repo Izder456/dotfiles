@@ -1,0 +1,174 @@
+#!/usr/bin/env zsh
+
+##
+# ENV VARS
+##
+export VISUAL="nvim"
+export EDITOR="vi"
+export PAGER="less -R"
+
+##
+# export $PATH
+##
+export PATH=$PATH:$HOME/.cargo/bin:$HOME/.local/bin
+
+##
+# Setup Completions
+##
+fpath=($HOME/.zsh-openbsd/completions $fpath)
+setopt MENU_COMPLETE
+setopt AUTO_LIST
+setopt COMPLETE_IN_WORD
+
+autoload -U bashcompinit
+bashcompinit
+eval "$(register-python-argcomplete pipx)"
+
+##
+# Java Stuff
+##
+export PATH=$PATH:/usr/local/jdk-17/bin
+export JAVA_HOME=/usr/local/jdk-17/
+
+##
+# Syntax Highlight
+##
+source ~/.zsh-fsh/fast-syntax-highlighting.plugin.zsh
+
+##
+# Suggestions
+##
+source ~/.zsh-suggest/zsh-autosuggestions.plugin.zsh
+
+##
+# FZF-Zsh
+##
+source ~/.zsh-fzf/fzf-tab.plugin.zsh
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+    --color=fg:#A89984,bg:#282828,hl:#83A598
+    --color=fg+:#BDAE93,bg+:#1D2021,hl+:#8EC07C
+    --color=info:#D3869B,prompt:#FABD2F,pointer:#FABD2F
+    --color=marker:#B16286,spinner:#B8BB26,header:#FE8019'
+
+##
+# 256-Color
+##
+source ~/.zsh-256/zsh-256color.plugin.zsh
+
+##
+# Ruby Stuff
+##
+export GEM_HOME="$HOME/.gems"
+export PATH=$PATH:$HOME/.gems/bin
+
+##
+# Alias for muscle memory
+##
+alias sudo="doas"
+alias su="echo 'did you mean to run doas -s? '"
+
+##
+# Alias for listing files
+##
+alias ls="eza --icons=auto -h"
+alias la="eza --icons=auto -ah"
+alias ll="eza --icons=auto -lh"
+alias lh="eza --icons=auto -lah"
+alias tree="eza --icons=auto -Th"
+
+##
+# Rm-Trash
+##
+alias rm="trash"
+
+##
+# Alias for parsing
+##
+alias cat="bat --theme=gruvbox-dark --paging=never"
+alias bat="bat --theme=gruvbox-dark"
+unalias grep
+alias rgrep="rg"
+
+##
+# Alias for editing
+##
+alias edit=$EDITOR
+alias vedit=$VISUAL
+alias doasedit="doas $EDITOR"
+alias sudoedit="doas $EDITOR"
+
+##
+# Alias for sysfetch
+##
+alias f="neofetch --off"
+alias F="neofetch -L"
+alias mf="pfetch"
+alias uf="ufetch"
+
+##
+# Alias for sysstats
+##
+alias i="top"
+alias H="htop"
+
+##
+# Alias for media
+##
+alias audio-dlp="yt-dlp -x --audio-quality 0 --audio-format vorbis \
+	--concurrent-fragments 5"
+alias video-dlp="yt-dlp --write-subs --sub-format srt --remux-video mkv \
+	--embed-subs --concurrent-fragments 5"
+alias tidal-dlp="tidal-dl -o /home/izder456/Music -q Master -r P1080 -l "
+
+##
+# Prompt
+##
+PROMPT="%B%F{yellow}%~%f%b%B % %b"
+
+##
+# Tere config
+##
+tere() {
+    local result=$(command tere "$@")
+    [ -n "$result" ] && cd -- "$result"
+}
+
+##
+# Transfer.sh
+##
+transfer() {
+    if [ $# -eq 0 ]; then
+        echo "No arguments specified.\nUsage:\n transfer <file|directory>\n ... | transfer <file_name>">&2;
+        return 1;
+    fi;
+    if tty -s; then
+        file="$1";
+        file_name=$(basename "$file");
+        if [ ! -e "$file" ]; then
+            echo "$file: No such file or directory">&2;
+            return 1;
+        fi;
+        if [ -d "$file" ]; then
+            file_name="$file_name.zip" ,;
+            (cd "$file" && zip -r -q - .) |
+                curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name" | tee /dev/null,;
+        else cat "$file" |
+                curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name" | tee /dev/null;
+        fi;
+    else file_name=$1;
+         curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name" |
+             tee /dev/null;
+    fi;
+}
+
+##
+# Node.JS
+##
+export PATH=~/.npm-global/bin:$PATH
+
+##
+# the r/unixporn rite of passage
+##
+afetch
+
+. $HOME/.shellrc.load

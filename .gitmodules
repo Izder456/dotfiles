@@ -1,0 +1,15 @@
+[submodule "dotfiles"]
+	path = dotfiles
+	url = https://github.com/justone/dotfiles.git
+[submodule "dfm"]
+	path = dfm
+	url = https://github.com/justone/dotfiles.git
+[submodule "XenoDM-Config"]
+	path = XenoDM-Config
+	url = https://github.com/Izder456/XenoDM-Config
+[submodule "Emacs-Config"]
+	path = Emacs-Config
+	url = https://github.com/Izder456/Minimal-Emacs
+[submodule "StumpWM-Config"]
+	path = StumpWM-Config
+	url = https://github.com/Izder456/StumpWM-Config

@@ -1,0 +1,928 @@
+#+TITLE: Iz's OpenBSD Dotfiles
+#+DESCRIPTION: Mainly for personal backups, but if you want 'em, use 'em.
+#+KEYWORDS: org-mode, emacs, doom-emacs, XenoDM, OpenBSD, stumpwm, elisp, lisp, perl, Rex, dotfiles, izder
+#+LANGUAGE: en
+#+PROPERTY: header-args: :tangle ~/.dotfiles :mkdirp t
+
+#+BEGIN_HTML
+<div align="left">
+<img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/izder456/dotfiles?style=plastic">
+<img alt="Lines of code" src="https://tokei.rs/b1/github/izder456/dotfiles?category=code&style=plastic">
+</div>
+#+END_HTML
+
+* DISCLAIMER
+
+- I'm not responsible for any system breakage due to my code.
+
+- If you're unsure, refer to [[LICENSE.txt][THE LICENSE]] to see how seriously I take this.
+
+- Use with caution.
+* Shameless Unixporn for internet points.
+
+#+html: <p align="center"><img width=700 src="assets/XenoDM.png" /></p>
+
+#+html: <p align="center"><img width=700 src="assets/StumpWM.png" /></p>
+
+#+html: <p align="center"><img width=700 src="assets/Emacs.png" /></p>
+
+* Crucial Information
+
+- While /there *is*/ a setup script in this project, =it's not meant to be plug-and-play=. /It's a bare-bones setup/ that is fairly non-portable and will require some tinkering to work perfectly. I don't see this as a problem because I'm comfortable customizing it to my needs.
+
+* Note:
+
+- My script doesn't perform any performance tweaking. Users should refer to [[https://openbsd.org/faq][the FAQ]], [[https://man.openbsd.org][manpages]], or the unofficial [[https://www.openbsdhandbook.com][OpenBSD Handbook]] for that.
+
+- for laptops, I /highly recommend/ solene%'s power management daemon [[https://dataswamp.org/~solene/2022-03-21-openbsd-cool-frequency.html][obsdfreqd]]
+
+- When the script installs dependencies, always choose the latest version when given a version choice from ~pkg_add~.
+
+* Table of Contents :TOC_4:
+- [[#disclaimer][DISCLAIMER]]
+- [[#shameless-unixporn-for-internet-points][Shameless Unixporn for internet points.]]
+- [[#crucial-information][Crucial Information]]
+- [[#note][Note:]]
+- [[#setup][Setup]]
+  - [[#initscript][InitScript]]
+      - [[#boilerplate][Boilerplate]]
+      - [[#subroutines][Subroutines]]
+      - [[#will-it-run][Will it run?]]
+      - [[#wizard-menu][Wizard Menu]]
+  - [[#misc-stuffs][Misc Stuffs]]
+      - [[#quicklisp-install][Quicklisp Install]]
+      - [[#xsessionxresourcesxprofile][.Xsession/.Xresources/.Xprofile]]
+      - [[#sysctlconf][Sysctl.conf]]
+      - [[#dfm-install][Dfm-Install]]
+      - [[#doasconf][Doas.conf]]
+      - [[#cargo-list][Cargo-list]]
+  - [[#rexfile][Rexfile]]
+      - [[#perl-boilerplate][Perl-Boilerplate]]
+      - [[#remove-cruft][Remove-Cruft]]
+      - [[#fizsh-setup][FiZSH-Setup]]
+      - [[#icons-and-gtk-stuffs][Icons and GTK stuffs]]
+      - [[#emacs-setup][Emacs-Setup]]
+      - [[#stumpwm-setup][StumpWM-Setup]]
+      - [[#xenodmbackground-setup][XenoDM/Background-Setup]]
+      - [[#apmd_autohook-lock][APMD_AutoHook-Lock]]
+      - [[#extra-packages][Extra-Packages]]
+      - [[#xdg-userdirs][Xdg-UserDirs]]
+- [[#setup-script][Setup Script]]
+
+* Setup
+** InitScript
+
+This setup script is written in Korn Shell from OpenBSD base.
+
+**** Boilerplate
+
+the basic setup of the KSH script, as well as some GLOBALS.
+
+#+BEGIN_SRC sh :tangle setup.ksh
+#!/bin/ksh
+
+# configuration variables
+typeset -r SLEEPTIME=2
+
+# "colors"
+REVON=$(tput smso)  # Reverse on.
+REVOFF=$(tput rmso) # Reverse off.
+
+# logfile
+LOG_FILE="/tmp/setup.log"
+
+function log {
+    local timestamp=$(date +"%Y-%m-%d_%H:%M:%S")
+    echo "[$timestamp] $1" | tee -a "$LOG_FILE"
+}
+
+# error handling
+trap 'log "Error occurred at line $LINENO"; exit 1' ERR
+#+END_SRC
+
+**** Subroutines
+
+some basic functions i will be using
+
+#+BEGIN_SRC sh :tangle setup.ksh
+function clean {
+    log "$REVON Removing Cruft... $REVOFF"
+    rex remove_default_cruft
+}
+
+function ensure_lisp {
+    log "$REVON Quicklisp Setup $REVOFF"
+    doas pkg_add -vm sbcl rlwrap
+    ftp -o /tmp/quicklisp.lisp https://beta.quicklisp.org/quicklisp.lisp
+    ftp -o /tmp/quicklisp-setup.lisp https://github.com/izder456/dotfiles/raw/main/quicklisp-setup.lisp
+    sbcl --load /tmp/quicklisp.lisp --script /tmp/quicklisp-setup.lisp
+}
+
+function ports_deps {
+    log "$REVON We will install port deps now! $REVOFF"
+    doas pkg_add -vvvvm -l ~/.pkglist
+}
+
+function cargo_deps {
+    doas pkg_add rust
+    log "$REVON We will install cargo deps now! $REVOFF"
+    xargs cargo install < ~/.cargolist
+}
+
+function config_install {
+    log "$REVON Cloning/Installing Dots... $REVOFF"
+    if [[ ! -d "${HOME}/.dotfiles" ]]; then
+        git clone --depth 1 --recurse-submodules "https://github.com/Izder456/dotfiles.git" "${HOME}/.dotfiles"
+    elif [[ -d "${HOME}/.dotfiles" ]]; then
+        log "Already here"
+        (cd "${HOME}/.dotfiles"
+         git pull --recurse-submodules --depth 1)
+        cd "${HOME}"
+    else # something got fucked
+        log "Dots brokey"
+        exit 1
+    fi
+    rex configure_gtk
+    rex configure_icons
+    "${HOME}/.dotfiles/bin/dfm" install
+    doas cp ~/.dotfiles/doas.conf /etc/doas.conf
+}
+
+function setup_shell {
+    log "$REVON Setting up FiZSH... $REVOFF"
+    rex configure_default_shell
+    rex compile_afetch
+}
+
+function setup_backgrounds {
+    log "$REVON Installing Backgrounds... $REVOFF"
+    rex install_backgrounds
+}
+
+function setup_emacs {
+    log "$REVON Setting up Emacs... $REVOFF"
+    rex configure_emacs
+}
+
+function setup_stumpwm {
+    ensure_lisp
+    log "$REVON Setting up StumpWM... $REVOFF"
+    rex update_or_clone_stumpwm
+}
+
+function setup_misc {
+    setup_shell
+    log  "$REVON Misc setup... $REVOFF"
+    rex compile_shuf
+    rex compile_slock
+    rex compile_st
+    rex compile_surf
+    rex compile_nxbelld
+    rex setup_apmd
+    rex install_backgrounds
+    rex update_xdg_user_dirs
+}
+
+function setup_xenodm {
+    log "$REVON Setting up XenoDM... $REVOFF"
+    rex setup_xenodm
+}
+#+END_SRC
+
+**** Will it run?
+
+You need some things to make this crap work. This checks those things. So it will work.
+
+#+BEGIN_SRC sh :tangle setup.ksh
+function is_internet_up {
+    log "$REVON Checking if we have internet...$REVOFF"
+    if nc -zw1 OpenBSD.org 443; then
+        log "$REVON We have a Connection!$REVOFF"
+    else
+        return 1
+    fi
+}
+
+function ensure_needed {
+    log "$REVON We need git and p5-Rex from ports for functionality"
+    log "$REVON We will install p5-rex & git from ports now! $REVOFF"
+    doas pkg_add -vm p5-Rex git
+    ftp -o $HOME/Rexfile https://github.com/Izder456/dotfiles/raw/main/Rexfile
+}
+
+
+function do_ensure {
+    is_internet_up
+    ensure_needed
+}
+
+do_ensure
+#+END_SRC
+
+**** Wizard Menu
+
+The interactive menu for the setup process.
+
+#+BEGIN_SRC sh :tangle setup.ksh
+HEADER_TEXT=`cat <<-EOF
+\n$REVON Srcerizder Dotfiles Setup $REVOFF
+\nOptions:
+\n--------------------------
+\n  1) Ports \t 4) StumpWM
+\n  2) Cargo \t 5) Emacs
+\n  3) Config\t 6) XenoDM
+\n  7) Misc\t 8) Clean
+\n
+\nOther Options:
+\n----------------
+\n  a) All (Reccomended)
+\n  r) Reload Menu
+\n  q) Quit
+\n
+\nEnter your selection: r\b\c
+EOF
+`
+
+
+function main {
+    while :
+    do
+        clear
+        print $HEADER_TEXT
+        read selection
+        if [[ -z "$selection" ]]; then
+            selection=r
+        fi
+        case $selection in
+            1) print "\nSelected Ports Deps..."
+               sleep $SLEEPTIME
+               ports_deps;;
+            2) print "Selected Cargo Deps..."
+               sleep $SLEEPTIME
+               cargo_deps;;
+            3) print "Selected Install Configs..."
+               sleep $SLEEPTIME
+               config_install;;
+            4) print "Selected StumpWM Config..."
+               sleep $SLEEPTIME
+               setup_stumpwm;;
+            5) print "Selected Emacs Config..."
+               sleep $SLEEPTIME
+               setup_emacs;;
+            6) print "Selected XenoDM Config..."
+               sleep $SLEEPTIME
+               setup_xenodm;;
+            7) print "Selected Misc..."
+               sleep $SLEEPTIME
+               setup_misc;;
+            8) print "Selected Clean..."
+               sleep $SLEEPTIME
+               clean;;
+            a|A) print "Running All..."
+                 sleep $SLEEPTIME
+                 clean
+                 config_install
+                 ports_deps
+                 cargo_deps
+                 setup_stumpwm
+                 setup_emacs
+                 setup_xenodm
+                 setup_misc;;
+            r|R) continue;;
+            q|Q) print
+                 exit;;
+            ,*) print "\n$REVON Invalid selection $REVOFF"
+               sleep 1;;
+        esac
+    done
+}
+
+# main
+main
+#+END_SRC
+
+** Misc Stuffs
+
+random scripts and configs that are maybe relevant possibly.
+
+**** Quicklisp Install
+
+You probably want this if you want to write with StumpWM and modules...
+
+#+BEGIN_SRC lisp :tangle quicklisp-setup.lisp
+(quicklisp-quickstart:install :path "~/.quicklisp")
+(ql:add-to-init-file)
+(ql-dist:install-dist "http://dist.ultralisp.org/"
+		      :prompt nil)
+(ql:quickload '("clx"
+		"cl-ppcre"
+		"alexandria"
+		"cl-fad"
+		"xembed"
+		"anaphora"
+		"drakma"
+		"slynk"))
+#+END_SRC
+
+/USE:/
+
+#+BEGIN_SRC sh
+$ ftp -o /tmp/quicklisp.lisp https://beta.quicklisp.org/quicklisp.lisp
+$ ftp -o /tmp/quicklisp-setup.lisp https://github.com/Izder456/raw/main/quicklisp-setup.lisp
+$ sbcl --load /tmp/quicklisp.lisp --script /tmp/quicklisp-setup.lisp
+#+END_SRC
+
+**** .Xsession/.Xresources/.Xprofile
+
+The settings for X session, resources, and profile.
+
+***** .xprofile
+
+#+BEGIN_SRC sh :tangle .xprofile
+#!/bin/sh
+export LC_ALL=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+export QT_QPA_PLATFORMTHEME=gtk2
+export SDL_VIDEO_X11_DGAMOUSE=0
+#+END_SRC
+
+***** .xresources
+
+#+BEGIN_SRC conf :tangle .xresources
+!!
+! XWindow Stuffs
+!!
+,*imLocale: en_US.UTF-8
+
+!!
+! XTerm Stuffs
+!!
+,*intensityStyles: true
+,*allowSendEvents: true
+xterm*scrollBar: false
+xterm*faceName: Spleen
+xterm*faceSize: 12
+xterm*renderFont: true
+xterm*internalBorder: 16
+xterm*letterSpace: 1
+xterm*loginShell: true
+xterm*savelines: 16384
+
+!!
+! Font Rendering Stuffs
+!!
+Xft.dpi: 96
+Xft.rgba: rgb
+Xft.antialias: true
+Xft.autohint: false
+Xft.hintstyle: hintfull
+Xft.lcdfilter: lcddefault
+,*faceName: Spleen
+,*faceSize: 12
+
+!!
+! XClock Stuffs
+!!
+XClock*Background: #32302f
+XClock*Foreground: #ebdbb2
+
+!!
+! Pointer Stuffs
+!!
+Xcursor.size: 16
+Xcursor.theme: Capitaine Cursors (Gruvbox) - White
+
+!!
+! Background Colors
+!!
+! Normal
+,*background: #282828
+,*foreground: #ebdbb2
+! Hard-Dark
+,*.activeBackground: #1d2021
+,*.activeForeground: #32302f
+
+!!
+! ssh-askpass
+!!
+SshAskpass.borderColor: #fe8019
+SshAskpass.borderWidth: 4
+SshAskpass.verticalSpacing: 16
+SshAskpass.horizontalSpacing: 16
+SshAskpass.cursorColor: #ebdbb2
+SshAskpass.buttonColor: #fe8019
+SshAskpass.selectColor: #3c3836
+SshAskpass.dialogBackground: #32302f
+SshAskpass.dialogForeground: #ebdbb2
+SshAskpass.dialogSelect: #fe8019
+SshAskpass.labelBackground: #32302f
+SshAskpass.labelForeground: #ebdbb2
+SshAskpass.textBackground: #282828
+SshAskpass.textForeground: #ebdbb2
+      
+!!
+! Gruvbox Colors
+!!
+! Black + DarkGrey
+,*color0:  #282828
+,*color8:  #928374
+! DarkRed + Red
+,*color1:  #cc241d
+,*color9:  #fb4934
+! DarkGreen + Green
+,*color2:  #98971a
+,*color10: #b8bb26
+! DarkYellow + Yellow
+,*color3:  #d79921
+,*color11: #fabd2f
+! DarkBlue + Blue
+,*color4:  #458588
+,*color12: #83a598
+! DarkMagenta + Magenta
+,*color5:  #b16286
+,*color13: #d3869b
+! DarkCyan + Cyan
+,*color6:  #689d6a
+,*color14: #8ec07c
+! LightGrey + White
+,*color7:  #a89984
+,*color15: #ebdbb2
+
+
+!!
+! Gruvbox 256color
+!!
+
+! BrightBlue
+,*color24:  #076678
+! BrightAqua
+,*color66:  #427b58
+! BrightRed
+,*color88:  #9d0006
+! BrightMagenta
+,*color96:  #8f3f71
+! BrightGreen
+,*color100: #79740e
+! DimBlue
+,*color109: #83a598
+! DimAqua
+,*color108: #8ec07c
+! DimRed
+,*color130: #af3a03
+! DimYellow
+,*color136: #b57614
+! DimGreen
+,*color142: #b8bb26
+! DimRed
+,*color167: #fb4934
+! DimMagenta
+,*color175: #d3869b
+! Orange
+,*color208: #fe8019
+! BrightYellow
+,*color214: #fabd2f
+!! fg0-fg3
+,*color223: #ebdbb2
+,*color228: #f2e5bc
+,*color229: #fbf1c7
+,*color230: #f9f5d7
+!! bg0-bg3
+,*color234: #1d2021
+,*color235: #282828
+,*color236: #32302f
+,*color237: #3c3836
+!! Gray0-Gray7
+,*color239: #504945
+,*color241: #665c54
+,*color243: #7c6f64
+,*color244: #928374
+,*color245: #928374
+,*color246: #a89984
+,*color248: #bdae93
+,*color250: #d5c4a1
+#+END_SRC
+
+***** .xsession
+
+#+BEGIN_SRC sh :tangle .xsession
+#!/bin/sh
+[ -f /etc/xprofile ] && . /etc/xprofile
+[ -f ~/.xprofile ] && . ~/.xprofile
+[ -f ~/.xresources ] && xrdb ~/.xresources
+if [ -x /usr/local/bin/dbus-launch -a -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
+    eval `dbus-launch --sh-syntax --exit-with-x11`
+fi
+export LC_CTYPE="en_US.UTF-8"
+export MOZ_ACCELERATED=1
+export MOZ_WEBRENDER=1
+xset b off
+dunst &
+picom -f -b &
+ulimit -d 17000000
+ulimit -Sc 0
+pkill nxbelld; ~/.local/bin/nxbelld -v100 -d200 -f ~/.local/sfx/Pop.wav -b
+xset +fp /usr/local/share/fonts/spleen
+feh --bg-fill $(shuf -n1 -e /usr/local/share/backgrounds/*) &
+xidle -delay 5 -nw -program "/usr/local/bin/slock" -timeout 1800 &
+stumpwm
+#+END_SRC
+
+**** Sysctl.conf
+
+The kernel parameters settings.
+
+*Very hardware specific*
+
+#+BEGIN_SRC conf :tangle sysctl.conf
+# Open Kernel Limits
+kern.maxthread=5240
+kern.maxproc=16384
+kern.maxfiles=32768
+
+# Enable Multithreading
+hw.smt=1
+
+# Video/Audio enable/disable
+# change these to =1 if you want microphone or webcam access
+kern.audio.record=0
+kern.video.record=0
+#+END_SRC
+
+**** Dfm-Install
+
+dfm install script config
+
+#+BEGIN_SRC txt :tangle .dfminstall
+.fonts recurse
+.git recurse
+.icons recurse
+.themes recurse
+.moc recurse
+.config recurse
+.local recurse
+.claws-mail recurse
+LICENSE.txt skip
+COPYING skip
+README.org skip
+quicklisp-setup.lisp skip
+doas.conf skip
+sysctl.conf skip
+setup.ksh skip
+setup.pl.bak skip
+bin skip
+assets skip
+backgrounds skip
+Emacs-Config skip
+StumpWM-Config skip
+XenoDM-Config skip
+APM-Config skip
+#+END_SRC
+
+**** Doas.conf
+
++this is totally overkill+
+fine now
+
+#+BEGIN_SRC conf :tangle doas.conf
+permit persist :doas
+#+END_SRC
+
+**** Cargo-list
+
+The list of packages to be installed via Cargo.
+
+#+BEGIN_SRC txt :tangle .cargolist
+cargo-upgrade-command du-dust hyperfine onefetch sd tere tokei
+#+END_SRC
+
+** Rexfile
+
+this is an automation thingy i use. its definitely overkill, but i like perl.
+
+**** Perl-Boilerplate
+
+The initial setup for Perl.
+
+#+BEGIN_SRC perl :tangle Rexfile
+use 5.36.0;
+use Rex -feature => ['1.4'];
+
+# Set PATH explicitly
+$ENV{'PATH'} =
+  '/bin:/usr/bin:/sbin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin';
+
+# No Magic
+our $USERHOME = "$ENV{HOME}";
+our $GITHUB   = "https://github.com";
+#+END_SRC
+
+**** Remove-Cruft
+
+I don't need some of these defaults
+
+#+BEGIN_SRC perl :tangle Rexfile
+# task to clean home dir
+task 'remove_default_cruft', sub {
+  unlink(
+    "$USERHOME/.cshrc",   "$USERHOME/.login",     "$USERHOME/.mailrc",
+    "$USERHOME/.profile", "$USERHOME/.Xdefaults", "$USERHOME/.cvsrc"
+  );
+  system( 'doas', 'chmod', '0700', "$USERHOME" );
+};
+#+END_SRC
+
+**** FiZSH-Setup
+
+This is a zsh frontend, that emulates the functionality of fish
+
+#+BEGIN_SRC perl :tangle Rexfile
+# Configures and sets up the default shell
+task 'configure_default_shell', sub {
+  my %plugins = (
+    "zsh-openbsd" => "$GITHUB/sizeofvoid/openbsd-zsh-completions.git",
+    "zsh-fzf"     => "$GITHUB/Aloxaf/fzf-tab.git",
+    "zsh-suggest" => "$GITHUB/zsh-users/zsh-autosuggestions.git",
+    "zsh-256"     => "$GITHUB/chrissicool/zsh-256color.git",
+    "zsh-fsh"     => "$GITHUB/zdharma-continuum/fast-syntax-highlighting.git"
+  );
+  keys %plugins;
+  while (my($k, $v) = each %plugins) {
+    my $clonedir = "$USERHOME/.$k";
+    my $cloneuri = "$v";
+    if ( -d $clonedir ) {
+      chdir "$clonedir";
+      system( 'git', 'pull' );
+    } else {
+      system( 'git', 'clone', "$cloneuri", "$clonedir" );
+    }
+  }
+
+  # Grab fizsh src setup
+  if ( -d "$USERHOME/.fizsh" ) {
+    chdir "$USERHOME/.fizsh";
+  } else {
+    system( 'git', 'clone', "$GITHUB/zsh-users/fizsh.git", "$USERHOME/.fizsh" );
+    chdir "$USERHOME/.fizsh";
+  }
+  system( './configure' );
+  system( 'make' );
+  system( 'doas', 'make', 'install' );
+  system( 'cp', "$USERHOME/.dotfiles/.fizshrc", "$USERHOME/.fizsh/.fizshrc" );
+  system( 'chsh', '-s', '/usr/local/bin/fizsh' );
+};
+#+END_SRC
+
+**** Icons and GTK stuffs
+
+#+BEGIN_SRC perl :tangle Rexfile
+task 'configure_gtk', sub {
+  my %gtk = (
+    "gruvbox-square-gtk" => "$GITHUB/jmattheis/gruvbox-dark-gtk.git",
+    "gruvbox-round-gtk" => "$GITHUB/Fausto-Korpsvart/Gruvbox-GTK-Theme.git",
+    "gruvbox-plus-gtk" => "$GITHUB/SylEleuth/gruvbox-plus-gtk.git",
+  );
+  keys %gtk;
+  while (my($k, $v) = each %gtk) {
+    my $clonedir = "/tmp/$k";
+    my $cloneuri = "$v";
+    if ( -d "$clonedir" ) {
+      chdir "$clonedir";
+      system( 'git', 'pull' );
+    } else {
+      system( 'git', 'clone', "$cloneuri", "$clonedir" );
+    }
+    if ( -d "$clonedir/themes" ) {
+      system( 'cp', '-Rv', glob("$clonedir/themes/*"), "$USERHOME/.dotfiles/.themes/" );
+    } elsif ( -d "$clonedir/Gruvbox-Plus-Dark" ) {
+      system( 'cp', '-Rv', "$clonedir/Gruvbox-Plus-Dark", "$USERHOME/.dotfiles/.themes/" );
+    } else {
+      system( 'cp', '-Rv', "$clonedir", "$USERHOME/.dotfiles/.themes/" );
+    }
+  }
+};
+
+task 'configure_icons', sub {
+  my %icons = (
+    "gruvbox-round-icons" => "$GITHUB/Fausto-Korpsvart/Gruvbox-GTK-Theme.git",
+    "gruvbox-square-icons" => "$GITHUB/jmattheis/gruvbox-dark-icons-gtk.git",
+    "gruvbox-plus-icons" => "$GITHUB/SylEleuth/gruvbox-plus-icon-pack.git",
+  );
+  keys %icons;
+  while (my($k, $v) = each %icons) {
+    my $clonedir = "/tmp/$k";
+    my $cloneuri = "$v";
+    if ( -d "$clonedir" ) {
+      chdir "$clonedir";
+      system( 'git', 'pull' );
+    } else {
+      system( 'git', 'clone', "$cloneuri", "$clonedir" );
+    }
+    if ( -d "$clonedir/icons" ) {
+      system( 'cp', '-Rv', glob("$clonedir/icons/*"), "$USERHOME/.dotfiles/.icons/" );
+    } elsif ( -d "$clonedir/Gruvbox-Plus-Dark" ) {
+      system( 'cp', '-Rv', "$clonedir/Gruvbox-Plus-Dark", "$USERHOME/.dotfiles/.icons/" );
+    } else {
+      system( 'cp', '-Rv', "$clonedir", "$USERHOME/.dotfiles/.icons/" );
+    }
+  }
+};
+#+END_SRC
+
+**** Emacs-Setup
+
+I use Emacs, btw
+
+#+BEGIN_SRC perl :tangle Rexfile
+# Configures and installs emacs
+task 'configure_emacs', sub {
+  if ( -d "$USERHOME/.emacs.d" ) {
+    chdir "$USERHOME/.emacs.d";
+  } else {
+    system( 'ln', '-sf', "$USERHOME/.dotfiles/Emacs-Config", "$USERHOME/.emacs.d" );
+  }
+};
+#+END_SRC
+
+**** StumpWM-Setup
+
+Yeah, this weird WM...
+
+#+BEGIN_SRC perl :tangle Rexfile
+task 'update_or_clone_stumpwm', sub {
+  if ( -d "$USERHOME/.stumpwm.d" ) {
+    chdir "$USERHOME/.stumpwm.d";
+  } else {
+    system( 'ln', '-sf', "$USERHOME/.dotfiles/StumpWM-Config", "$USERHOME/.stumpwm.d" );
+  }
+};
+#+END_SRC
+
+**** XenoDM/Background-Setup
+
+Because XDM wasn't cutting it...
+
+#+BEGIN_SRC perl :tangle Rexfile
+# Installs backgrounds to /usr/local/share/backgrounds
+task 'install_backgrounds', sub {
+  system( 'doas', 'mkdir', '-p', '/usr/local/share/backgrounds' );
+  system( 'doas',  'cp', '-rvf', glob("$USERHOME/.dotfiles/backgrounds/*"), '/usr/local/share/backgrounds' );
+};
+
+# Sets up Xenodm configuration
+task 'setup_xenodm', sub {
+  system( 'doas', 'cp', '-rvf', glob("$USERHOME/.dotfiles/XenoDM-Config/*"), '/etc/X11/xenodm/' );
+};
+#+END_SRC
+
+**** APMD_AutoHook-Lock
+
+Setup Laptop Slock shell-close autohook
+
+#+BEGIN_SRC perl :tangle Rexfile
+task 'setup_apmd', sub {
+  system( 'doas', 'mkdir', '/etc/apm' );
+  system( 'doas', 'cp', '-rvf', glob("$USERHOME/.dotfiles/APM-Config/*"), '/etc/apm/' );
+};
+#+END_SRC
+
+**** Extra-Packages
+
+Extra stuff thats not in ports, cargo or base
+
+#+BEGIN_SRC perl :tangle Rexfile
+# Compiles shuf re-implementation
+task 'compile_shuf', sub {
+  system( 'git', 'clone', "$GITHUB/ibara/shuf.git", "$USERHOME/.shuf" );
+  chdir "$USERHOME/.shuf";
+  system( './configure' );
+  system( 'make' );
+  system( 'doas', 'make', 'install' );
+};
+
+# Compiles in my Slock Setup
+task 'compile_slock', sub {
+  system( 'git', 'clone', "$GITHUB/Izder456/slock.git", "$USERHOME/.slock" );
+  chdir "$USERHOME/.slock";
+  system( 'make' );
+  system( 'doas', 'make', 'install' );
+};
+
+# Compiles in my SURF Setup
+task 'compile_surf', sub {
+  system( 'git', 'clone', "$GITHUB/Izder456/surf.git", "$USERHOME/.surf-src" );
+  chdir "$USERHOME/.surf-src";
+  system( 'make' );
+  system( 'doas', 'make', 'install' );
+};
+
+# Compiles in my ST Setup
+task 'compile_st', sub {
+  system( 'git', 'clone', "$GITHUB/Izder456/st.git", "$USERHOME/.st" );
+  chdir "$USERHOME/.st";
+  system( 'make' );
+  system( 'doas', 'make', 'install' );
+};
+
+# Compiles afetch
+task 'compile_afetch', sub {
+  system( 'git', 'clone', "$GITHUB/13-CF/afetch.git", "$USERHOME/.afetch" );
+  chdir "$USERHOME/.afetch";
+  system( 'make' );
+  system( 'doas', 'make', 'install' );
+};
+
+task 'compile_nxbelld', sub {
+  $ENV{'AUTOCONF_VERSION'} = "2.69";
+  $ENV{'AUTOMAKE_VERSION'} = "1.16";
+  system( 'git', 'clone', "$GITHUB/dusxmt/nxbelld.git", "$USERHOME/.nxbelld" );
+  chdir "$USERHOME/.nxbelld";
+  system('autoreconf -i');
+  system( './configure', '--prefix', "$USERHOME/.local");
+  system( 'gmake' );
+  system( 'gmake', 'install' );
+};
+#+END_SRC
+
+**** Xdg-UserDirs
+
+Setup Homedir Paths
+
+#+BEGIN_SRC perl :tangle Rexfile
+# Updates XDG user directories
+task 'update_xdg_user_dirs', sub {
+  system( 'xdg-user-dirs-update' );
+  system( 'mkdir', "$USERHOME/Projects" );
+  system( 'doas', 'gdk-pixbuf-query-loaders', '--update-cache' );
+};
+#+END_SRC
+
+* Setup Script
+
+please read the [[#disclaimer][DISCLAIMER]], i am not your mom. 
+
+1. Install OpenBSD on a machine with these specs
+
+   #+BEGIN_SRC
+  >=42GB Install Disklabel Size (minimum reccomended)
+  >=4GB in / (you need this cos /tmp resides here by default, and my icons and gtk themes will clone here during setup)
+  >=4GB in /usr (you can get by with 1 single root partiton too, but its probably more ideal to break things up for ramdisk purposes)
+  >=24GB in /usr/local (same here as /usr, but even more important)
+  4gb or more RAM
+  4 logical cores or more
+  OpenGL >=3.1 Capable GFX Card
+   #+END_SRC
+
+2. Switch to -CURRENT
+
+   #+BEGIN_SRC
+  # sysupgrade -sn
+   #+END_SRC
+
+3. Add =:doas= group
+
+   #+BEGIN_SRC
+  # groupadd doas
+  # usermod -G wheel,operator,doas [your username]
+   #+END_SRC
+
+4. Add user to staff login class
+
+   #+BEGIN_SRC
+  # usermod -L staff [your username]
+   #+END_SRC
+
+5. grab my doas and sysctl configs
+
+   #+BEGIN_SRC
+   # ftp -o /etc/doas.conf https://github.com/izder456/dotfiles/raw/main/doas.conf
+   # ftp -o /etc/sysctl.conf https://github.com/izder456/dotfiles/raw/main/sysctl.conf
+   #+END_SRC
+
+6. reboot, let sysupgrade finish, and merge changes:
+
+   #+BEGIN_SRC
+   # reboot
+   #+END_SRC
+
+   #+BEGIN_SRC
+   # sysmerge -d
+   #+END_SRC
+
+7. Download and run script as your regular user
+
+   #+BEGIN_SRC
+  $ ftp -o /tmp/setup.ksh https://github.com/izder456/dotfiles/raw/main/setup.ksh
+  $ ksh /tmp/setup.ksh
+   #+END_SRC
+
+8. enable dbus (my StumpWM config needs it)
+
+   #+BEGIN_SRC
+   # rcctl enable messagebus
+   #+END_SRC
+
+9. Reboot again
+
+   #+BEGIN_SRC
+  # reboot
+   #+END_SRC

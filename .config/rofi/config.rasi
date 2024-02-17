@@ -1,0 +1,6 @@
+configuration {
+ modi: "window,drun,ssh,combi";
+ font: "Spleen 8x16 12";
+ combi-modi: "window,drun,ssh";
+ }
+@theme "~/.config/rofi/themes/gruvbox-dark-hard.rasi"
