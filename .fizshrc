@@ -175,7 +175,7 @@ transfer() {
 ##
 # Node.JS
 ##
-if [ ! $(command -v npm); then
+if [ ! $(command -v npm) ]; then
     if [ ! -d $HOME/.npm-global ]; then
         mkdir $HOME/.npm-global
     fi
