@@ -45,6 +45,7 @@ firefox-esr--
 fluidsynth--
 fmt--
 fossil--
+fox--
 freedroid--
 freefont-ttf--
 freeglut--
@@ -71,6 +72,7 @@ gnupg--
 gnutls--
 gnuwatch--
 go--
+godot--
 gpgme--
 gsettings-desktop-schemas--
 gtk+4--
@@ -83,6 +85,7 @@ hunspell--
 hw-probe--
 iftop--
 iniparser--
+intltool--
 jack--
 jansson--
 jdk--%1.8
@@ -136,6 +139,7 @@ mgba-qt--
 minetest--
 motif--
 mpv--
+musescore--
 nano--
 nanosaur--
 nanosaur2--
@@ -154,7 +158,6 @@ ottomatic--
 p5-Rex--
 p7zip--
 parallel--
-pcmanfm--
 pcre--
 perltidy--
 picom--
@@ -165,6 +168,7 @@ playerctl--
 png--
 poppler--
 portaudio-svn--
+portmidi--
 pv--
 py3-pip--
 py3-pipx--
@@ -196,7 +200,6 @@ shared-mime-info--
 shellcheck--
 shfmt--
 smartmontools--
-snes9x--
 speedtest-cli--
 spleen--
 sqlite3--
@@ -204,7 +207,6 @@ ssh-copy-id--
 sshfs-fuse--
 startup-notification--
 stumpwm--
-supertuxkart--
 tidy--
 tiff--
 tor--
@@ -224,7 +226,9 @@ xarchiver--
 xclip--
 xdg-user-dirs--
 xdg-utils--
+xfe--
 xonotic--
+xpdf--
 xz--
 yt-dlp--
 zsh--
