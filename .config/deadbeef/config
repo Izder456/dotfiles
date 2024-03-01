@@ -35,9 +35,9 @@ logwindow.geometry.h 842
 logwindow.geometry.w 1576
 logwindow.geometry.x 12
 logwindow.geometry.y 46
-mainwin.geometry.h 842
-mainwin.geometry.w 1576
-mainwin.geometry.x 12
+mainwin.geometry.h 409
+mainwin.geometry.w 776
+mainwin.geometry.x 806
 mainwin.geometry.y 46
 network.proxy.port 8080
 notify.albumart 1
@@ -63,8 +63,8 @@ prefwin.geometry.x 419
 prefwin.geometry.y 193
 resume.paused 0
 resume.playlist 0
-resume.position 236.28730
-resume.track 134
+resume.position 0.0000000
+resume.track 123
 streamer.16_to_24 1
 streamer.samplerate 44100
 streamer.samplerate_mult_44 44100
