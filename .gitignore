@@ -2,7 +2,7 @@
 .local/bin/*
 *.lock
 *.dbpl
-*deadbeef/playlists*y
+*deadbeef/playlists*
 .themes
 .icons/Gruvbox*
 .icons/gruvbox*
