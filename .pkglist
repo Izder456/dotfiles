@@ -12,6 +12,7 @@ bugdom--
 bugdom2--
 cairo--
 candycrisis--
+cargo-generate-vendor--
 chicken--
 clang-tools-extra--
 claws-mail--
@@ -57,6 +58,7 @@ gdk-pixbuf-xlib--
 gettext-runtime--
 gettext-tools--
 gforth--
+ghostscript--no_x11
 giflib--
 git--
 github-cli--
@@ -74,6 +76,7 @@ gnuwatch--
 go--
 godot--
 gpgme--
+groff--
 gsettings-desktop-schemas--
 gtk+4--
 gtk2-murrine-engine--
@@ -84,6 +87,7 @@ htop--
 hunspell--
 hw-probe--
 iftop--
+imake--
 iniparser--
 intltool--
 jack--
@@ -126,8 +130,10 @@ libvorbis--
 libwebp--
 libxml--
 libyaml--
+links--
 lmms--
 lsblk--
+luajit--
 lxappearance--
 m17n-db--
 m17n-lib--
@@ -157,6 +163,7 @@ openssl--%3.1
 ottomatic--
 p5-Rex--
 p7zip--
+pandoc--
 parallel--
 pcre--
 perltidy--
@@ -200,6 +207,7 @@ shared-mime-info--
 shellcheck--
 shfmt--
 smartmontools--
+snes9x--
 speedtest-cli--
 spleen--
 sqlite3--
@@ -228,8 +236,9 @@ xdg-user-dirs--
 xdg-utils--
 xfe--
 xonotic--
-xpdf--
 xz--
 yt-dlp--
+zathura--
+zathura-pdf-poppler--
 zsh--
 zstd--
