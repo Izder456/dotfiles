@@ -6,6 +6,7 @@
 .config recurse
 .local recurse
 .claws-mail recurse
+.ssh recurse
 LICENSE.txt skip
 COPYING skip
 README.org skip
