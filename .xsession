@@ -1,12 +1,11 @@
 #!/bin/ksh
 
 # Load in resources
-function load_resources
-{
+function load_resources {
     # set xdefaults
     [ -f /etc/xprofile ] && . /etc/profile
-    [ -f $HOME/.xprofile ] && . $HOME/.xprofile
-    [ -f $HOME/.xresources ] && . $HOME/.xresources
+    [ -f ~/.xprofile ] && . ~/.xprofile
+    [ -f ~/.xresources ] && . ~/.xresources
     # Mute xbell
     xset b off
     # Add spleen font to xfonts path
@@ -16,8 +15,7 @@ function load_resources
     ulimit -Sc 0
 }
 
-function autostart
-{
+function autostart {
     # if dbus exists, open it
     if [ -x /usr/local/bin/dbus-launch -a -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
 	eval `dbus-launch --sh-syntax --exit-with-x11`
