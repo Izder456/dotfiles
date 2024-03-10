@@ -2,10 +2,11 @@
 
 # Load in resources
 function load_resources {
-    # set xdefaults
+    # set xprofile
     [ -f /etc/xprofile ] && . /etc/profile
     [ -f ~/.xprofile ] && . ~/.xprofile
-    [ -f ~/.xresources ] && . ~/.xresources
+    # set xdefaults
+    [ -f ~/.xresources ] && xrdb -merge ~/.xresources
     # Mute xbell
     xset b off
     # Add spleen font to xfonts path
