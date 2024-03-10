@@ -52,6 +52,7 @@
   - [[#misc-stuffs][Misc Stuffs]]
       - [[#quicklisp-install][Quicklisp Install]]
       - [[#xsessionxresourcesxprofile][.Xsession/.Xresources/.Xprofile]]
+      - [[#exrc][.exrc]]
       - [[#sysctlconf][Sysctl.conf]]
       - [[#dfm-install][Dfm-Install]]
       - [[#doasconf][Doas.conf]]
@@ -340,9 +341,15 @@ The settings for X session, resources, and profile.
 
 #+BEGIN_SRC sh :tangle .xprofile
 #!/bin/sh
-export LC_ALL=en_US.UTF-8
-export LC_CTYPE=en_US.UTF-8
+# Set Default LOCALE
+export LC_CTYPE="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+# Enable HWACCEL for Firefox
+export MOZ_ACCELERATED=1
+export MOZ_WEBRENDER=1
+# set qt apps to use gtk2 widgets if avail
 export QT_QPA_PLATFORMTHEME=gtk2
+# make sdl mouse cursor lag go away
 export SDL_VIDEO_X11_DGAMOUSE=0
 #+END_SRC
 
@@ -505,26 +512,75 @@ SshAskpass.textForeground: #ebdbb2
 ***** .xsession
 
 #+BEGIN_SRC sh :tangle .xsession
-#!/bin/sh
-[ -f /etc/xprofile ] && . /etc/xprofile
-[ -f ~/.xprofile ] && . ~/.xprofile
-[ -f ~/.xresources ] && xrdb ~/.xresources
-if [ -x /usr/local/bin/dbus-launch -a -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
-    eval `dbus-launch --sh-syntax --exit-with-x11`
-fi
-export LC_CTYPE="en_US.UTF-8"
-export MOZ_ACCELERATED=1
-export MOZ_WEBRENDER=1
-xset b off
-dunst &
-picom -f -b &
-ulimit -d 17000000
-ulimit -Sc 0
-pkill nxbelld; ~/.local/bin/nxbelld -v100 -d200 -f ~/.local/sfx/Pop.wav -b
-xset +fp /usr/local/share/fonts/spleen
-feh --bg-fill $(shuf -n1 -e /usr/local/share/backgrounds/*) &
-xidle -delay 5 -nw -program "/usr/local/bin/slock" -timeout 1800 &
-stumpwm
+#!/bin/ksh
+
+# Load in resources
+function load_resources
+{
+    # set xdefaults
+    [ -f /etc/xprofile ] && . /etc/profile
+    [ -f $HOME/.xprofile ] && . $HOME/.xprofile
+    [ -f $HOME/.xresources ] && . $HOME/.xresources
+    # Mute xbell
+    xset b off
+    # Add spleen font to xfonts path
+    xset +fp /usr/local/share/fonts/spleen
+    # raise limits, disable .core dumps
+    ulimit -d 17000000
+    ulimit -Sc 0
+}
+
+function autostart
+{
+    # if dbus exists, open it
+    if [ -x /usr/local/bin/dbus-launch -a -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
+	eval `dbus-launch --sh-syntax --exit-with-x11`
+    fi
+    # notification daemon
+    dunst &
+    # run compositor in bg
+    picom -b &
+    # override default bell sound
+    pkill nxbelld; ~/.local/bin/nxbelld -v100 -d200 -f ~/.local/sfx/Pop.wav -b
+    # set a random background
+    feh --bg-fill --randomize /usr/local/share/backgrounds &
+    # set slock
+    xidle -delay 5 -nw -program "/usr/local/bin/slock" -timeout 1800 &
+}
+
+# actually run shit
+load_resources
+autostart
+stumpwm --tls-limit 24
+#+END_SRC
+
+**** .exrc
+
+for BSD Vi
+
+#+BEGIN_SRC conf :tangle .exrc
+" display current mode
+set showmode
+" show matching parens, brackets, etc
+set showmatch
+" display row/column info
+set ruler
+" autoindent tab = 2 space
+set shiftwidth=2
+" tab = 2 space
+set tabstop=2
+" display errors
+set verbose
+" enable horiz scroll
+set leftright
+" use extend regex
+set extend
+" case-less searching, unless uppercase
+set iclower
+" incremental searching
+set searchincr
+" print helpful messages (eg, 4 lines yanked)
+set report=1
 #+END_SRC
 
 **** Sysctl.conf
@@ -592,7 +648,7 @@ permit persist :doas
 The list of packages to be installed via Cargo.
 
 #+BEGIN_SRC txt :tangle .cargolist
-cargo-upgrade-command du-dust hyperfine onefetch sd tere tokei
+cargo-upgrade-command dipc du-dust hyperfine onefetch sd tere tokei
 #+END_SRC
 
 ** Rexfile
@@ -698,6 +754,7 @@ task 'configure_gtk', sub {
     } else {
       system( 'cp', '-Rv', "$clonedir", "$USERHOME/.dotfiles/.themes/" );
     }
+    unlink("$clonedir");
   }
 };
 
@@ -724,6 +781,7 @@ task 'configure_icons', sub {
     } else {
       system( 'cp', '-Rv', "$clonedir", "$USERHOME/.dotfiles/.icons/" );
     }
+    unlink("$clonedir");
   }
 };
 #+END_SRC

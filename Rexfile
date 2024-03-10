@@ -76,6 +76,7 @@ task 'configure_gtk', sub {
     } else {
       system( 'cp', '-Rv', "$clonedir", "$USERHOME/.dotfiles/.themes/" );
     }
+    unlink("$clonedir");
   }
 };
 
@@ -102,6 +103,7 @@ task 'configure_icons', sub {
     } else {
       system( 'cp', '-Rv', "$clonedir", "$USERHOME/.dotfiles/.icons/" );
     }
+    unlink("$clonedir");
   }
 };
 
