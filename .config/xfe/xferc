@@ -1,11 +1,11 @@
 [OPTIONS]
-height=836
+height=842
 toolstoolbar=1
 folder_warn=1
 panel_view=0
-width=776
+width=1576
 use_startup_notification=1
-root_warn=0
+use_trash_can=1
 preserve_date_warn=1
 confirm_delete=1
 no_script=0
@@ -25,7 +25,7 @@ confirm_properties=1
 twopanels_lpanel_pct=0.5
 root_auth=1
 vert_panels=1
-use_trash_can=1
+root_warn=0
 confirm_trash=1
 confirm_execute=1
 status=1
@@ -35,23 +35,13 @@ generaltoolbar=1
 locationbar=1
 confirm_drag_and_drop=1
 
-[PROGS]
-imgeditor=
-txtviewer="emacsclient -c --socket-name=stumpwm-emacs -a \'emacs\'"
-audioplayer=deadbeef
-xterm=st
-imgviewer=feh
-txteditor="emacsclient -c --socket-name=stumpwm-emacs -a \'emacs\'"
-filecomparator=
-videoplayer=mpv
-
 [SETTINGS]
 listforecolor=#fbf1c7
 iconpath=/usr/local/share/xfe/icons/default-theme
 screenres=96
 single_click=0
 highlightcolor=#32302f
-wheellines=5
+textfont=Liberation Serif [1ASC],120,normal,regular
 bordercolor=#1d2021
 activecolorpane=1
 font=Spleen [misc],120,normal,regular
@@ -67,10 +57,10 @@ time_format=%x %X
 show_pathlinker=1
 relative_resize=1
 selbackcolor=#d65d0e
+wheellines=5
 smooth_scroll=1
 use_clearlooks=0
 attentioncolor=#fb4934
-textfont=Liberation Serif [1ASC],120,normal,regular
 backcolor=#1d2021
 tiptime=10000
 selforecolor=#fbf1c7
@@ -172,27 +162,33 @@ name_size=200
 lastdir=/home/izder456
 hiddenfiles=0
 
-[DIR PANEL]
-hidden_dir=0
-sort_func=ascendingCase
+[PROGS]
+imgeditor=
+txtviewer="emacsclient -c --socket-name=stumpwm-emacs -a \'emacs\'"
+audioplayer=deadbeef
+xterm=st
+imgviewer=feh
+txteditor="emacsclient -c --socket-name=stumpwm-emacs -a \'emacs\'"
+filecomparator=
+videoplayer=mpv
 
 [LEFT PANEL]
-type_size=49
+type_size=224
 deldate_size=150
 origpath_size=200
 liststyle=0
 attr_size=49
-size_size=30
+size_size=137
 user_size=25
 dirs_first=1
-ext_size=49
+ext_size=155
 grou_size=25
 modd_size=74
 ignore_case=1
 sort_func=ascendingCase
 showthumbnails=0
-name_size=98
-lastdir=/home/izder456/Mail
+name_size=252
+lastdir=/home/izder456/Documents
 hiddenfiles=0
 
 [FILETYPES]
@@ -421,4 +417,8 @@ modd_size=150
 showthumbnails=0
 name_size=200
 size_size=60
+
+[DIR PANEL]
+hidden_dir=0
+sort_func=ascendingCase
 
