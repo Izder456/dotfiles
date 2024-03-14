@@ -175,9 +175,14 @@ max_concurrency = 5
 # Additional git repositories to pull
 repos = [
      "/usr/ports",
-     "/usr/ports/mystuff",
      "/usr/ports/openbsd-wip",
-     "/usr/src"
+     "/usr/src",
+     "/home/izder456/.zsh-256",
+     "/home/izder456/.zsh-completions",
+     "/home/izder456/.zsh-fsh",
+     "/home/izder456/.zsh-fzf",
+     "/home/izder456/.zsh-openbsd",
+     "/home/izder456/.zsh-suggest"
 ]
 
 # Don't pull the predefined git repos
