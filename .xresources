@@ -52,24 +52,6 @@ Xcursor.theme: Capitaine Cursors (Gruvbox) - White
 *.activeForeground: #32302f
 
 !!
-! ssh-askpass
-!!
-SshAskpass.borderColor: #fe8019
-SshAskpass.borderWidth: 4
-SshAskpass.verticalSpacing: 16
-SshAskpass.horizontalSpacing: 16
-SshAskpass.cursorColor: #ebdbb2
-SshAskpass.buttonColor: #fe8019
-SshAskpass.selectColor: #3c3836
-SshAskpass.dialogBackground: #32302f
-SshAskpass.dialogForeground: #ebdbb2
-SshAskpass.dialogSelect: #fe8019
-SshAskpass.labelBackground: #32302f
-SshAskpass.labelForeground: #ebdbb2
-SshAskpass.textBackground: #282828
-SshAskpass.textForeground: #ebdbb2
-      
-!!
 ! Gruvbox Colors
 !!
 ! Black + DarkGrey
@@ -96,7 +78,6 @@ SshAskpass.textForeground: #ebdbb2
 ! LightGrey + White
 *color7:  #a89984
 *color15: #ebdbb2
-
 
 !!
 ! Gruvbox 256color
