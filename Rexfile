@@ -21,11 +21,12 @@ task 'remove_default_cruft', sub {
 # Configures and sets up the default shell
 task 'configure_default_shell', sub {
   my %plugins = (
-    "zsh-openbsd" => "$GITHUB/sizeofvoid/openbsd-zsh-completions.git",
-    "zsh-fzf"     => "$GITHUB/Aloxaf/fzf-tab.git",
-    "zsh-suggest" => "$GITHUB/zsh-users/zsh-autosuggestions.git",
-    "zsh-256"     => "$GITHUB/chrissicool/zsh-256color.git",
-    "zsh-fsh"     => "$GITHUB/zdharma-continuum/fast-syntax-highlighting.git"
+    "zsh-openbsd"     => "$GITHUB/sizeofvoid/openbsd-zsh-completions.git",
+    "zsh-completions" => "$GITHUB/zsh-users/zsh-completions.git",
+    "zsh-fzf"         => "$GITHUB/Aloxaf/fzf-tab.git",
+    "zsh-suggest"     => "$GITHUB/zsh-users/zsh-autosuggestions.git",
+    "zsh-256"         => "$GITHUB/chrissicool/zsh-256color.git",
+    "zsh-fsh"         => "$GITHUB/zdharma-continuum/fast-syntax-highlighting.git"
   );
   keys %plugins;
   while (my($k, $v) = each %plugins) {

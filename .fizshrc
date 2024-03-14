@@ -3,7 +3,9 @@
 ##
 # ENV VARS
 ##
-export VISUAL="nvim"
+alias evi="emacsclient --create-frame --socket=stumpwm-emacs --alternative-editor='vi'"
+export ALTERNATIVE_EDITOR="vi"
+export VISUAL="evi"
 export EDITOR="vi"
 export PAGER="less -R"
 
@@ -15,13 +17,13 @@ export PATH=$PATH:$HOME/.cargo/bin:$HOME/.local/bin
 ##
 # Setup Completions
 ##
-fpath=($HOME/.zsh-openbsd/completions $fpath)
+autoload -U compinit; compinit
+autoload -U bashcompinit; bashcompinit
+
+fpath=($HOME/.zsh-openbsd/completions $HOME/.zsh-completions/src $fpath)
 setopt MENU_COMPLETE
 setopt AUTO_LIST
 setopt COMPLETE_IN_WORD
-
-autoload -U bashcompinit
-bashcompinit
 eval "$(register-python-argcomplete pipx)"
 
 ##
