@@ -3,10 +3,9 @@
 ##
 # ENV VARS
 ##
-alias evi="emacsclient --create-frame --socket=stumpwm-emacs --alternative-editor='vi'"
+alias evi="emacsclient --create-frame --socket=stumpwm-emacs"
 export ALTERNATIVE_EDITOR="vi"
-export VISUAL="evi"
-export EDITOR="vi"
+export EDITOR="evi"
 export PAGER="less -R"
 
 ##
