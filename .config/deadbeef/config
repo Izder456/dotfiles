@@ -37,9 +37,9 @@ logwindow.geometry.h 842
 logwindow.geometry.w 1576
 logwindow.geometry.x 12
 logwindow.geometry.y 46
-mainwin.geometry.h 842
-mainwin.geometry.w 1576
-mainwin.geometry.x 12
+mainwin.geometry.h 836
+mainwin.geometry.w 726
+mainwin.geometry.x 856
 mainwin.geometry.y 46
 mp3.id3v1_encoding iso8859-1
 mp3.id3v2_version 3
@@ -55,7 +55,7 @@ notify.format_title_tf %title%
 output_plugin pulseaudio
 playback.loop 0
 playback.order 2
-playback.volume.normalized 0.1450627
+playback.volume.normalized 0.2579621
 playlist.current 0
 playlist.cursor.0 26
 playlist.cursor.1 -1
@@ -74,8 +74,8 @@ pulse.buffersize 4096
 pulse.serveraddr2 
 resume.paused 0
 resume.playlist 0
-resume.position 0.1857143
-resume.track 37
+resume.position 0.0928798
+resume.track 57
 resume_last_session 0
 streamer.16_to_24 0
 streamer.8_to_16 0
