@@ -1,11 +1,13 @@
+ape.write_apev2 1
 cli_add_playlist_name Default
+cli_add_to_specific_playlist 0
 deadbeef_version 1.9.4
-filechooser.lastdir file:///home/izder456/Music/Night%20Beats
+filechooser.lastdir file:///home/izder456/Music
 filechooser.playlist.lastdir file:///home/izder456/Music
 gtkui.columns.playlist [{"title":"♫","id":"1","format":"%playstatus%","sort_format":"","size":"28","align":"0","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"294","align":"0","color_override":"0","color":"#ff000000"}]
 gtkui.columns.search [{"title":"Artist / Album","id":"-1","format":"$if(%artist%,%artist%,Unknown Artist)[ - %album%]","sort_format":"","size":"150","align":"0","color_override":"0","color":"#ff000000"},{"title":"Track No","id":"-1","format":"%tracknumber%","sort_format":"","size":"50","align":"1","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"150","align":"0","color_override":"0","color":"#ff000000"},{"title":"Duration","id":"-1","format":"%length%","sort_format":"","size":"50","align":"0","color_override":"0","color":"#ff000000"}]
-gtkui.last_playlist_save_name /home/izder456/Music/Grooves.dbpl
-gtkui.layout.1.9.0 {"type":"vbox","legacy_params":" expand=\"0 1\" fill=\"1 1\" homogeneous=0","children":[{"type":"hbox","legacy_params":" expand=\"0 1 0\" fill=\"1 1 1\" homogeneous=0","children":[{"type":"playtb"},{"type":"seekbar"},{"type":"volumebar","settings":{"scale":"db"}}]},{"type":"hsplitter","legacy_params":" locked=0 ratio=0.238579 pos=0 size2=0","children":[{"type":"vsplitter","legacy_params":" locked=0 ratio=0.500000 pos=0 size2=0","children":[{"type":"coverart","settings":{"mode":"selected"}},{"type":"scope","settings":{"renderMode":"multichannel","scaleMode":"auto","fragmentDuration":"300"}}]},{"type":"playlist","legacy_params":" hideheaders=0 width=1193"}]}]}
+gtkui.last_playlist_save_name /home/izder456/Music/Gayming.dbpl
+gtkui.layout.1.9.0 {"type":"vbox","legacy_params":" expand=\"0 1\" fill=\"1 1\" homogeneous=0","children":[{"type":"hbox","legacy_params":" expand=\"0 1 0\" fill=\"1 1 1\" homogeneous=0","children":[{"type":"playtb"},{"type":"seekbar"},{"type":"volumebar","settings":{"scale":"db"}}]},{"type":"hsplitter","legacy_params":" locked=0 ratio=0.256345 pos=0 size2=0","children":[{"type":"vsplitter","legacy_params":" locked=0 ratio=0.500000 pos=0 size2=0","children":[{"type":"coverart","settings":{"mode":"playing"}},{"type":"scope","settings":{"renderMode":"multichannel","scaleMode":"auto","fragmentDuration":"300"}}]},{"type":"playlist","legacy_params":" hideheaders=0 width=1166"}]}]}
 gtkui.override_bar_colors 1
 gtkui.override_listview_colors 1
 gtkui.override_tabstrip_colors 1
@@ -39,6 +41,10 @@ mainwin.geometry.h 842
 mainwin.geometry.w 1576
 mainwin.geometry.x 12
 mainwin.geometry.y 46
+mp3.id3v1_encoding iso8859-1
+mp3.id3v2_version 3
+mp3.write_id3v1 1
+mp3.write_id3v2 1
 network.proxy.port 8080
 notify.albumart 1
 notify.albumart_size 64
@@ -49,23 +55,35 @@ notify.format_title_tf %title%
 output_plugin pulseaudio
 playback.loop 0
 playback.order 2
-playback.volume.normalized 0.1437883
+playback.volume.normalized 0.1450627
 playlist.current 0
-playlist.cursor.0 135
+playlist.cursor.0 26
 playlist.cursor.1 -1
-playlist.scroll.0 2607
+playlist.scroll.0 -26
 playlist.scroll.1 0
 playlist.scroll.cursorfollowplayback 1
-playlist.tab.00000 Grooves
+playlist.stop_after_album_reset 1
+playlist.stop_after_current 0
+playlist.stop_after_current_reset 1
+playlist.tab.00000 MOTHER3: Halloween Hack
 prefwin.geometry.h 547
 prefwin.geometry.w 762
 prefwin.geometry.x 419
 prefwin.geometry.y 193
+pulse.buffersize 4096
+pulse.serveraddr2 
 resume.paused 0
 resume.playlist 0
-resume.position 0.0928798
-resume.track 38
-streamer.16_to_24 1
+resume.position 0.1857143
+resume.track 37
+resume_last_session 0
+streamer.16_to_24 0
+streamer.8_to_16 0
 streamer.samplerate 44100
 streamer.samplerate_mult_44 44100
 streamer.samplerate_mult_48 48000
+trkproperties.geometry.h 842
+trkproperties.geometry.w 1576
+trkproperties.geometry.x 12
+trkproperties.geometry.y 46
+wv.write_apev2 1
