@@ -23,10 +23,6 @@
 
 # autostarts
 {
-    # if dbus exists, open it
-    if [ -x /usr/local/bin/dbus-launch -a -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
-	eval `dbus-launch --sh-syntax --exit-with-x11`
-    fi
     # notification daemon
     dunst &
     # run compositor in bg
@@ -39,5 +35,5 @@
     xidle -delay 5 -nw -program "/usr/local/bin/slock" -timeout 1800 &
 }
 
-# actually run my wm
-stumpwm
+# actually run my wm (with dbus support :3)
+exec dbus-launch --exit-with-session stumpwm
