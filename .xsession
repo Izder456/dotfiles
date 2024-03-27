@@ -36,4 +36,4 @@
 }
 
 # actually run my wm (with dbus support :3)
-exec dbus-launch --exit-with-session stumpwm --disable-ldp --lose-on-corruption
+exec dbus-launch --exit-with-session stumpwm --disable-ldb --lose-on-corruption
