@@ -57,9 +57,9 @@ playback.loop 0
 playback.order 2
 playback.volume.normalized 0.2579622
 playlist.current 0
-playlist.cursor.0 -1
+playlist.cursor.0 6
 playlist.cursor.1 -1
-playlist.scroll.0 -7
+playlist.scroll.0 -22
 playlist.scroll.1 0
 playlist.scroll.cursorfollowplayback 1
 playlist.stop_after_album_reset 1
@@ -74,8 +74,8 @@ pulse.buffersize 4096
 pulse.serveraddr2 
 resume.paused 0
 resume.playlist 0
-resume.position 0.3715193
-resume.track 17
+resume.position 0.0000000
+resume.track 6
 resume_last_session 0
 streamer.16_to_24 0
 streamer.8_to_16 0
