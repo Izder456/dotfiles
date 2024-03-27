@@ -73,9 +73,9 @@ prefwin.geometry.y 193
 pulse.buffersize 4096
 pulse.serveraddr2 
 resume.paused 0
-resume.playlist 0
-resume.position 0.0000000
-resume.track 6
+resume.playlist -1
+resume.position -1.000000
+resume.track -1
 resume_last_session 0
 streamer.16_to_24 0
 streamer.8_to_16 0
