@@ -2,7 +2,7 @@ ape.write_apev2 1
 cli_add_playlist_name Default
 cli_add_to_specific_playlist 0
 deadbeef_version 1.9.4
-filechooser.lastdir file:///home/izder456/Music
+filechooser.lastdir file:///home/izder456/Music/Seb%20Lowe
 filechooser.playlist.lastdir file:///home/izder456/Music
 gtkui.columns.playlist [{"title":"♫","id":"1","format":"%playstatus%","sort_format":"","size":"28","align":"0","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"294","align":"0","color_override":"0","color":"#ff000000"}]
 gtkui.columns.search [{"title":"Artist / Album","id":"-1","format":"$if(%artist%,%artist%,Unknown Artist)[ - %album%]","sort_format":"","size":"150","align":"0","color_override":"0","color":"#ff000000"},{"title":"Track No","id":"-1","format":"%tracknumber%","sort_format":"","size":"50","align":"1","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"150","align":"0","color_override":"0","color":"#ff000000"},{"title":"Duration","id":"-1","format":"%length%","sort_format":"","size":"50","align":"0","color_override":"0","color":"#ff000000"}]
@@ -57,15 +57,15 @@ playback.loop 0
 playback.order 2
 playback.volume.normalized 0.2579622
 playlist.current 0
-playlist.cursor.0 17
+playlist.cursor.0 -1
 playlist.cursor.1 -1
-playlist.scroll.0 -17
+playlist.scroll.0 -7
 playlist.scroll.1 0
 playlist.scroll.cursorfollowplayback 1
 playlist.stop_after_album_reset 1
 playlist.stop_after_current 0
 playlist.stop_after_current_reset 1
-playlist.tab.00000 MOTHER3: Halloween Hack
+playlist.tab.00000 Seb Lowe
 prefwin.geometry.h 547
 prefwin.geometry.w 762
 prefwin.geometry.x 419
@@ -74,8 +74,8 @@ pulse.buffersize 4096
 pulse.serveraddr2 
 resume.paused 0
 resume.playlist 0
-resume.position 0.0928798
-resume.track 84
+resume.position 0.3715193
+resume.track 17
 resume_last_session 0
 streamer.16_to_24 0
 streamer.8_to_16 0
