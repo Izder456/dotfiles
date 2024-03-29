@@ -2,11 +2,11 @@ ape.write_apev2 1
 cli_add_playlist_name Default
 cli_add_to_specific_playlist 0
 deadbeef_version 1.9.4
-filechooser.lastdir file:///home/izder456/Music/Seb%20Lowe
+filechooser.lastdir file:///home/izder456/Music
 filechooser.playlist.lastdir file:///home/izder456/Music
-gtkui.columns.playlist [{"title":"♫","id":"1","format":"%playstatus%","sort_format":"","size":"28","align":"0","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"294","align":"0","color_override":"0","color":"#ff000000"}]
+gtkui.columns.playlist [{"title":"♫","id":"1","format":"%playstatus%","sort_format":"","size":"28","align":"0","color_override":"0","color":"#ff000000"},{"title":"Artist/Band","id":"-1","format":"$if(%album artist%,%album artist%,Unknown Artist)","sort_format":"","size":"249","align":"0","color_override":"0","color":"#ffebdbb2"},{"title":"Song","id":"-1","format":"%title%","sort_format":"","size":"441","align":"0","color_override":"0","color":"#ffebdbb2"},{"title":"Length","id":"-1","format":"%length%","sort_format":"","size":"100","align":"0","color_override":"0","color":"#ffebdbb2"},{"title":"Bitrate","id":"-1","format":"%bitrate%","sort_format":"","size":"100","align":"0","color_override":"0","color":"#ffebdbb2"},{"title":"Format","id":"-1","format":"%codec%","sort_format":"","size":"177","align":"0","color_override":"0","color":"#ffebdbb2"}]
 gtkui.columns.search [{"title":"Artist / Album","id":"-1","format":"$if(%artist%,%artist%,Unknown Artist)[ - %album%]","sort_format":"","size":"150","align":"0","color_override":"0","color":"#ff000000"},{"title":"Track No","id":"-1","format":"%tracknumber%","sort_format":"","size":"50","align":"1","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"150","align":"0","color_override":"0","color":"#ff000000"},{"title":"Duration","id":"-1","format":"%length%","sort_format":"","size":"50","align":"0","color_override":"0","color":"#ff000000"}]
-gtkui.last_playlist_save_name /home/izder456/Music/Gayming.dbpl
+gtkui.last_playlist_save_name /home/izder456/Music/HealthyMix.dbpl
 gtkui.layout.1.9.0 {"type":"vbox","legacy_params":" expand=\"0 1\" fill=\"1 1\" homogeneous=0","children":[{"type":"hbox","legacy_params":" expand=\"0 1 0\" fill=\"1 1 1\" homogeneous=0","children":[{"type":"playtb"},{"type":"seekbar"},{"type":"volumebar","settings":{"scale":"db"}}]},{"type":"hsplitter","legacy_params":" locked=0 ratio=0.256345 pos=0 size2=0","children":[{"type":"vsplitter","legacy_params":" locked=0 ratio=0.500000 pos=0 size2=0","children":[{"type":"coverart","settings":{"mode":"playing"}},{"type":"scope","settings":{"renderMode":"multichannel","scaleMode":"auto","fragmentDuration":"300"}}]},{"type":"playlist","legacy_params":" hideheaders=0 width=1166"}]}]}
 gtkui.override_bar_colors 1
 gtkui.override_listview_colors 1
@@ -55,23 +55,26 @@ notify.format_title_tf %title%
 output_plugin pulseaudio
 playback.loop 0
 playback.order 2
-playback.volume.normalized 0.2579622
+playback.volume.normalized 0.3727594
 playlist.current 0
-playlist.cursor.0 6
+playlist.cursor.0 18
 playlist.cursor.1 -1
-playlist.scroll.0 -22
+playlist.scroll.0 0
 playlist.scroll.1 0
 playlist.scroll.cursorfollowplayback 1
 playlist.stop_after_album_reset 1
 playlist.stop_after_current 0
 playlist.stop_after_current_reset 1
-playlist.tab.00000 Seb Lowe
+playlist.tab.00000 Steely Dan
 prefwin.geometry.h 547
 prefwin.geometry.w 762
 prefwin.geometry.x 419
 prefwin.geometry.y 193
 pulse.buffersize 4096
 pulse.serveraddr2 
+replaygain.preamp_with_rg 0.0000000
+replaygain.preamp_without_rg 0.0000000
+replaygain.processing_flags 3
 resume.paused 0
 resume.playlist -1
 resume.position -1.000000
