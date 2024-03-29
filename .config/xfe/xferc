@@ -5,7 +5,7 @@ folder_warn=1
 panel_view=2
 width=1576
 use_startup_notification=1
-use_trash_can=1
+root_warn=0
 preserve_date_warn=1
 confirm_delete=1
 no_script=0
@@ -25,7 +25,7 @@ confirm_properties=1
 twopanels_lpanel_pct=0.5
 root_auth=1
 vert_panels=1
-root_warn=0
+use_trash_can=1
 confirm_trash=1
 confirm_execute=1
 status=1
@@ -126,10 +126,10 @@ ext_size=100
 grou_size=50
 modd_size=150
 ignore_case=1
-sort_func=ascendingType
+sort_func=descendingCase
 showthumbnails=0
 name_size=200
-lastdir=/home/izder456/Videos/TV/Death Parade
+lastdir=/home/izder456
 hiddenfiles=0
 
 [SEARCH PANEL]
@@ -182,7 +182,7 @@ ignore_case=1
 sort_func=ascendingType
 showthumbnails=0
 name_size=252
-lastdir=/home/izder456/Downloads/Nicotine
+lastdir=/home/izder456
 hiddenfiles=0
 
 [SETTINGS]
