@@ -15,7 +15,7 @@ pre_sudo = true
 sudo_command = "doas"
 
 # Disable specific steps - same options as the command line flag
-# disable = ["emacs"]
+disable = ["emacs"]
 
 # Ignore failures for these steps
 ignore_failures = ["system", "pkg", "pnpm"]
