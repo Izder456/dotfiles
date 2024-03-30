@@ -27,8 +27,8 @@ eval "$(register-python-argcomplete pipx)"
 ##
 # Java Stuff
 ##
-export PATH=$PATH:/usr/local/jdk-17/bin
-export JAVA_HOME=/usr/local/jdk-17/
+export PATH=$PATH:/usr/local/jdk-21/bin
+export JAVA_HOME=/usr/local/jdk-21/
 
 ##
 # Go Stuff
@@ -171,19 +171,6 @@ transfer() {
              tee /dev/null;
     fi;
 }
-
-##
-# Node.JS
-##
-if [ ! $(command -v npm) ]; then
-    if [ ! -d $HOME/.npm-global ]; then
-        mkdir $HOME/.npm-global
-    fi
-    if [ -d $HOME/.npm-global ]; then
-        npm config set prefix '~/.npm-global'
-    fi
-fi
-export PATH=~/.npm-global/bin:$PATH
 
 ##
 # the r/unixporn rite of passage
