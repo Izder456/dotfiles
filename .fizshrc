@@ -76,7 +76,7 @@ alias su="echo 'did you mean to run doas -s? '"
 ##
 # Alias for CD
 ##
-eval $(zoxide init --cmd cd zsh)
+eval "$(zoxide init --cmd cd zsh)"
 
 ##
 # Alias for listing files
