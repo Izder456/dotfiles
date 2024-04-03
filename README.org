@@ -1083,8 +1083,6 @@ glx-no-rebind-pixmap = true;
 this configures my ports/src build environment, it goes in ~/etc/mk.conf~
 
 #+BEGIN_SRC conf :tangle mk.conf
-# Enable password prompt via DOAS
-SUDO="/usr/bin/doas"
 # set up overlays for wip ports, and my personal ports
 PORTSDIR_PATH=${PORTSDIR}:${PORTSDIR}/openbsd-wip:${PORTSDIR}/mystuff
 # other less importand crap, but nice to have nonetheless
@@ -1149,6 +1147,8 @@ kern.video.record=0
 #+END_SRC
 
 **** Packer Filter config
+
+This goes in =/etc/pf.conf=, use /with caution/
 
 #+BEGIN_SRC conf :tangle pf.conf
 # Macros
