@@ -3,7 +3,7 @@ cli_add_playlist_name Default
 cli_add_to_specific_playlist 0
 close_send_to_tray 1
 deadbeef_version 1.9.4
-filechooser.lastdir file:///home/izder456/Music/Mild%20High%20Club
+filechooser.lastdir file:///home/izder456/Music/Soulwax
 filechooser.playlist.lastdir file:///home/izder456/Music
 gtkui.columns.playlist [{"title":"♫","id":"1","format":"%playstatus%","sort_format":"","size":"28","align":"0","color_override":"0","color":"#ff000000"},{"title":"Song","id":"-1","format":"%title%","sort_format":"","size":"441","align":"0","color_override":"0","color":"#ffebdbb2"},{"title":"Length","id":"-1","format":"%length%","sort_format":"","size":"100","align":"0","color_override":"0","color":"#ffebdbb2"},{"title":"Bitrate","id":"-1","format":"%bitrate%","sort_format":"","size":"100","align":"0","color_override":"0","color":"#ffebdbb2"},{"title":"Format","id":"-1","format":"%codec%","sort_format":"","size":"177","align":"0","color_override":"0","color":"#ffebdbb2"}]
 gtkui.columns.search [{"title":"Artist / Album","id":"-1","format":"$if(%artist%,%artist%,Unknown Artist)[ - %album%]","sort_format":"","size":"150","align":"0","color_override":"0","color":"#ff000000"},{"title":"Track No","id":"-1","format":"%tracknumber%","sort_format":"","size":"50","align":"1","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"150","align":"0","color_override":"0","color":"#ff000000"},{"title":"Duration","id":"-1","format":"%length%","sort_format":"","size":"50","align":"0","color_override":"0","color":"#ff000000"}]
@@ -38,8 +38,8 @@ logwindow.geometry.h 842
 logwindow.geometry.w 1576
 logwindow.geometry.x 12
 logwindow.geometry.y 46
-mainwin.geometry.h 842
-mainwin.geometry.w 1576
+mainwin.geometry.h 836
+mainwin.geometry.w 776
 mainwin.geometry.x 12
 mainwin.geometry.y 46
 mp3.id3v1_encoding iso8859-1
@@ -76,10 +76,10 @@ pulse.serveraddr2
 replaygain.preamp_with_rg 0.0000000
 replaygain.preamp_without_rg 0.0000000
 replaygain.processing_flags 3
-resume.paused 1
+resume.paused 0
 resume.playlist 0
-resume.position 40.774387
-resume.track 28
+resume.position 0.0000000
+resume.track 157
 resume_last_session 0
 streamer.16_to_24 0
 streamer.8_to_16 0
