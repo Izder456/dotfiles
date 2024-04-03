@@ -57,6 +57,7 @@
       - [[#mkconf][mk.conf]]
       - [[#exrc][.exrc]]
       - [[#sysctlconf][Sysctl.conf]]
+      - [[#packer-filter-config][Packer Filter config]]
       - [[#dfm-install][Dfm-Install]]
       - [[#doasconf][Doas.conf]]
       - [[#cargo-list][Cargo-list]]
@@ -1129,9 +1130,14 @@ The kernel parameters settings.
 
 #+BEGIN_SRC conf :tangle sysctl.conf
 # Open Kernel Limits
-kern.maxthread=5240
-kern.maxproc=16384
+kern.maxthread=16385
+kern.maxproc=8192
 kern.maxfiles=32768
+
+# Shared Memory
+kern.shminfo.shmmax=2147483647
+kern.shminfo.shmall=536870912
+kern.shminfo.shmmni=4096
 
 # Enable Multithreading
 hw.smt=1
@@ -1140,6 +1146,53 @@ hw.smt=1
 # change these to =1 if you want microphone or webcam access
 kern.audio.record=0
 kern.video.record=0
+#+END_SRC
+
+**** Packer Filter config
+
+#+BEGIN_SRC conf :tangle pf.conf
+# Macros
+icmp_types = "{ echoreq }"
+wifi_if = "{ iwm0 }"
+eth_if = "{ em0 }"
+
+# Options
+set skip on lo
+set block-policy drop
+set state-policy if-bound
+set fingerprints "/etc/pf.os"
+set ruleset-optimization none
+set optimization normal
+set timeout { tcp.closing 60, tcp.established 7200 }
+
+# Tables
+table <bruteforce> persist
+table <rfc6890> { 0.0.0.0/8 10.0.0.0/8 100.64.0.0/10 127.0.0.0/8 169.254.0.0/11
+                  172.16.0.0/12 192.0.0.0/24 192.0.0.0/29 192.0.2.0/24 192.88.99.0/24 
+                  192.168.0.0/16 198.18.0.0/15 195.51.100.0/24 203.0.113.0/24
+                  240.0.0.0/4 255.255.255.255/32 }
+
+# prevent IP spoofing
+antispoof quick for $wifi_if
+antispoof quick for $eth_if
+
+# for logging
+block in log on egress from <rfc6890>
+block return out log on egress to <rfc6890>
+
+# block all else
+block all
+
+# only allow special services 
+## (OUT on GLOB: HTTP HTTPS SSH IRC over TLS SMTP submission SMTP SMTP over TLS DNS, 9999 for termbin)
+pass out on egress proto { tcp udp } to port {80 1000 443 22 6697 587 993 25 465 53 5353 9999}
+## (IN on ETH: ssh)
+pass in on $eth_if proto tcp to port { 22 } \
+	keep state (max-src-conn 15 max-src-conn-rate 3/1 \
+		overload <bruteforce> flush global)
+
+# ICMP
+pass out inet proto icmp icmp-type $icmp_types 
 #+END_SRC
 
 **** Dfm-Install
