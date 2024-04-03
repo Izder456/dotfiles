@@ -38,8 +38,8 @@ logwindow.geometry.h 842
 logwindow.geometry.w 1576
 logwindow.geometry.x 12
 logwindow.geometry.y 46
-mainwin.geometry.h 836
-mainwin.geometry.w 776
+mainwin.geometry.h 842
+mainwin.geometry.w 1576
 mainwin.geometry.x 12
 mainwin.geometry.y 46
 mp3.id3v1_encoding iso8859-1
@@ -78,8 +78,8 @@ replaygain.preamp_without_rg 0.0000000
 replaygain.processing_flags 3
 resume.paused 0
 resume.playlist 0
-resume.position 0.0000000
-resume.track 157
+resume.position 0.3715193
+resume.track 69
 resume_last_session 0
 streamer.16_to_24 0
 streamer.8_to_16 0
