@@ -611,7 +611,7 @@ xmessage*font:	     -misc-spleen-medium-r-normal--16-160-72-72-c-80-iso10646-1
 
     case ${CHOICE} in
 	1) WM=$(which stumpwm)
-	   WM_ARGS="--diable-ldb --lose-on-curruption"
+	   WM_ARGS="--diable-ldb --lose-on-corruption"
 	   ;;
 	2) WM=$(which xmsession)
 	   WM_ARGS=""
