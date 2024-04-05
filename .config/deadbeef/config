@@ -78,8 +78,8 @@ replaygain.preamp_without_rg 0.0000000
 replaygain.processing_flags 3
 resume.paused 0
 resume.playlist 0
-resume.position 0.0000000
-resume.track 4
+resume.position 0.0928798
+resume.track 14
 resume_last_session 0
 streamer.16_to_24 0
 streamer.8_to_16 0

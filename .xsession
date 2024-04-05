@@ -55,7 +55,7 @@
 
     case ${CHOICE} in
 	1) WM=$(which stumpwm)
-	   WM_ARGS="--diable-ldb --lose-on-curruption"
+	   WM_ARGS="--diable-ldb --lose-on-corruption"
 	   ;;
 	2) WM=$(which xmsession)
 	   WM_ARGS=""
