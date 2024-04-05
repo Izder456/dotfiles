@@ -1,0 +1,40 @@
+# Sample toolboxrc. See xmtoolbox(1) manpage for detailed syntax description.
+# Copy this file to ~/.toolboxrc for per-user configuration.
+
+# Every top-level menu is defined by specifying its title followed by
+# the opening bracket. The & character designates the keyboard mnemonic.
+&Programs
+{
+	# A menu item consists of a title and a command
+	# string separated by the : character.
+
+	&File Manager: pcmanfm
+	&Emacs: emacsclient -c -a ''
+	&Web-Browser: firefox-esr
+	&E-Mail: claws-mail 
+}
+
+
+# Top-level menus, as well as sub-menus may also contain menus.
+# The SEPARATOR keyword places a separator gadget between items.
+&Utilities
+{
+	&Terminal: st
+	SEPARATOR
+	X11 &Utilities 
+	{
+		&Text Editor: emacsclient -c -a ''
+		&Rofi: rofi -i -show-icons -matching fuzzy -show drun
+		Ca&lculator: xcalc
+	}
+}
+
+# The command string may contain environment variables
+# in sh(1) syntax: $name or ${name}.
+&Locations
+{
+	&Home: pcmanfm $HOME
+	&Projects: pcmanfm $HOME/Projects
+	&Pictures: pcmanfm $HOME/Pictures
+	&Documents: pcmanfm $HOME/Documents
+}

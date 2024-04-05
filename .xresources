@@ -36,6 +36,49 @@ XClock*Background: #32302f
 XClock*Foreground: #ebdbb2
 
 !!
+! Emwm Stuffs
+!!
+! fonts
+*renderTable.fixed.fontType: FONT_IS_XFT
+*renderTable.fixed.fontName: Spleen 16x32
+*renderTable.fixed.fontSize: 16
+*renderTable: fixed
+! colors
+*XmList.background: #1d2021
+*XmText.background: #ebdbb2	    
+*XmList.foreground: #fcf1c7
+*XmTextField.background: #32302f
+*XmTextField.foreground: #fcf1c7
+*TipLabel.background: #ebdbb2
+*TipShell.borderColor: #282828
+*TipShell.borderWidth: 4
+Emwm*client*background: #282828
+Emwm*client*activeBackground: #1d2021
+Emwm*client*foreground: #fcf1c7
+Emwm*client*activeForeground: #ebdbb2
+Emwm*icon*background: #282828
+Emwm*icon*activeBackground: #1d2021
+Emwm*icon*foreground: #fcf1c7
+Emwm*icon*activeForeground: #ebdbb2
+! Tweaks
+*multiClickTime: 260
+*XmScrollBar.width: 12
+*XmScrollBar.height: 12
+*enableThinThickness: True
+*enableBtn1Transfer: button2_adjust
+*enableButtonTab: True
+*enableEtchedInMenu: True
+*enableMenuInCascate: True
+*enableToggleColor: True
+*enableToggleVisual: False
+*enableDragIcon: False
+
+! Dithering
+Emwm*client*top*ShadowPixmap: 1x1
+Emwm*client*activeTopShadowPixmap: 1x1
+
+
+!!
 ! Pointer Stuffs
 !!
 Xcursor.size: 16
@@ -50,6 +93,20 @@ Xcursor.theme: Capitaine Cursors (Gruvbox) - White
 ! Hard-Dark
 *.activeBackground: #1d2021
 *.activeForeground: #32302f
+
+!!
+! XMessage
+!!
+
+xmessage*background: #1d2021
+xmessage*foreground: #fbf1c7
+xmessage.borderWidth: 3
+xmessage*borderColor: #ebdbb2
+xmessage*message.scrollHorizontal: Never
+xmessage*message.scrollVertical: Never
+xmessage*timeout: 0
+xmessage*printValue: false
+xmessage*font:	     -misc-spleen-medium-r-normal--16-160-72-72-c-80-iso10646-1
 
 !!
 ! Gruvbox Colors
