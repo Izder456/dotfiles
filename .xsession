@@ -35,5 +35,46 @@
     xidle -delay 5 -nw -program "/usr/local/bin/slock" -timeout 1800 &
 }
 
-# actually run my wm (with dbus support :3)
-exec dbus-launch --exit-with-session stumpwm --disable-ldb --lose-on-corruption
+# WM Session Prompt
+{
+    # Grab the Screen Dimentions and save into globals
+    XWIDTH=$(xdpyinfo | awk '/dimensions/ {print $2}' | cut -d 'x' -f 1)
+    XHEIGHT=$(xdpyinfo | awk '/dimensions/ {print $2}' | cut -d 'x' -f 2)
+
+    # XMessage
+    XMESG_WIDTH=512
+    XMESG_HEIGHT=128
+    XMESG_XPOS=$((($XWIDTH - $XMESG_WIDTH) / 2))
+    XMESG_YOFFSET=$((($XHEIGHT- $XMESG_HEIGHT) / 2))
+    
+    # Ask which WM to use.
+    xmessage "Please Choose a Session to load" \
+	     -buttons "StumpWM[]":1,"EMWM[]":2,"CWM[]":3,"FVWM[]":4 \
+	     -geometry ${XMESG_WIDTH}x${XMESG_HEIGHT}+${XMESG_XPOS}-${XMESG_YOFFSET}
+    CHOICE=$?
+
+    case ${CHOICE} in
+	1) WM=$(which stumpwm)
+	   WM_ARGS="--diable-ldb --lose-on-curruption"
+	   ;;
+	2) WM=$(which xmsession)
+	   WM_ARGS=""
+	   ;;
+	3) WM=$(which cwm)
+	   WM_ARGS=""
+	   ;;
+	4) WM=$(which fvwm)
+	   WM_ARGS=""
+	   ;;
+    esac
+
+    # start wm
+    
+    exec dbus-launch --exit-with-session ${WM} ${WM_ARGS} &
+    WAIT_PID=$!
+    
+    # wait for the WM to die
+    wait ${WAIT_PID}
+}
+
+exit 0
