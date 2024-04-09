@@ -39,10 +39,15 @@ XClock*Foreground: #ebdbb2
 ! Emwm Stuffs
 !!
 ! fonts
+*renderTable.variable.fontType: FONT_IS_XFT
+*renderTable.variable.fontName: Liberation Serif 
+*renderTable.variable.fontSize: 12
+*renderTable: variable
 *renderTable.fixed.fontType: FONT_IS_XFT
 *renderTable.fixed.fontName: Spleen 16x32
-*renderTable.fixed.fontSize: 16
-*renderTable: fixed
+*renderTable.fixed.fontSize: 12
+*XmText*renderTable: fixed
+*XmTextField*renderTable: fixed
 ! colors
 *XmList.background: #1d2021
 *XmText.background: #ebdbb2	    
@@ -64,7 +69,7 @@ Emwm*icon*activeForeground: #ebdbb2
 *multiClickTime: 260
 *XmScrollBar.width: 12
 *XmScrollBar.height: 12
-*enableThinThickness: True
+*enableThinThickness: False
 *enableBtn1Transfer: button2_adjust
 *enableButtonTab: True
 *enableEtchedInMenu: True
@@ -93,6 +98,8 @@ Xcursor.theme: Capitaine Cursors (Gruvbox) - White
 ! Hard-Dark
 *.activeBackground: #1d2021
 *.activeForeground: #32302f
+! Highlight
+*highlightColor: #fcf1c7
 
 !!
 ! XMessage

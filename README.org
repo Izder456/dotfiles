@@ -401,10 +401,15 @@ XClock*Foreground: #ebdbb2
 ! Emwm Stuffs
 !!
 ! fonts
+,*renderTable.variable.fontType: FONT_IS_XFT
+,*renderTable.variable.fontName: Liberation Serif 
+,*renderTable.variable.fontSize: 12
+,*renderTable: variable
 ,*renderTable.fixed.fontType: FONT_IS_XFT
 ,*renderTable.fixed.fontName: Spleen 16x32
-,*renderTable.fixed.fontSize: 16
-,*renderTable: fixed
+,*renderTable.fixed.fontSize: 12
+,*XmText*renderTable: fixed
+,*XmTextField*renderTable: fixed
 ! colors
 ,*XmList.background: #1d2021
 ,*XmText.background: #ebdbb2	    
@@ -426,7 +431,7 @@ Emwm*icon*activeForeground: #ebdbb2
 ,*multiClickTime: 260
 ,*XmScrollBar.width: 12
 ,*XmScrollBar.height: 12
-,*enableThinThickness: True
+,*enableThinThickness: False
 ,*enableBtn1Transfer: button2_adjust
 ,*enableButtonTab: True
 ,*enableEtchedInMenu: True
@@ -455,6 +460,8 @@ Xcursor.theme: Capitaine Cursors (Gruvbox) - White
 ! Hard-Dark
 ,*.activeBackground: #1d2021
 ,*.activeForeground: #32302f
+! Highlight
+,*highlightColor: #fcf1c7
 
 !!
 ! XMessage
@@ -556,6 +563,16 @@ xmessage*font:	     -misc-spleen-medium-r-normal--16-160-72-72-c-80-iso10646-1
 #+BEGIN_SRC sh :tangle .xsession
 #!/bin/ksh
 
+# function for getting screen dimentions
+function get_screen_dimension {
+    dimension=$(xdpyinfo | awk '/dimensions/ {print $2}')
+    case $1 in
+        0) echo $dimension | cut -d 'x' -f 1 ;;
+        1) echo $dimension | cut -d 'x' -f 2 ;;
+        ,*) echo "Invalid argument. Use 0 for width or 1 for height." ;;
+    esac
+}
+
 ##
 # blocking this for organization reasons
 ##
@@ -594,8 +611,8 @@ xmessage*font:	     -misc-spleen-medium-r-normal--16-160-72-72-c-80-iso10646-1
 # WM Session Prompt
 {
     # Grab the Screen Dimentions and save into globals
-    XWIDTH=$(xdpyinfo | awk '/dimensions/ {print $2}' | cut -d 'x' -f 1)
-    XHEIGHT=$(xdpyinfo | awk '/dimensions/ {print $2}' | cut -d 'x' -f 2)
+    XWIDTH=$(get_screen_dimension 0)
+    XHEIGHT=$(get_screen_dimension 1)
 
     # XMessage
     XMESG_WIDTH=512

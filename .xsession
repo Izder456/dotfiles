@@ -1,5 +1,15 @@
 #!/bin/ksh
 
+# function for getting screen dimentions
+function get_screen_dimension {
+    dimension=$(xdpyinfo | awk '/dimensions/ {print $2}')
+    case $1 in
+        0) echo $dimension | cut -d 'x' -f 1 ;;
+        1) echo $dimension | cut -d 'x' -f 2 ;;
+        *) echo "Invalid argument. Use 0 for width or 1 for height." ;;
+    esac
+}
+
 ##
 # blocking this for organization reasons
 ##
@@ -38,8 +48,8 @@
 # WM Session Prompt
 {
     # Grab the Screen Dimentions and save into globals
-    XWIDTH=$(xdpyinfo | awk '/dimensions/ {print $2}' | cut -d 'x' -f 1)
-    XHEIGHT=$(xdpyinfo | awk '/dimensions/ {print $2}' | cut -d 'x' -f 2)
+    XWIDTH=$(get_screen_dimension 0)
+    XHEIGHT=$(get_screen_dimension 1)
 
     # XMessage
     XMESG_WIDTH=512
