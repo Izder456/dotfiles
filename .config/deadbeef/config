@@ -3,12 +3,12 @@ cli_add_playlist_name Default
 cli_add_to_specific_playlist 0
 close_send_to_tray 1
 deadbeef_version 1.9.4
-filechooser.lastdir file:///home/izder456/Projects/ExportMusic
+filechooser.lastdir file:///home/izder456/Music
 filechooser.playlist.lastdir file:///home/izder456/Music
 gtkui.columns.playlist [{"title":"♫","id":"1","format":"%playstatus%","sort_format":"","size":"28","align":"0","color_override":"0","color":"#ff000000"},{"title":"Song","id":"-1","format":"%title%","sort_format":"","size":"441","align":"0","color_override":"0","color":"#ffebdbb2"},{"title":"Length","id":"-1","format":"%length%","sort_format":"","size":"100","align":"0","color_override":"0","color":"#ffebdbb2"},{"title":"Bitrate","id":"-1","format":"%bitrate%","sort_format":"","size":"100","align":"0","color_override":"0","color":"#ffebdbb2"},{"title":"Format","id":"-1","format":"%codec%","sort_format":"","size":"177","align":"0","color_override":"0","color":"#ffebdbb2"}]
 gtkui.columns.search [{"title":"Artist / Album","id":"-1","format":"$if(%artist%,%artist%,Unknown Artist)[ - %album%]","sort_format":"","size":"150","align":"0","color_override":"0","color":"#ff000000"},{"title":"Track No","id":"-1","format":"%tracknumber%","sort_format":"","size":"50","align":"1","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"150","align":"0","color_override":"0","color":"#ff000000"},{"title":"Duration","id":"-1","format":"%length%","sort_format":"","size":"50","align":"0","color_override":"0","color":"#ff000000"}]
 gtkui.last_playlist_save_name /home/izder456/Music/HealthyMix.dbpl
-gtkui.layout.1.9.0 {"type":"vbox","legacy_params":" expand=\"0 1\" fill=\"1 1\" homogeneous=0","children":[{"type":"hbox","legacy_params":" expand=\"0 1 0\" fill=\"1 1 1\" homogeneous=0","children":[{"type":"playtb"},{"type":"seekbar"},{"type":"volumebar","settings":{"scale":"db"}}]},{"type":"vsplitter","legacy_params":" locked=0 ratio=0.500000 pos=0 size2=0","children":[{"type":"coverart","settings":{"mode":"selected"}},{"type":"hsplitter","legacy_params":" locked=0 ratio=0.500000 pos=0 size2=0","children":[{"type":"scope","settings":{"renderMode":"multichannel","scaleMode":"auto","fragmentDuration":"300"}},{"type":"spectrum","settings":{"renderMode":"bands","distanceBetweenBars":"3","barGranularity":"2"}}]}]}]}
+gtkui.layout.1.9.0 {"type":"vbox","legacy_params":" expand=\"0 1\" fill=\"1 1\" homogeneous=0","children":[{"type":"hbox","legacy_params":" expand=\"0 1 0\" fill=\"1 1 1\" homogeneous=0","children":[{"type":"playtb"},{"type":"seekbar"},{"type":"volumebar","settings":{"scale":"db"}}]},{"type":"vsplitter","legacy_params":" locked=0 ratio=0.500000 pos=0 size2=0","children":[{"type":"hsplitter","legacy_params":" locked=0 ratio=0.220812 pos=0 size2=0","children":[{"type":"coverart","settings":{"mode":"selected"}},{"type":"tabbed_playlist","legacy_params":" hideheaders=0 width=1222"}]},{"type":"hsplitter","legacy_params":" locked=0 ratio=0.500000 pos=0 size2=0","children":[{"type":"scope","settings":{"renderMode":"multichannel","scaleMode":"auto","fragmentDuration":"300"}},{"type":"spectrum","settings":{"renderMode":"bands","distanceBetweenBars":"3","barGranularity":"2"}}]}]}]}
 gtkui.override_bar_colors 1
 gtkui.override_listview_colors 1
 gtkui.override_tabstrip_colors 1
@@ -38,10 +38,10 @@ logwindow.geometry.h 842
 logwindow.geometry.w 1576
 logwindow.geometry.x 12
 logwindow.geometry.y 46
-mainwin.geometry.h 569
-mainwin.geometry.w 568
-mainwin.geometry.x 901
-mainwin.geometry.y 230
+mainwin.geometry.h 842
+mainwin.geometry.w 1576
+mainwin.geometry.x 12
+mainwin.geometry.y 46
 mp3.id3v1_encoding iso8859-1
 mp3.id3v2_version 3
 mp3.write_id3v1 1
@@ -66,7 +66,7 @@ playlist.scroll.cursorfollowplayback 1
 playlist.stop_after_album_reset 1
 playlist.stop_after_current 0
 playlist.stop_after_current_reset 1
-playlist.tab.00000 ExportMusic
+playlist.tab.00000 Music
 prefwin.geometry.h 547
 prefwin.geometry.w 762
 prefwin.geometry.x 419
@@ -78,8 +78,8 @@ replaygain.preamp_without_rg 0.0000000
 replaygain.processing_flags 3
 resume.paused 0
 resume.playlist 0
-resume.position 0.0928798
-resume.track 14
+resume.position 0.0000000
+resume.track 6461
 resume_last_session 0
 streamer.16_to_24 0
 streamer.8_to_16 0

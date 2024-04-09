@@ -40,6 +40,9 @@ Keys DefaultKeyBindings
 	Alt<Key>F6 window f.next_key transient
 	Alt Shift<Key>F6 window f.prev_key transient
 	Shift<Key>F10 icon f.post_wmenu
+	Alt<Key>e root|icon|window f.exec "emacsclient -c -a ''"
+	Alt<Key>b root|icon|window f.exec "feh --bg-fill -z /usr/local/share/backgrounds"
+	Alt<Key>c root|icon|window f.exec "st"
 	Alt<Key>space root|icon|window f.exec "rofi -i -show-icons -matching fuzzy -show drun"
 !	Alt Shift<Key>Delete root|icon|window f.restart
 }
