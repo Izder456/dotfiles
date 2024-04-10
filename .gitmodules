@@ -13,3 +13,6 @@
 [submodule "StumpWM-Config"]
 	path = StumpWM-Config
 	url = https://github.com/Izder456/StumpWM-Config
+[submodule "Emwm-Config"]
+	path = Emwm-Config
+	url = https://github.com/izder456/Emwm-Config
