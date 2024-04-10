@@ -8,8 +8,8 @@ XMESG_HEIGHT=128
 function get_screen_dimension {
     typeset dimension=$(xdpyinfo | awk '/dimensions/ {print $2}')
     case $1 in
-         0) echo $dimension | cut -d 'x' -f 1 ;;
-         1) echo $dimension | cut -d 'x' -f 2 ;;
+         0) echo ${dimension%x*} ;;
+         1) echo ${dimension#*x} ;;
          *) echo "Invalid argument. Use 0 for width or 1 for height." ;;
     esac
 }
@@ -37,7 +37,7 @@ function load_resources {
 # Function to manage autostarts
 function manage_autostarts {
     for process in "$@"; do
-        process_name=$(echo $process | awk '{print $1;}')
+        process_name="${process% *}"
         if pgrep -x $process_name > /dev/null; then
             pkill $process_name
         fi
