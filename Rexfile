@@ -117,12 +117,17 @@ task 'configure_emacs', sub {
   }
 };
 
-task 'update_or_clone_stumpwm', sub {
+task 'configure_stumpwm', sub {
   if ( -d "$USERHOME/.stumpwm.d" ) {
     chdir "$USERHOME/.stumpwm.d";
   } else {
     system( 'ln', '-sf', "$USERHOME/.dotfiles/StumpWM-Config", "$USERHOME/.stumpwm.d" );
   }
+};
+
+task 'configure_emwm', sub {
+    system( 'ln', '-sf', "$USERHOME/.dotfiles/Emwm-Config/.emwmrc", "$USERHOME/.emwmrc" );
+    system( 'ln', '-sf', "$USERHOME/.dotfiles/Emwm-Config/.toolboxrc", "$USERHOME/.toolboxrc" );
 };
 
 # Installs backgrounds to /usr/local/share/backgrounds
@@ -132,11 +137,11 @@ task 'install_backgrounds', sub {
 };
 
 # Sets up Xenodm configuration
-task 'setup_xenodm', sub {
+task 'configure_xenodm', sub {
   system( 'doas', 'cp', '-rvf', glob("$USERHOME/.dotfiles/XenoDM-Config/*"), '/etc/X11/xenodm/' );
 };
 
-task 'setup_apmd', sub {
+task 'configure_apmd', sub {
   system( 'doas', 'mkdir', '/etc/apm' );
   system( 'doas', 'cp', '-rvf', glob("$USERHOME/.dotfiles/APM-Config/*"), '/etc/apm/' );
 };

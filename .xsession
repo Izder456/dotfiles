@@ -64,18 +64,18 @@ function get_screen_dimension {
     CHOICE=$?
 
     case ${CHOICE} in
-	1) WM=$(which stumpwm)
-	   WM_ARGS="--diable-ldb --lose-on-corruption"
-	   ;;
-	2) WM=$(which xmsession)
-	   WM_ARGS=""
-	   ;;
-	3) WM=$(which cwm)
-	   WM_ARGS=""
-	   ;;
-	4) WM=$(which fvwm)
-	   WM_ARGS=""
-	   ;;
+        1) WM=$(which stumpwm)
+           WM_ARGS="--diable-ldb --lose-on-corruption"
+           ;;
+        2) WM=$(which xmsession)
+           WM_ARGS=""
+           ;;
+        3) WM=$(which cwm)
+           WM_ARGS=""
+           ;;
+        4) WM=$(which fvwm)
+           WM_ARGS=""
+           ;;
     esac
 
     # start wm
