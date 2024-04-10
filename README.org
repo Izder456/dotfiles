@@ -372,14 +372,12 @@ export SDL_VIDEO_X11_DGAMOUSE=0
 ***** .xresources
 
 #+BEGIN_SRC conf :tangle .xresources
-
 !!
 ! Includes
 !!
-
 #include ".xresources.d/colors"
 #include ".xresources.d/apps"
-
+	 
 !!
 ! XWindow Stuffs
 !!
@@ -507,7 +505,6 @@ Xcursor.theme: Capitaine Cursors (Gruvbox) - White
 !!
 ! XMessage
 !!
-
 xmessage*background: #1d2021
 xmessage*foreground: #fbf1c7
 xmessage.borderWidth: 3
