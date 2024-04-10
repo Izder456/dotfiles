@@ -3,7 +3,7 @@ cli_add_playlist_name Default
 cli_add_to_specific_playlist 0
 close_send_to_tray 1
 deadbeef_version 1.9.4
-filechooser.lastdir file:///home/izder456/Music
+filechooser.lastdir file:///home/izder456/Music/The_Babe_Rainbow
 filechooser.playlist.lastdir file:///home/izder456/Music
 gtkui.columns.playlist [{"title":"♫","id":"1","format":"%playstatus%","sort_format":"","size":"28","align":"0","color_override":"0","color":"#ff000000"},{"title":"Song","id":"-1","format":"%title%","sort_format":"","size":"441","align":"0","color_override":"0","color":"#ffebdbb2"},{"title":"Length","id":"-1","format":"%length%","sort_format":"","size":"100","align":"0","color_override":"0","color":"#ffebdbb2"},{"title":"Bitrate","id":"-1","format":"%bitrate%","sort_format":"","size":"100","align":"0","color_override":"0","color":"#ffebdbb2"},{"title":"Format","id":"-1","format":"%codec%","sort_format":"","size":"177","align":"0","color_override":"0","color":"#ffebdbb2"}]
 gtkui.columns.search [{"title":"Artist / Album","id":"-1","format":"$if(%artist%,%artist%,Unknown Artist)[ - %album%]","sort_format":"","size":"150","align":"0","color_override":"0","color":"#ff000000"},{"title":"Track No","id":"-1","format":"%tracknumber%","sort_format":"","size":"50","align":"1","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"150","align":"0","color_override":"0","color":"#ff000000"},{"title":"Duration","id":"-1","format":"%length%","sort_format":"","size":"50","align":"0","color_override":"0","color":"#ff000000"}]
@@ -38,10 +38,10 @@ logwindow.geometry.h 842
 logwindow.geometry.w 1576
 logwindow.geometry.x 12
 logwindow.geometry.y 46
-mainwin.geometry.h 842
-mainwin.geometry.w 1576
-mainwin.geometry.x 12
-mainwin.geometry.y 46
+mainwin.geometry.h 500
+mainwin.geometry.w 605
+mainwin.geometry.x 169
+mainwin.geometry.y 221
 mp3.id3v1_encoding iso8859-1
 mp3.id3v2_version 3
 mp3.write_id3v1 1
@@ -60,13 +60,13 @@ playback.volume.normalized 0.4216965
 playlist.current 0
 playlist.cursor.0 -1
 playlist.cursor.1 -1
-playlist.scroll.0 -5
+playlist.scroll.0 0
 playlist.scroll.1 0
 playlist.scroll.cursorfollowplayback 1
 playlist.stop_after_album_reset 1
 playlist.stop_after_current 0
 playlist.stop_after_current_reset 1
-playlist.tab.00000 Music
+playlist.tab.00000 The_Babe_Rainbow
 prefwin.geometry.h 547
 prefwin.geometry.w 762
 prefwin.geometry.x 419
@@ -77,9 +77,9 @@ replaygain.preamp_with_rg 0.0000000
 replaygain.preamp_without_rg 0.0000000
 replaygain.processing_flags 3
 resume.paused 0
-resume.playlist 0
-resume.position 0.0000000
-resume.track 6461
+resume.playlist -1
+resume.position -1.000000
+resume.track -1
 resume_last_session 0
 streamer.16_to_24 0
 streamer.8_to_16 0

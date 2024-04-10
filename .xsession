@@ -20,7 +20,8 @@ function get_screen_dimension {
     [ -f /etc/xprofile ] && . /etc/profile
     [ -f ~/.xprofile ] && . ~/.xprofile
     # set xdefaults
-    [ -f ~/.xresources ] && xrdb -merge ~/.xresources
+    [ -f ~/.xresources ] && xrdb -I$HOME ~/.xresources
+    [ -f ~/.xresources.d/emwm ] && xrdb -merge ~/.xresources.d/emwm
     # Mute xbell
     xset b off
     # Add spleen & noto (emoji) fonts to xfonts path

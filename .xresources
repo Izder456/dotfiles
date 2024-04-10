@@ -1,21 +1,14 @@
 !!
+! Includes
+!!
+
+#include ".xresources.d/colors"
+#include ".xresources.d/apps"
+
+!!
 ! XWindow Stuffs
 !!
 *imLocale: en_US.UTF-8
-
-!!
-! XTerm Stuffs
-!!
-*intensityStyles: true
-*allowSendEvents: true
-xterm*scrollBar: false
-xterm*faceName: Spleen
-xterm*faceSize: 12
-xterm*renderFont: true
-xterm*internalBorder: 16
-xterm*letterSpace: 1
-xterm*loginShell: true
-xterm*savelines: 16384
 
 !!
 ! Font Rendering Stuffs
@@ -30,167 +23,7 @@ Xft.lcdfilter: lcddefault
 *faceSize: 12
 
 !!
-! XClock Stuffs
-!!
-XClock*Background: #32302f
-XClock*Foreground: #ebdbb2
-
-!!
-! Emwm Stuffs
-!!
-! fonts
-*renderTable.variable.fontType: FONT_IS_XFT
-*renderTable.variable.fontName: Liberation Serif 
-*renderTable.variable.fontSize: 12
-*renderTable: variable
-*renderTable.fixed.fontType: FONT_IS_XFT
-*renderTable.fixed.fontName: Spleen 16x32
-*renderTable.fixed.fontSize: 12
-*XmText*renderTable: fixed
-*XmTextField*renderTable: fixed
-! colors
-*XmList.background: #1d2021
-*XmText.background: #ebdbb2	    
-*XmList.foreground: #fcf1c7
-*XmTextField.background: #32302f
-*XmTextField.foreground: #fcf1c7
-*TipLabel.background: #ebdbb2
-*TipShell.borderColor: #282828
-*TipShell.borderWidth: 4
-Emwm*client*background: #282828
-Emwm*client*activeBackground: #1d2021
-Emwm*client*foreground: #fcf1c7
-Emwm*client*activeForeground: #ebdbb2
-Emwm*icon*background: #282828
-Emwm*icon*activeBackground: #1d2021
-Emwm*icon*foreground: #fcf1c7
-Emwm*icon*activeForeground: #ebdbb2
-! Tweaks
-*multiClickTime: 260
-*XmScrollBar.width: 12
-*XmScrollBar.height: 12
-*enableThinThickness: False
-*enableBtn1Transfer: button2_adjust
-*enableButtonTab: True
-*enableEtchedInMenu: True
-*enableMenuInCascate: True
-*enableToggleColor: True
-*enableToggleVisual: False
-*enableDragIcon: False
-
-! Dithering
-Emwm*client*top*ShadowPixmap: 1x1
-Emwm*client*activeTopShadowPixmap: 1x1
-
-
-!!
 ! Pointer Stuffs
 !!
 Xcursor.size: 16
 Xcursor.theme: Capitaine Cursors (Gruvbox) - White
-
-!!
-! Background Colors
-!!
-! Normal
-*background: #282828
-*foreground: #ebdbb2
-! Hard-Dark
-*.activeBackground: #1d2021
-*.activeForeground: #32302f
-! Highlight
-*highlightColor: #fcf1c7
-
-!!
-! XMessage
-!!
-
-xmessage*background: #1d2021
-xmessage*foreground: #fbf1c7
-xmessage.borderWidth: 3
-xmessage*borderColor: #ebdbb2
-xmessage*message.scrollHorizontal: Never
-xmessage*message.scrollVertical: Never
-xmessage*timeout: 0
-xmessage*printValue: false
-xmessage*font:	     -misc-spleen-medium-r-normal--16-160-72-72-c-80-iso10646-1
-
-!!
-! Gruvbox Colors
-!!
-! Black + DarkGrey
-*color0:  #282828
-*color8:  #928374
-! DarkRed + Red
-*color1:  #cc241d
-*color9:  #fb4934
-! DarkGreen + Green
-*color2:  #98971a
-*color10: #b8bb26
-! DarkYellow + Yellow
-*color3:  #d79921
-*color11: #fabd2f
-! DarkBlue + Blue
-*color4:  #458588
-*color12: #83a598
-! DarkMagenta + Magenta
-*color5:  #b16286
-*color13: #d3869b
-! DarkCyan + Cyan
-*color6:  #689d6a
-*color14: #8ec07c
-! LightGrey + White
-*color7:  #a89984
-*color15: #ebdbb2
-
-!!
-! Gruvbox 256color
-!!
-
-! BrightBlue
-*color24:  #076678
-! BrightAqua
-*color66:  #427b58
-! BrightRed
-*color88:  #9d0006
-! BrightMagenta
-*color96:  #8f3f71
-! BrightGreen
-*color100: #79740e
-! DimBlue
-*color109: #83a598
-! DimAqua
-*color108: #8ec07c
-! DimRed
-*color130: #af3a03
-! DimYellow
-*color136: #b57614
-! DimGreen
-*color142: #b8bb26
-! DimRed
-*color167: #fb4934
-! DimMagenta
-*color175: #d3869b
-! Orange
-*color208: #fe8019
-! BrightYellow
-*color214: #fabd2f
-!! fg0-fg3
-*color223: #ebdbb2
-*color228: #f2e5bc
-*color229: #fbf1c7
-*color230: #f9f5d7
-!! bg0-bg3
-*color234: #1d2021
-*color235: #282828
-*color236: #32302f
-*color237: #3c3836
-!! Gray0-Gray7
-*color239: #504945
-*color241: #665c54
-*color243: #7c6f64
-*color244: #928374
-*color245: #928374
-*color246: #a89984
-*color248: #bdae93
-*color250: #d5c4a1
