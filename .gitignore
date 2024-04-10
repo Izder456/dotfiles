@@ -8,4 +8,5 @@
 .icons/gruvbox*
 running
 socket
+.xresources.d/emwm
 !.local/bin/ffrecord
