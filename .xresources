@@ -1,10 +1,9 @@
 !!
 ! Includes
 !!
-
 #include ".xresources.d/colors"
 #include ".xresources.d/apps"
-
+	 
 !!
 ! XWindow Stuffs
 !!

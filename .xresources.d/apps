@@ -1,7 +1,6 @@
 !!
 ! XMessage
 !!
-
 xmessage*background: #1d2021
 xmessage*foreground: #fbf1c7
 xmessage.borderWidth: 3
