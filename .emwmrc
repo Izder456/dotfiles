@@ -28,7 +28,6 @@ Menu DefaultWindowMenu
 	Close		_C	Alt<Key>F4	f.kill
 }
 
-
 ! Key Bindings
 Keys DefaultKeyBindings
 {
@@ -44,10 +43,12 @@ Keys DefaultKeyBindings
 	Alt<Key>b root|icon|window f.exec "feh --bg-fill -z /usr/local/share/backgrounds"
 	Alt<Key>c root|icon|window f.exec "st"
 	Alt<Key>space root|icon|window f.exec "rofi -i -show-icons -matching fuzzy -show drun"
-!	Alt Shift<Key>Delete root|icon|window f.restart
+	Alt<Key>Print root|icon|window f.exec "scrot -F ~/Pictures/screenshot-`date +%F`.png"
+	Alt Shift<Key>Print root|icon|window f.exec "scrot -s -F ~/Pictures/screenshot-split-`date +%F`.png"
+	Alt Shift<Key>Print root|icon|window f.exec "scrot -u -F ~/Pictures/screenshot-activewin-`date +%F`.png"
 }
 
-! Mouse Button Bindins
+! Mouse Button Bindings
 Buttons DefaultButtonBindings
 {
 	<Btn1Down>	icon|frame	f.raise
