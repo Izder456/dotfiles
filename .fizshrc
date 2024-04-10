@@ -27,14 +27,19 @@ eval "$(register-python-argcomplete pipx)"
 ##
 # Java Stuff
 ##
-export PATH=$PATH:/usr/local/jdk-21/bin
-export JAVA_HOME=/usr/local/jdk-21/
+export PATH=$PATH:/usr/local/jdk-17/bin
+export JAVA_HOME=/usr/local/jdk-17/
 
 ##
 # Go Stuff
 ##
 export GOPATH=$HOME/.go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+##
+# ZVM
+##
+source ~/.zsh-zvm/zsh-vi-mode.plugin.zsh
 
 ##
 # Syntax Highlight
@@ -97,7 +102,6 @@ alias rm="trash"
 ##
 alias cat="bat --theme=gruvbox-dark --paging=never"
 alias bat="bat --theme=gruvbox-dark"
-unalias grep
 alias rgrep="rg"
 
 ##
@@ -162,12 +166,12 @@ transfer() {
         if [ -d "$file" ]; then
             file_name="$file_name.zip" ,;
             (cd "$file" && zip -r -q - .) |
-                curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name" | tee /dev/null,;
+                curl --progress-bar --upload-file "-" "http://transfer.sh/$file_name" | tee /dev/null,;
         else cat "$file" |
-                curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name" | tee /dev/null;
+                curl --progress-bar --upload-file "-" "http://transfer.sh/$file_name" | tee /dev/null;
         fi;
     else file_name=$1;
-         curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name" |
+         curl --progress-bar --upload-file "-" "http://transfer.sh/$file_name" |
              tee /dev/null;
     fi;
 }
