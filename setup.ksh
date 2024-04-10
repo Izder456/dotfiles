@@ -77,10 +77,15 @@ function setup_emacs {
     rex configure_emacs
 }
 
+function setup_emwm {
+    log "$REVON Setting up Enhanced Motif WM... $REVOFF"
+    rex configure_emwm
+}
+
 function setup_stumpwm {
     ensure_lisp
     log "$REVON Setting up StumpWM... $REVOFF"
-    rex update_or_clone_stumpwm
+    rex configure_stumpwm
 }
 
 function setup_misc {
@@ -91,14 +96,14 @@ function setup_misc {
     rex compile_st
     rex compile_surf
     rex compile_nxbelld
-    rex setup_apmd
+    rex configure_apmd
     rex install_backgrounds
     rex update_xdg_user_dirs
 }
 
 function setup_xenodm {
     log "$REVON Setting up XenoDM... $REVOFF"
-    rex setup_xenodm
+    rex configure_xenodm
 }
 
 function is_internet_up {
@@ -131,8 +136,10 @@ HEADER_TEXT=`cat <<-EOF
 \n--------------------------
 \n  1) Ports \t 4) StumpWM
 \n  2) Cargo \t 5) Emacs
-\n  3) Config\t 6) XenoDM
-\n  7) Misc\t 8) Clean
+\n  3) Emwm \t 6) Xenodm
+\n  7) Config \t 8) Misc
+\n  9) Clean
+\n  
 \n
 \nOther Options:
 \n----------------
@@ -161,9 +168,9 @@ function main {
             2) print "Selected Cargo Deps..."
                sleep $SLEEPTIME
                cargo_deps;;
-            3) print "Selected Install Configs..."
+            3) print "Selected Emwm Config..."
                sleep $SLEEPTIME
-               config_install;;
+               setup_emwm;;
             4) print "Selected StumpWM Config..."
                sleep $SLEEPTIME
                setup_stumpwm;;
@@ -173,10 +180,13 @@ function main {
             6) print "Selected XenoDM Config..."
                sleep $SLEEPTIME
                setup_xenodm;;
-            7) print "Selected Misc..."
+            7) print "Selected Install Configs..."
+               sleep $SLEEPTIME
+               config_install;;
+            8) print "Selected Misc Setup..."
                sleep $SLEEPTIME
                setup_misc;;
-            8) print "Selected Clean..."
+            9) print "Selected Clean..."
                sleep $SLEEPTIME
                clean;;
             a|A) print "Running All..."
@@ -185,6 +195,7 @@ function main {
                  config_install
                  ports_deps
                  cargo_deps
+                 setup_emwm
                  setup_stumpwm
                  setup_emacs
                  setup_xenodm
