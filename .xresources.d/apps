@@ -1,0 +1,33 @@
+!!
+! XMessage
+!!
+
+xmessage*background: #1d2021
+xmessage*foreground: #fbf1c7
+xmessage.borderWidth: 3
+xmessage*borderColor: #ebdbb2
+xmessage*message.scrollHorizontal: Never
+xmessage*message.scrollVertical: Never
+xmessage*timeout: 0
+xmessage*printValue: false
+xmessage*font:	     -misc-spleen-medium-r-normal--16-160-72-72-c-80-iso10646-1
+
+!!
+! XTerm
+!!
+*intensityStyles: true
+*allowSendEvents: true
+xterm*scrollBar: false
+xterm*faceName: Spleen
+xterm*faceSize: 12
+xterm*renderFont: true
+xterm*internalBorder: 16
+xterm*letterSpace: 1
+xterm*loginShell: true
+xterm*savelines: 16384
+
+!!
+! XClock Stuffs
+!!
+XClock*Background: #32302f
+XClock*Foreground: #ebdbb2

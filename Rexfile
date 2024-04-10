@@ -128,6 +128,8 @@ task 'configure_stumpwm', sub {
 task 'configure_emwm', sub {
     system( 'ln', '-sf', "$USERHOME/.dotfiles/Emwm-Config/.emwmrc", "$USERHOME/.emwmrc" );
     system( 'ln', '-sf', "$USERHOME/.dotfiles/Emwm-Config/.toolboxrc", "$USERHOME/.toolboxrc" );
+    system( 'mkdir', '-p', "$USERHOME/.xresources.d" );
+    system( 'ln', '-sf', "$USERHOME/.dotfiles/Emwm-Config/.xresources", "$USERHOME/.xresources.d/emwm" );
 };
 
 # Installs backgrounds to /usr/local/share/backgrounds
