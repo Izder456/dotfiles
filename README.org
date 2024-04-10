@@ -367,6 +367,9 @@ export MOZ_WEBRENDER=1
 export QT_QPA_PLATFORMTHEME=gtk2
 # make sdl mouse cursor lag go away
 export SDL_VIDEO_X11_DGAMOUSE=0
+# Raise Ulimits and Disable .core dumps
+ulimit -d 17000000
+ulimit -Sc 0
 #+END_SRC
 
 ***** .xresources
