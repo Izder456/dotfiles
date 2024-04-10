@@ -18,8 +18,8 @@ function get_screen_dimension {
 function load_environment {
     set -A files "$@"
     for file in "${file[@]}"; do
-        if [ -f "$file" ]; then
-            . "$file"
+        if [ -f $file ]; then
+            . $file
         fi
     done
 }
@@ -28,8 +28,8 @@ function load_environment {
 function load_resources {
     set -A resources "$@"
     for resource in "${resources[@]}"; do
-        if [ -f "$resource" ]; then
-            xrdb -merge "$resource"
+        if [ -f $resource ]; then
+            xrdb -merge $resource
         fi
     done
 }
@@ -37,11 +37,11 @@ function load_resources {
 # Function to manage autostarts
 function manage_autostarts {
     for process in "$@"; do
-        process_name=$(echo "${process}" | awk '{print $1;}')
-        if pgrep -x "${process_name}" > /dev/null; then
-            pkill "${process_name}"
+        process_name=$(echo $process | awk '{print $1;}')
+        if pgrep -x $process_name > /dev/null; then
+            pkill $process_name
         fi
-        eval "${process}" &
+        eval $process &
     done
 }
 
