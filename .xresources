@@ -40,11 +40,11 @@ XClock*Foreground: #ebdbb2
 !!
 ! fonts
 *renderTable.variable.fontType: FONT_IS_XFT
-*renderTable.variable.fontName: Liberation Serif 
+*renderTable.variable.fontName: Liberation Serif:style=Regular 
 *renderTable.variable.fontSize: 12
 *renderTable: variable
 *renderTable.fixed.fontType: FONT_IS_XFT
-*renderTable.fixed.fontName: Spleen 16x32
+*renderTable.fixed.fontName: Spleen:style-Regular
 *renderTable.fixed.fontSize: 12
 *XmText*renderTable: fixed
 *XmTextField*renderTable: fixed

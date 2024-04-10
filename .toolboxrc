@@ -8,24 +8,23 @@
 	# A menu item consists of a title and a command
 	# string separated by the : character.
 
-	&File Manager: pcmanfm
-	&Emacs: emacsclient -c -a ''
-	&Web-Browser: firefox-esr
-	&E-Mail: claws-mail 
+	&File Manager: "pcmanfm"
+	&Emacs: "emacsclient -c -a ''"
+	&Web-Browser: "firefox-esr"
+	&E-Mail: "claws-mail"
 }
-
 
 # Top-level menus, as well as sub-menus may also contain menus.
 # The SEPARATOR keyword places a separator gadget between items.
 &Utilities
 {
-	&Terminal: st
+	&Terminal: "st"
 	SEPARATOR
 	X11 &Utilities 
 	{
-		&Text Editor: emacsclient -c -a ''
-		&Rofi: rofi -i -show-icons -matching fuzzy -show drun
-		Ca&lculator: xcalc
+		&Text Editor: "emacsclient -c -a ''"
+		&Rofi: "rofi -i -show-icons -matching fuzzy -show drun"
+		Ca&lculator: "xcalc"
 	}
 }
 
@@ -33,8 +32,34 @@
 # in sh(1) syntax: $name or ${name}.
 &Locations
 {
-	&Home: pcmanfm $HOME
-	&Projects: pcmanfm $HOME/Projects
-	&Pictures: pcmanfm $HOME/Pictures
-	&Documents: pcmanfm $HOME/Documents
+	&Home: "pcmanfm $HOME"
+	&Projects: "pcmanfm $HOME/Projects"
+	&Pictures: "pcmanfm $HOME/Pictures"
+	&Documents: "pcmanfm $HOME/Documents"
+}
+
+# Adding the &Applications menu with submenus for app bindings
+&Applications
+{
+	&Media
+	{
+		&Player: "playerctl play-pause"
+		&Stop: "playerctl stop"
+		&Previous: "playerctl previous"
+		&Next: "playerctl next"
+		&Shuffle: "playerctl shuffle toggle"
+	}
+	&System
+	{
+		&Screenshot: "scrot -F ~/Pictures/screenshot-`date +%F`.png"
+		&Screenshot Split: "scrot -s -F ~/Pictures/screenshot-split-`date +%F`.png"
+		&Screenshot Active Window: "scrot -u -F ~/Pictures/screenshot-activewin-`date +%F`.png"
+	}
+	&Other
+	{
+		&Mail: "claws-mail"
+		&Music Player: "deadbeef"
+		&File Manager: "pcmanfm"
+		&Web Browser: "firefox-esr"
+	}
 }
