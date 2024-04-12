@@ -58,16 +58,16 @@ function select_wm {
     typeset choice=$?
 
     case ${choice} in
-    	1) wm=$(which stumpwm)
-    	   wm_args="--diable-ldb --lose-on-corruption"
+    	1) wm=$(command -v stumpwm)
+    	   wm_args="--didable-ldb --lose-on-corruption"
     	   ;;
-    	2) wm=$(which xmsession)
+    	2) wm=$(command -v xmsession)
     	   wm_args=""
     	   ;;
-    	3) wm=$(which cwm)
+    	3) wm=$(command -v cwm)
     	   wm_args=""
     	   ;;
-    	4) wm=$(which fvwm)
+    	4) wm=$(command -v fvwm)
     	   wm_args=""
     	   ;;
     esac

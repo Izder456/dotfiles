@@ -130,6 +130,7 @@ function do_ensure {
 
 do_ensure
 
+#!/bin/ksh
 HEADER_TEXT=`cat <<-EOF
 \n$REVON Srcerizder Dotfiles Setup $REVOFF
 \nOptions:
@@ -153,7 +154,7 @@ EOF
 
 
 function main {
-    while :
+    while true;
     do
         clear
         print $HEADER_TEXT
