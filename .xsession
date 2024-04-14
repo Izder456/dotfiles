@@ -72,10 +72,7 @@ function select_wm {
     	   ;;
     esac
 
-    exec dbus-launch --exit-with-session ${wm} ${wm_args} &
-    typeset wait_pid=$!
-
-    wait ${wait_pid}
+    dbus-launch --exit-with-session ${wm} ${wm_args}
 }
 
 # Load in environment & resources

@@ -3,7 +3,7 @@ cli_add_playlist_name Default
 cli_add_to_specific_playlist 0
 close_send_to_tray 1
 deadbeef_version 1.9.4
-filechooser.lastdir file:///home/izder456/Music/Daft_Punk/Discovery
+filechooser.lastdir file:///home/izder456/Music/King_Gizzard_&_the_Lizard_Wizard/Chunky_Shrapnel
 filechooser.playlist.lastdir file:///home/izder456/Music
 gtkui.color.bar_foreground 65278 32896 6424
 gtkui.color.listview_even_row 10280 10280 10280
@@ -76,13 +76,13 @@ playback.volume.normalized 0.1201877
 playlist.current 0
 playlist.cursor.0 -1
 playlist.cursor.1 -1
-playlist.scroll.0 0
+playlist.scroll.0 -2
 playlist.scroll.1 0
 playlist.scroll.cursorfollowplayback 1
 playlist.stop_after_album_reset 1
 playlist.stop_after_current 0
 playlist.stop_after_current_reset 1
-playlist.tab.00000 Escapades
+playlist.tab.00000 Chunky_Shrapnel
 prefwin.geometry.h 547
 prefwin.geometry.w 762
 prefwin.geometry.x 419
@@ -95,7 +95,7 @@ replaygain.processing_flags 3
 resume.paused 0
 resume.playlist 0
 resume.position 0.0000000
-resume.track 59
+resume.track 5
 resume_last_session 0
 streamer.16_to_24 0
 streamer.8_to_16 0

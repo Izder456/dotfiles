@@ -368,9 +368,14 @@ export MOZ_WEBRENDER=1
 export QT_QPA_PLATFORMTHEME=gtk2
 # make sdl mouse cursor lag go away
 export SDL_VIDEO_X11_DGAMOUSE=0
+# set XDG dirs
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_DIR=$OME/.local/share
+export XDG_STATE_HOME=$HOME/.local/state
 # Raise Ulimits and Disable .core dumps
-ulimit -d 17000000
-ulimit -Sc 0
+ulimit -d 17000000 &
+ulimit -Sc 0 &
 #+END_SRC
 
 ***** .xresources
@@ -555,7 +560,7 @@ function get_screen_dimension {
     case $1 in
          0) echo ${dimension%x*} ;;
          1) echo ${dimension#*x} ;;
-         *) echo "Invalid argument. Use 0 for width or 1 for height." ;;
+         ,*) echo "Invalid argument. Use 0 for width or 1 for height." ;;
     esac
 }
 
@@ -617,10 +622,7 @@ function select_wm {
     	   ;;
     esac
 
-    exec dbus-launch --exit-with-session ${wm} ${wm_args} &
-    typeset wait_pid=$!
-
-    wait ${wait_pid}
+    dbus-launch --exit-with-session ${wm} ${wm_args}
 }
 
 # Load in environment & resources
