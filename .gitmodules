@@ -3,7 +3,7 @@
 	url = https://github.com/justone/dotfiles.git
 [submodule "dfm"]
 	path = dfm
-	url = https://github.com/justone/dotfiles.git
+	url = https://github.com/justone/dotfiles
 [submodule "XenoDM-Config"]
 	path = XenoDM-Config
 	url = https://github.com/Izder456/XenoDM-Config
