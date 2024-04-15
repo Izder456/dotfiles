@@ -57,7 +57,7 @@ function config_install {
     fi
     rex configure_gtk
     rex configure_icons
-    "${HOME}/.dotfiles/bin/dfm" install
+    "${HOME}/.dotfiles/dfm/bin/dfm" install
     doas cp ~/.dotfiles/doas.conf /etc/doas.conf
 }
 
@@ -121,7 +121,6 @@ function ensure_needed {
     doas pkg_add -vm p5-Rex git
     ftp -o $HOME/Rexfile https://github.com/Izder456/dotfiles/raw/main/Rexfile
 }
-
 
 function do_ensure {
     is_internet_up
