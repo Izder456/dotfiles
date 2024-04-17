@@ -1181,9 +1181,8 @@ glx-no-rebind-pixmap = true;
 this configures my ports/src build environment, it goes in ~/etc/mk.conf~
 
 #+BEGIN_SRC conf :tangle mk.conf
-# set up overlays for wip ports, and my personal ports
+#SUDO="/usr/bin/doas"
 PORTSDIR_PATH=${PORTSDIR}:${PORTSDIR}/openbsd-wip:${PORTSDIR}/mystuff
-# other less importand crap, but nice to have nonetheless
 WRKOBJDIR=/usr/obj
 DISTDIR=/usr/distfiles
 PACKAGE_REPOSITORY=/usr/packages
@@ -1251,9 +1250,9 @@ This goes in =/etc/pf.conf=, use /with caution/
 #+BEGIN_SRC conf :tangle pf.conf
 # Macros
 icmp_types = "{ echoreq }"
-wifi_if = "{ iwm0 rtwn0 }"
+wifi_if = "{ iwm0 urtwn0 urtwn1 }"
 eth_if = "{ em0 }"
-tcp_services = "{ http https ssh irc smtp domain 9999 }"
+tcp_services = "{ http 1000 https ssh 6697 587 993 domain telnet }"
 udp_services = "{ domain 50000:65535 }" 
  
 # Options
