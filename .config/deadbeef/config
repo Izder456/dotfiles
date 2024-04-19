@@ -72,7 +72,7 @@ notify.format_title_tf %title%
 output_plugin pulseaudio
 playback.loop 0
 playback.order 2
-playback.volume.normalized 0.1201877
+playback.volume.normalized 0.0675865
 playlist.current 0
 playlist.cursor.0 -1
 playlist.cursor.1 -1
@@ -92,10 +92,10 @@ pulse.serveraddr2
 replaygain.preamp_with_rg 0.0000000
 replaygain.preamp_without_rg 0.0000000
 replaygain.processing_flags 3
-resume.paused 0
+resume.paused 1
 resume.playlist 0
-resume.position 0.0928798
-resume.track 3
+resume.position 67.709655
+resume.track 21
 resume_last_session 0
 streamer.16_to_24 0
 streamer.8_to_16 0

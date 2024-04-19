@@ -50,11 +50,7 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 ##
 # Vi Mode
 ##
-if tty -s; then
-    bindkey -v
-else
-    source ~/.zsh-zvm/zsh-vi-mode.plugin.zsh
-fi
+bindkey -v
 
 ##
 # Syntax Highlight
