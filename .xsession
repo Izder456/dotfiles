@@ -98,10 +98,10 @@ load_resources ~/.xresources ~/.xresources.d/emwm
 
 # Autostarts
 manage_autostarts "dunst" \
-                  "picom -b" \
-                  "~/.local/bin/nxbelld -v100 -d200 -f ~/.local/sfx/Pop.wav -b" \
-                  "feh --bg-fill --randomize /usr/local/share/backgrounds" \
-                  "xidle -delay 5 -nw -program /usr/local/bin/slock -timeout 1800" \
+		  "picom -b" \
+		  "~/.local/bin/nxbelld -v100 -d200 -f ~/.local/sfx/Pop.wav -b" \
+		  "feh --bg-fill --randomize /usr/local/share/backgrounds" \
+		  "xidle -delay 5 -nw -program /usr/local/bin/slock -timeout 1800" \
 		  "ulimit -d 17000000 &" \
 		  "ulimit -Sc 0 &"
 
