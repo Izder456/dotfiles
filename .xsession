@@ -55,10 +55,10 @@ function load_resources {
 function manage_autostarts {
     for process in "$@"; do
         process_name="${process% *}"
-        if pgrep -x $process_name > /dev/null; then
+        if pgrep $process_name > /dev/null; then
             pkill $process_name
         fi
-        eval $process &
+        eval $process
     done
 }
 
@@ -70,23 +70,20 @@ function select_wm {
     typeset xmesg_xpos=$((($xwidth - $XMESG_WIDTH) / 2))
     typeset xmesg_yoffset=$((($xheight - $XMESG_HEIGHT) / 2))
     xmessage "Please Choose a Session to load" \
-    	    -buttons "StumpWM[]":1,"EMWM[]":2,"CWM[]":3,"FVWM[]":4 \
+    	    -buttons "StumpWM[]":1,"EMWM[]":2,"TERMINAL[]":3 \
     	    -geometry ${XMESG_WIDTH}x${XMESG_HEIGHT}+${xmesg_xpos}-${xmesg_yoffset}
     typeset choice=$?
 
     case ${choice} in
-    	1) wm=$(command -v stumpwm)
-    	   wm_args="--didable-ldb --lose-on-corruption"
-    	   ;;
-    	2) wm=$(command -v xmsession)
-    	   wm_args=""
-    	   ;;
-    	3) wm=$(command -v cwm)
-    	   wm_args=""
-    	   ;;
-    	4) wm=$(command -v fvwm)
-    	   wm_args=""
-    	   ;;
+	1) wm=$(command -v stumpwm)
+	   wm_args="--disable-ldb --lose-on-corruption"
+	   ;;
+	2) wm=$(command -v xmsm)
+	   wm_args=""
+	   ;;
+	3) wm=$(command -v xterm)
+	   wm_args=""
+	   ;;
     esac
 
     dbus-launch --exit-with-session ${wm} ${wm_args}
@@ -97,13 +94,12 @@ load_environment /etc/xprofile ~/.xprofile
 load_resources ~/.xresources ~/.xresources.d/emwm
 
 # Autostarts
-manage_autostarts "dunst" \
-		  "picom -b" \
+manage_autostarts "picom -b" \
 		  "~/.local/bin/nxbelld -v100 -d200 -f ~/.local/sfx/Pop.wav -b" \
-		  "feh --bg-fill --randomize /usr/local/share/backgrounds" \
-		  "xidle -delay 5 -nw -program /usr/local/bin/slock -timeout 1800" \
-		  "ulimit -d 17000000 &" \
-		  "ulimit -Sc 0 &"
+		  "feh --bg-fill --randomize /usr/local/share/backgrounds &" \
+		  "sleep 5 && dunst &" \
+		  "ulimit -Sc 0"
+		  "xidle -delay 5 -nw -program /usr/local/bin/slock -timeout 1800 &"
 
 # Select Window Manager
 select_wm
