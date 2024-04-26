@@ -57,7 +57,6 @@ function config_install {
     fi
     rex configure_gtk
     rex configure_icons
-    ftp -o "${HOME}/.dotfiles/dfm/bin/dfm" https://github.com/justone/dotfiles/raw/master/bin/dfm
     "${HOME}/.dotfiles/dfm/dfm" install
     doas cp ~/.dotfiles/doas.conf /etc/doas.conf
 }
