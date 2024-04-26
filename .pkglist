@@ -39,8 +39,6 @@ dosbox--
 dunst--
 dwz--
 emacs--gtk3%emacs
-emwm--
-emwm-utils--
 enchant--
 enchant2--
 exfat-fuse--
@@ -56,7 +54,6 @@ fluidsynth--
 fmt--
 freefont-ttf--
 freeglut--
-funny-manpages--
 fzf--
 gcr--
 gd--
@@ -160,7 +157,6 @@ node--
 noto-emoji--
 nss--
 obsdfreqd--
-oneko-sakura--
 openal--
 ottomatic--
 p5-Rex--
