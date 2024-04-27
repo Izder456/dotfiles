@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+ #!/usr/bin/env zsh
 
 ##
 # ENV VARS
@@ -46,11 +46,6 @@ export JAVA_HOME=/usr/local/jdk-17/
 ##
 export GOPATH=$HOME/.go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-
-##
-# Vi Mode
-##
-bindkey -v
 
 ##
 # Syntax Highlight
