@@ -640,24 +640,13 @@ exit 0
 ##
 
 opacity-rule = [
-  "85:class_g = 'emacs'",
-  "85:class_g = 'st'",
-  "85:class_g = 'xterm'",
-  "85:class_g = 'tabbed'"
+  "100:class_g = 'emacs' && focused",
+  "85:class_g = 'emacs' && !focused",
+  "100:class_g = 'st' && focused",
+  "85:class_g = 'st' && !focused",
+  "100:class_g = 'xterm' && focused",
+  "85:class_g = 'xterm' && !focused",
 ];
-
-##
-# Blur
-##
-
-blur: {
-  method = "dual_kawase";
-  size = 5;
-  deviation = 5.0;
-  strength = 4;
-  background-fixed = true;
-};
-
 
 ##
 # Wintypes
@@ -707,11 +696,8 @@ blur-background-exclude = [
 ##
 # Backend
 ##
-backend = "glx";
-glx-no-stencil = true;
-glx-copy-from-front = false;
+backend = "xrender";
 use-damage = true;
-glx-no-rebind-pixmap = true;
 #+END_SRC
 
 **** Dunstrc
