@@ -71,11 +71,11 @@ task 'configure_gtk', sub {
       system( 'git', 'clone', "$cloneuri", "$clonedir" );
     }
     if ( -d "$clonedir/themes" ) {
-      system( 'cp', '-Rv', glob("$clonedir/themes/*"), "$USERHOME/.dotfiles/.themes/" );
+      system( 'cp', '-R', glob("$clonedir/themes/*"), "$USERHOME/.dotfiles/.themes/" );
     } elsif ( -d "$clonedir/Gruvbox-Plus-Dark" ) {
-      system( 'cp', '-Rv', "$clonedir/Gruvbox-Plus-Dark", "$USERHOME/.dotfiles/.themes/" );
+      system( 'cp', '-R', "$clonedir/Gruvbox-Plus-Dark", "$USERHOME/.dotfiles/.themes/" );
     } else {
-      system( 'cp', '-Rv', "$clonedir", "$USERHOME/.dotfiles/.themes/" );
+      system( 'cp', '-R', "$clonedir", "$USERHOME/.dotfiles/.themes/" );
     }
     unlink("$clonedir");
   }
@@ -98,11 +98,11 @@ task 'configure_icons', sub {
       system( 'git', 'clone', "$cloneuri", "$clonedir" );
     }
     if ( -d "$clonedir/icons" ) {
-      system( 'cp', '-Rv', glob("$clonedir/icons/*"), "$USERHOME/.dotfiles/.icons/" );
+      system( 'cp', '-R', glob("$clonedir/icons/*"), "$USERHOME/.dotfiles/.icons/" );
     } elsif ( -d "$clonedir/Gruvbox-Plus-Dark" ) {
-      system( 'cp', '-Rv', "$clonedir/Gruvbox-Plus-Dark", "$USERHOME/.dotfiles/.icons/" );
+      system( 'cp', '-R', "$clonedir/Gruvbox-Plus-Dark", "$USERHOME/.dotfiles/.icons/" );
     } else {
-      system( 'cp', '-Rv', "$clonedir", "$USERHOME/.dotfiles/.icons/" );
+      system( 'cp', '-R', "$clonedir", "$USERHOME/.dotfiles/.icons/" );
     }
     unlink("$clonedir");
   }
@@ -135,17 +135,17 @@ task 'configure_emwm', sub {
 # Installs backgrounds to /usr/local/share/backgrounds
 task 'install_backgrounds', sub {
   system( 'doas', 'mkdir', '-p', '/usr/local/share/backgrounds' );
-  system( 'doas',  'cp', '-rvf', glob("$USERHOME/.dotfiles/backgrounds/*"), '/usr/local/share/backgrounds' );
+  system( 'doas',  'cp', '-R', glob("$USERHOME/.dotfiles/backgrounds/*"), '/usr/local/share/backgrounds' );
 };
 
 # Sets up Xenodm configuration
 task 'configure_xenodm', sub {
-  system( 'doas', 'cp', '-rvf', glob("$USERHOME/.dotfiles/XenoDM-Config/*"), '/etc/X11/xenodm/' );
+  system( 'doas', 'cp', '-R', glob("$USERHOME/.dotfiles/XenoDM-Config/*"), '/etc/X11/xenodm/' );
 };
 
 task 'configure_apmd', sub {
   system( 'doas', 'mkdir', '/etc/apm' );
-  system( 'doas', 'cp', '-rvf', glob("$USERHOME/.dotfiles/APM-Config/*"), '/etc/apm/' );
+  system( 'doas', 'cp', '-R', glob("$USERHOME/.dotfiles/APM-Config/*"), '/etc/apm/' );
 };
 
 # Compiles shuf re-implementation
