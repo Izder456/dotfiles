@@ -1322,7 +1322,7 @@ permit persist :doas
 The list of packages to be installed via Cargo.
 
 #+BEGIN_SRC txt :tangle .cargolist
-cargo-upgrade-command dipc du-dust hyperfine onefetch sd tere tokei
+cargo-upgrade-command dipc du-dust hyperfine onefetch sd tere tokei zoxide
 #+END_SRC
 
 ** Rexfile
