@@ -1,6 +1,7 @@
 ImageMagick--
 adwaita-icon-theme--
 aria2--
+astyle--
 autoconf--%2.71
 automake--%1.16
 bash--
@@ -26,6 +27,7 @@ clojure--
 cmake--
 cmatrix--
 cmixer--
+cowsay--
 cromagrally--
 curl--
 cyrus-sasl--
@@ -38,6 +40,7 @@ dolphin--
 dosbox--
 dunst--
 dwz--
+editorconfig-core-c--
 emacs--gtk3%emacs
 enchant--
 enchant2--
@@ -87,6 +90,7 @@ hw-probe--
 iftop--
 imake--
 iniparser--
+intltool--
 jack--
 jansson--
 jdk--%1.8
@@ -161,6 +165,7 @@ openal--
 ottomatic--
 p5-Rex--
 p7zip--
+pandoc--
 parallel--
 pcmanfm--
 pcre--
@@ -183,6 +188,7 @@ py3-platformdirs--
 py3-requests--
 py3-tomli--
 py3-yaml--
+qemu--
 qt6-qt5compat--
 qt6ct--
 quirks--
@@ -235,6 +241,7 @@ xclip--
 xdg-user-dirs--
 xdg-utils--
 xz--
+yasm--
 yt-dlp--
 ytfzf--
 zathura--
