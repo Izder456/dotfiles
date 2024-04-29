@@ -25,7 +25,7 @@ function clean {
 
 function ensure_lisp {
     log "$REVON Quicklisp Setup $REVOFF"
-    doas pkg_add -vm sbcl rlwrap
+    doas pkg_add -m sbcl rlwrap
     ftp -o /tmp/quicklisp.lisp https://beta.quicklisp.org/quicklisp.lisp
     ftp -o /tmp/quicklisp-setup.lisp https://github.com/izder456/dotfiles/raw/main/quicklisp-setup.lisp
     sbcl --load /tmp/quicklisp.lisp --script /tmp/quicklisp-setup.lisp
@@ -33,7 +33,7 @@ function ensure_lisp {
 
 function ports_deps {
     log "$REVON We will install port deps now! $REVOFF"
-    doas pkg_add -vvvvm -l ~/.pkglist
+    doas pkg_add -m -l ~/.pkglist
 }
 
 function cargo_deps {
@@ -118,7 +118,7 @@ function is_internet_up {
 function ensure_needed {
     log "$REVON We need git and p5-Rex from ports for functionality"
     log "$REVON We will install p5-rex & git from ports now! $REVOFF"
-    doas pkg_add -vm p5-Rex git
+    doas pkg_add -m p5-Rex git
     ftp -o $HOME/Rexfile https://github.com/Izder456/dotfiles/raw/main/Rexfile
 }
 
