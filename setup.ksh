@@ -48,9 +48,9 @@ function config_install {
         git clone --depth 1 --recurse-submodules "https://github.com/Izder456/dotfiles.git" "${HOME}/.dotfiles"
     elif [[ -d "${HOME}/.dotfiles" ]]; then
         log "Already here"
-        (cd "${HOME}/.dotfiles"
+        (cd "${HOME}/.dotfiles" || exit
          git pull --recurse-submodules --depth 1)
-        cd "${HOME}"
+        cd "${HOME}" || exit
     else # something got fucked
         log "Dots brokey"
         exit 1
@@ -119,7 +119,7 @@ function ensure_needed {
     log "$REVON We need git and p5-Rex from ports for functionality"
     log "$REVON We will install p5-rex & git from ports now! $REVOFF"
     doas pkg_add -m p5-Rex git
-    ftp -o $HOME/Rexfile https://github.com/Izder456/dotfiles/raw/main/Rexfile
+    ftp -o "$HOME"/Rexfile https://github.com/Izder456/dotfiles/raw/main/Rexfile
 }
 
 function do_ensure {
@@ -129,8 +129,7 @@ function do_ensure {
 
 do_ensure
 
-#!/bin/ksh
-HEADER_TEXT=`cat <<-EOF
+HEADER_TEXT=$(cat <<-EOF
 \n$REVON Srcerizder Dotfiles Setup $REVOFF
 \nOptions:
 \n--------------------------
@@ -149,14 +148,13 @@ HEADER_TEXT=`cat <<-EOF
 \n
 \nEnter your selection: r\b\c
 EOF
-`
+)
 
 
 function main {
-    while true;
-    do
+    while true; do
         clear
-        print $HEADER_TEXT
+        print "$HEADER_TEXT"
         read selection
         if [[ -z "$selection" ]]; then
             selection=r

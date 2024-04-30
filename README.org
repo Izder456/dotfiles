@@ -141,9 +141,9 @@ function config_install {
         git clone --depth 1 --recurse-submodules "https://github.com/Izder456/dotfiles.git" "${HOME}/.dotfiles"
     elif [[ -d "${HOME}/.dotfiles" ]]; then
         log "Already here"
-        (cd "${HOME}/.dotfiles"
+        (cd "${HOME}/.dotfiles" || exit
          git pull --recurse-submodules --depth 1)
-        cd "${HOME}"
+        cd "${HOME}" || exit
     else # something got fucked
         log "Dots brokey"
         exit 1
@@ -218,7 +218,7 @@ function ensure_needed {
     log "$REVON We need git and p5-Rex from ports for functionality"
     log "$REVON We will install p5-rex & git from ports now! $REVOFF"
     doas pkg_add -m p5-Rex git
-    ftp -o $HOME/Rexfile https://github.com/Izder456/dotfiles/raw/main/Rexfile
+    ftp -o "$HOME"/Rexfile https://github.com/Izder456/dotfiles/raw/main/Rexfile
 }
 
 function do_ensure {
@@ -234,8 +234,7 @@ do_ensure
 The interactive menu for the setup process.
 
 #+BEGIN_SRC sh :tangle setup.ksh
-#!/bin/ksh
-HEADER_TEXT=`cat <<-EOF
+HEADER_TEXT=$(cat <<-EOF
 \n$REVON Srcerizder Dotfiles Setup $REVOFF
 \nOptions:
 \n--------------------------
@@ -254,14 +253,13 @@ HEADER_TEXT=`cat <<-EOF
 \n
 \nEnter your selection: r\b\c
 EOF
-`
+)
 
 
 function main {
-    while true;
-    do
+    while true; do
         clear
-        print $HEADER_TEXT
+        print "$HEADER_TEXT"
         read selection
         if [[ -z "$selection" ]]; then
             selection=r
@@ -308,7 +306,7 @@ function main {
             r|R) continue;;
             q|Q) print
                  exit;;
-            ,*) print "\n$REVON Invalid selection $REVOFF"
+            *) print "\n$REVON Invalid selection $REVOFF"
                sleep 1;;
         esac
     done
@@ -550,9 +548,9 @@ export XDG_STATE_HOME=$HOME/.local/state
 function get_screen_dimension {
     typeset dimension=$(xdpyinfo | awk '/dimensions/ {print $2}')
     case $1 in
-         0) echo ${dimension%x*} ;;
-         1) echo ${dimension#*x} ;;
-         ,*) echo "Invalid argument. Use 0 for width or 1 for height." ;;
+         0) echo "${dimension%x*}" ;;
+         1) echo "${dimension#*x}" ;;
+         *) echo "Invalid argument. Use 0 for width or 1 for height." ;;
     esac
 }
 
@@ -560,8 +558,8 @@ function get_screen_dimension {
 function load_environment {
     set -A files "$@"
     for file in "${file[@]}"; do
-        if [ -f $file ]; then
-            . $file
+        if [ -f "$file" ]; then
+            . "$file"
         fi
     done
 }
@@ -570,8 +568,8 @@ function load_environment {
 function load_resources {
     set -A resources "$@"
     for resource in "${resources[@]}"; do
-        if [ -f $resource ]; then
-            xrdb -merge $resource
+        if [ -f "$resource" ]; then
+            xrdb -merge "$resource"
         fi
     done
 }
@@ -580,10 +578,10 @@ function load_resources {
 function manage_autostarts {
     for process in "$@"; do
         process_name="${process% *}"
-        if pgrep $process_name > /dev/null; then
-            pkill $process_name
+        if pgrep "$process_name" > /dev/null; then
+            pkill "$process_name"
         fi
-        eval $process
+        eval "$process"
     done
 }
 
@@ -611,7 +609,7 @@ function select_wm {
 	   ;;
     esac
 
-    dbus-launch --exit-with-session ${wm} ${wm_args}
+    dbus-launch --exit-with-session "${wm}" "${wm_args}"
 }
 
 # Load in environment & resources

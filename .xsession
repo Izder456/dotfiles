@@ -25,8 +25,8 @@ export XDG_STATE_HOME=$HOME/.local/state
 function get_screen_dimension {
     typeset dimension=$(xdpyinfo | awk '/dimensions/ {print $2}')
     case $1 in
-         0) echo ${dimension%x*} ;;
-         1) echo ${dimension#*x} ;;
+         0) echo "${dimension%x*}" ;;
+         1) echo "${dimension#*x}" ;;
          *) echo "Invalid argument. Use 0 for width or 1 for height." ;;
     esac
 }
@@ -35,8 +35,8 @@ function get_screen_dimension {
 function load_environment {
     set -A files "$@"
     for file in "${file[@]}"; do
-        if [ -f $file ]; then
-            . $file
+        if [ -f "$file" ]; then
+            . "$file"
         fi
     done
 }
@@ -45,8 +45,8 @@ function load_environment {
 function load_resources {
     set -A resources "$@"
     for resource in "${resources[@]}"; do
-        if [ -f $resource ]; then
-            xrdb -merge $resource
+        if [ -f "$resource" ]; then
+            xrdb -merge "$resource"
         fi
     done
 }
@@ -55,10 +55,10 @@ function load_resources {
 function manage_autostarts {
     for process in "$@"; do
         process_name="${process% *}"
-        if pgrep $process_name > /dev/null; then
-            pkill $process_name
+        if pgrep "$process_name" > /dev/null; then
+            pkill "$process_name"
         fi
-        eval $process
+        eval "$process"
     done
 }
 
@@ -86,7 +86,7 @@ function select_wm {
 	   ;;
     esac
 
-    dbus-launch --exit-with-session ${wm} ${wm_args}
+    dbus-launch --exit-with-session "${wm}" "${wm_args}"
 }
 
 # Load in environment & resources
