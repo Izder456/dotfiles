@@ -489,7 +489,7 @@ Xcursor.theme: Capitaine Cursors (Gruvbox) - White
 !!
 xmessage*background: #1d2021
 xmessage*foreground: #fbf1c7
-xmessage.borderWidth: 3
+xmessage.borderWidth: 1
 xmessage*borderColor: #ebdbb2
 xmessage*message.scrollHorizontal: Never
 xmessage*message.scrollVertical: Never
@@ -506,7 +506,7 @@ xterm*scrollBar: false
 xterm*faceName: Spleen
 xterm*faceSize: 12
 xterm*renderFont: true
-xterm*internalBorder: 16
+xterm*internalBorder: 12
 xterm*letterSpace: 1
 xterm*loginShell: true
 xterm*savelines: 16384
@@ -792,7 +792,7 @@ use-damage = true;
 
     # Defines width in pixels of frame around the notification window.
     # Set to 0 to disable.
-    frame_width = 4
+    frame_width = 1
 
     # Defines color of the frame around the notification window.
     frame_color = "#d5c4a1"
