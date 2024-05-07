@@ -3,7 +3,7 @@ cli_add_playlist_name Default
 cli_add_to_specific_playlist 0
 close_send_to_tray 1
 deadbeef_version 1.9.4
-filechooser.lastdir file:///home/izder456/Music/King_Gizzard_&_the_Lizard_Wizard/Live_at_Red_Rocks_'22
+filechooser.lastdir file:///home/izder456/Music/Towa_Tei
 filechooser.playlist.lastdir file:///home/izder456/Music/Spyro_Gyra/Morning_Dance
 gtkui.color.bar_foreground 65278 32896 6424
 gtkui.color.listview_even_row 10280 10280 10280
@@ -50,14 +50,15 @@ lastfm.password Byeb0t!!
 lastfm.prefer_album_artist 1
 lastfm.scrobbler_url https://post.audioscrobbler.com
 lastfm.submit_tiny_tracks 0
-logwindow.geometry.h 842
-logwindow.geometry.w 1576
-logwindow.geometry.x 12
-logwindow.geometry.y 46
-mainwin.geometry.h 842
-mainwin.geometry.w 1576
-mainwin.geometry.x 12
-mainwin.geometry.y 46
+logwindow.geometry.h 858
+logwindow.geometry.w 1588
+logwindow.geometry.x 6
+logwindow.geometry.y 36
+mainwin.geometry.h 866
+mainwin.geometry.maximized 1
+mainwin.geometry.w 1586
+mainwin.geometry.x 0
+mainwin.geometry.y 0
 mp3.id3v1_encoding iso8859-1
 mp3.id3v2_version 3
 mp3.write_id3v1 1
@@ -74,15 +75,15 @@ playback.loop 0
 playback.order 2
 playback.volume.normalized 0.2096180
 playlist.current 0
-playlist.cursor.0 -1
+playlist.cursor.0 72
 playlist.cursor.1 -1
-playlist.scroll.0 0
+playlist.scroll.0 -72
 playlist.scroll.1 0
 playlist.scroll.cursorfollowplayback 1
 playlist.stop_after_album_reset 1
 playlist.stop_after_current 0
 playlist.stop_after_current_reset 1
-playlist.tab.00000 Live_at_Red_Rocks_'22
+playlist.tab.00000 EDM
 prefwin.geometry.h 483
 prefwin.geometry.w 762
 prefwin.geometry.x 419
@@ -95,7 +96,7 @@ replaygain.processing_flags 3
 resume.paused 0
 resume.playlist 0
 resume.position 0.0928798
-resume.track 42
+resume.track 134
 resume_last_session 0
 streamer.16_to_24 0
 streamer.8_to_16 0

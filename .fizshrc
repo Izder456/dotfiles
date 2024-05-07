@@ -1,4 +1,4 @@
- #!/usr/bin/env zsh
+#!/usr/bin/env zsh
 
 ##
 # ENV VARS
@@ -9,25 +9,21 @@ export EDITOR="evi"
 export LC_CTYPE="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
-##
-# If in TTY
-##
-if tty -s; then
-    unalias grep
-    export EDITOR="vi"
-    export PAGER="less -R"
-fi
+# fix grep --color bug
+unalias grep
 
 ##
 # export $PATH
 ##
-export PATH=$PATH:$HOME/.cargo/bin:$HOME/.local/bin
+export PATH=$PATH:/usr/games:$HOME/.cargo/bin:$HOME/.local/bin:$HOME/go/bin
 
 ##
 # Setup Completions
 ##
-autoload -U compinit; compinit
-autoload -U bashcompinit; bashcompinit
+autoload -U compinit
+compinit
+autoload -U bashcompinit
+bashcompinit
 
 fpath=($HOME/.zsh-openbsd/completions $HOME/.zsh-completions/src $fpath)
 setopt MENU_COMPLETE
@@ -92,18 +88,25 @@ eval "$(zoxide init --cmd cd zsh)"
 ##
 # Alias for listing files
 ##
-alias ls="eza --icons=auto -h"
-alias la="eza --icons=auto -ah"
-alias ll="eza --icons=auto -lh"
-alias lh="eza --icons=auto -lah"
-alias tree="eza --icons=auto -Th"
+if command -v eza &> /dev/null; then
+	alias ls="eza --icons=auto -Hh"
+	alias la="eza --icons=auto -ah"
+	alias ll="eza --icons=auto -lh"
+	alias lh="eza --icons=auto -lAh"
+	alias tree="eza --icons=auto -Th"
+fi
+
 
 ##
 # Alias for parsing
 ##
-alias cat="bat --theme=gruvbox-dark --paging=never"
-alias bat="bat --theme=gruvbox-dark"
-alias rgrep="rg"
+if command -v bat &> /dev/null; then
+	alias cat="bat --theme=gruvbox-dark --paging=never"
+	alias bat="bat --theme=gruvbox-dark"
+fi
+if command -v rg &> /dev/null; then
+	alias rgrep="rg"
+fi
 
 ##
 # Alias for editing
@@ -118,8 +121,6 @@ alias sudoedit="doas $EDITOR"
 ##
 alias f="neofetch --off"
 alias F="neofetch -L"
-alias mf="pfetch"
-alias uf="ufetch"
 
 ##
 # Alias for sysstats
@@ -144,42 +145,61 @@ PROMPT="%B%F{yellow}%~%f%b%B % %b"
 ##
 # Tere config
 ##
-tere() {
-    local result=$(command tere "$@")
-    [ -n "$result" ] && cd -- "$result"
+function tere {
+	local result=$(command tere "$@")
+	[ -n "$result" ] && cd -- "$result"
 }
 
 ##
-# Transfer.sh
+# Functions For OpenBSD
 ##
-transfer() {
-    if [ $# -eq 0 ]; then
-        echo "No arguments specified.\nUsage:\n transfer <file|directory>\n ... | transfer <file_name>">&2;
-        return 1;
-    fi;
-    if tty -s; then
-        file="$1";
-        file_name=$(basename "$file");
-        if [ ! -e "$file" ]; then
-            echo "$file: No such file or directory">&2;
-            return 1;
-        fi;
-        if [ -d "$file" ]; then
-            file_name="$file_name.zip" ,;
-            (cd "$file" && zip -r -q - .) |
-                curl --progress-bar --upload-file "-" "http://transfer.sh/$file_name" | tee /dev/null,;
-        else cat "$file" |
-                curl --progress-bar --upload-file "-" "http://transfer.sh/$file_name" | tee /dev/null;
-        fi;
-    else file_name=$1;
-         curl --progress-bar --upload-file "-" "http://transfer.sh/$file_name" |
-             tee /dev/null;
-    fi;
+function src {
+	cd /usr/src/*/$1 || return
+}
+
+function port {
+	cd /usr/ports/*/$1 2>/dev/null ||
+		cd /usr/ports/*/*/$1 2>/dev/null ||
+		return
+}
+
+function port_grep {
+	local _usage
+	_usage="port_grep [file] [pattern]"
+	[ -z $1 ] || [ -z $2 ] && echo $_usage
+	[ ! -z $1 ] && [ ! -z $2 ] &&
+		find /usr/ports -iname "${1}" -exec grep -iH ${2} {} \;
+}
+
+function pclean {
+	find . -name \*.orig -exec rm {} \;
+	find . -size 0 -exec rm {} \;
+}
+
+function revert_diffs {
+	for i in $(find . -name \*.orig); do
+		F=$(echo $i | sed 's/\.orig//')
+		mv -v "$i" "$F"
+	done
+}
+
+function cdw {
+	cd $(make show=WRKSRC)
+}
+
+function maintains {
+	(
+		cd /usr/ports/*/$1 >/dev/null 2>&1 &&
+			make show=MAINTAINER ||
+			echo "No port '/usr/ports/*/$1'"
+	)
 }
 
 ##
 # the r/unixporn rite of passage
 ##
-afetch
+if command -v afetch &> /dev/null; then
+	afetch
+fi
 
 . $HOME/.shellrc.load
