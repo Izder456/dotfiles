@@ -154,26 +154,26 @@ function tere {
 # Functions For OpenBSD
 ##
 function src {
-	cd /usr/src/*/$1 || return
+	local _usage
+	_usage="src [file]"
+	[ -z $1 ] && echo $_usage
+	[ ! -z $1 ] &&
+		cd /usr/src/*/$1 || return
 }
 
 function port {
-	cd /usr/ports/*/$1 2>/dev/null ||
-		cd /usr/ports/*/*/$1 2>/dev/null ||
-		return
-}
-
-function port_grep {
 	local _usage
-	_usage="port_grep [file] [pattern]"
-	[ -z $1 ] || [ -z $2 ] && echo $_usage
-	[ ! -z $1 ] && [ ! -z $2 ] &&
-		find /usr/ports -iname "${1}" -exec grep -iH ${2} {} \;
+	_usage="port [port]"	
+	[ -z $1 ] && echo $_usage
+	[ ! -z $1 ] &&
+		cd /usr/ports/*/$1 2>/dev/null ||
+			cd /usr/ports/*/*/$1 2>/dev/null ||
+			return
 }
 
 function pclean {
-	find . -name \*.orig -exec rm {} \;
-	find . -size 0 -exec rm {} \;
+	find . -name \*.orig -exec rm -v {} \;
+	find . -size 0 -exec rm -v {} \;
 }
 
 function revert_diffs {
@@ -188,11 +188,15 @@ function cdw {
 }
 
 function maintains {
-	(
-		cd /usr/ports/*/$1 >/dev/null 2>&1 &&
-			make show=MAINTAINER ||
-			echo "No port '/usr/ports/*/$1'"
-	)
+	local _usage
+	_usage="maintains [port]"
+	[ -z $1 ] && echo $_usage
+	[ ! -z $1 ] &&
+		(
+			cd /usr/ports/*/$1 >/dev/null 2>&1 &&
+				make show=MAINTAINER ||
+				echo "No port '/usr/ports/*/$1'"
+		)
 }
 
 ##
