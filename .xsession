@@ -78,7 +78,7 @@ function select_wm {
 	1) wm=$(command -v stumpwm)
 	   wm_args="--disable-ldb --lose-on-corruption"
 	   ;;
-	2) wm=$(command -v xmsm)
+	2) wm=$(command -v xmsession)
 	   wm_args=""
 	   ;;
 	3) wm=$(command -v xterm)
@@ -99,7 +99,7 @@ manage_autostarts "picom -b" \
 		  "feh --bg-fill --randomize /usr/local/share/backgrounds &" \
 		  "sleep 5 && dunst &" \
 		  "ulimit -Sc 0"
-		  "xidle -delay 5 -nw -program /usr/local/bin/slock -timeout 1800 &"
+		  "xidle -delay 5 -nw -program /usr/sbin/zzz -timeout 1800 &"
 
 # Select Window Manager
 select_wm

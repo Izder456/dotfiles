@@ -1,3 +1,7 @@
 #!/bin/sh
-
-pkill -USR1 xidle
+# Get current xsession user
+_user=$(ps -o user= -p $(pgrep -f Xsession))
+pkill slock
+# Run slock as the Xsession user
+doas -u $_user env DISPLAY=:0
+XAUTHORITY=/home/$_user/.Xauthority slock $
