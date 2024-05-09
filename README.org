@@ -34,7 +34,7 @@
 
 - My script doesn't perform any performance tweaking. Users should refer to [[https://openbsd.org/faq][the FAQ]], [[https://man.openbsd.org][manpages]], or the unofficial [[https://www.openbsdhandbook.com][OpenBSD Handbook]] for that.
 
-- For more of a newb-friendly (albeit detailed) explanation video of some optimization tricks, [[https://www.youtube.com/watch?v=f8lloCtrpdk][Watch The OpenBSD Guy's Video]]
+		- For more of a newb-friendly (albeit detailed) explanation video of some optimization tricks, [[https://www.youtube.com/watch?v=f8lloCtrpdk][Watch The OpenBSD Guy's Video]]
 
 - for laptops, I /highly recommend/ solene%'s power management daemon [[https://dataswamp.org/~solene/2022-03-21-openbsd-cool-frequency.html][obsdfreqd]]
 
@@ -63,19 +63,20 @@
 - [[#misc-stuffs][Misc Stuffs]]
   - [[#quicklisp-install][Quicklisp Install]]
   - [[#xsessionxresourcesxprofile][.Xsession/.Xresources/.Xprofile]]
-    - [[#xresources][.xresources]]
-    - [[#colors][Colors]]
-    - [[#apps][Apps]]
+    - [[#xresources][Xresources]]
+      - [[#xresources-1][.xresources]]
+      - [[#colors][Colors]]
+      - [[#apps][Apps]]
     - [[#xsession][.xsession]]
-    - [[#picomconf][picom.conf]]
-      - [[#dunstrc][Dunstrc]]
-    - [[#mkconf][mk.conf]]
-    - [[#exrc][.exrc]]
-    - [[#sysctlconf][Sysctl.conf]]
-      - [[#pf-config][pf config]]
-    - [[#dfm-install][Dfm-Install]]
-    - [[#doasconf][Doas.conf]]
-    - [[#cargo-list][Cargo-list]]
+  - [[#picomconf][picom.conf]]
+  - [[#dunstrc][Dunstrc]]
+  - [[#mkconf][mk.conf]]
+  - [[#exrc][.exrc]]
+  - [[#sysctlconf][Sysctl.conf]]
+  - [[#pf-config][pf config]]
+  - [[#dfm-install][Dfm-Install]]
+  - [[#doasconf][Doas.conf]]
+  - [[#cargo-list][Cargo-list]]
 
 * How To Use
 
@@ -156,8 +157,7 @@ $ rex menu
 #+END_SRC
 
 * Rexfile
-
-This is an automation thingy I use. It's definitely overkill, but I like Perl.
+this is an automation thingy i use. its definitely overkill, but i like perl.
 
 ** Perl-Boilerplate
 
@@ -643,7 +643,9 @@ $ sbcl --load /tmp/quicklisp.lisp --script /tmp/quicklisp-setup.lisp
 
 The settings for X session, resources, and profile.
 
-*** .xresources
+*** Xresources
+
+**** .xresources
 
 #+BEGIN_SRC conf :tangle .xresources
 !!
@@ -676,7 +678,7 @@ Xcursor.size: 16
 Xcursor.theme: Capitaine Cursors (Gruvbox) - White
 #+END_SRC
 
-*** Colors
+**** Colors
 
 #+BEGIN_SRC conf :tangle .xresources.d/colors	
 !!
@@ -772,7 +774,7 @@ Xcursor.theme: Capitaine Cursors (Gruvbox) - White
 ,*color250: #d5c4a1
 #+END_SRC
 
-*** Apps
+**** Apps
 
 #+BEGIN_SRC conf :tangle .xresources.d/apps
 
@@ -922,7 +924,7 @@ select_wm
 exit 0
 #+END_SRC
 
-*** picom.conf
+** picom.conf
 
 #+BEGIN_SRC conf :tangle .config/picom/picom.conf
 ##
@@ -990,7 +992,7 @@ backend = "xrender";
 use-damage = true;
 #+END_SRC
 
-**** Dunstrc
+** Dunstrc
 
 #+BEGIN_SRC conf :tangle .config/dunst/dunstrc	
 [global]
@@ -1448,7 +1450,7 @@ use-damage = true;
 # vim: ft=cfg
 #+END_SRC
 
-*** mk.conf
+** mk.conf
 
 this configures my ports/src build environment, it goes in ~/etc/mk.conf~
 
@@ -1460,7 +1462,7 @@ DISTDIR=/usr/distfiles
 PACKAGE_REPOSITORY=/usr/packages
 #+END_SRC
 
-*** .exrc
+** .exrc
 
 for BSD Vi
 
@@ -1489,7 +1491,7 @@ set searchincr
 set report=1
 #+END_SRC
 
-*** Sysctl.conf
+** Sysctl.conf
 
 The kernel parameters settings.
 
@@ -1515,7 +1517,7 @@ kern.audio.record=0
 kern.video.record=0
 #+END_SRC
 
-**** pf config
+** pf config
 
 This goes in =/etc/pf.conf=, use /with caution/
 
@@ -1565,7 +1567,7 @@ pass proto udp to port $udp_services
 pass out inet proto icmp icmp-type $icmp_types
 #+END_SRC
 
-*** Dfm-Install
+** Dfm-Install
 
 dfm install script config
 
@@ -1598,7 +1600,7 @@ XenoDM-Config skip
 APM-Config skip
 #+END_SRC
 
-*** Doas.conf
+** Doas.conf
 
 +this is totally overkill+
 fine now
@@ -1608,7 +1610,7 @@ permit persist :doas
 permit nopass root
 #+END_SRC
 
-*** Cargo-list
+** Cargo-list
 
 The list of packages to be installed via Cargo.
 
