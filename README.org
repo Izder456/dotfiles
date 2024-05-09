@@ -1495,7 +1495,7 @@ dfm skip
 assets skip
 backgrounds skip
 Emacs-Config skip
-EMWM-Config skip
+Emwm-Config skip
 StumpWM-Config skip
 XenoDM-Config skip
 APM-Config skip
