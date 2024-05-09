@@ -18,6 +18,11 @@ unalias grep
 export PATH=$PATH:/usr/games:$HOME/.cargo/bin:$HOME/.local/bin:$HOME/go/bin
 
 ##
+# Autoload zmv
+##
+autoload -Uz zmv
+
+##
 # Setup Completions
 ##
 autoload -U compinit
@@ -172,15 +177,11 @@ function port {
 }
 
 function pclean {
-	find . -name \*.orig -exec rm -v {} \;
-	find . -size 0 -exec rm -v {} \;
+	rm -v **/*.orig **/*(.NL0)
 }
 
 function revert_diffs {
-	for i in $(find . -name \*.orig); do
-		F=$(echo $i | sed 's/\.orig//')
-		mv -v "$i" "$F"
-	done
+	zmv -v '**/*.orig' '${f%.orig}'
 }
 
 function cdw {
