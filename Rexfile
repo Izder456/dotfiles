@@ -59,7 +59,7 @@ sub config_install {
     }
     system('rex configure_gtk');
     system('rex configure_icons');
-    system( "${HOME}/.dotfiles/dfm/dfm install" );
+    system( "${USERHOME}/.dotfiles/dfm/dfm install" );
     system('doas cp ~/.dotfiles/doas.conf /etc/doas.conf');
 }
 
@@ -133,7 +133,7 @@ my $HEADER_TEXT = <<'EOF';
 Srcerizder Dotfiles Setup
 Options:
 --------------------------
-  1) Ports	  4) StumpWM
+  1) Ports   4) StumpWM
   2) Cargo   5) Emacs
   3) Emwm    6) Xenodm
   7) Config  8) Misc
@@ -149,7 +149,7 @@ Other Options:
 Enter your selection:
 EOF
 
-task 'menu', sub {
+sub menu {
     while (1) {
         system("clear");
         print $HEADER_TEXT;
@@ -175,6 +175,8 @@ task 'menu', sub {
         }
     }
 };
+
+menu();
 
 # task to clean home dir
 task 'remove_default_cruft', sub {
