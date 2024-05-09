@@ -34,7 +34,7 @@
 
 - My script doesn't perform any performance tweaking. Users should refer to [[https://openbsd.org/faq][the FAQ]], [[https://man.openbsd.org][manpages]], or the unofficial [[https://www.openbsdhandbook.com][OpenBSD Handbook]] for that.
 
-		- For more of a newb-friendly (albeit detailed) explanation video of some optimization tricks, [[https://www.youtube.com/watch?v=f8lloCtrpdk][Watch The OpenBSD Guy's Video]]
+- For more of a newb-friendly (albeit detailed) explanation video of some optimization tricks, [[https://www.youtube.com/watch?v=f8lloCtrpdk][Watch The OpenBSD Guy's Video]]
 
 - for laptops, I /highly recommend/ solene%'s power management daemon [[https://dataswamp.org/~solene/2022-03-21-openbsd-cool-frequency.html][obsdfreqd]]
 
@@ -157,7 +157,8 @@ $ rex menu
 #+END_SRC
 
 * Rexfile
-this is an automation thingy i use. its definitely overkill, but i like perl.
+
+This is an automation thingy I use. It's definitely overkill, but I like perl.
 
 ** Perl-Boilerplate
 
@@ -606,7 +607,6 @@ task 'update_xdg_user_dirs', sub {
   system( 'doas', 'gdk-pixbuf-query-loaders', '--update-cache' );
 };
 #+END_SRC
-
 
 * Misc Stuffs
 
@@ -1495,7 +1495,7 @@ set report=1
 
 The kernel parameters settings.
 
-*Very hardware specific*
+*Very hardware specific* /see [[#note][NOTE]]/
 
 #+BEGIN_SRC conf :tangle sysctl.conf
 # Open Kernel Limits
