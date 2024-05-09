@@ -49,6 +49,8 @@
 - [[#rexfile][Rexfile]]
   - [[#perl-boilerplate][Perl-Boilerplate]]
   - [[#globals][Globals]]
+    - [[#setuppl][setup.pl]]
+    - [[#rexfile-1][Rexfile]]
   - [[#menu][Menu]]
   - [[#remove-cruft][Remove-Cruft]]
   - [[#fizsh-setup][FiZSH-Setup]]
@@ -140,8 +142,8 @@ OpenGL >=2.0 Capable GFX Card
 
 #+BEGIN_SRC
 $ cd $HOME
-$ ftp https://github.com/izder456/dotfiles/raw/main/Rexfile
-$ perl Rexfile
+$ ftp https://github.com/izder456/dotfiles/raw/main/setup.pl
+$ perl setup.pl
 #+END_SRC
 
 8. enable dbus (my StumpWM config needs it)
@@ -174,7 +176,24 @@ no warnings qw( experimental::smartmatch );
 
 ** Globals
 
-#+BEGIN_SRC perl :tangle Rexfile
+*** setup.pl
+
+#+BEGIN_SRC perl :tangle setup.pl
+# No Magic
+our $USERHOME = "$ENV{HOME}";
+our $GITHUB   = "https://github.com";
+
+# Set PATH explicitly
+$ENV{'PATH'} =
+  '/bin:/usr/bin:/sbin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin';
+
+our $SLEEPTIME = 2;
+our $LOG_FILE = "/tmp/setup.log";
+#+END_SRC
+
+*** Rexfile
+
+#+BEGIN_SRC perl :tangle setup.pl
 # No Magic
 our $USERHOME = "$ENV{HOME}";
 our $GITHUB   = "https://github.com";
@@ -189,7 +208,7 @@ our $LOG_FILE = "/tmp/setup.log";
 
 ** Menu
 
-#+BEGIN_SRC perl :tangle Rexfile
+#+BEGIN_SRC perl :tangle setup.pl 
 sub setup_log {
     my ($message) = @_;
     my $timestamp = gmtime();
@@ -1348,7 +1367,7 @@ set showmode
 " show matching parens, brackets, etc
 set showmatch
 " display row/column info
-set ruler
+hset ruler
 " autoindent tab = 2 space
 set shiftwidth=2
 " tab = 2 space
@@ -1464,8 +1483,7 @@ doas.conf skip
 sysctl.conf skip
 mk.conf skip
 pf.conf skip
-setup.ksh skip
-setup.pl.bak skip
+setup.pl skip
 dfm skip
 assets skip
 backgrounds skip

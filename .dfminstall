@@ -14,8 +14,7 @@ doas.conf skip
 sysctl.conf skip
 mk.conf skip
 pf.conf skip
-setup.ksh skip
-setup.pl.bak skip
+setup.pl skip
 dfm skip
 assets skip
 backgrounds skip
