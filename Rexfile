@@ -1,8 +1,5 @@
 use 5.36.0;
 use Rex -feature => ['1.4'];
-use warnings;
-use feature qw( switch );
-no warnings qw( experimental::smartmatch );
 
 # task to clean home dir
 task 'remove_default_cruft', sub {

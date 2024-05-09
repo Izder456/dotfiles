@@ -1,3 +1,8 @@
+use 5.36.0;
+use warnings;
+use feature qw( switch );
+no warnings qw( experimental::smartmatch );
+
 # No Magic
 our $USERHOME = "$ENV{HOME}";
 our $GITHUB   = "https://github.com";

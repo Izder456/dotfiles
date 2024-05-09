@@ -48,9 +48,11 @@
 - [[#how-to-use][How To Use]]
 - [[#rexfile][Rexfile]]
   - [[#perl-boilerplate][Perl-Boilerplate]]
-  - [[#globals][Globals]]
     - [[#setuppl][setup.pl]]
     - [[#rexfile-1][Rexfile]]
+  - [[#globals][Globals]]
+    - [[#setuppl-1][setup.pl]]
+    - [[#rexfile-2][Rexfile]]
   - [[#menu][Menu]]
   - [[#remove-cruft][Remove-Cruft]]
   - [[#fizsh-setup][FiZSH-Setup]]
@@ -166,12 +168,20 @@ This is an automation thingy I use. It's definitely overkill, but I like perl.
 
 The initial setup for Perl.
 
-#+BEGIN_SRC perl :tangle Rexfile
+*** setup.pl
+
+#+BEGIN_SRC perl :tangle setup.pl
 use 5.36.0;
-use Rex -feature => ['1.4'];
 use warnings;
 use feature qw( switch );
 no warnings qw( experimental::smartmatch );
+#+END_SRC
+
+*** Rexfile
+
+#+BEGIN_SRC perl :tangle Rexfile
+use 5.36.0;
+use Rex -feature => ['1.4'];
 #+END_SRC
 
 ** Globals
@@ -1483,7 +1493,7 @@ doas.conf skip
 sysctl.conf skip
 mk.conf skip
 pf.conf skip
-setup.pl skip
+setup.plskip
 dfm skip
 assets skip
 backgrounds skip
