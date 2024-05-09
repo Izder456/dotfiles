@@ -1,6 +1,17 @@
 use 5.36.0;
 use Rex -feature => ['1.4'];
 
+# No Magic
+our $USERHOME = "$ENV{HOME}";
+our $GITHUB   = "https://github.com";
+
+# Set PATH explicitly
+$ENV{'PATH'} =
+  '/bin:/usr/bin:/sbin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin';
+
+our $SLEEPTIME = 2;
+our $LOG_FILE = "/tmp/setup.log";
+
 # task to clean home dir
 task 'remove_default_cruft', sub {
   unlink(

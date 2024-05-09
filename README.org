@@ -203,7 +203,7 @@ our $LOG_FILE = "/tmp/setup.log";
 
 *** Rexfile
 
-#+BEGIN_SRC perl :tangle setup.pl
+#+BEGIN_SRC perl :tangle Rexfile
 # No Magic
 our $USERHOME = "$ENV{HOME}";
 our $GITHUB   = "https://github.com";
