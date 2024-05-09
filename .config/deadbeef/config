@@ -13,7 +13,7 @@ gtkui.color.listview_selected_text 64764 61937 51143
 gtkui.color.listview_selection 12850 12336 12079
 gtkui.color.tabstrip_playing_text 64764 61937 51143
 gtkui.color.tabstrip_selected_text 64764 61937 51143
-gtkui.columns.playlist [{"title":"♫","id":"1","format":"%playstatus%","sort_format":"","size":"28","align":"0","color_override":"0","color":"#ff000000"},{"title":"Song","id":"-1","format":"%title%","sort_format":"","size":"441","align":"0","color_override":"0","color":"#ffebdbb2"},{"title":"Length","id":"-1","format":"%length%","sort_format":"","size":"100","align":"0","color_override":"0","color":"#ffebdbb2"},{"title":"Bitrate","id":"-1","format":"%bitrate%","sort_format":"","size":"100","align":"0","color_override":"0","color":"#ffebdbb2"},{"title":"Format","id":"-1","format":"%codec%","sort_format":"","size":"177","align":"0","color_override":"0","color":"#ffebdbb2"}]
+gtkui.columns.playlist [{"title":"♫","id":"1","format":"%playstatus%","sort_format":"","size":"28","align":"0","color_override":"0","color":"#ff000000"},{"title":"Artist","id":"-1","format":"$if(%artist%,%artist%,Unknown Artist)","sort_format":"","size":"100","align":"0","color_override":"0","color":"#ffbdae93"},{"title":"Song","id":"-1","format":"%title%","sort_format":"","size":"441","align":"0","color_override":"0","color":"#ffebdbb2"},{"title":"Length","id":"-1","format":"%length%","sort_format":"","size":"100","align":"0","color_override":"0","color":"#ffebdbb2"},{"title":"Bitrate","id":"-1","format":"%bitrate%","sort_format":"","size":"100","align":"0","color_override":"0","color":"#ffebdbb2"},{"title":"Format","id":"-1","format":"%codec%","sort_format":"","size":"177","align":"0","color_override":"0","color":"#ffebdbb2"}]
 gtkui.columns.search [{"title":"Artist / Album","id":"-1","format":"$if(%artist%,%artist%,Unknown Artist)[ - %album%]","sort_format":"","size":"150","align":"0","color_override":"0","color":"#ff000000"},{"title":"Track No","id":"-1","format":"%tracknumber%","sort_format":"","size":"50","align":"1","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"150","align":"0","color_override":"0","color":"#ff000000"},{"title":"Duration","id":"-1","format":"%length%","sort_format":"","size":"50","align":"0","color_override":"0","color":"#ff000000"}]
 gtkui.embolden_current_track 0
 gtkui.font.listview_column_text Spleen 8x16 Medium 12
@@ -96,7 +96,7 @@ replaygain.processing_flags 3
 resume.paused 0
 resume.playlist 0
 resume.position 0.0928798
-resume.track 34
+resume.track 117
 resume_last_session 0
 streamer.16_to_24 0
 streamer.8_to_16 0
