@@ -4,15 +4,15 @@ use feature qw( switch );
 no warnings qw( experimental::smartmatch );
 
 # No Magic
-our $USERHOME = "$ENV{HOME}";
-our $GITHUB   = "https://github.com";
+my $USERHOME = "$ENV{HOME}";
+my $GITHUB   = "https://github.com";
 
 # Set PATH explicitly
 $ENV{'PATH'} =
   '/bin:/usr/bin:/sbin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin';
 
-our $SLEEPTIME = 2;
-our $LOG_FILE = "/tmp/setup.log";
+my $SLEEPTIME = 2;
+my $LOG_FILE = "/tmp/setup.log";
 
 sub setup_log {
     my ($message) = @_;

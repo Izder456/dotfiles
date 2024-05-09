@@ -190,30 +190,27 @@ use Rex -feature => ['1.4'];
 
 #+BEGIN_SRC perl :tangle setup.pl
 # No Magic
-our $USERHOME = "$ENV{HOME}";
-our $GITHUB   = "https://github.com";
+my $USERHOME = "$ENV{HOME}";
+my $GITHUB   = "https://github.com";
 
 # Set PATH explicitly
 $ENV{'PATH'} =
   '/bin:/usr/bin:/sbin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin';
 
-our $SLEEPTIME = 2;
-our $LOG_FILE = "/tmp/setup.log";
+my $SLEEPTIME = 2;
+my $LOG_FILE = "/tmp/setup.log";
 #+END_SRC
 
 *** Rexfile
 
 #+BEGIN_SRC perl :tangle Rexfile
 # No Magic
-our $USERHOME = "$ENV{HOME}";
-our $GITHUB   = "https://github.com";
+my $USERHOME = "$ENV{HOME}";
+my $GITHUB   = "https://github.com";
 
 # Set PATH explicitly
 $ENV{'PATH'} =
   '/bin:/usr/bin:/sbin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin';
-
-our $SLEEPTIME = 2;
-our $LOG_FILE = "/tmp/setup.log";
 #+END_SRC
 
 ** Menu
