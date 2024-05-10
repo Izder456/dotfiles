@@ -3,7 +3,7 @@ set showmode
 " show matching parens, brackets, etc
 set showmatch
 " display row/column info
-hset ruler
+set ruler
 " autoindent tab = 2 space
 set shiftwidth=2
 " tab = 2 space
