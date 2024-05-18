@@ -39,8 +39,8 @@ eval "$(register-python-argcomplete pipx)"
 ##
 # Java Stuff
 ##
-export PATH=$PATH:/usr/local/jdk-1.8.0/bin
-export JAVA_HOME=/usr/local/jdk-1.8.0/
+export PATH=$PATH:/usr/local/jdk-17/bin
+export JAVA_HOME=/usr/local/jdk-17/
 
 ##
 # Go Stuff
@@ -61,12 +61,14 @@ source ~/.zsh-suggest/zsh-autosuggestions.plugin.zsh
 ##
 # FZF-Zsh
 ##
-source ~/.zsh-fzf/fzf-tab.plugin.zsh
-export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+if command -v fzf &> /dev/null; then
+	source ~/.zsh-fzf/fzf-tab.plugin.zsh
+	export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
     --color=fg:#A89984,bg:#282828,hl:#83A598
     --color=fg+:#BDAE93,bg+:#1D2021,hl+:#8EC07C
     --color=info:#D3869B,prompt:#FABD2F,pointer:#FABD2F
     --color=marker:#B16286,spinner:#B8BB26,header:#FE8019'
+fi
 
 ##
 # 256-Color
@@ -88,7 +90,9 @@ alias su="echo 'did you mean to run doas -s? '"
 ##
 # Alias for CD
 ##
-eval "$(zoxide init --cmd cd zsh)"
+if command -v zoxide &> /dev/null; then
+	eval "$(zoxide init --cmd cd zsh)"
+fi
 
 ##
 # Alias for listing files
