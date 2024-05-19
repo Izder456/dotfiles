@@ -99,7 +99,7 @@ manage_autostarts "picom -b" \
 		  "feh --bg-fill --randomize /usr/local/share/backgrounds &" \
 		  "sleep 5 && dunst &" \
 		  "ulimit -Sc 0"
-		  "xidle -delay 5 -nw -program /usr/sbin/zzz -timeout 1800 &"
+		  "xidle -delay 5 -nw -program /usr/local/bin/slock -timeout 1800 &"
 
 # Select Window Manager
 select_wm
