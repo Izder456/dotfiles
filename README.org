@@ -140,7 +140,7 @@ OpenGL >=2.0 Capable GFX Card
 # pkg_add p5-Rex
 #+END_SRC
 
-7. Download and run =Rexfile= as your regular user
+7. Download and run =setup.pl= as your regular user
 
 #+BEGIN_SRC
 $ cd $HOME
@@ -1402,16 +1402,40 @@ The kernel parameters settings.
 #+BEGIN_SRC conf :tangle sysctl.conf
 # Open Kernel Limits
 kern.maxthread=16385
-kern.maxproc=8192
-kern.maxfiles=32768
+kern.maxproc=32768
+kern.maxfiles=65535
+kern.maxvnodes=262144
+kern.somaxconn=2048
+kern.bufcachepercent=90
 
-# Shared Memory
+# Shared Memory (for browsers)
 kern.shminfo.shmmax=2147483647
 kern.shminfo.shmall=536870912
 kern.shminfo.shmmni=4096
 
+# Semaphores (not as relevant, but still worth having in case)
+kern.shminfo.shmseg=2048
+kern.seminfo.semmns=4096
+kern.seminfo.semmni=1024
+
+# Allow Kernel Memory Access
+kern.allowkmem=1
+
 # Enable Multithreading
+## Danger! has implications
 hw.smt=1
+
+# Fix Screen Tearing
+machdep.allowaperture=2
+
+# Network
+## Enable IP Forwarding
+net.inet.ip.forwarding=1
+net.inet6.ip6.forwarding=1
+## Faster Networking
+net.inet.udp.recvspace=262144
+net.inet.udp.sendspace=262144
+net.inet.icmp.errppslimit=1000
 
 # Video/Audio enable/disable
 # change these to =1 if you want microphone or webcam access
