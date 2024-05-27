@@ -158,7 +158,7 @@ sub menu {
             $selection = "r";
         }
         given($selection) {
-            when("1") { print("\nSelected Ports Deps...\n"); sleep($SLEEPTIME); ports_deps(); }
+            when("1") { print("Selected Ports Deps...\n"); sleep($SLEEPTIME); ports_deps(); }
             when("2") { print("Selected Cargo Deps...\n"); sleep($SLEEPTIME); cargo_deps(); }
             when("3") { print("Selected Emwm Config...\n"); sleep($SLEEPTIME); setup_emwm(); }
             when("4") { print("Selected StumpWM Config...\n"); sleep($SLEEPTIME); setup_stumpwm(); }
