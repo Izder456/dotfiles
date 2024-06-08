@@ -1,6 +1,13 @@
 #!/usr/bin/env zsh
 
 ##
+# Check if TTY
+##
+if [ -n $DISPLAY ]; then
+    export TERM=wsvt25
+fi
+
+##
 # ENV VARS
 ##
 alias evi="emacsclient --socket=stumpwm-emacs -c -a vi"
