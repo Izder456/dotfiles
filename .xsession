@@ -70,7 +70,7 @@ function select_wm {
     typeset xmesg_xpos=$((($xwidth - $XMESG_WIDTH) / 2))
     typeset xmesg_yoffset=$((($xheight - $XMESG_HEIGHT) / 2))
     xmessage "Please Choose a Session to load" \
-    	    -buttons "StumpWM[]":1,"EMWM[]":2,"TERMINAL[]":3 \
+    	    -buttons "StumpWM[]":1,"EMWM[]":2,"MLVWM[]":3 \
     	    -geometry ${XMESG_WIDTH}x${XMESG_HEIGHT}+${xmesg_xpos}-${xmesg_yoffset}
     typeset choice=$?
 
@@ -78,10 +78,10 @@ function select_wm {
 	1) wm=$(command -v stumpwm)
 	   wm_args="--disable-ldb --lose-on-corruption"
 	   ;;
-	2) wm=$(command -v xmsession)
+	2) wm=$(command -v xmsm)
 	   wm_args=""
 	   ;;
-	3) wm=$(command -v xterm)
+	3) wm=$(command -v mlvwm)
 	   wm_args=""
 	   ;;
     esac
