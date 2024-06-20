@@ -1,7 +1,6 @@
 use 5.36.0;
 use warnings;
-use feature qw( switch );
-no warnings qw( experimental::smartmatch );
+use experimental qw( switch );
 
 # No Magic
 my $USERHOME = "$ENV{HOME}";
@@ -157,20 +156,23 @@ sub menu {
         if ($selection eq "") {
             $selection = "r";
         }
-        given($selection) {
-            when("1") { print("Selected Ports Deps...\n"); sleep($SLEEPTIME); ports_deps(); }
-            when("2") { print("Selected Cargo Deps...\n"); sleep($SLEEPTIME); cargo_deps(); }
-            when("3") { print("Selected Emwm Config...\n"); sleep($SLEEPTIME); setup_emwm(); }
-            when("4") { print("Selected StumpWM Config...\n"); sleep($SLEEPTIME); setup_stumpwm(); }
-            when("5") { print("Selected Emacs Config...\n"); sleep($SLEEPTIME); setup_emacs(); }
-            when("6") { print("Selected XenoDM Config...\n"); sleep($SLEEPTIME); setup_xenodm(); }
-            when("7") { print("Selected Install Configs...\n"); sleep($SLEEPTIME); config_install(); }
-            when("8") { print("Selected Misc Setup...\n"); sleep($SLEEPTIME); setup_misc(); }
-            when("9") { print("Selected Clean...\n"); sleep($SLEEPTIME); clean(); }
-            when("a") { print("Running All...\n"); sleep($SLEEPTIME); clean(); config_install(); ports_deps(); cargo_deps(); setup_emwm(); setup_stumpwm(); setup_emacs(); setup_xenodm(); setup_misc(); }
-            when("r") { next; }
-            when("q") { print("\n"); exit; }
-            default { print("\nInvalid selection\n"); sleep(1); }
+        { # Encapsulate this feature to a scope, so we can temporarily suppress warnings
+            no warnings;
+            given($selection) {
+        				    when("1") { print("Selected Ports Deps...\n"); sleep($SLEEPTIME); ports_deps(); }
+        				    when("2") { print("Selected Cargo Deps...\n"); sleep($SLEEPTIME); cargo_deps(); }
+        				    when("3") { print("Selected Emwm Config...\n"); sleep($SLEEPTIME); setup_emwm(); }
+        				    when("4") { print("Selected StumpWM Config...\n"); sleep($SLEEPTIME); setup_stumpwm(); }
+        				    when("5") { print("Selected Emacs Config...\n"); sleep($SLEEPTIME); setup_emacs(); }
+        				    when("6") { print("Selected XenoDM Config...\n"); sleep($SLEEPTIME); setup_xenodm(); }
+        				    when("7") { print("Selected Install Configs...\n"); sleep($SLEEPTIME); config_install(); }
+        				    when("8") { print("Selected Misc Setup...\n"); sleep($SLEEPTIME); setup_misc(); }
+        				    when("9") { print("Selected Clean...\n"); sleep($SLEEPTIME); clean(); }
+        				    when("a") { print("Running All...\n"); sleep($SLEEPTIME); clean(); config_install(); ports_deps(); cargo_deps(); setup_emwm(); setup_stumpwm(); setup_emacs(); setup_xenodm(); setup_misc(); }
+        				    when("r") { next; }
+        				    when("q") { print("\n"); exit; }
+        				    default { print("\nInvalid selection\n"); sleep(1); }
+            }
         }
     }
 };
