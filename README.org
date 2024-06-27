@@ -858,8 +858,8 @@ export LC_ALL="en_US.UTF-8"
 # Enable HWACCEL for Firefox
 export MOZ_ACCELERATED=1
 export MOZ_WEBRENDER=1
-# set qt apps to use gtk2 widgets if avail
-export QT_QPA_PLATFORMTHEME=gtk2
+# set qt apps to use kvantum widgets if avail
+export QT_STYLE_OVERRIDE=kvantum
 # make sdl mouse cursor lag go away
 export SDL_VIDEO_X11_DGAMOUSE=0
 # set XDG dirs
