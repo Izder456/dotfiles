@@ -15,11 +15,20 @@ export MOZ_WEBRENDER=1
 export QT_STYLE_OVERRIDE=kvantum
 # make sdl mouse cursor lag go away
 export SDL_VIDEO_X11_DGAMOUSE=0
-# set XDG dirs
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_CACHE_HOME=$HOME/.cache
-export XDG_DATA_DIR=$HOME/.local/share
-export XDG_STATE_HOME=$HOME/.local/state
+
+# set XDG stuff
+function xdg_runtime {
+    export XDG_RUNTIME_DIR=/tmp/run/$(id -u)
+    export XDG_CONFIG_HOME=$HOME/.config
+    export XDG_CACHE_HOME=$HOME/.cache
+    export XDG_DATA_DIR=$HOME/.local/share
+    export XDG_STATE_HOME=$HOME/.local/state
+    export XDG_CURRENT_DESKTOP=StumpWM
+    export DESKTOP_SESSION=stumpwm
+    if [ ! -d $XDG_RUNTIME_DIR ]; then
+	mkdir -m 700 -p $XDG_RUNTIME_DIR
+    fi
+}
 
 # Function to get screen dimensions
 function get_screen_dimension {
@@ -97,6 +106,9 @@ manage_autostarts "picom -b" \
 		  "sleep 5 && dunst &" \
 		  "ulimit -Sc 0" \
 		  "xidle -delay 5 -nw -program /usr/local/bin/slock -timeout 1800 &"
+
+# Set XDG Stuffs
+xdg_runtime
 
 # Select Window Manager
 select_wm
