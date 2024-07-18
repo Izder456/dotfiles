@@ -113,7 +113,7 @@ sub setup_misc {
 # Setup XenoDM
 sub setup_xenodm {
     setup_log("Setting up XenoDM...");
-    rex configure_xenodm
+    system('rex configure_xenodm');
 }
 
 # Check for internet connection
