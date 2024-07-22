@@ -85,3 +85,4 @@ backgrounds/F-ZeroMuteCity.png filter=lfs diff=lfs merge=lfs -text
 backgrounds/HylicsChar.png filter=lfs diff=lfs merge=lfs -text
 backgrounds/VomitCoffin.png filter=lfs diff=lfs merge=lfs -text
 backgrounds/GizzSpace.png filter=lfs diff=lfs merge=lfs -text
+backgrounds/F-ZeroX.png filter=lfs diff=lfs merge=lfs -text
