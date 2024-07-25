@@ -1427,19 +1427,16 @@ The kernel parameters settings.
 kern.maxthread=16385
 kern.maxproc=32768
 kern.maxfiles=65535
-kern.maxvnodes=262144
-kern.somaxconn=2048
-kern.bufcachepercent=90
 
 # Shared Memory (for browsers)
 kern.shminfo.shmmax=2147483647
 kern.shminfo.shmall=536870912
 kern.shminfo.shmmni=4096
-
-# Semaphores (not as relevant, but still worth having in case)
 kern.shminfo.shmseg=2048
+	
+# Semaphores (not as relevant, but still worth having in case)
 kern.seminfo.semmns=4096
-kern.seminfo.semmni=1024
+kern.seminfo.semmni=4096
 
 # Allow Kernel Memory Access
 kern.allowkmem=1
@@ -1447,9 +1444,6 @@ kern.allowkmem=1
 # Enable Multithreading
 ## Danger! has implications
 hw.smt=1
-
-# Fix Screen Tearing
-machdep.allowaperture=2
 
 # Network
 ## Enable IP Forwarding
