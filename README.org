@@ -1475,49 +1475,34 @@ kern.video.record=0
 This goes in =/etc/pf.conf=, use /with caution/
 
 #+BEGIN_SRC conf :tangle pf.conf
+# See pf.conf(5) and /etc/examples/pf.conf
+
 # Macros
-icmp_types = "{ echoreq }"
-wifi_if = "{ iwm0 urtwn0 urtwn1 }"
-eth_if = "{ em0 }"
-tcp_services = "{ http 1000 https ssh 6697 587 993 domain telnet }"
-udp_services = "{ domain 50000:65535 }" 
- 
-# Options
+## mod these to match your hardware. these are the drivers my hardware uses.
+wifi_if = "{ iwm0 iwm1 iwn0 iwn1 bwi0 urtwn0 urtwn1 }"
+eth_if = "{ em0 re0 }"
+
+# a few teeny little changes.
 set skip on lo
 set block-policy drop
 set state-policy if-bound
 set fingerprints "/etc/pf.os"
 set ruleset-optimization none
-set optimization normal
+set optimization normal 
 set timeout { tcp.closing 60, tcp.established 7200 }
 
-# Tables
-table <bruteforce> persist
-table <rfc6890> { 0.0.0.0/8 10.0.0.0/8 100.64.0.0/10 127.0.0.0/8 \
-      		  169.254.0.0/11 172.16.0.0/12 192.0.0.0/24 192.0.0.0/29 \
-		  192.0.2.0/24 192.88.99.0/24 192.168.0.0/16 198.18.0.0/15 \
-                  195.51.100.0/24 240.0.0.0/4 203.0.113.0/24 255.255.255.255/32 }
-
-# prevent IP spoofing
+# mitigate IP spoofing
 antispoof quick for $wifi_if
-antispoof quick for $eth_if
+antispoof quick for $eth_if 
 
-# for logging
-block in log on egress from <rfc6890>
-block return out log on egress to <rfc6890>
-
-# block all else
+# block all incoming traffic, useful on portable machines.
 block all
 
-# only allow special services 
-pass out on egress proto tcp to port $tcp_services 
-pass in on $eth_if proto tcp to port ssh \
-	keep state (max-src-conn 15 max-src-conn-rate 3/1 \
-		overload <bruteforce> flush global)
-pass proto udp to port $udp_services
+# allow all regular draffic going out.
+pass out inet
 
-# ICMP
-pass out inet proto icmp icmp-type $icmp_types
+# allow icmp traffic. nice if you ping to test conns.
+pass in proto icmp
 #+END_SRC
 
 ** Dfm-Install
