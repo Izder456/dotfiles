@@ -28,17 +28,13 @@
 
 * Crucial Information
 
-- While /there *is*/ a setup script in this project, =it's not meant to be plug-and-play=. /It's a bare-bones setup/ that is fairly non-portable and will require some tinkering to work perfectly. I don't see this as a problem because I'm comfortable customizing it to my needs.
+- While there *is* a setup script in this project, /it's not meant to be plug-and-play/. *It's a bare-bones setup*, that is fairly non-portable and will require some tinkering to work perfectly. If you wan't a solid experience, use Linux Mint. I don't see this as a problem because I'm comfortable customizing it to my needs. If you need assistance with this, I expect that as a bare minimum you read this ORG-mode file and have basic understanding of the function of these configs. I try not to hand-hold people. You learn nothing by blindly copy-pasting. Take this as a word of caution.
 
 * Note:
 
-- My script doesn't perform any performance tweaking. Users should refer to [[https://openbsd.org/faq][the FAQ]], [[https://man.openbsd.org][manpages]], or the unofficial [[https://www.openbsdhandbook.com][OpenBSD Handbook]] for that.
+- My script doesn't perform any performance tweaking. In the how-to section, I say to install the syctl.conf file, but you *should* read the comments I put there. Users should refer to [[https://openbsd.org/faq][the FAQ]], [[https://man.openbsd.org][manpages]], or the unofficial [[https://www.openbsdhandbook.com][OpenBSD Handbook]] for more info for that. For more of a newb-friendly (albeit detailed) explanation video of some optimization tricks, [[https://www.youtube.com/watch?v=f8lloCtrpdk][Watch The OpenBSD Guy's Video]]
 
-- For more of a newb-friendly (albeit detailed) explanation video of some optimization tricks, [[https://www.youtube.com/watch?v=f8lloCtrpdk][Watch The OpenBSD Guy's Video]]
-
-- for laptops, I /highly recommend/ solene%'s power management daemon [[https://dataswamp.org/~solene/2022-03-21-openbsd-cool-frequency.html][obsdfreqd]]
-
-- When the script installs dependencies, always choose the latest version when given a version choice from ~pkg_add~.
+- For laptops, I /highly recommend/ Solene%'s power management daemon [[https://dataswamp.org/~solene/2022-03-21-openbsd-cool-frequency.html][obsdfreqd]], Its a no-brainer. It's defaults are quite sane. It sets throttling for CPU frequency to avoid overheating when on line power. As of 7.1, OpenBSD maxes the CPU when on line power, but from my personal experience, this makes my laptop hardware thermal throttle like hell. In theory- the idea is sane. However, in practice, it tends to have adverse affects that are dependent on hardware. As Solene% says, this is not meant to "replace" the kernel scheduler. It tries to "nudge" the existing scheduling system to be better suited for laptop hardware. 
 
 * Table of Contents :TOC_4:
 - [[#disclaimer][DISCLAIMER]]
@@ -46,13 +42,13 @@
 - [[#crucial-information][Crucial Information]]
 - [[#note][Note:]]
 - [[#how-to-use][How To Use]]
-- [[#rexfile][Rexfile]]
+- [[#perl][Perl]]
   - [[#perl-boilerplate][Perl-Boilerplate]]
     - [[#setuppl][setup.pl]]
-    - [[#rexfile-1][Rexfile]]
+    - [[#rexfile][Rexfile]]
   - [[#globals][Globals]]
     - [[#setuppl-1][setup.pl]]
-    - [[#rexfile-2][Rexfile]]
+    - [[#rexfile-1][Rexfile]]
   - [[#menu][Menu]]
   - [[#remove-cruft][Remove-Cruft]]
   - [[#fizsh-setup][FiZSH-Setup]]
@@ -66,6 +62,7 @@
   - [[#xdg-userdirs][Xdg-UserDirs]]
 - [[#misc-stuffs][Misc Stuffs]]
   - [[#quicklisp-install][Quicklisp Install]]
+    - [[#use][/USE:/]]
   - [[#xsessionxresourcesxprofile][.Xsession/.Xresources/.Xprofile]]
     - [[#xresources][Xresources]]
       - [[#xresources-1][.xresources]]
@@ -160,9 +157,13 @@ $ perl setup.pl
 # reboot
 #+END_SRC
 
-* Rexfile
+* Perl
 
-This is an automation thingy I use. It's definitely overkill, but I like perl.
+p5-Rex is an automation thingy I use. It's definitely overkill, but I like perl.
+I split this up to the names of the files:
+
+- =setup.pl= is the inital bootstrap script. I set a personal constraint that I can't use any external perl libraries. it /must/ function on vanilla OpenBSD 7.5 or higher. I plan to eventually re-write it in OpenBSD's Korn shell, as I dislike how perl lacks a secure switch-case implementation by default. I need to enable the "deprecated" given/when stuff. Gross.
+- =Rexfile= is the config file for p5-Rex. Its still perl code, but with a teeny bit of extensions. You can manually run "tasks" with the =rex= command in your shell. You can see the tasks available to run with =rex -T=
 
 ** Perl-Boilerplate
 
@@ -673,7 +674,9 @@ You probably want this if you want to write with StumpWM and modules...
 		"slynk"))
 #+END_SRC
 
-/USE:/
+*** /USE:/
+
+(this is as a reference if you need to quickly set up quicklisp for x11/stumpwm hacking, and don't wanna use all of my dotfiles. the script automates this for you)
 
 #+BEGIN_SRC sh
 $ ftp -o /tmp/quicklisp.lisp https://beta.quicklisp.org/quicklisp.lisp
@@ -1068,7 +1071,7 @@ use-damage = true;
     # dynamic width from 0 to 300
     # width = (0, 300)
     # constant width of 300
-    width = (0, 256) 
+    width = (0, 350)
     # The maximum height of a single notification, excluding the frame.
     height = (0, 256)
 
@@ -1377,7 +1380,7 @@ use-damage = true;
 
 ** mk.conf
 
-this configures my ports/src build environment, it goes in ~/etc/mk.conf~
+This configures my ports/src build environment, it goes in ~/etc/mk.conf~. This script does not install this, as ports aren't enabled OOTB on OpenBSD. You need to manually add this. 
 
 #+BEGIN_SRC conf :tangle mk.conf
 #SUDO="/usr/bin/doas"
@@ -1390,6 +1393,8 @@ PACKAGE_REPOSITORY=/usr/packages
 ** .exrc
 
 for BSD Vi
+
+If you install or use editors/vim, these settings are incompatible, and will break things. If you want a good text mode editor that isn't BSD vi, use editors/neovim. I use editors/emacs for "real" editing, and BSD vi for everything else. Editor wars are stupid. Use what works for you.
 
 #+BEGIN_SRC conf :tangle .exrc
 " display current mode
@@ -1424,38 +1429,43 @@ The kernel parameters settings.
 
 #+BEGIN_SRC conf :tangle sysctl.conf
 # Open Kernel Limits
-kern.maxthread=16385
-kern.maxproc=32768
-kern.maxfiles=65535
+kern.maxthread=16385 # default 2620
+kern.maxproc=32768   # default 1310
+kern.maxfiles=65535  # default 7030
 
-# Shared Memory (for browsers)
-kern.shminfo.shmmax=2147483647
-kern.shminfo.shmall=536870912
-kern.shminfo.shmmni=4096
-kern.shminfo.shmseg=2048
+# Shared Memory
+## this is useful for browsers, or other "thread-y" programs. Programs that eat up lots of processes and memory benifit from having more space to eat up memory. www/mozilla-firefox, for example, often goes OOM without these mods. These are taken as-is from that which debian linux sets. 
+kern.shminfo.shmmax=2147483647 # default 33554432
+kern.shminfo.shmall=536870912  # default 8192
+kern.shminfo.shmmni=4096       # default 128
+kern.shminfo.shmseg=2048       # default 128
 	
 # Semaphores (not as relevant, but still worth having in case)
-kern.seminfo.semmns=4096
-kern.seminfo.semmni=4096
+##
+kern.seminfo.semmns=4096 # default 60
+kern.seminfo.semmni=4096 # default 10
 
 # Allow Kernel Memory Access
-kern.allowkmem=1
+kern.allowkmem=1 # default 0
 
 # Enable Multithreading
-## Danger! has implications
-hw.smt=1
+## Danger! has security implications wrt spectre/meltdown.
+## Keep this disabled, unless you have significant performance hits without it. OpenBSD has a tendancy to spin while waiting for kernel lock jobs to free on many CPU cores. Keeping SMT or "Hyperthreading" disabled helps minimize this from happening.
+hw.smt=0 # default 0
 
 # Network
-## Enable IP Forwarding
-net.inet.ip.forwarding=1
-net.inet6.ip6.forwarding=1
+## Enable IP Forwarding (default 0)
+net.inet.ip.forwarding=0  # useful for if using VMM or some sort of local NAT
+net.inet6.ip6.forwarding=0 # see above
 ## Faster Networking
-net.inet.udp.recvspace=262144
-net.inet.udp.sendspace=262144
-net.inet.icmp.errppslimit=1000
+### useful on crappy wifi, technically unnecessary, may be personal placebo.
+### I took these params from the RootBSD youtube channel. I have zero adverse side-effects with these, so I keep them on.
+net.inet.udp.recvspace=262144  # default 41600
+net.inet.udp.sendspace=262144  # default 9216
+net.inet.icmp.errppslimit=1000 # default 100
 
 # Video/Audio enable/disable
-# change these to =1 if you want microphone or webcam access
+# change these to =1 if you want microphone or webcam access globally, although its probably better to enable manually with sysctl(8) if paranoid
 kern.audio.record=0
 kern.video.record=0
 #+END_SRC
