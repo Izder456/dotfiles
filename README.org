@@ -28,7 +28,7 @@
 
 * Crucial Information
 
-- While there *is* a setup script in this project, /it's not meant to be plug-and-play/. *It's a bare-bones setup*, that is fairly non-portable and will require some tinkering to work perfectly. If you wan't a solid experience, use Linux Mint. I don't see this as a problem because I'm comfortable customizing it to my needs. If you need assistance with this, I expect that as a bare minimum you read this ORG-mode file and have basic understanding of the function of these configs. I try not to hand-hold people. You learn nothing by blindly copy-pasting. Take this as a word of caution.
+- While there *is* a setup script in this project, /it's not meant to be plug-and-play/. *It's a bare-bones setup*, that is fairly non-portable and will require some tinkering to work perfectly. If you want a solid experience, use Linux Mint. I don't see this as a problem because I'm comfortable customizing it to my needs. If you need assistance with this, I expect that as a bare minimum you read this ORG-mode file and have basic understanding of the function of these configs. I try not to hand-hold people. You learn nothing by blindly copy-pasting. Take this as a word of caution.
 
 * Note:
 
