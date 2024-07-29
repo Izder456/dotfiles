@@ -1,3 +1,5 @@
+#!/bin/ksh
+
 # Constants
 USERHOME=$HOME
 GITHUB="https://github.com"

@@ -140,8 +140,8 @@ OpenGL >=2.0 Capable GFX Card
 
 #+BEGIN_SRC
 $ cd $HOME
-$ ftp https://github.com/izder456/dotfiles/raw/main/setup.pl
-$ perl setup.pl
+$ ftp https://github.com/izder456/dotfiles/raw/main/setup.ksh
+$ ksh setup.ksh
 #+END_SRC
 
 8. enable dbus (my StumpWM config needs it)
@@ -171,6 +171,8 @@ The initial setup for the system.
 *** Boilerplate
 
 #+BEGIN_SRC sh :tangle setup.ksh
+#!/bin/ksh
+
 # Constants
 USERHOME=$HOME
 GITHUB="https://github.com"
