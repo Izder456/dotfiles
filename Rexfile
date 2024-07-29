@@ -56,8 +56,6 @@ task 'configure_default_shell', sub {
 
 task 'configure_gtk', sub {
   my %gtk = (
-    "gruvbox-square-gtk" => "$GITHUB/jmattheis/gruvbox-dark-gtk.git",
-    "gruvbox-round-gtk" => "$GITHUB/Fausto-Korpsvart/Gruvbox-GTK-Theme.git",
     "gruvbox-plus-gtk" => "$GITHUB/SylEleuth/gruvbox-plus-gtk.git",
   );
   keys %gtk;
@@ -66,17 +64,11 @@ task 'configure_gtk', sub {
     my $cloneuri = "$v";
     if ( -d "$clonedir" ) {
       chdir "$clonedir";
-      system( 'git', 'pull' );
+      system( 'git', 'pull', '--depth 1' );
     } else {
-      system( 'git', 'clone', "$cloneuri", "$clonedir" );
+      system( 'git', 'clone', '--depth 1', "$cloneuri", "$clonedir" );
     }
-    if ( -d "$clonedir/themes" ) {
-      system( 'cp', '-R', glob("$clonedir/themes/*"), "$USERHOME/.dotfiles/.themes/" );
-    } elsif ( -d "$clonedir/Gruvbox-Plus-Dark" ) {
-      system( 'cp', '-R', "$clonedir/Gruvbox-Plus-Dark", "$USERHOME/.dotfiles/.themes/" );
-    } else {
-      system( 'cp', '-R', "$clonedir", "$USERHOME/.dotfiles/.themes/" );
-    }
+    system( 'cp', '-R', "$clonedir/Gruvbox-Plus-Dark", "$USERHOME/.dotfiles/.themes/" );
     unlink("$clonedir");
   }
 };
@@ -84,8 +76,6 @@ task 'configure_gtk', sub {
 task 'configure_icons', sub {
   my %icons = (
     "gruvbox-round-icons" => "$GITHUB/Fausto-Korpsvart/Gruvbox-GTK-Theme.git",
-    "gruvbox-square-icons" => "$GITHUB/jmattheis/gruvbox-dark-icons-gtk.git",
-    "gruvbox-plus-icons" => "$GITHUB/SylEleuth/gruvbox-plus-icon-pack.git",
   );
   keys %icons;
   while (my($k, $v) = each %icons) {
@@ -93,17 +83,11 @@ task 'configure_icons', sub {
     my $cloneuri = "$v";
     if ( -d "$clonedir" ) {
       chdir "$clonedir";
-      system( 'git', 'pull' );
+      system( 'git', 'pull', '--depth 1' );
     } else {
-      system( 'git', 'clone', "$cloneuri", "$clonedir" );
+      system( 'git', 'clone', '--depth 1', "$cloneuri", "$clonedir" );
     }
-    if ( -d "$clonedir/icons" ) {
-      system( 'cp', '-R', glob("$clonedir/icons/*"), "$USERHOME/.dotfiles/.icons/" );
-    } elsif ( -d "$clonedir/Gruvbox-Plus-Dark" ) {
-      system( 'cp', '-R', "$clonedir/Gruvbox-Plus-Dark", "$USERHOME/.dotfiles/.icons/" );
-    } else {
-      system( 'cp', '-R', "$clonedir", "$USERHOME/.dotfiles/.icons/" );
-    }
+    system( 'cp', '-R', "$clonedir/Gruvbox-Plus-Dark", "$USERHOME/.dotfiles/.icons/" );
     unlink("$clonedir");
   }
 };
