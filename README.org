@@ -487,11 +487,11 @@ task 'configure_gtk', sub {
     my $cloneuri = "$v";
     if ( -d "$clonedir" ) {
       chdir "$clonedir";
-      system( 'git', 'pull', '--depth 1' );
+      system( 'git', 'pull', '--depth', '1' );
     } else {
-      system( 'git', 'clone', '--depth 1', "$cloneuri", "$clonedir" );
+      system( 'git', 'clone', '--depth', '1', "$cloneuri", "$clonedir" );
     }
-    system( 'cp', '-R', "$clonedir/Gruvbox-Plus-Dark", "$USERHOME/.dotfiles/.themes/" );
+    system( 'cp', '-R', "$clonedir/*", "$USERHOME/.dotfiles/.themes/" );
     unlink("$clonedir");
   }
 };
@@ -506,11 +506,11 @@ task 'configure_icons', sub {
     my $cloneuri = "$v";
     if ( -d "$clonedir" ) {
       chdir "$clonedir";
-      system( 'git', 'pull', '--depth 1' );
+      system( 'git', 'pull', '--depth', '1' );
     } else {
-      system( 'git', 'clone', '--depth 1', "$cloneuri", "$clonedir" );
+      system( 'git', 'clone', '--depth', '1', "$cloneuri", "$clonedir" );
     }
-    system( 'cp', '-R', "$clonedir/Gruvbox-Plus-Dark", "$USERHOME/.dotfiles/.icons/" );
+    system( 'cp', '-R', "$clonedir/icons/*", "$USERHOME/.dotfiles/.icons/" );
     unlink("$clonedir");
   }
 };
