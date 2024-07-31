@@ -140,7 +140,7 @@ function do_ensure {
     ensure_needed
 }
 
-#do_ensure
+do_ensure
 
 # Menu header text
 
@@ -201,9 +201,9 @@ function menu {
 	    "a")
 		echo "Running All...";
 		sleep $SLEEPTIME; clean;
-		ports_deps; cargo_deps;
+		config_install; ports_deps; cargo_deps;
 		setup_emwm; setup_stumpwm; setup_emacs; setup_xenodm;
-		config_install; setup_misc;
+		setup_misc;
 		;;
 	    "r")
 		continue;
