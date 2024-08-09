@@ -709,6 +709,7 @@ The settings for X session, resources, and profile.
 ! XWindow Stuffs
 !!
 ,*imLocale: en_US.UTF-8
+,*lookAndFeel: motif
 
 !!
 ! Font Rendering Stuffs

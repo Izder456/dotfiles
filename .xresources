@@ -8,6 +8,7 @@
 ! XWindow Stuffs
 !!
 *imLocale: en_US.UTF-8
+*lookAndFeel: motif
 
 !!
 ! Font Rendering Stuffs
