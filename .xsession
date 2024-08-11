@@ -34,9 +34,9 @@ function xdg_runtime {
 function get_screen_dimension {
     typeset dimension=$(xdpyinfo | awk '/dimensions/ {print $2}')
     case $1 in
-         0) echo "${dimension%x*}" ;;
-         1) echo "${dimension#*x}" ;;
-         *) echo "Invalid argument. Use 0 for width or 1 for height." ;;
+        0) echo "${dimension%x*}" ;;
+        1) echo "${dimension#*x}" ;;
+        *) echo "Invalid argument. Use 0 for width or 1 for height." ;;
     esac
 }
 
@@ -79,8 +79,8 @@ function select_wm {
     typeset xmesg_xpos=$((($xwidth - $XMESG_WIDTH) / 2))
     typeset xmesg_yoffset=$((($xheight - $XMESG_HEIGHT) / 2))
     xmessage "Please Choose a Session to load" \
-    	    -buttons "StumpWM[]":1,"EMWM[]":2 \
-    	    -geometry ${XMESG_WIDTH}x${XMESG_HEIGHT}+${xmesg_xpos}-${xmesg_yoffset}
+    	     -buttons "StumpWM[]":1,"EMWM[]":2 \
+    	     -geometry ${XMESG_WIDTH}x${XMESG_HEIGHT}+${xmesg_xpos}-${xmesg_yoffset}
     typeset choice=$?
 
     case ${choice} in

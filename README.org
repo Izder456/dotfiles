@@ -414,7 +414,7 @@ my $GITHUB   = "https://github.com";
 
 # Set PATH explicitly
 $ENV{'PATH'} =
-  '/bin:/usr/bin:/sbin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin';
+    '/bin:/usr/bin:/sbin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin';
 #+END_SRC
 
 *** Remove-Cruft
@@ -424,11 +424,11 @@ I don't need some of these defaults
 #+BEGIN_SRC perl :tangle Rexfile
 # task to clean home dir
 task 'remove_default_cruft', sub {
-  unlink(
-    "$USERHOME/.cshrc",   "$USERHOME/.login",     "$USERHOME/.mailrc",
-    "$USERHOME/.profile", "$USERHOME/.Xdefaults", "$USERHOME/.cvsrc"
-  );
-  system( 'doas', 'chmod', '0700', "$USERHOME" );
+    unlink(
+        "$USERHOME/.cshrc",   "$USERHOME/.login",     "$USERHOME/.mailrc",
+        "$USERHOME/.profile", "$USERHOME/.Xdefaults", "$USERHOME/.cvsrc"
+        );
+    system( 'doas', 'chmod', '0700', "$USERHOME" );
 };
 #+END_SRC
 
@@ -439,38 +439,38 @@ This is a zsh frontend, that emulates the functionality of fish
 #+BEGIN_SRC perl :tangle Rexfile
 # Configures and sets up the default shell
 task 'configure_default_shell', sub {
-  my %plugins = (
-    "zsh-openbsd"     => "$GITHUB/sizeofvoid/openbsd-zsh-completions.git",
-    "zsh-completions" => "$GITHUB/zsh-users/zsh-completions.git",
-    "zsh-fzf"         => "$GITHUB/Aloxaf/fzf-tab.git",
-    "zsh-suggest"     => "$GITHUB/zsh-users/zsh-autosuggestions.git",
-    "zsh-256"         => "$GITHUB/chrissicool/zsh-256color.git",
-    "zsh-fsh"         => "$GITHUB/zdharma-continuum/fast-syntax-highlighting.git"
-  );
-  keys %plugins;
-  while (my($k, $v) = each %plugins) {
-    my $clonedir = "$USERHOME/.$k";
-    my $cloneuri = "$v";
-    if ( -d $clonedir ) {
-      chdir "$clonedir";
-      system( 'git', 'pull' );
-    } else {
-      system( 'git', 'clone', "$cloneuri", "$clonedir" );
+    my %plugins = (
+        "zsh-openbsd"     => "$GITHUB/sizeofvoid/openbsd-zsh-completions.git",
+        "zsh-completions" => "$GITHUB/zsh-users/zsh-completions.git",
+        "zsh-fzf"         => "$GITHUB/Aloxaf/fzf-tab.git",
+        "zsh-suggest"     => "$GITHUB/zsh-users/zsh-autosuggestions.git",
+        "zsh-256"         => "$GITHUB/chrissicool/zsh-256color.git",
+        "zsh-fsh"         => "$GITHUB/zdharma-continuum/fast-syntax-highlighting.git"
+        );
+    keys %plugins;
+    while (my($k, $v) = each %plugins) {
+        my $clonedir = "$USERHOME/.$k";
+        my $cloneuri = "$v";
+        if ( -d $clonedir ) {
+            chdir "$clonedir";
+            system( 'git', 'pull' );
+        } else {
+            system( 'git', 'clone', "$cloneuri", "$clonedir" );
+        }
     }
-  }
 
-  # Grab fizsh src setup
-  if ( -d "$USERHOME/.fizsh" ) {
-    chdir "$USERHOME/.fizsh";
-  } else {
-    system( 'git', 'clone', "$GITHUB/zsh-users/fizsh.git", "$USERHOME/.fizsh" );
-    chdir "$USERHOME/.fizsh";
-  }
-  system( './configure' );
-  system( 'make' );
-  system( 'doas', 'make', 'install' );
-  system( 'cp', "$USERHOME/.dotfiles/.fizshrc", "$USERHOME/.fizsh/.fizshrc" );
-  system( 'chsh', '-s', '/usr/local/bin/fizsh' );
+    # Grab fizsh src setup
+    if ( -d "$USERHOME/.fizsh" ) {
+        chdir "$USERHOME/.fizsh";
+    } else {
+        system( 'git', 'clone', "$GITHUB/zsh-users/fizsh.git", "$USERHOME/.fizsh" );
+        chdir "$USERHOME/.fizsh";
+    }
+    system( './configure' );
+    system( 'make' );
+    system( 'doas', 'make', 'install' );
+    system( 'cp', "$USERHOME/.dotfiles/.fizshrc", "$USERHOME/.fizsh/.fizshrc" );
+    system( 'chsh', '-s', '/usr/local/bin/fizsh' );
 };
 #+END_SRC
 
@@ -478,41 +478,41 @@ task 'configure_default_shell', sub {
 
 #+BEGIN_SRC perl :tangle Rexfile
 task 'configure_gtk', sub {
-  my %gtk = (
-    "gruvbox-plus-gtk" => "$GITHUB/SylEleuth/gruvbox-plus-gtk.git",
-  );
-  keys %gtk;
-  while (my($k, $v) = each %gtk) {
-    my $clonedir = "/tmp/$k";
-    my $cloneuri = "$v";
-    if ( -d "$clonedir" ) {
-      chdir "$clonedir";
-      system( 'git', 'pull', '--depth', '1' );
-    } else {
-      system( 'git', 'clone', '--depth', '1', "$cloneuri", "$clonedir" );
+    my %gtk = (
+        "gruvbox-plus-gtk" => "$GITHUB/SylEleuth/gruvbox-plus-gtk.git",
+        );
+    keys %gtk;
+    while (my($k, $v) = each %gtk) {
+        my $clonedir = "/tmp/$k";
+        my $cloneuri = "$v";
+        if ( -d "$clonedir" ) {
+            chdir "$clonedir";
+            system( 'git', 'pull', '--depth', '1' );
+        } else {
+            system( 'git', 'clone', '--depth', '1', "$cloneuri", "$clonedir" );
+        }
+        system( 'cp', '-R', "$clonedir/*", "$USERHOME/.dotfiles/.themes/" );
+        unlink("$clonedir");
     }
-    system( 'cp', '-R', "$clonedir/*", "$USERHOME/.dotfiles/.themes/" );
-    unlink("$clonedir");
-  }
 };
 
 task 'configure_icons', sub {
-  my %icons = (
-    "gruvbox-round-icons" => "$GITHUB/Fausto-Korpsvart/Gruvbox-GTK-Theme.git",
-  );
-  keys %icons;
-  while (my($k, $v) = each %icons) {
-    my $clonedir = "/tmp/$k";
-    my $cloneuri = "$v";
-    if ( -d "$clonedir" ) {
-      chdir "$clonedir";
-      system( 'git', 'pull', '--depth', '1' );
-    } else {
-      system( 'git', 'clone', '--depth', '1', "$cloneuri", "$clonedir" );
+    my %icons = (
+        "gruvbox-round-icons" => "$GITHUB/Fausto-Korpsvart/Gruvbox-GTK-Theme.git",
+        );
+    keys %icons;
+    while (my($k, $v) = each %icons) {
+        my $clonedir = "/tmp/$k";
+        my $cloneuri = "$v";
+        if ( -d "$clonedir" ) {
+            chdir "$clonedir";
+            system( 'git', 'pull', '--depth', '1' );
+        } else {
+            system( 'git', 'clone', '--depth', '1', "$cloneuri", "$clonedir" );
+        }
+        system( 'cp', '-R', "$clonedir/icons/*", "$USERHOME/.dotfiles/.icons/" );
+        unlink("$clonedir");
     }
-    system( 'cp', '-R', "$clonedir/icons/*", "$USERHOME/.dotfiles/.icons/" );
-    unlink("$clonedir");
-  }
 };
 #+END_SRC
 
@@ -523,11 +523,11 @@ I use Emacs, btw
 #+BEGIN_SRC perl :tangle Rexfile
 # Configures and installs emacs
 task 'configure_emacs', sub {
-  if ( -d "$USERHOME/.emacs.d" ) {
-    chdir "$USERHOME/.emacs.d";
-  } else {
-    system( 'ln', '-sf', "$USERHOME/.dotfiles/Emacs-Config", "$USERHOME/.emacs.d" );
-  }
+    if ( -d "$USERHOME/.emacs.d" ) {
+        chdir "$USERHOME/.emacs.d";
+    } else {
+        system( 'ln', '-sf', "$USERHOME/.dotfiles/Emacs-Config", "$USERHOME/.emacs.d" );
+    }
 };
 #+END_SRC
 
@@ -537,11 +537,11 @@ Yeah, this weird WM...
 
 #+BEGIN_SRC perl :tangle Rexfile
 task 'configure_stumpwm', sub {
-  if ( -d "$USERHOME/.stumpwm.d" ) {
-    chdir "$USERHOME/.stumpwm.d";
-  } else {
-    system( 'ln', '-sf', "$USERHOME/.dotfiles/StumpWM-Config", "$USERHOME/.stumpwm.d" );
-  }
+    if ( -d "$USERHOME/.stumpwm.d" ) {
+        chdir "$USERHOME/.stumpwm.d";
+    } else {
+        system( 'ln', '-sf', "$USERHOME/.dotfiles/StumpWM-Config", "$USERHOME/.stumpwm.d" );
+    }
 };
 #+END_SRC
 
@@ -565,13 +565,13 @@ Because XDM wasn't cutting it...
 #+BEGIN_SRC perl :tangle Rexfile
 # Installs backgrounds to /usr/local/share/backgrounds
 task 'install_backgrounds', sub {
-  system( 'doas', 'mkdir', '-p', '/usr/local/share/backgrounds' );
-  system( 'doas',  'cp', '-R', glob("$USERHOME/.dotfiles/backgrounds/*"), '/usr/local/share/backgrounds' );
+    system( 'doas', 'mkdir', '-p', '/usr/local/share/backgrounds' );
+    system( 'doas',  'cp', '-R', glob("$USERHOME/.dotfiles/backgrounds/*"), '/usr/local/share/backgrounds' );
 };
 
 # Sets up Xenodm configuration
 task 'configure_xenodm', sub {
-  system( 'doas', 'cp', '-R', glob("$USERHOME/.dotfiles/XenoDM-Config/*"), '/etc/X11/xenodm/' );
+    system( 'doas', 'cp', '-R', glob("$USERHOME/.dotfiles/XenoDM-Config/*"), '/etc/X11/xenodm/' );
 };
 #+END_SRC
 
@@ -581,8 +581,8 @@ Setup Laptop Slock shell-close autohook
 
 #+BEGIN_SRC perl :tangle Rexfile
 task 'configure_apmd', sub {
-  system( 'doas', 'mkdir', '/etc/apm' );
-  system( 'doas', 'cp', '-R', glob("$USERHOME/.dotfiles/APM-Config/*"), '/etc/apm/' );
+    system( 'doas', 'mkdir', '/etc/apm' );
+    system( 'doas', 'cp', '-R', glob("$USERHOME/.dotfiles/APM-Config/*"), '/etc/apm/' );
 };
 #+END_SRC
 
@@ -593,54 +593,54 @@ Extra stuff thats not in ports, cargo or base
 #+BEGIN_SRC perl :tangle Rexfile
 # Compiles shuf re-implementation
 task 'compile_shuf', sub {
-  system( 'git', 'clone', "$GITHUB/ibara/shuf.git", "$USERHOME/.shuf" );
-  chdir "$USERHOME/.shuf";
-  system( './configure' );
-  system( 'make' );
-  system( 'doas', 'make', 'install' );
+    system( 'git', 'clone', "$GITHUB/ibara/shuf.git", "$USERHOME/.shuf" );
+    chdir "$USERHOME/.shuf";
+    system( './configure' );
+    system( 'make' );
+    system( 'doas', 'make', 'install' );
 };
 
 # Compiles in my Slock Setup
 task 'compile_slock', sub {
-  system( 'git', 'clone', "$GITHUB/Izder456/slock.git", "$USERHOME/.slock" );
-  chdir "$USERHOME/.slock";
-  system( 'make' );
-  system( 'doas', 'make', 'install' );
+    system( 'git', 'clone', "$GITHUB/Izder456/slock.git", "$USERHOME/.slock" );
+    chdir "$USERHOME/.slock";
+    system( 'make' );
+    system( 'doas', 'make', 'install' );
 };
 
 # Compiles in my SURF Setup
 task 'compile_surf', sub {
-  system( 'git', 'clone', "$GITHUB/Izder456/surf.git", "$USERHOME/.surf-src" );
-  chdir "$USERHOME/.surf-src";
-  system( 'make' );
-  system( 'doas', 'make', 'install' );
+    system( 'git', 'clone', "$GITHUB/Izder456/surf.git", "$USERHOME/.surf-src" );
+    chdir "$USERHOME/.surf-src";
+    system( 'make' );
+    system( 'doas', 'make', 'install' );
 };
 
 # Compiles in my ST Setup
 task 'compile_st', sub {
-  system( 'git', 'clone', "$GITHUB/Izder456/st.git", "$USERHOME/.st" );
-  chdir "$USERHOME/.st";
-  system( 'make' );
-  system( 'doas', 'make', 'install' );
+    system( 'git', 'clone', "$GITHUB/Izder456/st.git", "$USERHOME/.st" );
+    chdir "$USERHOME/.st";
+    system( 'make' );
+    system( 'doas', 'make', 'install' );
 };
 
 # Compiles afetch
 task 'compile_afetch', sub {
-  system( 'git', 'clone', "$GITHUB/13-CF/afetch.git", "$USERHOME/.afetch" );
-  chdir "$USERHOME/.afetch";
-  system( 'make' );
-  system( 'doas', 'make', 'install' );
+    system( 'git', 'clone', "$GITHUB/13-CF/afetch.git", "$USERHOME/.afetch" );
+    chdir "$USERHOME/.afetch";
+    system( 'make' );
+    system( 'doas', 'make', 'install' );
 };
 
 task 'compile_nxbelld', sub {
-  $ENV{'AUTOCONF_VERSION'} = "2.69";
-  $ENV{'AUTOMAKE_VERSION'} = "1.16";
-  system( 'git', 'clone', "$GITHUB/dusxmt/nxbelld.git", "$USERHOME/.nxbelld" );
-  chdir "$USERHOME/.nxbelld";
-  system('autoreconf -i');
-  system( './configure', '--prefix', "$USERHOME/.local");
-  system( 'gmake' );
-  system( 'gmake', 'install' );
+    $ENV{'AUTOCONF_VERSION'} = "2.69";
+    $ENV{'AUTOMAKE_VERSION'} = "1.16";
+    system( 'git', 'clone', "$GITHUB/dusxmt/nxbelld.git", "$USERHOME/.nxbelld" );
+    chdir "$USERHOME/.nxbelld";
+    system('autoreconf -i');
+    system( './configure', '--prefix', "$USERHOME/.local");
+    system( 'gmake' );
+    system( 'gmake', 'install' );
 };
 #+END_SRC
 
@@ -651,9 +651,9 @@ Setup Homedir Paths
 #+BEGIN_SRC perl :tangle Rexfile
 # Updates XDG user directories
 task 'update_xdg_user_dirs', sub {
-  system( 'xdg-user-dirs-update' );
-  system( 'mkdir', "$USERHOME/Projects" );
-  system( 'doas', 'gdk-pixbuf-query-loaders', '--update-cache' );
+    system( 'xdg-user-dirs-update' );
+    system( 'mkdir', "$USERHOME/Projects" );
+    system( 'doas', 'gdk-pixbuf-query-loaders', '--update-cache' );
 };
 #+END_SRC
 
@@ -704,7 +704,7 @@ The settings for X session, resources, and profile.
 !!
 #include ".xresources.d/colors"
 #include ".xresources.d/apps"
-	 
+
 !!
 ! XWindow Stuffs
 !!
@@ -903,9 +903,9 @@ function xdg_runtime {
 function get_screen_dimension {
     typeset dimension=$(xdpyinfo | awk '/dimensions/ {print $2}')
     case $1 in
-         0) echo "${dimension%x*}" ;;
-         1) echo "${dimension#*x}" ;;
-         ,*) echo "Invalid argument. Use 0 for width or 1 for height." ;;
+        0) echo "${dimension%x*}" ;;
+        1) echo "${dimension#*x}" ;;
+        ,*) echo "Invalid argument. Use 0 for width or 1 for height." ;;
     esac
 }
 
@@ -948,8 +948,8 @@ function select_wm {
     typeset xmesg_xpos=$((($xwidth - $XMESG_WIDTH) / 2))
     typeset xmesg_yoffset=$((($xheight - $XMESG_HEIGHT) / 2))
     xmessage "Please Choose a Session to load" \
-    	    -buttons "StumpWM[]":1,"EMWM[]":2 \
-    	    -geometry ${XMESG_WIDTH}x${XMESG_HEIGHT}+${xmesg_xpos}-${xmesg_yoffset}
+    	     -buttons "StumpWM[]":1,"EMWM[]":2 \
+    	     -geometry ${XMESG_WIDTH}x${XMESG_HEIGHT}+${xmesg_xpos}-${xmesg_yoffset}
     typeset choice=$?
 
     case ${choice} in
@@ -993,12 +993,12 @@ exit 0
 ##
 
 opacity-rule = [
-  "100:class_g = 'emacs' && focused",
-  "85:class_g = 'emacs' && !focused",
-  "100:class_g = 'st' && focused",
-  "85:class_g = 'st' && !focused",
-  "100:class_g = 'xterm' && focused",
-  "85:class_g = 'xterm' && !focused",
+"100:class_g = 'emacs' && focused",
+"85:class_g = 'emacs' && !focused",
+"100:class_g = 'st' && focused",
+"85:class_g = 'st' && !focused",
+"100:class_g = 'xterm' && focused",
+"85:class_g = 'xterm' && !focused",
 ];
 
 ##
@@ -1006,8 +1006,8 @@ opacity-rule = [
 ##
 
 wintypes: {
-  normal = { blur-background = true; };
-  splash = { blur-background = false; };
+normal = { blur-background = true; };
+splash = { blur-background = false; };
 };
 
 ##
@@ -1039,10 +1039,10 @@ invert-color-include = [ ];
 # QT-Apps Fixes For Blurs
 ##
 shadow-exclude = [
-  "argb && (_NET_WM_WINDOW_TYPE@:a *= 'MENU' || _NET_WM_WINDOW_TYPE@:a *= 'COMBO')"
+"argb && (_NET_WM_WINDOW_TYPE@:a *= 'MENU' || _NET_WM_WINDOW_TYPE@:a *= 'COMBO')"
 ];
 blur-background-exclude = [
-  "(_NET_WM_WINDOW_TYPE@:a *= 'MENU' || _NET_WM_WINDOW_TYPE@:a *= 'COMBO')"
+"(_NET_WM_WINDOW_TYPE@:a *= 'MENU' || _NET_WM_WINDOW_TYPE@:a *= 'COMBO')"
 ];
 
 
@@ -1057,332 +1057,332 @@ use-damage = true;
 
 #+BEGIN_SRC conf :tangle .config/dunst/dunstrc	
 [global]
-    # Which monitor should the notifications be displayed on.
-    monitor = 0
-
-    # Display notification on focused monitor.  Possible modes are:
-    #   mouse: follow mouse pointer
-    #   keyboard: follow window with keyboard focus
-    #   none: don't follow anything
-    #
-    # "keyboard" needs a window manager that exports the
-    # _NET_ACTIVE_WINDOW property.
-    # This should be the case for almost all modern window managers.
-    #
-    # If this option is set to mouse or keyboard, the monitor option
-    # will be ignored.
-    follow = none
-
-    ### Geometry ###
-
-    # dynamic width from 0 to 300
-    # width = (0, 300)
-    # constant width of 300
-    width = (0, 350)
-    # The maximum height of a single notification, excluding the frame.
-    height = (0, 256)
-
-    # Position the notification in the top right corner
-    origin = bottom-right 
-
-    # Offset from the origin
-    offset = 0x0
-
-    # Scale factor. It is auto-detected if value is 0.
-    scale = 0
-
-    # Maximum number of notification (0 means no limit)
-    notification_limit = 3
-
-    ### Progress bar ###
-
-    # Turn on the progess bar. It appears when a progress hint is passed with
-    # for example dunstify -h int:value:12
-    progress_bar = true
-
-    # Set the progress bar height. This includes the frame, so make sure
-    # it's at least twice as big as the frame width.
-    progress_bar_height = 10
-
-    # Set the frame width of the progress bar
-    progress_bar_frame_width = 1
-
-    # Set the minimum width for the progress bar
-    progress_bar_min_width = 150
-
-    # Set the maximum width for the progress bar
-    progress_bar_max_width = 300
-
-    # Corner radius for the progress bar. 0 disables rounded corners.
-    progress_bar_corner_radius = 0
-
-    # Corner radius for the icon image.
-    icon_corner_radius = 0
-
-    # Show how many messages are currently hidden (because of
-    # notification_limit).
-    indicate_hidden = yes
-
-    # The transparency of the window.  Range: [0; 100].
-    # This option will only work if a compositing window manager is
-    # present (e.g. xcompmgr, compiz, etc.). (X11 only)
-    transparency = 0
-
-    # Draw a line of "separator_height" pixel height between two
-    # notifications.
-    # Set to 0 to disable.
-    # If gap_size is greater than 0, this setting will be ignored.
-    separator_height = 2
-
-    # Padding between text and separator.
-    padding = 8
-
-    # Horizontal padding.
-    horizontal_padding = 10
-
-    # Padding between text and icon.
-    text_icon_padding = 0
-
-    # Defines width in pixels of frame around the notification window.
-    # Set to 0 to disable.
-    frame_width = 1
-
-    # Defines color of the frame around the notification window.
-    frame_color = "#d5c4a1"
-
-    # Size of gap to display between notifications - requires a compositor.
-    # If value is greater than 0, separator_height will be ignored and a border
-    # of size frame_width will be drawn around each notification instead.
-    # Click events on gaps do not currently propagate to applications below.
-    gap_size = 2
-
-    # Define a color for the separator.
-    # possible values are:
-    #  * auto: dunst tries to find a color fitting to the background;
-    #  * foreground: use the same color as the foreground;
-    #  * frame: use the same color as the frame;
-    #  * anything else will be interpreted as a X color.
-    separator_color = foreground
-
-    # Sort messages by urgency.
-    sort = yes
-
-    # Don't remove messages, if the user is idle (no mouse or keyboard input)
-    # for longer than idle_threshold seconds.
-    # Set to 0 to disable.
-    # A client can set the 'transient' hint to bypass this. See the rules
-    # section for how to disable this if necessary
-    idle_threshold = 120
-
-    ### Text ###
-
-    font = Spleen 6x12 11
-
-    # The spacing between lines.  If the height is smaller than the
-    # font height, it will get raised to the font height.
-    line_height = 0
-
-    # Possible values are:
-    # full: Allow a small subset of html markup in notifications:
-    #        <b>bold</b>
-    #        <i>italic</i>
-    #        <s>strikethrough</s>
-    #        <u>underline</u>
-    #
-    #        For a complete reference see
-    #        <https://docs.gtk.org/Pango/pango_markup.html>.
-    #
-    # strip: This setting is provided for compatibility with some broken
-    #        clients that send markup even though it's not enabled on the
-    #        server. Dunst will try to strip the markup but the parsing is
-    #        simplistic so using this option outside of matching rules for
-    #        specific applications *IS GREATLY DISCOURAGED*.
-    #
-    # no:    Disable markup parsing, incoming notifications will be treated as
-    #        plain text. Dunst will not advertise that it has the body-markup
-    #        capability if this is set as a global setting.
-    #
-    # It's important to note that markup inside the format option will be parsed
-    # regardless of what this is set to.
-    markup = full
-
-    # The format of the message.  Possible variables are:
-    #   %a  appname
-    #   %s  summary
-    #   %b  body
-    #   %i  iconname (including its path)
-    #   %I  iconname (without its path)
-    #   %p  progress value if set ([  0%] to [100%]) or nothing
-    #   %n  progress value if set without any extra characters
-    #   %%  Literal %
-    # Markup is allowed
-    format = "<b>%a</b>\n%s\n<i>%b</i> "
-
-    # Alignment of message text.
-    # Possible values are "left", "center" and "right".
-    alignment = left
-
-    # Vertical alignment of message text and icon.
-    # Possible values are "top", "center" and "bottom".
-    vertical_alignment = center
-
-    # Show age of message if message is older than show_age_threshold
-    # seconds.
-    # Set to -1 to disable.
-    show_age_threshold = 60
-
-    # Specify where to make an ellipsis in long lines.
-    # Possible values are "start", "middle" and "end".
-    ellipsize = middle
-
-    # Ignore newlines '\n' in notifications.
-    ignore_newline = no
-
-    # Stack together notifications with the same content
-    stack_duplicates = true
-
-    # Hide the count of stacked notifications with the same content
-    hide_duplicate_count = false
-
-    # Display indicators for URLs (U) and actions (A).
-    show_indicators = yes
-
-    ### Icons ###
-
-    # Recursive icon lookup. You can set a single theme, instead of having to
-    # define all lookup paths.
-    enable_recursive_icon_lookup = false
-
-    # Set icon theme (only used for recursive icon lookup)
-    icon_theme = Gruvbox_Dark
-    # You can also set multiple icon themes, with the leftmost one being used first.
-    # icon_theme = "Adwaita, breeze"
-
-    # Align icons left/right/top/off
-    icon_position = left
-
-    # Scale small icons up to this size, set to 0 to disable. Helpful
-    # for e.g. small files or high-dpi screens. In case of conflict,
-    # max_icon_size takes precedence over this.
-    min_icon_size = 32
-
-    # Scale larger icons down to this size, set to 0 to disable
-    max_icon_size = 64
-
-    # Paths to default icons (only neccesary when not using recursive icon lookup)
-    #icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
-
-    ### History ###
-
-    # Should a notification popped up from history be sticky or timeout
-    # as if it would normally do.
-    sticky_history = yes
-
-    # Maximum amount of notifications kept in history
-    history_length = 20
-
-    ### Misc/Advanced ###
-
-    # Browser for opening urls in context menu.
-    browser = /usr/bin/xdg-open
-
-    # Always run rule-defined scripts, even if the notification is suppressed
-    always_run_script = true
-
-    # Define the title of the windows spawned by dunst
-    title = Dunst
-
-    # Define the class of the windows spawned by dunst
-    class = Dunst
-
-    # Define the corner radius of the notification window
-    # in pixel size. If the radius is 0, you have no rounded
-    # corners.
-    # The radius will be automatically lowered if it exceeds half of the
-    # notification height to avoid clipping text and/or icons.
-    corner_radius = 0
-
-    # Ignore the dbus closeNotification message.
-    # Useful to enforce the timeout set by dunst configuration. Without this
-    # parameter, an application may close the notification sent before the
-    # user defined timeout.
-    ignore_dbusclose = false
-
-    ### Wayland ###
-    # These settings are Wayland-specific. They have no effect when using X11
-
-    # Uncomment this if you want to let notications appear under fullscreen
-    # applications (default: overlay)
-    # layer = top
-
-    # Set this to true to use X11 output on Wayland.
-    force_xwayland = false
-
-    ### Legacy
-
-    # Use the Xinerama extension instead of RandR for multi-monitor support.
-    # This setting is provided for compatibility with older nVidia drivers that
-    # do not support RandR and using it on systems that support RandR is highly
-    # discouraged.
-    #
-    # By enabling this setting dunst will not be able to detect when a monitor
-    # is connected or disconnected which might break follow mode if the screen
-    # layout changes.
-    force_xinerama = false
-
-    ### mouse
-
-    # Defines list of actions for each mouse event
-    # Possible values are:
-    # * none: Don't do anything.
-    # * do_action: Invoke the action determined by the action_name rule. If there is no
-    #              such action, open the context menu.
-    # * open_url: If the notification has exactly one url, open it. If there are multiple
-    #             ones, open the context menu.
-    # * close_current: Close current notification.
-    # * close_all: Close all notifications.
-    # * context: Open context menu for the notification.
-    # * context_all: Open context menu for all notifications.
-    # These values can be strung together for each mouse event, and
-    # will be executed in sequence.
-    mouse_left_click = close_current
-    mouse_middle_click = do_action, close_current
-    mouse_right_click = close_all
+# Which monitor should the notifications be displayed on.
+monitor = 0
+
+# Display notification on focused monitor.  Possible modes are:
+#   mouse: follow mouse pointer
+#   keyboard: follow window with keyboard focus
+#   none: don't follow anything
+#
+# "keyboard" needs a window manager that exports the
+# _NET_ACTIVE_WINDOW property.
+# This should be the case for almost all modern window managers.
+#
+# If this option is set to mouse or keyboard, the monitor option
+# will be ignored.
+follow = none
+
+### Geometry ###
+
+# dynamic width from 0 to 300
+# width = (0, 300)
+# constant width of 300
+width = (0, 350)
+# The maximum height of a single notification, excluding the frame.
+height = (0, 256)
+
+# Position the notification in the top right corner
+origin = bottom-right 
+
+# Offset from the origin
+offset = 0x0
+
+# Scale factor. It is auto-detected if value is 0.
+scale = 0
+
+# Maximum number of notification (0 means no limit)
+notification_limit = 3
+
+### Progress bar ###
+
+# Turn on the progess bar. It appears when a progress hint is passed with
+# for example dunstify -h int:value:12
+progress_bar = true
+
+# Set the progress bar height. This includes the frame, so make sure
+# it's at least twice as big as the frame width.
+progress_bar_height = 10
+
+# Set the frame width of the progress bar
+progress_bar_frame_width = 1
+
+# Set the minimum width for the progress bar
+progress_bar_min_width = 150
+
+# Set the maximum width for the progress bar
+progress_bar_max_width = 300
+
+# Corner radius for the progress bar. 0 disables rounded corners.
+progress_bar_corner_radius = 0
+
+# Corner radius for the icon image.
+icon_corner_radius = 0
+
+# Show how many messages are currently hidden (because of
+# notification_limit).
+indicate_hidden = yes
+
+# The transparency of the window.  Range: [0; 100].
+# This option will only work if a compositing window manager is
+# present (e.g. xcompmgr, compiz, etc.). (X11 only)
+transparency = 0
+
+# Draw a line of "separator_height" pixel height between two
+# notifications.
+# Set to 0 to disable.
+# If gap_size is greater than 0, this setting will be ignored.
+separator_height = 2
+
+# Padding between text and separator.
+padding = 8
+
+# Horizontal padding.
+horizontal_padding = 10
+
+# Padding between text and icon.
+text_icon_padding = 0
+
+# Defines width in pixels of frame around the notification window.
+# Set to 0 to disable.
+frame_width = 1
+
+# Defines color of the frame around the notification window.
+frame_color = "#d5c4a1"
+
+# Size of gap to display between notifications - requires a compositor.
+# If value is greater than 0, separator_height will be ignored and a border
+# of size frame_width will be drawn around each notification instead.
+# Click events on gaps do not currently propagate to applications below.
+gap_size = 2
+
+# Define a color for the separator.
+# possible values are:
+#  * auto: dunst tries to find a color fitting to the background;
+#  * foreground: use the same color as the foreground;
+#  * frame: use the same color as the frame;
+#  * anything else will be interpreted as a X color.
+separator_color = foreground
+
+# Sort messages by urgency.
+sort = yes
+
+# Don't remove messages, if the user is idle (no mouse or keyboard input)
+# for longer than idle_threshold seconds.
+# Set to 0 to disable.
+# A client can set the 'transient' hint to bypass this. See the rules
+# section for how to disable this if necessary
+idle_threshold = 120
+
+### Text ###
+
+font = Spleen 6x12 11
+
+# The spacing between lines.  If the height is smaller than the
+# font height, it will get raised to the font height.
+line_height = 0
+
+# Possible values are:
+# full: Allow a small subset of html markup in notifications:
+#        <b>bold</b>
+#        <i>italic</i>
+#        <s>strikethrough</s>
+#        <u>underline</u>
+#
+#        For a complete reference see
+#        <https://docs.gtk.org/Pango/pango_markup.html>.
+#
+# strip: This setting is provided for compatibility with some broken
+#        clients that send markup even though it's not enabled on the
+#        server. Dunst will try to strip the markup but the parsing is
+#        simplistic so using this option outside of matching rules for
+#        specific applications *IS GREATLY DISCOURAGED*.
+#
+# no:    Disable markup parsing, incoming notifications will be treated as
+#        plain text. Dunst will not advertise that it has the body-markup
+#        capability if this is set as a global setting.
+#
+# It's important to note that markup inside the format option will be parsed
+# regardless of what this is set to.
+markup = full
+
+# The format of the message.  Possible variables are:
+#   %a  appname
+#   %s  summary
+#   %b  body
+#   %i  iconname (including its path)
+#   %I  iconname (without its path)
+#   %p  progress value if set ([  0%] to [100%]) or nothing
+#   %n  progress value if set without any extra characters
+#   %%  Literal %
+# Markup is allowed
+format = "<b>%a</b>\n%s\n<i>%b</i> "
+
+# Alignment of message text.
+# Possible values are "left", "center" and "right".
+alignment = left
+
+# Vertical alignment of message text and icon.
+# Possible values are "top", "center" and "bottom".
+vertical_alignment = center
+
+# Show age of message if message is older than show_age_threshold
+# seconds.
+# Set to -1 to disable.
+show_age_threshold = 60
+
+# Specify where to make an ellipsis in long lines.
+# Possible values are "start", "middle" and "end".
+ellipsize = middle
+
+# Ignore newlines '\n' in notifications.
+ignore_newline = no
+
+# Stack together notifications with the same content
+stack_duplicates = true
+
+# Hide the count of stacked notifications with the same content
+hide_duplicate_count = false
+
+# Display indicators for URLs (U) and actions (A).
+show_indicators = yes
+
+### Icons ###
+
+# Recursive icon lookup. You can set a single theme, instead of having to
+# define all lookup paths.
+enable_recursive_icon_lookup = false
+
+# Set icon theme (only used for recursive icon lookup)
+icon_theme = Gruvbox_Dark
+# You can also set multiple icon themes, with the leftmost one being used first.
+# icon_theme = "Adwaita, breeze"
+
+# Align icons left/right/top/off
+icon_position = left
+
+# Scale small icons up to this size, set to 0 to disable. Helpful
+# for e.g. small files or high-dpi screens. In case of conflict,
+# max_icon_size takes precedence over this.
+min_icon_size = 32
+
+# Scale larger icons down to this size, set to 0 to disable
+max_icon_size = 64
+
+# Paths to default icons (only neccesary when not using recursive icon lookup)
+#icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+
+### History ###
+
+# Should a notification popped up from history be sticky or timeout
+# as if it would normally do.
+sticky_history = yes
+
+# Maximum amount of notifications kept in history
+history_length = 20
+
+### Misc/Advanced ###
+
+# Browser for opening urls in context menu.
+browser = /usr/bin/xdg-open
+
+# Always run rule-defined scripts, even if the notification is suppressed
+always_run_script = true
+
+# Define the title of the windows spawned by dunst
+title = Dunst
+
+# Define the class of the windows spawned by dunst
+class = Dunst
+
+# Define the corner radius of the notification window
+# in pixel size. If the radius is 0, you have no rounded
+# corners.
+# The radius will be automatically lowered if it exceeds half of the
+# notification height to avoid clipping text and/or icons.
+corner_radius = 0
+
+# Ignore the dbus closeNotification message.
+# Useful to enforce the timeout set by dunst configuration. Without this
+# parameter, an application may close the notification sent before the
+# user defined timeout.
+ignore_dbusclose = false
+
+### Wayland ###
+# These settings are Wayland-specific. They have no effect when using X11
+
+# Uncomment this if you want to let notications appear under fullscreen
+# applications (default: overlay)
+# layer = top
+
+# Set this to true to use X11 output on Wayland.
+force_xwayland = false
+
+### Legacy
+
+# Use the Xinerama extension instead of RandR for multi-monitor support.
+# This setting is provided for compatibility with older nVidia drivers that
+# do not support RandR and using it on systems that support RandR is highly
+# discouraged.
+#
+# By enabling this setting dunst will not be able to detect when a monitor
+# is connected or disconnected which might break follow mode if the screen
+# layout changes.
+force_xinerama = false
+
+### mouse
+
+# Defines list of actions for each mouse event
+# Possible values are:
+# * none: Don't do anything.
+# * do_action: Invoke the action determined by the action_name rule. If there is no
+#              such action, open the context menu.
+# * open_url: If the notification has exactly one url, open it. If there are multiple
+#             ones, open the context menu.
+# * close_current: Close current notification.
+# * close_all: Close all notifications.
+# * context: Open context menu for the notification.
+# * context_all: Open context menu for all notifications.
+# These values can be strung together for each mouse event, and
+# will be executed in sequence.
+mouse_left_click = close_current
+mouse_middle_click = do_action, close_current
+mouse_right_click = close_all
 
 # Experimental features that may or may not work correctly. Do not expect them
 # to have a consistent behaviour across releases.
 [experimental]
-    # Calculate the dpi to use on a per-monitor basis.
-    # If this setting is enabled the Xft.dpi value will be ignored and instead
-    # dunst will attempt to calculate an appropriate dpi value for each monitor
-    # using the resolution and physical size. This might be useful in setups
-    # where there are multiple screens with very different dpi values.
-    per_monitor_dpi = false 
+# Calculate the dpi to use on a per-monitor basis.
+# If this setting is enabled the Xft.dpi value will be ignored and instead
+# dunst will attempt to calculate an appropriate dpi value for each monitor
+# using the resolution and physical size. This might be useful in setups
+# where there are multiple screens with very different dpi values.
+per_monitor_dpi = false 
 
 
 [urgency_low]
-    # IMPORTANT: colors have to be defined in quotation marks.
-    # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#282828"
-    foreground = "#928374"
-    timeout = 10
-    # Icon for notifications with low urgency, uncomment to enable
-    #default_icon = /path/to/icon
+# IMPORTANT: colors have to be defined in quotation marks.
+# Otherwise the "#" and following would be interpreted as a comment.
+background = "#282828"
+foreground = "#928374"
+timeout = 10
+# Icon for notifications with low urgency, uncomment to enable
+#default_icon = /path/to/icon
 
 [urgency_normal]
-    background = "#282828"
-    foreground = "#ebdbb2"
-    timeout = 10
-    # Icon for notifications with normal urgency, uncomment to enable
-    #default_icon = /path/to/icon
+background = "#282828"
+foreground = "#ebdbb2"
+timeout = 10
+# Icon for notifications with normal urgency, uncomment to enable
+#default_icon = /path/to/icon
 
 [urgency_critical]
-    background = "#282828"
-    foreground = "#fb4934"
-    frame_color = "#fabd2f"
-    timeout = 25
-    # Icon for notifications with critical urgency, uncomment to enable
-    #default_icon = /path/to/icon
+background = "#282828"
+foreground = "#fb4934"
+frame_color = "#fabd2f"
+timeout = 25
+# Icon for notifications with critical urgency, uncomment to enable
+#default_icon = /path/to/icon
 #+END_SRC
 
 ** mk.conf
@@ -1446,7 +1446,7 @@ kern.shminfo.shmmax=2147483647 # default 33554432
 kern.shminfo.shmall=536870912  # default 8192
 kern.shminfo.shmmni=4096       # default 128
 kern.shminfo.shmseg=2048       # default 128
-	
+
 # Semaphores (not as relevant, but still worth having in case)
 ##
 kern.seminfo.semmns=4096 # default 60
