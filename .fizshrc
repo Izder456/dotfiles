@@ -21,7 +21,7 @@ unalias grep
 ##
 # export $PATH
 ##
-export PATH=$PATH:/usr/games:$HOME/.cargo/bin:$HOME/.local/bin:$HOME/go/bin
+export PATH=$PATH:/usr/games:/usr/ports/infrastructure/bin:$HOME/.cargo/bin:$HOME/.local/bin:$HOME/go/bin
 
 ##
 # Autoload zmv
@@ -158,6 +158,26 @@ alias tidal-dlp="tidal-dl -o /home/izder456/Music -q Master -r P1080 -l "
 PROMPT="%B%F{yellow}%~%f%b%B % %b"
 
 ##
+# Bat
+##
+
+if command -v bat &> /dev/null; then
+	export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+	alias bathelp='bat --plain --language=help'
+fi
+
+# Manpager
+function man {
+	command man "$@" | eval ${MANPAGER}
+}
+
+# Help Page
+function help {
+	"$@" --help 2>&1 | bathelp
+}
+
+
+##
 # Tere config
 ##
 function tere {
@@ -199,7 +219,7 @@ function cdw {
 }
 
 function maintains {
-	local _usage
+local _usage
 	_usage="maintains [port]"
 	[ -z $1 ] && echo $_usage
 	[ ! -z $1 ] &&
@@ -213,8 +233,8 @@ function maintains {
 ##
 # the r/unixporn rite of passage
 ##
-if command -v afetch &> /dev/null; then
-	afetch
+if command -v crfetch &> /dev/null; then
+	crfetch
 fi
 
 . $HOME/.shellrc.load
