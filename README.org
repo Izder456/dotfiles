@@ -956,7 +956,7 @@ function select_wm {
 	1) wm=$(command -v stumpwm)
 	   wm_args="--disable-ldb --lose-on-corruption"
 	   ;;
-	2) wm=$(command -v xmsm)
+	2) wm=$(command -v emwm)
 	   wm_args=""
 	   ;;
     esac
