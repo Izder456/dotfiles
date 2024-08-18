@@ -15,13 +15,20 @@ export EDITOR="vi"
 export LC_CTYPE="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
-# fix grep --color bug
-unalias grep
+##
+# Force emacs-style binds
+##
+bindkey -e
 
 ##
 # export $PATH
 ##
 export PATH=$PATH:/usr/games:/usr/ports/infrastructure/bin:$HOME/.cargo/bin:$HOME/.local/bin:$HOME/go/bin
+
+##
+# Lazy Loading
+##
+source ~/.zshrc.d/defer/zsh-defer.plugin.zsh
 
 ##
 # Autoload zmv
@@ -32,15 +39,15 @@ autoload -Uz zmv
 # Setup Completions
 ##
 autoload -U compinit
-compinit
+zsh-defer compinit
 autoload -U bashcompinit
-bashcompinit
+zsh-defer bashcompinit
 
-fpath=($HOME/.zsh-openbsd/completions $HOME/.zsh-completions/src $fpath)
+fpath=($HOME/.zshrc.d/openbsd/completions $HOME/.zshrc.d/completions/src $fpath)
 setopt MENU_COMPLETE
 setopt AUTO_LIST
 setopt COMPLETE_IN_WORD
-eval "$(register-python-argcomplete pipx)"
+zsh-defer eval "$(register-python-argcomplete pipx)"
 
 ##
 # Java Stuff
@@ -55,20 +62,26 @@ export GOPATH=$HOME/.go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 ##
+# Autopair
+##
+zsh-defer source ~/.zshrc.d/autopair/autopair.zsh
+zsh-defer autopair-init
+
+##
 # Syntax Highlight
 ##
-source ~/.zsh-fsh/fast-syntax-highlighting.plugin.zsh
+zsh-defer source ~/.zshrc.d/fsh/fast-syntax-highlighting.plugin.zsh
 
 ##
 # Suggestions
 ##
-source ~/.zsh-suggest/zsh-autosuggestions.plugin.zsh
+source ~/.zshrc.d/suggest/zsh-autosuggestions.plugin.zsh
 
 ##
 # FZF-Zsh
 ##
 if command -v fzf &> /dev/null; then
-	source ~/.zsh-fzf/fzf-tab.plugin.zsh
+	source ~/.zshrc.d/fzf/fzf-tab.plugin.zsh
 	export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
     --color=fg:#A89984,bg:#282828,hl:#83A598
     --color=fg+:#BDAE93,bg+:#1D2021,hl+:#8EC07C
@@ -79,7 +92,7 @@ fi
 ##
 # 256-Color
 ##
-source ~/.zsh-256/zsh-256color.plugin.zsh
+zsh-defer source ~/.zshrc.d/256/zsh-256color.plugin.zsh
 
 ##
 # Ruby Stuff
@@ -237,4 +250,4 @@ if command -v crfetch &> /dev/null; then
 	crfetch
 fi
 
-. $HOME/.shellrc.load
+zsh-defer . $HOME/.shellrc.load

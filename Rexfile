@@ -1,6 +1,7 @@
 use 5.36.0;
 use Rex -feature => ['1.4'];
 
+
 # No Magic
 my $USERHOME = "$ENV{HOME}";
 my $GITHUB   = "https://github.com";
@@ -21,16 +22,22 @@ task 'remove_default_cruft', sub {
 # Configures and sets up the default shell
 task 'configure_default_shell', sub {
     my %plugins = (
-        "zsh-openbsd"     => "$GITHUB/sizeofvoid/openbsd-zsh-completions.git",
-        "zsh-completions" => "$GITHUB/zsh-users/zsh-completions.git",
-        "zsh-fzf"         => "$GITHUB/Aloxaf/fzf-tab.git",
-        "zsh-suggest"     => "$GITHUB/zsh-users/zsh-autosuggestions.git",
-        "zsh-256"         => "$GITHUB/chrissicool/zsh-256color.git",
-        "zsh-fsh"         => "$GITHUB/zdharma-continuum/fast-syntax-highlighting.git"
+        "openbsd"     => "$GITHUB/sizeofvoid/openbsd-zsh-completions.git",
+        "completions" => "$GITHUB/zsh-users/zsh-completions.git",
+        "fzf"         => "$GITHUB/Aloxaf/fzf-tab.git",
+        "suggest"     => "$GITHUB/zsh-users/zsh-autosuggestions.git",
+        "256"         => "$GITHUB/chrissicool/zsh-256color.git",
+        "fsh"         => "$GITHUB/zdharma-continuum/fast-syntax-highlighting.git",
+        "autopair"    => "$GITHUB/hlissner/zsh-autopair",
+        "defer"       => "$GITHUB/romkatv/zsh-defer"
         );
     keys %plugins;
+    my $zshdir = "$USERHOME/.zshrc.d";
+    mkdir ($zshdir)
+        or $!{EEXIST} # Don't die if $zshdir exists
+        or die ("Cant create $zshdir! \n");
     while (my($k, $v) = each %plugins) {
-        my $clonedir = "$USERHOME/.$k";
+        my $clonedir = "$zshdir/$k";
         my $cloneuri = "$v";
         if ( -d $clonedir ) {
             chdir "$clonedir";
@@ -39,19 +46,7 @@ task 'configure_default_shell', sub {
             system( 'git', 'clone', "$cloneuri", "$clonedir" );
         }
     }
-
-    # Grab fizsh src setup
-    if ( -d "$USERHOME/.fizsh" ) {
-        chdir "$USERHOME/.fizsh";
-    } else {
-        system( 'git', 'clone', "$GITHUB/zsh-users/fizsh.git", "$USERHOME/.fizsh" );
-        chdir "$USERHOME/.fizsh";
-    }
-    system( './configure' );
-    system( 'make' );
-    system( 'doas', 'make', 'install' );
-    system( 'cp', "$USERHOME/.dotfiles/.fizshrc", "$USERHOME/.fizsh/.fizshrc" );
-    system( 'chsh', '-s', '/usr/local/bin/fizsh' );
+    system( 'chsh', '-s', '/usr/local/bin/zsh' );
 };
 
 task 'configure_gtk', sub {
