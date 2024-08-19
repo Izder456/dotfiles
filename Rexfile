@@ -29,7 +29,8 @@ task 'configure_default_shell', sub {
         "256"         => "$GITHUB/chrissicool/zsh-256color.git",
         "fsh"         => "$GITHUB/zdharma-continuum/fast-syntax-highlighting.git",
         "autopair"    => "$GITHUB/hlissner/zsh-autopair",
-        "defer"       => "$GITHUB/romkatv/zsh-defer"
+        "defer"       => "$GITHUB/romkatv/zsh-defer",
+        "vim-mode"    => "$GITHUB/jeffreytse/zsh-vi-mode"
         );
     keys %plugins;
     my $zshdir = "$USERHOME/.zshrc.d";

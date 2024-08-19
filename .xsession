@@ -28,6 +28,9 @@ function xdg_runtime {
     if [ ! -d $XDG_RUNTIME_DIR ]; then
 	mkdir -m 700 -p $XDG_RUNTIME_DIR
     fi
+    if [ -x dbus-launch -a -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
+        eval `dbus-launch --sh-syntax --exit-with-x11`
+    fi
 }
 
 # Function to get screen dimensions
@@ -92,7 +95,11 @@ function select_wm {
 	   ;;
     esac
 
-    dbus-launch --exit-with-session "${wm}" "${wm_args}"
+    if [ -x dbus-launch -a -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
+        eval `dbus-launch --sh-syntax --exit-with-x11`
+    fi
+    
+    "${wm}" "${wm_args}"
 }
 
 # Load in environment & resources

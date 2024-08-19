@@ -16,11 +16,6 @@ export LC_CTYPE="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
 ##
-# Force emacs-style binds
-##
-bindkey -e
-
-##
 # export $PATH
 ##
 export PATH=$PATH:/usr/games:/usr/ports/infrastructure/bin:$HOME/.cargo/bin:$HOME/.local/bin:$HOME/go/bin
@@ -29,6 +24,11 @@ export PATH=$PATH:/usr/games:/usr/ports/infrastructure/bin:$HOME/.cargo/bin:$HOM
 # Lazy Loading
 ##
 source ~/.zshrc.d/defer/zsh-defer.plugin.zsh
+
+##
+# Vim binds
+##
+zsh-defer ~/.zshrd.d/vim-mode/zsh-vi-mode.plugin.zsh
 
 ##
 # Autoload zmv
