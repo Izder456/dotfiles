@@ -33,14 +33,14 @@ zsh-defer ~/.zshrd.d/vim-mode/zsh-vi-mode.plugin.zsh
 ##
 # Autoload zmv
 ##
-autoload -Uz zmv
+zsh-defer autoload -Uz zmv
 
 ##
 # Setup Completions
 ##
-autoload -U compinit
+zsh-defer autoload -U compinit
 zsh-defer compinit
-autoload -U bashcompinit
+zsh-defer autoload -U bashcompinit
 zsh-defer bashcompinit
 
 fpath=($HOME/.zshrc.d/openbsd/completions $HOME/.zshrc.d/completions/src $fpath)
@@ -75,7 +75,15 @@ zsh-defer source ~/.zshrc.d/fsh/fast-syntax-highlighting.plugin.zsh
 ##
 # Suggestions
 ##
-source ~/.zshrc.d/suggest/zsh-autosuggestions.plugin.zsh
+zsh-defer source ~/.zshrc.d/suggest/zsh-autosuggestions.plugin.zsh
+
+##
+# History substring search
+##
+zsh-defer source ~/.zshrc.d/substring/zsh-history-substring-search.plugin.zsh
+HISTFILE="$HOME/.zshrc.d/.history"
+HISTSIZE=10000000
+SAVEHIST=10000000
 
 ##
 # FZF-Zsh
@@ -110,7 +118,7 @@ alias su="echo 'did you mean to run doas -s? '"
 # Alias for CD
 ##
 if command -v zoxide &> /dev/null; then
-	eval "$(zoxide init --cmd cd zsh)"
+	zsh-defer eval "$(zoxide init --cmd cd zsh)"
 fi
 
 ##
@@ -123,7 +131,6 @@ if command -v eza &> /dev/null; then
 	alias lh="eza --icons=auto -lAh"
 	alias tree="eza --icons=auto -Th"
 fi
-
 
 ##
 # Alias for parsing
