@@ -15,7 +15,7 @@ pre_sudo = true
 sudo_command = "doas"
 
 # Disable specific steps - same options as the command line flag
-disable = ["emacs"]
+disable = ["emacs", "pnpm", "system", "pkg", "clam_av_db"]
 
 # Ignore failures for these steps
 ignore_failures = ["system", "pkg", "pnpm"]
@@ -33,7 +33,7 @@ ignore_failures = ["system", "pkg", "pnpm"]
 # tmux_arguments = "-S /var/tmux.sock"
 
 # Do not set the terminal title (default: true)
-# set_title = true
+set_title = false
 
 # Display the time in step titles (default: true)
 # display_time = true
@@ -45,10 +45,10 @@ ignore_failures = ["system", "pkg", "pnpm"]
 # no_retry = true
 
 # Run inside tmux (default: false)
-# run_in_tmux = true
+run_in_tmux = false
 
 # Cleanup temporary or old files (default: false)
-# cleanup = true
+cleanup = true
 
 # Send a notification for every step (default: false)
 notify_each_step = false
@@ -77,12 +77,12 @@ skip_notify = true
 
 # Commands to run before anything
 [pre_commands]
-# "Emacs Snapshot" = "rm -rf ~/.emacs.d/elpa.bak && cp -rl ~/.emacs.d/elpa ~/.emacs.d/elpa.bak"
+#"Emacs Snapshot" = "rm -Rf ~/.emacs.d/elpa.bak && cp -Rf ~/.emacs.d/elpa ~/.emacs.d/elpa.bak"
 
 
 # Commands to run after anything
 [post_commands]
-# "Emacs Snapshot" = "rm -rf ~/.emacs.d/elpa.bak && cp -rl ~/.emacs.d/elpa ~/.emacs.d/elpa.bak"
+#"Emacs Snapshot" = "rm -Rf ~/.emacs.d/elpa.bak && cp -Rf ~/.emacs.d/elpa ~/.emacs.d/elpa.bak"
 
 
 # Custom commands
@@ -177,12 +177,14 @@ repos = [
      "/usr/ports",
      "/usr/ports/openbsd-wip",
      "/usr/src",
-     "/home/izder456/.zsh-256",
-     "/home/izder456/.zsh-completions",
-     "/home/izder456/.zsh-fsh",
-     "/home/izder456/.zsh-fzf",
-     "/home/izder456/.zsh-openbsd",
-     "/home/izder456/.zsh-suggest"
+     "/home/izder456/.zshrc.d/256",
+     "/home/izder456/.zshrc.d/completions",
+     "/home/izder456/.zshrc.d/fsh",
+     "/home/izder456/.zshrc.d/fzf",
+     "/home/izder456/.zshrc.d/openbsd",
+     "/home/izder456/.zshrc.d/suggest",
+     "/home/izder456/.zshrc.d/vim-mode",
+     "/home/izder456/.zshrc.d/substring"
 ]
 
 # Don't pull the predefined git repos
@@ -190,7 +192,6 @@ repos = [
 
 # Arguments to pass Git when pulling Repositories
 arguments = "--rebase --autostash"
-
 
 [windows]
 # Manually select Windows updates
@@ -225,7 +226,7 @@ arguments = "--rebase --autostash"
 
 [firmware]
 # Offer to update firmware; if false just check for and display available updates
-# upgrade = true
+upgrade = true
 
 
 [vagrant]

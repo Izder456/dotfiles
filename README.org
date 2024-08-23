@@ -961,11 +961,7 @@ function select_wm {
 	   ;;
     esac
 
-    if [ -x dbus-launch -a -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
-        eval `dbus-launch --sh-syntax --exit-with-x11`
-    fi
-    
-    "${wm}" "${wm_args}"
+    exec dbus-launch --exit-with-session --sh-syntax "${wm}" "${wm_args}"
 }
 
 # Load in environment & resources

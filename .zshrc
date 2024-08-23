@@ -56,6 +56,11 @@ export PATH=$PATH:/usr/local/jdk-17/bin
 export JAVA_HOME=/usr/local/jdk-17/
 
 ##
+# Elixir/Erlang Stuff
+##
+export PATH=$PATH:/usr/local/lib/erlang26/bin
+
+##
 # Go Stuff
 ##
 export GOPATH=$HOME/.go
