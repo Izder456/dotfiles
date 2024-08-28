@@ -75,6 +75,12 @@ function setup_shell {
     rex compile_afetch
 }
 
+# Setup URxvt
+function setup_urxvt {
+    log "Setting up urxvt..."
+    rex configure_urxvt
+}
+
 # Setup background images
 function setup_backgrounds {
     log "Installing Backgrounds..."
@@ -202,7 +208,7 @@ function menu {
 		echo "Running All...";
 		sleep $SLEEPTIME; clean;
 		config_install; ports_deps; cargo_deps;
-		setup_emwm; setup_stumpwm; setup_emacs; setup_xenodm;
+		setup_emwm; setup_stumpwm; setup_urxvt; setup_emacs; setup_xenodm;
 		setup_misc;
 		;;
 	    "r")

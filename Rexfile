@@ -19,6 +19,24 @@ task 'remove_default_cruft', sub {
     system( 'doas', 'chmod', '0700', "$USERHOME" );
 };
 
+# Configures and installs urxvt perls
+task 'configure_urxvt', sub {
+    my %perls = (
+        "resize-font" => "$GITHUB/simmel/urxvt-resize-font/raw/master/resize-font",
+        "clipboard"   => "$GITHUB/xyb3rt/urxvt-perls/raw/master/deprecated/clipboard"
+        );
+    keys %perls;
+    my $urxvtdir = "$USERHOME/.urxvt/ext";
+    mkdir ($urxvtdir)
+        or $!{EEXIST}
+        or die ("Cant create $urxvtdir! \n");
+    while (my($k, $v) = each %perls) {
+        my $dest = "$urxvtdir/$k";
+        my $source  = "$v";
+        system( 'ftp', '-o', "$dest", "$source" );
+    }
+};
+
 # Configures and sets up the default shell
 task 'configure_default_shell', sub {
     my %plugins = (
@@ -48,7 +66,7 @@ task 'configure_default_shell', sub {
             system( 'git', 'clone', "$cloneuri", "$clonedir" );
         }
     }
-    system( 'chsh', '-s', '/usr/local/bin/zsh' );
+    system( 'chsh', '-s', '$(which zsh)' );
 };
 
 task 'configure_gtk', sub {

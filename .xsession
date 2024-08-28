@@ -115,6 +115,7 @@ load_resources ~/.xresources ~/.xresources.d/emwm
 
 # Autostarts
 manage_autostarts "picom -b" \
+                  "urxvtd -q -f -o" \
 		  "~/.local/bin/nxbelld -t 150 -v100 -d200 -f ~/.local/sfx/Funk.wav -b " \
 		  "feh --bg-fill --randomize /usr/local/share/backgrounds &" \
 		  "sleep 5 && dunst &" \
