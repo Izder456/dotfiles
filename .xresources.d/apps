@@ -38,7 +38,7 @@ URxvt.boldFont: \
             xft:Noto Color Emoji-16:style=Bold:antialias=True:pixelsize=16:minspace=False, \
             xft:Noto Emoji-16:style=Bold:antialias=True:pixelsize=16:minspace=False
 
-URxvt.perl-lib: /home/izder456/.urxvt/ext
+URxvt.perl-lib: ~/.urxvt/ext
 URxvt.perl-ext-common: default,clipboard,resize-font
 
 URxvt.copyCommand: xclip -i -selection clipboard
