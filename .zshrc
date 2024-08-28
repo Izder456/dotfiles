@@ -144,7 +144,7 @@ fi
 ##
 if command -v bat &> /dev/null; then
     export BAT_THEME=ansi
-    alias cat="bat -p --paging-never"
+    alias cat="bat -p --paging=never"
     alias bat="bat -p"
 fi
 if command -v rg &> /dev/null; then
