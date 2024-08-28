@@ -65,7 +65,7 @@ task 'configure_gtk', sub {
         } else {
             system( 'git', 'clone', '--depth', '1', "$cloneuri", "$clonedir" );
         }
-        system( 'cp', '-R', "$clonedir/*", "$USERHOME/.dotfiles/.themes/" );
+        system( 'cp', '-R', glob("$clonedir/*"), "$USERHOME/.dotfiles/.themes/" );
         unlink("$clonedir");
     }
 };
@@ -84,7 +84,7 @@ task 'configure_icons', sub {
         } else {
             system( 'git', 'clone', '--depth', '1', "$cloneuri", "$clonedir" );
         }
-        system( 'cp', '-R', "$clonedir/icons/*", "$USERHOME/.dotfiles/.icons/" );
+        system( 'cp', '-R', glob("$clonedir/icons/*"), "$USERHOME/.dotfiles/.icons/" );
         unlink("$clonedir");
     }
 };

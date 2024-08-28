@@ -1,10 +1,12 @@
 #!/usr/bin/env zsh
 
 ##
-# Check if TTY
+# Check if TTY if on OpenBSD
 ##
-if [ -n $DISPLAY ]; then
-    export TERM=wsvt25
+if [[ "$(uname)" == "OpenBSD" ]]; then
+    if [ -n $DISPLAY ]; then
+        export TERM=wsvt25
+    fi
 fi
 
 ##
@@ -18,7 +20,7 @@ export LC_ALL="en_US.UTF-8"
 ##
 # export $PATH
 ##
-export PATH=$PATH:/usr/games:/usr/ports/infrastructure/bin:$HOME/.cargo/bin:$HOME/.local/bin:$HOME/go/bin
+export PATH=$PATH:/usr/games:$HOME/.cargo/bin:$HOME/.local/bin:$HOME/go/bin
 
 ##
 # Lazy Loading
@@ -43,7 +45,12 @@ zsh-defer compinit
 zsh-defer autoload -U bashcompinit
 zsh-defer bashcompinit
 
-fpath=($HOME/.zshrc.d/openbsd/completions $HOME/.zshrc.d/completions/src $fpath)
+# We don't need to load OpenBSD completions on non-OpenBSD Systems
+if [[ "$(uname)" == "OpenBSD" ]]; then
+    fpath=($HOME/.zshrc.d/openbsd/completions $HOME/.zshrc.d/completions/src $fpath)
+else
+    fpath=($HOME/.zshrc.d/completions/src $fpath)
+fi
 setopt MENU_COMPLETE
 setopt AUTO_LIST
 setopt COMPLETE_IN_WORD
@@ -94,12 +101,7 @@ SAVEHIST=10000000
 # FZF-Zsh
 ##
 if command -v fzf &> /dev/null; then
-	source ~/.zshrc.d/fzf/fzf-tab.plugin.zsh
-	export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
-    --color=fg:#A89984,bg:#282828,hl:#83A598
-    --color=fg+:#BDAE93,bg+:#1D2021,hl+:#8EC07C
-    --color=info:#D3869B,prompt:#FABD2F,pointer:#FABD2F
-    --color=marker:#B16286,spinner:#B8BB26,header:#FE8019'
+    source ~/.zshrc.d/fzf/fzf-tab.plugin.zsh
 fi
 
 ##
@@ -123,29 +125,28 @@ alias su="echo 'did you mean to run doas -s? '"
 # Alias for CD
 ##
 if command -v zoxide &> /dev/null; then
-	zsh-defer eval "$(zoxide init --cmd cd zsh)"
+    zsh-defer eval "$(zoxide init --cmd cd zsh)"
 fi
 
 ##
 # Alias for listing files
 ##
 if command -v eza &> /dev/null; then
-	alias ls="eza --icons=auto -Hh"
-	alias la="eza --icons=auto -ah"
-	alias ll="eza --icons=auto -lh"
-	alias lh="eza --icons=auto -lAh"
-	alias tree="eza --icons=auto -Th"
+    alias ls="eza --icons=never -Hh"
+    alias la="eza --icons=never -ah"
+    alias ll="eza --icons=never -lh"
+    alias lh="eza --icons=never -lAh"
+    alias tree="eza --icons=never -Th"
 fi
 
 ##
 # Alias for parsing
 ##
 if command -v bat &> /dev/null; then
-	alias cat="bat --theme=gruvbox-dark --paging=never"
-	alias bat="bat --theme=gruvbox-dark"
+    alias cat="bat --paging=never"
 fi
 if command -v rg &> /dev/null; then
-	alias rgrep="rg"
+    alias rgrep="rg"
 fi
 
 ##
@@ -180,25 +181,31 @@ alias tidal-dlp="tidal-dl -o /home/izder456/Music -q Master -r P1080 -l "
 ##
 # Prompt
 ##
-PROMPT="%B%F{yellow}%~%f%b%B % %b"
+if [[ "$(uname)" == "OpenBSD" ]]; then
+    PROMPT="%B%F{yellow}%~%f%b%B % %b"
+elif [[ "$(uname)" == "FreeBSD" ]]; then
+    PROMPT="%B%F{red}%~%f%b%B % %b"
+else
+    PROMPT="%B%F{blue}%~%f%b%B % %b"
+fi
 
 ##
 # Bat
 ##
 
 if command -v bat &> /dev/null; then
-	export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-	alias bathelp='bat --plain --language=help'
+    export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+    alias bathelp='bat --plain --language=help'
 fi
 
 # Manpager
 function man {
-	command man "$@" | eval ${MANPAGER}
+    command man "$@" | eval ${MANPAGER}
 }
 
 # Help Page
 function help {
-	"$@" --help 2>&1 | bathelp
+    "$@" --help 2>&1 | bathelp
 }
 
 
@@ -206,60 +213,63 @@ function help {
 # Tere config
 ##
 function tere {
-	local result=$(command tere "$@")
-	[ -n "$result" ] && cd -- "$result"
+    local result=$(command tere "$@")
+    [ -n "$result" ] && cd -- "$result"
 }
 
 ##
 # Functions For OpenBSD
 ##
-function src {
-	local _usage
-	_usage="src [file]"
-	[ -z $1 ] && echo $_usage
-	[ ! -z $1 ] &&
-		cd /usr/src/*/$1 || return
-}
 
-function port {
-	local _usage
-	_usage="port [port]"	
-	[ -z $1 ] && echo $_usage
-	[ ! -z $1 ] &&
-		cd /usr/ports/*/$1 2>/dev/null ||
-			cd /usr/ports/*/*/$1 2>/dev/null ||
-			return
-}
+if [[ "$(uname)" == "OpenBSD" ]]; then
+    function src {
+        local _usage
+        _usage="src [file]"
+        [ -z $1 ] && echo $_usage
+        [ ! -z $1 ] &&
+            cd /usr/src/*/$1 || return
+    }
 
-function pclean {
-	rm -v **/*.orig **/*(.NL0)
-}
+    function port {
+        local _usage
+        _usage="port [port]"	
+        [ -z $1 ] && echo $_usage
+        [ ! -z $1 ] &&
+            cd /usr/ports/*/$1 2>/dev/null ||
+                cd /usr/ports/*/*/$1 2>/dev/null ||
+                return
+    }
 
-function revert_diffs {
-	zmv -v '**/*.orig' '${f%.orig}'
-}
+    function pclean {
+        rm -v **/*.orig **/*(.NL0)
+    }
 
-function cdw {
-	cd $(make show=WRKSRC)
-}
+    function revert_diffs {
+        zmv -v '**/*.orig' '${f%.orig}'
+    }
 
-function maintains {
-local _usage
-	_usage="maintains [port]"
-	[ -z $1 ] && echo $_usage
-	[ ! -z $1 ] &&
-		(
-			cd /usr/ports/*/$1 >/dev/null 2>&1 &&
-				make show=MAINTAINER ||
-				echo "No port '/usr/ports/*/$1'"
-		)
-}
+    function cdw {
+        cd $(make show=WRKSRC)
+    }
+
+    function maintains {
+        local _usage
+        _usage="maintains [port]"
+        [ -z $1 ] && echo $_usage
+        [ ! -z $1 ] &&
+            (
+                cd /usr/ports/*/$1 >/dev/null 2>&1 &&
+                    make show=MAINTAINER ||
+                        echo "No port '/usr/ports/*/$1'"
+            )
+    }
+fi
 
 ##
 # the r/unixporn rite of passage
 ##
 if command -v crfetch &> /dev/null; then
-	crfetch
+    crfetch
 fi
 
 zsh-defer . $HOME/.shellrc.load
