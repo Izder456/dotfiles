@@ -143,7 +143,9 @@ fi
 # Alias for parsing
 ##
 if command -v bat &> /dev/null; then
-    alias cat="bat --paging=never"
+    export BAT_THEME=ansi
+    alias cat="bat -p --paging-never"
+    alias bat="bat -p"
 fi
 if command -v rg &> /dev/null; then
     alias rgrep="rg"
