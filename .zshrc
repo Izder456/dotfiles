@@ -118,8 +118,13 @@ export PATH=$PATH:$HOME/.gems/bin
 ##
 # Alias for muscle memory
 ##
-alias sudo="doas"
-alias su="echo 'did you mean to run doas -s? '"
+if whence -p doas &> /dev/null; then
+    alias sudo="doas"
+    alias su="echo 'did you mean to run doas -s? '"
+elif whence -p sudo &> /dev/null; then
+    alias doas="sudo"
+    alias su="echo 'did you mean to run sudo -i? '"
+fi
 
 ##
 # Alias for CD
@@ -156,8 +161,6 @@ fi
 ##
 alias edit=$EDITOR
 alias vedit=$VISUAL
-alias doasedit="doas $EDITOR"
-alias sudoedit="doas $EDITOR"
 
 ##
 # Alias for sysfetch
