@@ -113,20 +113,22 @@ function select_wm {
 load_environment /etc/xprofile ~/.xprofile
 load_resources ~/.xresources ~/.xresources.d/emwm
 
+# Set XDG Stuffs
+xdg_runtime
+# Set GnuPG Stuffs
+gpg_agent
+# ^ these need to be here so autostarts can work
+
 # Autostarts
 manage_autostarts "picom -b" \
                   "urxvtd -q -f -o" \
+                  "emacs --daemon" \
 		  "~/.local/bin/nxbelld -t 150 -v100 -d200 -f ~/.local/sfx/Funk.wav -b " \
 		  "feh --bg-fill --randomize /usr/local/share/backgrounds &" \
 		  "sleep 5 && dunst &" \
 		  "ulimit -Sc 0" \
 		  "xidle -delay 5 -nw -program /usr/local/bin/slock -timeout 1800 &"
 
-# Set XDG Stuffs
-xdg_runtime
-
-# Set GnuPG Stuffs
-gpg_agent
 
 # Select Window Manager
 select_wm
