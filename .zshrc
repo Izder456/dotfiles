@@ -101,7 +101,7 @@ SAVEHIST=10000000
 # FZF-Zsh
 ##
 if command -v fzf &> /dev/null; then
-    source ~/.zshrc.d/fzf/fzf-tab.plugin.zsh
+    zsh-defer source ~/.zshrc.d/fzf/fzf-tab.plugin.zsh
 fi
 
 ##
