@@ -42,6 +42,7 @@ task 'configure_default_shell', sub {
     my %plugins = (
         "openbsd"     => "$GITHUB/sizeofvoid/openbsd-zsh-completions.git",
         "completions" => "$GITHUB/zsh-users/zsh-completions.git",
+        "fzf-comp"    => "$GITHUB/lincheney/fzf-tab-completion.git",
         "suggest"     => "$GITHUB/zsh-users/zsh-autosuggestions.git",
         "substring"   => "$GITHUB/zsh-users/zsh-history-substring-search.git",
         "fzf"         => "$GITHUB/Aloxaf/fzf-tab.git",
@@ -66,7 +67,7 @@ task 'configure_default_shell', sub {
             system( 'git', 'clone', "$cloneuri", "$clonedir" );
         }
     }
-    system( 'chsh', '-s', '$(which zsh)' );
+    system( 'chsh', '-s', '/usr/local/bin/zsh' );
 };
 
 task 'configure_gtk', sub {
