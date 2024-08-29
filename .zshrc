@@ -4,7 +4,7 @@
 # Check if TTY if on OpenBSD
 ##
 if [[ "$(uname)" == "OpenBSD" ]]; then
-    if [ -n $DISPLAY ]; then
+    if [[ "$(tty)" == "/dev/ttyC"* ]]; then
         export TERM=wsvt25
     fi
 fi
