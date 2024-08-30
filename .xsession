@@ -113,6 +113,9 @@ function select_wm {
 load_environment /etc/xprofile ~/.xprofile
 load_resources ~/.xresources ~/.xresources.d/emwm
 
+# No .core files
+ulimit -Sc 0
+
 # Set XDG Stuffs
 xdg_runtime
 # Set GnuPG Stuffs
@@ -126,7 +129,6 @@ manage_autostarts "picom -b" \
 		  "~/.local/bin/nxbelld -t 150 -v100 -d200 -f ~/.local/sfx/Funk.wav -b " \
 		  "feh --bg-fill --randomize /usr/local/share/backgrounds &" \
 		  "sleep 5 && dunst &" \
-		  "ulimit -Sc 0" \
 		  "xidle -delay 5 -nw -program /usr/local/bin/slock -timeout 1800 &"
 
 

@@ -103,19 +103,9 @@ SAVEHIST=10000000
 if command -v fzf &> /dev/null; then
     zsh-defer source ~/.zshrc.d/fzf/fzf-tab.plugin.zsh
     zsh-defer source ~/.zshrc.d/fzf-comp/zsh/fzf-zsh-completion.sh
-    # disable sort when completing `git checkout`
-    zstyle ':completion:*:git-checkout:*' sort false
-    # set descriptions format to enable group support
-    # NOTE: don't use escape sequences here, fzf-tab will ignore them
-    zstyle ':completion:*:descriptions' format '[%d]'
-    # set list-colors to enable filename colorizing
-    zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-    # force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
-    zstyle ':completion:*' menu no
-    # preview directory's content with eza when completing cd
-    zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-    # switch group using `<` and `>`
-    zstyle ':fzf-tab:*' switch-group '<' '>'
+    if [[ "$(uname)" == "OpenBSD" ]]; then
+        export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS' --color=fg:#ebdbb2,bg:#282828,hl:#b16286 --color=fg+:#689d6a,bg+:#32302f,hl+:#d3869b --color=info:#d65d0e,prompt:#458588,pointer:#fe8019 --color=marker:#8ec07c,spinner:#cc241d,header:#fabd2f'
+    fi
 fi
 
 ##
@@ -163,9 +153,6 @@ fi
 ##
 if command -v bat &> /dev/null; then
     export BAT_THEME=ansi
-    if [[ "$(uname)" == "OpenBSD" ]]; then
-       export BAT_THEME=gruvbox-dark
-    fi # if on OpenBSD, override with usual gruvbox theme
     alias cat="bat -pp"
     alias bat="bat -p"
 fi

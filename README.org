@@ -763,22 +763,14 @@ Xcursor.theme: Capitaine Cursors (Gruvbox) - White
 **** Colors
 
 #+BEGIN_SRC conf :tangle .xresources.d/colors	
-!!
-! Background Colors
-!!
+,*background: #1d2021
+! regular contrast: *background: #282828
+! soft contrast: *background: #32302f
 
-! Normal
-,*background: #282828
-,*foreground: #ebdbb2
-! Hard-Dark
-,*.activeBackground: #1d2021
-,*.activeForeground: #32302f
-! Highlight
-,*highlightColor: #fcf1c7
+,*foreground: #f9f5d7
+! regular contrast: *foreground: #fbf1c7
+! soft-contrast: *foreground: #f2e5bc
 
-!!
-! Gruvbox Colors
-!!
 ! Black + DarkGrey
 ,*color0:  #282828
 ,*color8:  #928374
@@ -804,48 +796,29 @@ Xcursor.theme: Capitaine Cursors (Gruvbox) - White
 ,*color7:  #a89984
 ,*color15: #ebdbb2
 
-!!
-! Gruvbox 256color
-!!
-! BrightBlue
+! 256 Colors
 ,*color24:  #076678
-! BrightAqua
 ,*color66:  #427b58
-! BrightRed
 ,*color88:  #9d0006
-! BrightMagenta
 ,*color96:  #8f3f71
-! BrightGreen
 ,*color100: #79740e
-! DimBlue
-,*color109: #83a598
-! DimAqua
 ,*color108: #8ec07c
-! DimRed
+,*color109: #83a598
 ,*color130: #af3a03
-! DimYellow
 ,*color136: #b57614
-! DimGreen
 ,*color142: #b8bb26
-! DimRed
 ,*color167: #fb4934
-! DimMagenta
 ,*color175: #d3869b
-! Orange
 ,*color208: #fe8019
-! BrightYellow
 ,*color214: #fabd2f
-!! fg0-fg3
 ,*color223: #ebdbb2
 ,*color228: #f2e5bc
 ,*color229: #fbf1c7
 ,*color230: #f9f5d7
-!! bg0-bg3
 ,*color234: #1d2021
 ,*color235: #282828
 ,*color236: #32302f
 ,*color237: #3c3836
-!! Gray0-Gray7
 ,*color239: #504945
 ,*color241: #665c54
 ,*color243: #7c6f64
@@ -909,6 +882,7 @@ URxvt.keysym.C-C: perl:clipboard:copy
 URxvt.keysym.C-V: perl:clipboard:paste
 URxvt.keysym.C-A-V: perl:clipboard:paste_escaped
 
+URxvt.intensityStyles: false
 URxvt.letterSpace: 0
 URxvt.lineSpace: 0
 URxvt.geometry: 400x400
@@ -1058,6 +1032,9 @@ function select_wm {
 load_environment /etc/xprofile ~/.xprofile
 load_resources ~/.xresources ~/.xresources.d/emwm
 
+# No .core files
+ulimit -Sc 0
+
 # Set XDG Stuffs
 xdg_runtime
 # Set GnuPG Stuffs
@@ -1071,7 +1048,6 @@ manage_autostarts "picom -b" \
 		  "~/.local/bin/nxbelld -t 150 -v100 -d200 -f ~/.local/sfx/Funk.wav -b " \
 		  "feh --bg-fill --randomize /usr/local/share/backgrounds &" \
 		  "sleep 5 && dunst &" \
-		  "ulimit -Sc 0" \
 		  "xidle -delay 5 -nw -program /usr/local/bin/slock -timeout 1800 &"
 
 
@@ -1189,19 +1165,9 @@ SAVEHIST=10000000
 if command -v fzf &> /dev/null; then
     zsh-defer source ~/.zshrc.d/fzf/fzf-tab.plugin.zsh
     zsh-defer source ~/.zshrc.d/fzf-comp/zsh/fzf-zsh-completion.sh
-    # disable sort when completing `git checkout`
-    zstyle ':completion:*:git-checkout:*' sort false
-    # set descriptions format to enable group support
-    # NOTE: don't use escape sequences here, fzf-tab will ignore them
-    zstyle ':completion:*:descriptions' format '[%d]'
-    # set list-colors to enable filename colorizing
-    zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-    # force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
-    zstyle ':completion:*' menu no
-    # preview directory's content with eza when completing cd
-    zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-    # switch group using `<` and `>`
-    zstyle ':fzf-tab:*' switch-group '<' '>'
+    if [[ "$(uname)" == "OpenBSD" ]]; then
+        export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS' --color=fg:#ebdbb2,bg:#282828,hl:#b16286 --color=fg+:#689d6a,bg+:#32302f,hl+:#d3869b --color=info:#d65d0e,prompt:#458588,pointer:#fe8019 --color=marker:#8ec07c,spinner:#cc241d,header:#fabd2f'
+    fi
 fi
 
 ##
@@ -1249,9 +1215,6 @@ fi
 ##
 if command -v bat &> /dev/null; then
     export BAT_THEME=ansi
-    if [[ "$(uname)" == "OpenBSD" ]]; then
-       export BAT_THEME=gruvbox-dark
-    fi # if on OpenBSD, override with usual gruvbox theme
     alias cat="bat -pp"
     alias bat="bat -p"
 fi
