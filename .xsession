@@ -1,8 +1,8 @@
 #!/bin/ksh
 
 # Define variables at the top for easy access
-XMESG_WIDTH=512
-XMESG_HEIGHT=128
+readonly XMESG_WIDTH=512
+readonly XMESG_HEIGHT=128
 
 # Set environment up, .xprofile isn't respected
 # Set Default LOCALE
@@ -23,6 +23,7 @@ function xdg_runtime {
     export XDG_CACHE_HOME=$HOME/.cache
     export XDG_DATA_DIR=$HOME/.local/share
     export XDG_STATE_HOME=$HOME/.local/state
+    [ -z $selected_wm ] && export XDG_CURRENT_DESKTOP=$selected_wm
     if [ ! -d $XDG_RUNTIME_DIR ]; then
 	mkdir -m 700 -p $XDG_RUNTIME_DIR
     fi
@@ -53,9 +54,7 @@ function get_screen_dimension {
 function load_environment {
     set -A files "$@"
     for file in "${file[@]}"; do
-        if [ -f "$file" ]; then
-            . "$file"
-        fi
+        [ -f "$file" ] && . "$file"
     done
 }
 
@@ -63,9 +62,7 @@ function load_environment {
 function load_resources {
     set -A resources "$@"
     for resource in "${resources[@]}"; do
-        if [ -f "$resource" ]; then
-            xrdb -merge "$resource"
-        fi
+        [ -f "$resource" ] && xrdb -merge "$resource"
     done
 }
 
@@ -76,7 +73,7 @@ function manage_autostarts {
         if pgrep "$process_name" > /dev/null; then
             pkill "$process_name"
         fi
-        eval "$process"
+        eval "$process" &
     done
 }
 
@@ -131,10 +128,14 @@ manage_autostarts "picom -b" \
                   "urxvtd -q -f -o" \
                   "emacs --daemon" \
                   "~/.local/bin/nxbelld -t 150 -v100 -d200 -f ~/.local/sfx/Funk.wav -b " \
-                  "feh --bg-fill --randomize /usr/local/share/backgrounds &" \
-                  "xidle -delay 5 -nw -program /usr/local/bin/slock -timeout 1800 &" \
-                  "dunst &"
+                  "feh --bg-fill --randomize /usr/local/share/backgrounds" \
+                  "xidle -delay 5 -nw -program /usr/local/bin/slock -timeout 1800" \
+                  "dunst"
 
-exec dbus-launch --exit-with-session --sh-syntax "${wm}" ${wm_args}
+# Launch the window manager
+if ! exec dbus-launch --exit-with-session --sh-syntax "${wm}" ${wm_args}; then
+    echo "Failed to launch window manager ${wm}."
+    exit 1
+fi
 
 exit 0
