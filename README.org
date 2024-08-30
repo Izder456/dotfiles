@@ -940,8 +940,6 @@ function xdg_runtime {
     export XDG_CACHE_HOME=$HOME/.cache
     export XDG_DATA_DIR=$HOME/.local/share
     export XDG_STATE_HOME=$HOME/.local/state
-    export XDG_CURRENT_DESKTOP=StumpWM
-    export DESKTOP_SESSION=stumpwm
     if [ ! -d $XDG_RUNTIME_DIR ]; then
 	mkdir -m 700 -p $XDG_RUNTIME_DIR
     fi
