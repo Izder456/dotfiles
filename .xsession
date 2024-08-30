@@ -28,9 +28,6 @@ function xdg_runtime {
     if [ ! -d $XDG_RUNTIME_DIR ]; then
 	mkdir -m 700 -p $XDG_RUNTIME_DIR
     fi
-    if [ -x dbus-launch -a -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
-        eval `dbus-launch --sh-syntax --exit-with-x11`
-    fi
 }
 
 function gpg_agent {
@@ -93,25 +90,34 @@ function select_wm {
     typeset xmesg_xpos=$((($xwidth - $XMESG_WIDTH) / 2))
     typeset xmesg_yoffset=$((($xheight - $XMESG_HEIGHT) / 2))
     xmessage "Please Choose a Session to load" \
-    	     -buttons "StumpWM[]":1,"EMWM[]":2 \
-    	     -geometry ${XMESG_WIDTH}x${XMESG_HEIGHT}+${xmesg_xpos}-${xmesg_yoffset}
+             -buttons "StumpWM[]":1,"EMWM[]":2 \
+             -geometry ${XMESG_WIDTH}x${XMESG_HEIGHT}+${xmesg_xpos}-${xmesg_yoffset}
     typeset choice=$?
 
     case ${choice} in
-	1) wm=$(command -v stumpwm)
-	   wm_args="--disable-ldb --lose-on-corruption"
-	   ;;
-	2) wm=$(command -v emwm)
-	   wm_args=""
-	   ;;
+        1) echo "stumpwm" ;;
+        2) echo "emwm" ;;
     esac
-
-    exec dbus-launch --exit-with-session --sh-syntax "${wm}" "${wm_args}"
 }
 
 # Load in environment & resources
 load_environment /etc/xprofile ~/.xprofile
 load_resources ~/.xresources ~/.xresources.d/emwm
+
+# Select Window Manager
+selected_wm=$(select_wm)
+
+# Launch the selected window manager
+case ${selected_wm} in
+    stumpwm)
+        wm=$(command -v stumpwm)
+        wm_args="--disable-ldb --lose-on-corruption"
+        ;;
+    emwm)
+        wm=$(command -v emwm)
+        wm_args=""
+        ;;
+esac
 
 # No .core files
 ulimit -Sc 0
@@ -128,11 +134,9 @@ manage_autostarts "picom -b" \
                   "emacs --daemon" \
 		  "~/.local/bin/nxbelld -t 150 -v100 -d200 -f ~/.local/sfx/Funk.wav -b " \
 		  "feh --bg-fill --randomize /usr/local/share/backgrounds &" \
-		  "sleep 5 && dunst &" \
-		  "xidle -delay 5 -nw -program /usr/local/bin/slock -timeout 1800 &"
+		  "xidle -delay 5 -nw -program /usr/local/bin/slock -timeout 1800 &" \
+                  "dunst &"
 
-
-# Select Window Manager
-select_wm
+exec dbus-launch --exit-with-session --sh-syntax "${wm}" ${wm_args}
 
 exit 0
