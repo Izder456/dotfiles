@@ -1049,9 +1049,9 @@ gpg_agent
 manage_autostarts "picom -b" \
                   "urxvtd -q -f -o" \
                   "emacs --daemon" \
-		  "~/.local/bin/nxbelld -t 150 -v100 -d200 -f ~/.local/sfx/Funk.wav -b " \
-		  "feh --bg-fill --randomize /usr/local/share/backgrounds &" \
-		  "xidle -delay 5 -nw -program /usr/local/bin/slock -timeout 1800 &" \
+                  "~/.local/bin/nxbelld -t 150 -v100 -d200 -f ~/.local/sfx/Funk.wav -b " \
+                  "feh --bg-fill --randomize /usr/local/share/backgrounds &" \
+                  "xidle -delay 5 -nw -program /usr/local/bin/slock -timeout 1800 &" \
                   "dunst &"
 
 exec dbus-launch --exit-with-session --sh-syntax "${wm}" ${wm_args}
