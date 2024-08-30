@@ -50,7 +50,7 @@ task 'configure_default_shell', sub {
         "fsh"         => "$GITHUB/zdharma-continuum/fast-syntax-highlighting.git",
         "autopair"    => "$GITHUB/hlissner/zsh-autopair",
         "defer"       => "$GITHUB/romkatv/zsh-defer",
-        "vim-mode"    => "$GITHUB/jeffreytse/zsh-vi-mode"
+        "vim-mode"    => "$GITHUB/softmoth/zsh-vim-mode"
         );
     keys %plugins;
     my $zshdir = "$USERHOME/.zshrc.d";

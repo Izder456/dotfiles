@@ -13,7 +13,6 @@ fi
 # ENV VARS
 ##
 export PAGER="less"
-export EDITOR="vi"
 export LC_CTYPE="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
@@ -26,11 +25,6 @@ export PATH=$PATH:/usr/games:$HOME/.cargo/bin:$HOME/.local/bin:$HOME/go/bin
 # Lazy Loading
 ##
 source ~/.zshrc.d/defer/zsh-defer.plugin.zsh
-
-##
-# Vim binds
-##
-zsh-defer ~/.zshrd.d/vim-mode/zsh-vi-mode.plugin.zsh
 
 ##
 # Autoload zmv
@@ -80,14 +74,14 @@ zsh-defer source ~/.zshrc.d/autopair/autopair.zsh
 zsh-defer autopair-init
 
 ##
-# Syntax Highlight
-##
-zsh-defer source ~/.zshrc.d/fsh/fast-syntax-highlighting.plugin.zsh
-
-##
 # Suggestions
 ##
 zsh-defer source ~/.zshrc.d/suggest/zsh-autosuggestions.plugin.zsh
+
+##
+# Syntax Highlight
+##
+zsh-defer source ~/.zshrc.d/fsh/fast-syntax-highlighting.plugin.zsh
 
 ##
 # History substring search
@@ -96,6 +90,11 @@ zsh-defer source ~/.zshrc.d/substring/zsh-history-substring-search.plugin.zsh
 HISTFILE="$HOME/.zshrc.d/.history"
 HISTSIZE=10000000
 SAVEHIST=10000000
+
+##
+# Vim-mode
+##
+zsh-defer source ~/.zshrc.d/vim-mode/zsh-vim-mode.plugin.zsh
 
 ##
 # FZF-Zsh
@@ -225,6 +224,18 @@ function tere {
     local result=$(command tere "$@")
     [ -n "$result" ] && cd -- "$result"
 }
+
+##
+# Binds
+##
+
+bindkey "5A" previous-history
+bindkey "5B" next-history
+bindkey "5C" forward-word
+bindkey "5D" backward-word
+
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 ##
 # Functions For OpenBSD
