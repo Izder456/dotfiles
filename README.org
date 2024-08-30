@@ -849,8 +849,7 @@ xmessage*font:	     -misc-spleen-medium-r-normal--16-160-72-72-c-80-iso10646-1
 !!
 ! XTerm
 !!
-,*intensityStyles: true
-,*allowSendEvents: true
+*allowSendEvents: true
 xterm*scrollBar: false
 xterm*faceName: Spleen
 xterm*faceSize: 12
@@ -882,7 +881,6 @@ URxvt.keysym.C-C: perl:clipboard:copy
 URxvt.keysym.C-V: perl:clipboard:paste
 URxvt.keysym.C-A-V: perl:clipboard:paste_escaped
 
-URxvt.intensityStyles: false
 URxvt.letterSpace: 0
 URxvt.lineSpace: 0
 URxvt.geometry: 400x400
