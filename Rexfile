@@ -140,6 +140,7 @@ task 'install_backgrounds', sub {
 
 # Sets up Xenodm configuration
 task 'configure_xenodm', sub {
+    system( 'chmod', '+x', glob("$USERHOME/.dotfiles/XenoDM-Config/Xsetup_*"), glob("$USERHOME/.dotfiles/XenoDM-Config/GiveConsole"));
     system( 'doas', 'cp', '-R', glob("$USERHOME/.dotfiles/XenoDM-Config/*"), '/etc/X11/xenodm/' );
 };
 

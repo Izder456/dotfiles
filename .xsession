@@ -23,9 +23,9 @@ function xdg_runtime {
     export XDG_CACHE_HOME=$HOME/.cache
     export XDG_DATA_DIR=$HOME/.local/share
     export XDG_STATE_HOME=$HOME/.local/state
-    [ -z $selected_wm ] && export XDG_CURRENT_DESKTOP=$selected_wm
+    [ -n "${selected_wm}" ] && export XDG_CURRENT_DESKTOP="${selected_wm}"
     if [ ! -d $XDG_RUNTIME_DIR ]; then
-	mkdir -m 700 -p $XDG_RUNTIME_DIR
+        mkdir -m 700 -p $XDG_RUNTIME_DIR
     fi
 }
 
