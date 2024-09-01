@@ -1079,6 +1079,8 @@ fi
 export PAGER="less"
 export LC_CTYPE="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
+export EDITOR="emacsclient -nw -c -a ''"
+export VISUAL="emacsclient -c -a ''"
 
 ##
 # export $PATH
@@ -1198,6 +1200,12 @@ fi
 ##
 if command -v zoxide &> /dev/null; then
     zsh-defer eval "$(zoxide init --cmd cd zsh)"
+else
+    zsh-defer autoload -Uz chpwd_recent_dirs cdr
+    zsh-defer add-zsh-hook chpwd chpwd-recent-dirs
+    zstyle '*:chpwd:*' recent-dirs-default yes
+    zstyle '*:completion:*' recent-dirs-insert
+    alias cd=cdr
 fi
 
 ##
@@ -1209,6 +1217,11 @@ if command -v eza &> /dev/null; then
     alias ll="eza --icons=never -lh"
     alias lh="eza --icons=never -lAh"
     alias tree="eza --icons=never -Th"
+elif command -v colorls &> /dev/null; then
+    alias ls="colorls -G -Hh"
+    alias la="colorls -G -ah"
+    alias ll="colorls -G -lh"
+    alias lh="colorls -G -lAh"
 fi
 
 ##
@@ -1228,18 +1241,6 @@ fi
 ##
 alias edit=$EDITOR
 alias vedit=$VISUAL
-
-##
-# Alias for sysfetch
-##
-alias f="neofetch --off"
-alias F="neofetch -L"
-
-##
-# Alias for sysstats
-##
-alias i="top"
-alias H="htop"
 
 ##
 # Alias for media
