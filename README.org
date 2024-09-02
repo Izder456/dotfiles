@@ -29,11 +29,11 @@
 
 * Crucial Information
 
-- While there *is* a setup script in this project, /it's not meant to be plug-and-play/. *It's a bare-bones setup*, that is fairly non-portable and will require some tinkering to work perfectly. If you want a solid experience, use Linux Mint. I don't see this as a problem because I'm comfortable customizing it to my needs. If you need assistance with this, I expect that as a bare minimum you read this ORG-mode file and have basic understanding of the function of these configs. I try not to hand-hold people. You learn nothing by blindly copy-pasting. Take this as a word of caution.
+- While there *is* a setup script in this project, /it's not meant to be plug-and-play/. *It's a bare-bones setup*, that is fairly non-portable and will require some tinkering to work perfectly. If you want a solid experience, use Linux Mint or GhostBSD. I don't see this as a problem because I'm comfortable customizing it to my needs. If you need assistance with this, I expect that as a bare minimum you read this entire ORG-mode file and have basic understanding of the function of these configs. I try not to hand-hold people. You learn nothing by blindly copy-pasting. Take this as a word of caution.
 
 ** Note:
 
-- My script doesn't perform any performance tweaking. In the how-to section, I say to install the sysctl.conf file, but you *should* read the comments I put there. Users should refer to [[https://openbsd.org/faq][the FAQ]], [[https://man.openbsd.org][manpages]], or the unofficial [[https://www.openbsdhandbook.com][OpenBSD Handbook]] for more info for that. For more of a newb-friendly (albeit detailed) explanation video of some optimization tricks, [[https://www.youtube.com/watch?v=f8lloCtrpdk][Watch The OpenBSD Guy's Video]]
+- My script doesn't perform any performance tweaking. In the how-to section, I say to install the sysctl.conf file in [[#how-to-use][How to Use]] but you *should* read the comments I put there. Users should refer to [[https://openbsd.org/faq][the FAQ]], [[https://man.openbsd.org][manpages]], or the unofficial [[https://www.openbsdhandbook.com][OpenBSD Handbook]] for more info for that. For more of a newb-friendly (albeit detailed) explanation video of some optimization tricks, [[https://www.youtube.com/watch?v=f8lloCtrpdk][Watch The OpenBSD Guy's Video]]
 
 - For laptops, I /highly recommend/ Solene%'s power management daemon [[https://dataswamp.org/~solene/2022-03-21-openbsd-cool-frequency.html][obsdfreqd]], Its a no-brainer. It's defaults are quite sane. It sets throttling for CPU frequency to avoid overheating when on line power. As of 7.1, OpenBSD maxes the CPU when on line power, but from my personal experience, this makes my laptop hardware thermal throttle like hell. In theory- the idea is sane. However, in practice, it tends to have adverse affects that are dependent on hardware. As Solene% says, this is not meant to "replace" the kernel scheduler. It tries to "nudge" the existing scheduling system to be better suited for laptop hardware. 
 
@@ -75,9 +75,9 @@
   - [[#mkconf][mk.conf]]
   - [[#exrc][.exrc]]
   - [[#sysctlconf][Sysctl.conf]]
+  - [[#doasconf][Doas.conf]]
   - [[#pf-config][pf config]]
   - [[#dfm-install][Dfm-Install]]
-  - [[#doasconf][Doas.conf]]
   - [[#cargo-list][Cargo-list]]
 
 * How To Use
@@ -117,6 +117,10 @@ OpenGL >=2.0 Capable GFX Card
 
 5. grab my doas and sysctl configs
 
+*READ THESE FILES*, they are documented in this README.org:
+- [[#sysctlconf][sysctl.conf]]
+- [[#doas.conf][doas.conf]]
+ 
 #+BEGIN_SRC
 # ftp -o /etc/doas.conf https://github.com/izder456/dotfiles/raw/main/doas.conf
 # ftp -o /etc/sysctl.conf https://github.com/izder456/dotfiles/raw/main/sysctl.conf
@@ -138,7 +142,10 @@ OpenGL >=2.0 Capable GFX Card
 # pkg_add p5-Rex
 #+END_SRC
 
-7. Download and run =setup.pl= as your regular user
+7. Download and run =setup.ksh= as your regular user
+
+*READ THIS FILE*, they are documented in this README.org:
+- [[#automation][Automation]]
 
 #+BEGIN_SRC
 $ cd $HOME
@@ -146,7 +153,7 @@ $ ftp https://github.com/izder456/dotfiles/raw/main/setup.ksh
 $ ksh setup.ksh
 #+END_SRC
 
-8. enable dbus (my StumpWM config needs it)
+8. enable dbus (my [[#xsession][.xsession]] needs it)
 
 #+BEGIN_SRC
 # rcctl enable messagebus
@@ -163,8 +170,8 @@ $ ksh setup.ksh
 p5-Rex is an automation thingy I use. It's definitely overkill, but I like perl.
 I split this up to the names of the files:
 
-- =setup.ksh= is the inital bootstrap script. I set a personal constraint that I can't use any stuff outside of base OpenBSD for bootstrapping. for this reason, it /must/ function with korn shell in vanilla OpenBSD 7.5 or higher, as that is the default shell on OpenBSD.
-- =Rexfile= is the config file for p5-Rex. It is perl code, but with a teeny bit of extensions. Think of it as an even more extensible ansible playbook, if that makes sense. You can manually run "tasks" with the =rex= command in your shell. You can see the tasks available to run with =rex -T=
+- =setup.ksh= is the inital bootstrap script. I set a personal constraint that I can't use any stuff outside of base OpenBSD for bootstrapping. For this reason, the initial bootstrap /must/ function with korn shell in vanilla OpenBSD 7.5 or higher, as that is the default shell on OpenBSD, and includes some nice primitives that POSIX sh lacks.
+- =Rexfile= is the config file for p5-Rex. It is perl code, but with a teeny bit of extensions. Think of it as an even more extensible ansible playbook, if that makes sense. You can manually run "tasks" with the =rex= command in your shell. You can see the tasks available to run with =rex -T=. Besides, my =setup.ksh= sorta automates some basic tasks for you.
 
 ** Korn Shell
 
@@ -1847,7 +1854,8 @@ kern.seminfo.semmni=4096 # default 10 # half 2048
 ##
 
 # Allow Kernel Memory Access
-## Some programs, like sysutils/hw-probe need this. Be aware of security implications.
+## Some programs, like sysutils/hw-probe, or sysutils/dmidecode need this.
+## Be aware of security implications.
 kern.allowkmem=0 # default 0
 
 # Enable Multithreading
@@ -1881,16 +1889,31 @@ kern.audio.record=0 # default 0
 kern.video.record=0 # default 0
 #+END_SRC
 
+** Doas.conf
+
++this is totally overkill+
+fine now
+
+#+BEGIN_SRC conf :tangle doas.conf
+# this assumes the existence of the :doas group
+# create that group with groupadd(8)
+permit persist :doas
+# this lets root pass programs through doas with no restrictions
+# (technically not needed)
+permit nopass root
+#+END_SRC
+
 ** pf config
 
-This goes in =/etc/pf.conf=, use /with caution/
+This goes in =/etc/pf.conf=, use /with caution/. It is *not* installed by =setup.ksh= or =Rexfile=, you will need to grab this manually.
+It is made for laptops-in-mind, so by default things are quite locked down for use with public WiFi for example.
 
 #+BEGIN_SRC conf :tangle pf.conf
 # See pf.conf(5) and /etc/examples/pf.conf
 
 # Macros
-## mod these to match your hardware. these are the drivers my hardware uses.
-wifi_if = "{ iwm0 iwm1 iwn0 iwn1 bwi0 urtwn0 urtwn1 }"
+## mod these to match your hardware. these are the drivers my various devices use.
+wifi_if = "{ iwm0 iwm1 iwn0 iwn1 iwx0 iwx1 bwi0 bwi1 bwfm0 bwfm1 urtwn0 urtwn1 }"
 eth_if = "{ em0 re0 }"
 
 # a few teeny little changes.
@@ -1946,16 +1969,6 @@ Emwm-Config skip
 StumpWM-Config skip
 XenoDM-Config skip
 APM-Config skip
-#+END_SRC
-
-** Doas.conf
-
-+this is totally overkill+
-fine now
-
-#+BEGIN_SRC conf :tangle doas.conf
-permit persist :doas
-permit nopass root
 #+END_SRC
 
 ** Cargo-list
