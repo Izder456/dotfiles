@@ -144,7 +144,7 @@ OpenGL >=2.0 Capable GFX Card
 
 7. Download and run =setup.ksh= as your regular user
 
-*READ THIS FILE*, they are documented in this README.org:
+*READ THIS FILE*: it, and its accompanying =Rexfile= are documented in this README.org:
 - [[#automation][Automation]]
 
 #+BEGIN_SRC
