@@ -1863,7 +1863,7 @@ kern.allowkmem=0 # default 0
 ## Keep this disabled, unless you have significant performance hits without it.
 ## OpenBSD has a tendancy to spin while waiting for kernel lock jobs to free on many CPU cores.
 ## Keeping SMT or "Hyperthreading" disabled helps minimize this from happening.
-## Only appllicable on architectures with SMT-support (e.g., amd64 or arm64).
+## Only applicable on architectures with SMT-support (e.g., amd64 or arm64).
 hw.smt=0 # default 0
 
 ##
