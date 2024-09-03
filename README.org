@@ -1143,23 +1143,23 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 ##
 # Autopair
 ##
-source ~/.zshrc.d/autopair/autopair.zsh
+zsh-defer source ~/.zshrc.d/autopair/autopair.zsh
 zsh-defer autopair-init
 
 ##
 # Suggestions
 ##
-source ~/.zshrc.d/suggest/zsh-autosuggestions.plugin.zsh
+zsh-defer source ~/.zshrc.d/suggest/zsh-autosuggestions.plugin.zsh
 
 ##
 # Syntax Highlight
 ##
-source ~/.zshrc.d/fsh/fast-syntax-highlighting.plugin.zsh
+zsh-defer source ~/.zshrc.d/fsh/fast-syntax-highlighting.plugin.zsh
 
 ##
 # History substring search
 ##
-source ~/.zshrc.d/substring/zsh-history-substring-search.plugin.zsh
+zsh-defer source ~/.zshrc.d/substring/zsh-history-substring-search.plugin.zsh
 HISTFILE="$HOME/.zshrc.d/.history"
 HISTSIZE=10000000
 SAVEHIST=10000000
@@ -1167,14 +1167,14 @@ SAVEHIST=10000000
 ##
 # Vim-mode
 ##
-source ~/.zshrc.d/vim-mode/zsh-vim-mode.plugin.zsh
+zsh-defer source ~/.zshrc.d/vim-mode/zsh-vim-mode.plugin.zsh
 
 ##
 # FZF-Zsh
 ##
 if command -v fzf &> /dev/null; then
-    source ~/.zshrc.d/fzf/fzf-tab.plugin.zsh
-    source ~/.zshrc.d/fzf-comp/zsh/fzf-zsh-completion.sh
+    zsh-defer source ~/.zshrc.d/fzf/fzf-tab.plugin.zsh
+    zsh-defer source ~/.zshrc.d/fzf-comp/zsh/fzf-zsh-completion.sh
     if [[ "$(uname)" == "OpenBSD" ]]; then
         export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS' --color=fg:#ebdbb2,bg:#282828,hl:#b16286 --color=fg+:#689d6a,bg+:#32302f,hl+:#d3869b --color=info:#d65d0e,prompt:#458588,pointer:#fe8019 --color=marker:#8ec07c,spinner:#cc241d,header:#fabd2f'
     fi
@@ -1183,7 +1183,7 @@ fi
 ##
 # 256-Color
 ##
-source ~/.zshrc.d/256/zsh-256color.plugin.zsh
+zsh-defer source ~/.zshrc.d/256/zsh-256color.plugin.zsh
 
 ##
 # Ruby Stuff
