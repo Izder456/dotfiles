@@ -136,12 +136,6 @@ fi
 ##
 if command -v zoxide &> /dev/null; then
     zsh-defer eval "$(zoxide init --cmd cd zsh)"
-else
-    zsh-defer autoload -Uz chpwd_recent_dirs cdr
-    zsh-defer add-zsh-hook chpwd chpwd-recent-dirs
-    zstyle '*:chpwd:*' recent-dirs-default yes
-    zstyle '*:completion:*' recent-dirs-insert
-    alias cd=cdr
 fi
 
 ##
@@ -205,17 +199,18 @@ fi
 if command -v bat &> /dev/null; then
     export MANPAGER="sh -c 'col -bx | bat -l man -p'"
     alias bathelp='bat --plain --language=help'
+
+    # Manpager with bat
+    function man {
+        command man "$@" | eval ${MANPAGER}
+    }
+
+    # Help Page with bat
+    function help {
+        "$@" --help 2>&1 | bathelp
+    }
 fi
 
-# Manpager
-function man {
-    command man "$@" | eval ${MANPAGER}
-}
-
-# Help Page
-function help {
-    "$@" --help 2>&1 | bathelp
-}
 
 
 ##
