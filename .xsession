@@ -42,7 +42,7 @@ function gpg_agent {
 
 # Function to get screen dimensions
 function get_screen_dimension {
-    typeset dimension=$(xdpyinfo | awk '/dimensions/ {print $2}')
+    typeset dimension=$(xrandr --current | grep '*' | uniq | awk '{print $1}')
     case $1 in
         0) echo "${dimension%x*}" ;;
         1) echo "${dimension#*x}" ;;
