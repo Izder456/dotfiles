@@ -43,6 +43,7 @@ gdk-pixbuf-xlib--
 git--
 glib2--
 glslang--
+gnome-keyring--
 gmake--
 gmp--
 go--

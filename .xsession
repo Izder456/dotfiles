@@ -133,7 +133,7 @@ manage_autostarts "picom -b" \
                   "dunst"
 
 # Launch the window manager
-if ! exec dbus-launch --exit-with-session --sh-syntax "${wm}" ${wm_args}; then
+if ! exec dbus-run-session "${wm}" ${wm_args}; then
     echo "Failed to launch window manager ${wm}."
     exit 1
 fi
